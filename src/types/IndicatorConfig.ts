@@ -5,7 +5,7 @@ export interface Icon {
 export interface IndicatorConfig {
     legend?: {
         extra_layers?: {
-            layer_name?: string;
+            layer_name?: string | null;
             html?: string | null;
         };
         [key: string]: any;
