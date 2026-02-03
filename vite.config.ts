@@ -19,5 +19,5 @@ export default defineConfig({
       }
     }
   ],
-  base: process.env.NODE_ENV === 'production' ? '/Arras_CommunityHealthIndicator/' : ''
+  base: process.env.NODE_ENV === 'production' ? '' : ''
 })

@@ -12,7 +12,7 @@ const app = createApp(App)
 const pinia = createPinia()
 app.provide('mitt', emitter)
 
-const sitePath = process.env.NODE_ENV === 'production' ? '/Arras_CommunityHealthIndicator/' : ''
+const sitePath = process.env.NODE_ENV === 'production' ? '' : ''
 const historyBase = sitePath
 app.provide('sitePath', sitePath);
 const mainConfig = (await axios.get(sitePath+'/config/main.json')).data;
