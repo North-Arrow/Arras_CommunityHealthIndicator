@@ -1,0 +1,182 @@
+{
+  "indicators": [
+    {
+      "title": "Number of grandparent householders responsible for own grandchildren under 18 years",
+      "data_source": null,
+      "short_title": "Grandparent Caretakers",
+      "geotype": "tract",
+      "default": "right",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9sGRCKoXuLSJ5tURB-k1iXI7hng56SqraMUy8G4YIA9Z4uFM2w5VOIbU2V2L43S5aBhvxjLtQzXNr/pub?gid=2104564019&single=true&output=csv",
+      "short_name": "grandchildren",
+      "timeline": {
+        "yearValuePrefix": "count_",
+        "yearValueShortFormat": "{{value}}",
+        "filterOut": [
+          "statewide",
+          "overall"
+        ]
+      },
+      "popup": {
+        "format": {
+          "title": "{{count}} grandparents",
+          "subtitle": null
+        }
+      },
+      "legend": {
+        "title-column": "count",
+        "title": "{{count}} grandchildren"
+      },
+      "tooltip-info": "This indicator measures: Number of grandparent householders responsible for own grandchildren under 18 years. Values are shown by tract and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source details will be added later."
+    },
+    {
+      "title": "Lack of social and emotional support among adults",
+      "data_source": null,
+      "short_title": "Social & Emotional Support",
+      "geotype": "tract",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYA4y9XrarP5F9dBfW8I7fe5LEzyRiZIGORPYk0AKK0Frq-llgS_qK6CoRadzOxYJ5QJS1mBQcwVq_/pub?gid=423437760&single=true&output=csv",
+      "short_name": "social_emotional_support",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of adults",
+          "subtitle": "{{count}} out of {{pop}} adults"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of adults"
+      },
+      "tooltip-info": "This indicator measures: Lack of social and emotional support among adults. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+    },
+    {
+      "title": "Percent of population that is working age(18-64)",
+      "data_source": null,
+      "short_title": "Working Age",
+      "geotype": "tract",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDkj8Yv8bgKU9oXbT9-omjXmVn8PZYFNEwifzCO2g_V9QO3X5S2DZq01za_kir4VnCQkNTLRtg6_AG/pub?gid=1358534828&single=true&output=csv",
+      "short_name": "working_age",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of adults",
+          "subtitle": "{{count}} out of {{pop}} adults"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of adults"
+      },
+      "tooltip-info": "This indicator measures: Percent of population that is working age(18-64). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+    },
+    {
+      "title": "Rate of population change (10 year intervals)",
+      "data_source": null,
+      "short_title": "Population Change",
+      "geotype": "tract",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8gacbSx8FH5jb2LmQNAQnUdxiXnhs1k6edAhwpSsCOG7u-53e9SY3vcrZtOKwouFT4xRC2DIEBuon/pub?gid=1076089840&single=true&output=csv",
+      "short_name": "population_change",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% change",
+          "subtitle": "{{count}} out of {{pop}} people"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% change"
+      },
+      "tooltip-info": "This indicator measures: Rate of population change (10 year intervals). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+    },
+    {
+      "title": "Percent of families with children (under 18) with 1 householder and no spouse present",
+      "data_source": null,
+      "short_title": "Single-Parent Households",
+      "geotype": "tract",
+      "default": "left",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTap76TYvUgSrNBTaekNPbE0KEdaXb06QQrFkvD9p0K5AOGEb4nb_JTwrC2EFW23DhOIG9VskaYestC/pub?gid=920237844&single=true&output=csv",
+      "short_name": "single_parent_households",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of households",
+          "subtitle": "{{count}} out of {{pop}} households"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of households"
+      },
+      "tooltip-info": "This indicator measures: Percent of families with children (under 18) with 1 householder and no spouse present. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+    },
+    {
+      "title": "Percent of registered voters who voted in general elections",
+      "data_source": null,
+      "short_title": "Voter Turnout",
+      "geotype": "county",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7fphbAk3DI-8pEddwSfbxmeTuL9f868w-qTeyL9687ms1oYyYKj1_J7YVp-_7-LMmhxn9394BVzUL/pub?gid=0&single=true&output=csv",
+      "short_name": "voter_turnout",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of voters",
+          "subtitle": "{{count}} out of {{pop}} voters"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of voters"
+      },
+      "tooltip-info": "This indicator measures: Percent of registered voters who voted in general elections. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+    },
+    {
+      "title": "The rate of membership organizations per 10,000 people",
+      "data_source": null,
+      "short_title": "Social Associations",
+      "geotype": "county",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTUg8wMqDyz733CyK3bDNe3pF96ZvGgbsLJRc0IfWD_yBExMNU-gV88hM81CYOiO5efhFSvZeIDXc5/pub?gid=0&single=true&output=csv",
+      "short_name": "soc_associations",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}} per 10,000 residents",
+          "subtitle": "{{count}} out of 10,000 residents"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}} per 10,000 residents"
+      },
+      "tooltip-info": "This indicator measures: The rate of membership organizations per 10,000 people. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+    }
+  ]
+}

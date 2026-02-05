@@ -1,0 +1,196 @@
+{
+  "categories": [
+    {
+      "title": "Economic Vitality",
+      "query_str": "econ",
+      "enabled": true,
+      "description": "We envision residents and community partners convening together to address shared values for the purposes of good governance, community development, and artistic expression.",
+      "config": "/config/economy.json",
+      "icon": "assets/theme_icons/econ_blue.png",
+      "style": {
+        "colors": {
+          "icon": "dark-blue",
+          "circle": "white"
+        },
+        "min": {
+          "color": "white",
+          "value": 0
+        },
+        "max": {
+          "color": "dark-blue",
+          "value": 100
+        }
+      }
+    },
+    {
+      "title": "Education",
+      "query_str": "edu",
+      "enabled": true,
+      "description": "We envision communities that offer quality elementary, secondary, post-secondary educational opportunities and academic achievement.",
+      "config": "/config/education.json",
+      "icon": "assets/theme_icons/edu_red.png",
+      "style": {
+        "colors": {
+          "icon": "red",
+          "circle": "white"
+        },
+        "min": {
+          "color": "white",
+          "value": 0
+        },
+        "max": {
+          "color": "red",
+          "value": 100
+        }
+      }
+    },
+    {
+      "title": "Health",
+      "query_str": "health",
+      "enabled": true,
+      "description": "We envision residents and community partners convening together to address shared values for the purposes of good governance, community development, and artistic expression.",
+      "config": "/config/health.json",
+      "icon": "assets/theme_icons/health_gray.png",
+      "style": {
+        "colors": {
+          "icon": "pale-blue",
+          "circle": "white"
+        },
+        "min": {
+          "color": "white",
+          "value": 0
+        },
+        "max": {
+          "color": "pale-blue",
+          "value": 100
+        }
+      }
+    },
+    {
+      "title": "Natural Environment",
+      "query_str": "nat_env",
+      "icon": "assets/theme_icons/nature_green.png",
+      "enabled":true,
+      "config": "/config/natural_env.json",
+      "style": {
+        "colors": {
+          "icon": "green",
+          "circle": "white"
+        },
+        "min": {
+          "color": "white",
+          "value": 0
+        },
+        "max": {
+          "color": "green",
+          "value": 100
+        }
+      },
+      "description": "We envision communities where people are able and willing to work, spend, earn, and invest."
+    },
+    {
+      "title": "Social & Cultural Wellbeing",
+      "query_str": "social_cultural",
+      "icon": "assets/theme_icons/soc-cult_pink.png",
+      "enabled": true,
+      "description": "We envision communities that offer empowering supports for family wellbeing, safe neighborhoods, and community trust.",
+      "config": "/config/social_cultural.json",
+      "style": {
+        "colors": {
+          "icon": "pink",
+          "circle": "white"
+        },
+        "min": {
+          "color": "white",
+          "value": 0
+        },
+        "max": {
+          "color": "pink",
+          "value": 100
+        }
+      }
+    }
+  ],
+  "geo":{
+    "tract":{
+      "geolevel": "area",
+      "source_name": "tracts-harmonized",
+      "layers": {
+        "main": "tracts-harmonized-fill",
+        "outline": "tracts-harmonized-outline"
+      }
+    },
+    "county":{
+      "geolevel": "area",
+      "source_name": "counties-source",
+      "layers": {
+        "main": "counties-data"
+      }
+    },
+    "school":{
+      "geolevel": "point",
+      "source_name": "points-source",
+      "layers": {
+        "main": "point-data",
+        "circle": false
+      }
+    },
+    "facility":{
+      "geolevel": "point",
+      "source_name": "points-source",
+      "layers": {
+        "main": "point-data",
+        "circle": false
+      }
+    },
+    "protected":{
+      "geolevel": "area",
+      "source_name": "counties-source",
+      "layers": {
+        "main": "counties-data"
+      }
+    }
+  },
+  "data_sources":{
+    "census": {
+      "text": "ACS & Census",
+      "url": "https://www.census.gov"
+    },
+    "hsra": {
+      "text": "HRSA Data Warehouse",
+      "url": "https://data.hrsa.gov/topics/health-workforce/nchwa/ahrf"
+    },
+    "cdc": {
+      "text": "CDC",
+      "url": "https://www.cdc.gov"
+    },
+    "sc_public_health": {
+      "text": "SC Public Health",
+      "url": "https://apps.dhec.sc.gov/Health/SCAN_BDP/tables/death2table.aspx"
+    },
+    "brfss":{
+      "text": "BRFSS",
+      "url":"https://dph.sc.gov/health-wellness/south-carolina-health-compass-dashboards/health-compass-dashboard-communities"
+    },
+    "sc_depofed":{
+      "text": "SC Department of Education",
+      "url": "https://ed.sc.gov/data/report-cards/state-report-cards/"
+    },
+    "kids_count": {
+      "text": "Kids Count",
+      "url": "https://datacenter.aecf.org/data/tables/2899-babies-born-with-low-birthweight-by-race"
+    },
+    "abc_qual":{
+      "text": "ABC Quality",
+      "url":"https://abcquality.org"
+    },
+    "sc_conserv_bank":{
+      "text": "SC Conservation Bank",
+      "url": "https://www.sccbank.sc.gov/"
+    },
+    "county_health_rankings":{
+      "text": "County Health Rankings",
+      "url": "https://www.countyhealthrankings.org/health-data/south-carolina/chester"
+    }
+  }
+}

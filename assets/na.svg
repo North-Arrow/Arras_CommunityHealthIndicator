@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   preserveAspectRatio="xMidYMid"
+   data-bbox="0 -0.04 315.841 122.845"
+   viewBox="0 0 39477.499 15351.25"
+   data-type="ugc"
+   role="img"
+   aria-label="North Arrow Logo"
+   version="1.1"
+   id="svg32"
+   width="39477.5"
+   height="15351.25"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs32">
+    <radialGradient
+       xlink:href="#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q"
+       id="radialGradient2"
+       gradientUnits="userSpaceOnUse"
+       cx="111.01"
+       cy="122.81"
+       r="68.790001" />
+    <radialGradient
+       xlink:href="#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q"
+       id="radialGradient3"
+       gradientUnits="userSpaceOnUse"
+       cx="111.01"
+       cy="122.81"
+       r="68.790001" />
+    <radialGradient
+       xlink:href="#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q"
+       id="radialGradient4"
+       gradientUnits="userSpaceOnUse"
+       cx="111.01"
+       cy="122.81"
+       r="68.790001" />
+    <radialGradient
+       xlink:href="#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q"
+       id="radialGradient5"
+       gradientUnits="userSpaceOnUse"
+       cx="111.01"
+       cy="122.81"
+       r="68.790001" />
+  </defs>
+  <g
+     id="g32">
+    <defs
+       id="defs15">
+      <radialGradient
+         gradientUnits="userSpaceOnUse"
+         r="68.790001"
+         cy="122.81"
+         cx="111.01"
+         id="6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q">
+        <stop
+           stop-color="#3b6986"
+           offset="0"
+           id="stop1" />
+        <stop
+           stop-color="#1c3557"
+           offset="1"
+           id="stop2" />
+      </radialGradient>
+      <radialGradient
+         xlink:href="#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q"
+         r="68.120003"
+         cy="122.81"
+         cx="111.78"
+         id="0ad83a34-b517-4eae-94b3-d89adbd8272a_comp-lfi2r60q" />
+      <radialGradient
+         xlink:href="#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q"
+         r="70.220001"
+         cy="118.15"
+         cx="119.08"
+         id="0df965da-6645-45a0-b967-366ea052ed18_comp-lfi2r60q" />
+      <radialGradient
+         gradientUnits="userSpaceOnUse"
+         r="35.959999"
+         cy="124.11"
+         cx="111.59"
+         id="059f25b3-eb46-40cc-8dde-5a1421ac4999_comp-lfi2r60q">
+        <stop
+           stop-color="#ef4b66"
+           offset="0"
+           id="stop3" />
+        <stop
+           stop-color="#e63947"
+           offset="1"
+           id="stop4" />
+      </radialGradient>
+    </defs>
+    <path
+       transform="translate(-49.59,-49.59)"
+       d="m 137.52,49.59 h -52 a 75.17,75.17 0 0 1 7.57,21.61 z"
+       fill="url(#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q)"
+       id="path15"
+       style="fill:url(#radialGradient2)" />
+    <path
+       transform="translate(-49.59,-49.59)"
+       d="M 138.93,90.1 173.48,72.24 V 55.6 a 6,6 0 0 0 -6,-6 h -12.89 l -29.4,14.3 a 1.48,1.48 0 0 0 -0.62,2.08 z"
+       fill="url(#0ad83a34-b517-4eae-94b3-d89adbd8272a_comp-lfi2r60q)"
+       id="path16"
+       style="fill:url(#0ad83a34-b517-4eae-94b3-d89adbd8272a_comp-lfi2r60q)" />
+    <path
+       transform="translate(-49.59,-49.59)"
+       d="m 166.61,136.62 h 0.86 a 6,6 0 0 0 6,-6 v -50 l -30.72,15.9 z"
+       fill="url(#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q)"
+       id="path17"
+       style="fill:url(#radialGradient3)" />
+    <path
+       transform="translate(-49.59,-49.59)"
+       d="M 49.59,55.6 V 92.35 L 86.12,74.59 a 67.6,67.6 0 0 0 -9.22,-25 H 55.6 a 6,6 0 0 0 -6.01,6.01 z"
+       fill="url(#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q)"
+       id="path18"
+       style="fill:url(#radialGradient4)" />
+    <path
+       transform="translate(-49.59,-49.59)"
+       d="m 55.6,136.62 h 7.59 A 67.86,67.86 0 0 0 86.93,85.08 c 0,-0.86 0,-1.71 -0.07,-2.55 l -37.27,18.12 v 30 a 6,6 0 0 0 6.01,5.97 z"
+       fill="url(#6ace7856-6d39-4c99-894a-20466b3bd1a9_comp-lfi2r60q)"
+       id="path19"
+       style="fill:url(#radialGradient5)" />
+    <path
+       d="m 96,45.46 27.89,-14.42 v -8.39 l -31.35,16.2 a 3.82,3.82 0 0 1 -5,-1.44 L 75.97,18.04 a 3.25,3.25 0 0 1 1.38,-4.63 L 105,-0.04 H 87.94 L 46.16,20.32 A 2.32,2.32 0 0 1 42.9,18.72 75.1,75.1 0 0 0 35.9,0 h -8.59 a 67.73,67.73 0 0 1 8.47,21 5.11,5.11 0 0 1 -2.72,5.7 L 0,42.76 v 8.3 L 32,35.52 a 4.41,4.41 0 0 1 4.08,0.11 3,3 0 0 1 1.23,2.27 67.83,67.83 0 0 1 -23.66,49.13 H 24.41 A 75.16,75.16 0 0 0 44.8,35.49 q 0,-1.38 -0.06,-2.73 a 5.22,5.22 0 0 1 3,-4.9 l 16.85,-8.2 A 3.46,3.46 0 0 1 69.07,21 l 39.29,66 h 8.68 L 94.79,49.67 A 3,3 0 0 1 96,45.46 Z"
+       fill="#467c9d"
+       id="path20" />
+    <path
+       transform="translate(-49.59,-49.59)"
+       d="m 114.24,69.21 -16.93,8.24 a 5.22,5.22 0 0 0 -3,4.9 q 0.06,1.35 0.06,2.73 A 75.16,75.16 0 0 1 74,136.62 h 11.63 a 6,6 0 0 1 5.37,3.24 l 6.3,28.34 a 5.4,5.4 0 0 0 1.38,2.56 c 2.58,2.62 6.81,2.09 9.51,-1.58 L 132,139.86 h 0.05 a 6,6 0 0 1 5.33,-3.24 h 20.51 l -39.34,-66.1 a 3.36,3.36 0 0 0 -4.31,-1.31 z"
+       fill="url(#0df965da-6645-45a0-b967-366ea052ed18_comp-lfi2r60q)"
+       id="path21"
+       style="fill:url(#0df965da-6645-45a0-b967-366ea052ed18_comp-lfi2r60q)" />
+    <path
+       transform="translate(-49.59,-49.59)"
+       d="m 132.06,129.86 -6.25,-28.17 a 7.65,7.65 0 0 0 -0.62,-1.73 c -2.21,-3.72 -7.62,-3.27 -10.31,0.58 L 91,129.86 a 2.76,2.76 0 0 0 2.45,4 h 36.21 a 2.76,2.76 0 0 0 2.4,-4 z"
+       fill="url(#059f25b3-eb46-40cc-8dde-5a1421ac4999_comp-lfi2r60q)"
+       id="path22"
+       style="fill:url(#059f25b3-eb46-40cc-8dde-5a1421ac4999_comp-lfi2r60q)" />
+  </g>
+</svg>

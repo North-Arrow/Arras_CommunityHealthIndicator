@@ -1,0 +1,283 @@
+{
+  "indicators": [
+    {
+      "title": "Current cigarette smoking among adults",
+      "data_source": "cdc",
+      "short_title": "Smokers",
+      "geotype": "tract",
+      "default": "left",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRenE0k_5PqyC_bP8DsVfuheopSPQbHNSdcB6ipGGqqKixPSzyxNT4fiPQw2GUnfKiMUHtuqf5If98c/pub?gid=482200278&single=true&output=csv",
+      "short_name": "smokers",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of adults",
+          "subtitle": "{{count}} out of {{pop}} adults"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of adults"
+      },
+      "map": {
+        "color": "pct"
+      },
+      "tooltip-info": "This indicator measures: Current cigarette smoking among adults. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
+    },
+    {
+      "title": "Percentage of working-age adults (ages 19 to 64) who have no health insurance coverage",
+      "data_source": "census",
+      "short_title": "Health Insurance",
+      "geotype": "tract",
+      "default": "right",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxPi4GgcloW3FKCIEwM--UA9HhKQjNOGxEoTQC1quZEmlEF-5V9GXIvepoImUQ2c8QXfkmyB79MjS/pub?gid=534592488&single=true&output=csv",
+      "short_name": "no_health_insurance",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} out of {{pop}} working age adults"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of working age adults"
+      },
+      "map": {
+        "color": "pct"
+      },
+      "tooltip-info": "This indicator measures: Percentage of working-age adults (ages 19 to 64) who have no health insurance coverage. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+    },
+    {
+      "title": "Food insecurity crude prevalence (%)",
+      "data_source": "cdc",
+      "short_title": "Food Insecurity",
+      "geotype": "tract",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSpN9_3frlzhn0QzhN3IVYxJ4T4n6RjdAG9mQfq_Tk0qF5AwRUo-CWraFTIWM5tyznNZxbRW8siUNLm/pub?gid=849801194&single=true&output=csv",
+      "short_name": "food-insecurity",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of residents",
+          "subtitle": "{{count}} out of {{pop}} residents"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of residents"
+      },
+      "map": {
+        "color": "pct"
+      },
+      "tooltip-info": "This indicator measures: Food insecurity crude prevalence (%). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
+    },
+    {
+      "title": "Heart disease mortality rate",
+      "data_source": "sc_public_health",
+      "short_title": "Heart Disease Mortality",
+      "geotype": "tract",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQAZ7te1R2RjauYyukLy8AzDXjLJgYofIjfn8ktnOt7TV2_j9TqtnoW31hWBOPqmtF8O4Y12dpUdSD5/pub?gid=361602694&single=true&output=csv",
+      "short_name": "heart-disease",
+      "timeline": {
+        "yearValuePrefix": "pop_",
+        "yearValueShortFormat": "{{value}}/100k",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pop}} per 100k",
+          "subtitle": "{{count}} residents total"
+        }
+      },
+      "legend": {
+        "title-column": "pop",
+        "title": "{{pop}} per 100,000 residents"
+      },
+      "map": {
+        "color": "pop"
+      },
+      "tooltip-info": "This indicator measures: Heart disease mortality rate. Values are shown by tract and may vary by year where available. Higher values indicate a higher rate (often normalized per population, e.g. per 100,000). Data source: sc_public_health."
+    },
+    {
+      "title": "Percent of babies born with low birth rate",
+      "data_source": "kids_count",
+      "short_title": "Low Birth Weight",
+      "geotype": "county",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTSIDstR1PxU_mFXK6GbZGvKUoLN8HXi4UASSww3tFAxBzkV2EZMmtkh9_v_OSkZxAc2g2oSNYogSav/pub?gid=0&single=true&output=csv",
+      "short_name": "birth-weight",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of births"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of births"
+      },
+      "map": {
+        "color": "pct"
+      },
+      "tooltip-info": "This indicator measures: Percent of babies born with low birth rate. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: kids_count."
+    },
+    {
+      "title": "Cancer (malignant neoplasms) mortality rate",
+      "data_source": "sc_public_health",
+      "short_title": "Cancer Mortality",
+      "geotype": "county",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQx5IGI_FrPFnuH2_qxNO3csjQq6vE0VJEFPfqB4zGkltxOKuAMJ2CrBYSV6wiS6kE3p76nGqWc8iz/pub?gid=829636489&single=true&output=csv",
+      "short_name": "neoplasm-mortality",
+      "timeline": {
+        "yearValuePrefix": "pop_",
+        "yearValueShortFormat": "{{value}}/100k",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pop}} per 100k",
+          "subtitle": "{{count}} residents total"
+        }
+      },
+      "legend": {
+        "title-column": "pop",
+        "title": "{{pop}} per 100,000 residents"
+      },
+      "map": {
+        "color": "pop"
+      },
+      "tooltip-info": "This indicator measures: Cancer (malignant neoplasms) mortality rate. Values are shown by county and may vary by year where available. Higher values indicate a higher rate (often normalized per population, e.g. per 100,000). Data source: sc_public_health."
+    },
+    {
+      "title": "Prevalence of frequent mental distress among adults",
+      "data_source": "cdc",
+      "short_title": "Mental Health Distress",
+      "geotype": "tract",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSiMSkw-to8lXOD0pyjuoci-xIFvCdL3woQsEsPtPI0w1TO-g-zt1UVAOV4TOczQ_0RIWX_iFm4EasK/pub?gid=876954295&single=true&output=csv",
+      "short_name": "mental-health-distress",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of adults",
+          "subtitle": "{{count}} out of {{pop}} adults"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of adults"
+      },
+      "map": {
+        "color": "pct"
+      },
+      "tooltip-info": "This indicator measures: Prevalence of frequent mental distress among adults. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
+    },
+    {
+      "title": "Visits to doctor for routine checkup within the past year among adults aged ≥18 years",
+      "data_source": "cdc",
+      "short_title": "Routine Checkups",
+      "geotype": "tract",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSnJkFJHxwHVr8YseJRFPdIzYbvWY9G5Rgzo2Izrg1Tg2s_tVYSV5E38dgz-Fl4CFwcCIFxPv9F_o1N/pub?gid=0&single=true&output=csv",
+      "short_name": "doctor-visits",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of adults",
+          "subtitle": "{{count}} out of {{pop}} adults"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of adults"
+      },
+      "map": {
+        "color": "pct"
+      },
+      "tooltip-info": "This indicator measures: Visits to doctor for routine checkup within the past year among adults aged ≥18 years. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
+    },
+    {
+      "title": "Population to primary care provider ratio",
+      "data_source": "hsra",
+      "short_title": "Primary Care Providers",
+      "geotype": "county",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGdqqgaN6wAWaicLjxM5A1da7trVXWYXxavwHMs03056hZgognkNQ8ykvlxlB92BrBv1TXzSLlMsDH/pub?gid=1437757701&single=true&output=csv",
+      "short_name": "primary-care-provider-ratio",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of residents",
+          "subtitle": "{{count}} out of {{pop}} residents"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of residents"
+      },
+      "map": {
+        "color": "pct"
+      },
+      "tooltip-info": "This indicator measures: Population to primary care provider ratio. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: hsra."
+    },
+    {
+      "title": "Population to mental health care provider ratio",
+      "short_title": "Mental Health Providers",
+      "geotype": "county",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTVCNz20UXGQSJynxm2JeMA8JBmNGd9plBDL-YYR-N8XCKXPwOvpwkYYE-aZG1m1hxmKdr98ZNYKRtP/pub?gid=737318173&single=true&output=csv",
+      "short_name": "mental-health-care-provider-ratio",
+      "data_source": "hsra",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of residents",
+          "subtitle": "{{count}} out of {{pop}} residents"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of residents"
+      },
+      "map": {
+        "color": "pct"
+      },
+      "tooltip-info": "This indicator measures: Population to mental health care provider ratio. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: hsra."
+    }
+  ]
+}
