@@ -31,8 +31,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Custom domain deployment:
+      # - main serves at https://arras.north-arrow.org/
+      # - dev serves at  https://arras.north-arrow.org/dev/
       - name: Build (main -> site root)
-        run: npm run build -- --base="/${{ github.event.repository.name }}/"
+        run: npm run build -- --base=/
 
       - name: Deploy to gh-pages (root)
         uses: peaceiris/actions-gh-pages@v4
@@ -59,7 +62,7 @@ jobs:
         run: npm ci
 
       - name: Build (dev -> /dev/)
-        run: npm run build -- --base="/${{ github.event.repository.name }}/dev/"
+        run: npm run build -- --base=/dev/
 
       - name: Deploy to gh-pages (dev subfolder)
         uses: peaceiris/actions-gh-pages@v4

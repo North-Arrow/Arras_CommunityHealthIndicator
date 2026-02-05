@@ -8,20 +8,17 @@
   <body>
     <script>
       // GitHub Pages SPA fallback that supports BOTH:
-      // - /<repo>/...      (main)
-      // - /<repo>/dev/...  (dev)
+      // - /...      (main on custom domain root)
+      // - /dev/...  (dev on custom domain subpath)
       //
       // Redirects missing routes to the appropriate base with a `?/` encoded path,
       // which `index.html` decodes on load.
       (function () {
         var l = window.location;
-        var parts = l.pathname.split('/').filter(Boolean); // [repo, (dev), ...rest]
-        if (!parts.length) return;
-
-        var repo = parts[0];
-        var isDev = parts[1] === 'dev';
-        var keep = isDev ? 2 : 1;
-        var base = '/' + parts.slice(0, keep).join('/') + '/';
+        var parts = l.pathname.split('/').filter(Boolean); // [(dev), ...rest]
+        var isDev = parts[0] === 'dev';
+        var keep = isDev ? 1 : 0;
+        var base = isDev ? '/dev/' : '/';
 
         var rest = parts.slice(keep).join('/');
         var search = l.search ? '&' + l.search.slice(1) : '';
