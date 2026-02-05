@@ -2,8 +2,12 @@
   <div class="color-legend" :class="{ 'left': side === 'left', 'right': side === 'right' }">
     <div class="legend-container">
       <div class="legend-header">
-        <span class="legend-title">{{ selectedIndicator?.title || 'Indicator' }}</span>
-      </div>
+        <span class="legend-title">{{ selectedIndicator?.title || 'Indicator' }} <v-tooltip
+            style="display: inline-block; max-width: 500px;" location="bottom" :text="selectedIndicator['tooltip-info']">
+            <template v-slot:activator="{ props }">
+              <v-icon v-bind="props" icon="mdi-information-outline" size="18" class="mx-2"></v-icon>
+            </template>
+          </v-tooltip></span>      </div>
       <div class="legend-content">
 
         <table class="legend-icon-container" v-if="legendTitle.min !== '' && legendTitle.max !== '' && legendTitle.mid !== ''">
@@ -41,24 +45,11 @@
             </tr>
           </tbody>
         </table>
+        <div v-if="secondaryTitleColumn" class="gradient-bar" :style="{ width:'100%',
+            background: `linear-gradient(to right, ${minColor}, ${maxColor})`
+          }"></div>
         <table v-if="secondaryTitleColumn" class="legend-icon-container">
           <tbody>
-            <tr>
-              <td style="text-align: left;">
-                <span
-                  style="border: 1px solid #000; display: inline-block; width: 12px; height: 12px; border-radius: 50%;"
-                  :style="{ backgroundColor: minColor }"></span>
-              </td>
-              <td style="text-align: center;">
-                <span
-                  style="border: 1px solid #000;display: inline-block; width: 12px; height: 12px; border-radius: 50%;"
-                  :style="{ backgroundColor: middleColor }"></span>
-              </td>
-              <td style="text-align: right;"><span
-                  style="border: 1px solid #000;display: inline-block; width: 12px; height: 12px; border-radius: 50%;"
-                  :style="{ backgroundColor: maxColor }" /></td>
-            </tr>
-
             <tr class="legend-labels">
               <td style="text-align: left;"><span class="min-label">{{ secondaryTitle?.min.toLocaleString() }}</span>
               </td>
@@ -69,7 +60,7 @@
           </tbody>
 
         </table>
-        <div class="data-source">Data Source: <a :href="source?.url" target="_blank">{{ source?.text }} <v-icon icon="mdi-open-in-new" size="12" /></a></div>
+        <div v-show="source" class="data-source">Data Source: <a :href="source?.url" target="_blank">{{ source?.text }} <v-icon icon="mdi-open-in-new" size="12" /></a></div>
       </div>
       
     </div>
@@ -153,53 +144,6 @@ const maxColor = computed(() => {
     return arrasBranding.colors[colorName];
   }
   return '#000000';
-})
-
-const middleColor = computed(() => {
-  // Helper to convert hex to rgb
-  function hexToRgb(hex: string): { r: number, g: number, b: number } | null {
-    // Remove "#" if present
-    hex = hex.replace(/^#/, "");
-    if (hex.length === 3) {
-      // e.g. #03f -> #0033ff
-      hex = hex.split("").map(c => c + c).join("");
-    }
-    if (hex.length !== 6) return null;
-    const num = parseInt(hex, 16);
-    return {
-      r: (num >> 16) & 255,
-      g: (num >> 8) & 255,
-      b: num & 255
-    };
-  }
-
-  // Helper to convert rgb to hex
-  function rgbToHex({ r, g, b }: { r: number, g: number, b: number }): string {
-    return (
-      "#" +
-      [r, g, b]
-        .map(x => {
-          const hex = x.toString(16);
-          return hex.length === 1 ? "0" + hex : hex;
-        })
-        .join("")
-    );
-  }
-
-  return computed(() => {
-    const min = minColor.value;
-    const max = maxColor.value;
-    const rgbMin = hexToRgb(min);
-    const rgbMax = hexToRgb(max);
-    if (!rgbMin || !rgbMax) return "#000000";
-
-    const midwayRgb = {
-      r: Math.round((rgbMin.r + rgbMax.r) / 2),
-      g: Math.round((rgbMin.g + rgbMax.g) / 2),
-      b: Math.round((rgbMin.b + rgbMax.b) / 2),
-    };
-    return rgbToHex(midwayRgb);
-  }).value;
 })
 
 const minColor = computed(() => {
@@ -306,5 +250,12 @@ const minColor = computed(() => {
   font-weight: bold;
   margin-top: 4px;
   font-style: italic;
+}
+
+.gradient-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 2px;
+  border: 1px solid #d1d5db;
 }
 </style>

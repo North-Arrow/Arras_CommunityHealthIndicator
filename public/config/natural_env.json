@@ -26,7 +26,8 @@
           "layer_name": "protected_outline",
           "html": "<span class='protected-lands-outline'>Protected Lands<span class='protected-lands-swatch'></span></span>"
         }
-      }
+      },
+      "tooltip-info": "This indicator measures: Acres of Protected Land. Values are shown by protected and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source: sc_conserv_bank."
     },
     {
       "title": "Average daily density of fine particulate matter (PM2.5)",
@@ -50,7 +51,8 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of residents"
-      }
+      },
+      "tooltip-info": "This indicator measures: Average daily density of fine particulate matter (PM2.5). Values are shown by protected and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: county_health_rankings."
     },
     {
       "title": "Awards given by the SC Conservation Bank",
@@ -74,7 +76,8 @@
       "legend": {
         "title-column": "count",
         "title": "${{count}}"
-      }
+      },
+      "tooltip-info": "This indicator measures: Awards given by the SC Conservation Bank. Values are shown by facility and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source: sc_conserv_bank."
     }
   ]
 }

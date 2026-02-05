@@ -12,10 +12,15 @@ const app = createApp(App)
 const pinia = createPinia()
 app.provide('mitt', emitter)
 
-const sitePath = process.env.NODE_ENV === 'production' ? '' : ''
-const historyBase = sitePath
+// Vite sets BASE_URL based on `vite build --base=...` (and defaults to `/`).
+// This lets us host the app at `/repo/` (prod) and `/repo/dev/` (dev) on GitHub Pages.
+const baseUrl = (import.meta as any).env?.BASE_URL ?? '/';
+const sitePath = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+const historyBase = baseUrl;
+
 app.provide('sitePath', sitePath);
-const mainConfig = (await axios.get(sitePath+'/config/main.json')).data;
+
+const mainConfig = (await axios.get(`${sitePath}/config/main.json`)).data;
 const activeCategories = mainConfig.categories
     .filter((category: any) => category.enabled && category.config)
 
@@ -28,12 +33,11 @@ await Promise.all(activeCategories.map(async (config: any) => {
 
 const geoConfigs = mainConfig.geo;
 const catKeys = Object.keys(categoryConfigs);
-console.log(catKeys);
-console.log(categoryConfigs)
+
 for(let k=0; k<catKeys.length; k++){
     const key = catKeys[k];
     const indicators = categoryConfigs[key].indicators;
-    console.log(indicators);
+
     for(let i=0; i<indicators.length; i++){
         let indicator = indicators[i];
         const geotype = indicator.geotype;

@@ -32,32 +32,60 @@
         </div>
       </div>
     <v-app>
-      <v-navigation-drawer class="sidebar" v-model="drawer" temporary>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title class="text-h6 font-weight-bold">
-              Health Indicators
-            </v-list-item-title>
-          </v-list-item>
-          <v-divider></v-divider>
+      <v-navigation-drawer
+        class="sidebar"
+        v-model="drawer"
+        temporary
+        :width="320"
+      >
+        <div class="sidebar__header" :style="sidebarHeaderStyle">
+          <div class="sidebar__brand">
+            <v-img
+              src="ArrasFoundation.png"
+              width="44"
+              height="44"
+              class="sidebar__logo"
+            />
+            <div class="sidebar__brand-text">
+              <div class="sidebar__title">Health Indicators</div>
+              <div class="sidebar__subtitle">Choose a theme</div>
+            </div>
+          </div>
+        </div>
+        <v-divider class="sidebar__divider" />
+        <v-list nav density="comfortable" class="sidebar__list">
           <v-list-item
             v-for="category in categories"
             :key="category.title"
             :to="`/map?theme=${category.query_str}`"
             :disabled="!category.enabled"
             @click="drawer = false"
+            class="sidebar__item"
+            rounded="lg"
           >
             <template v-slot:prepend>
-              <v-img :src="category.icon" width="24" height="24" class="mr-2"></v-img>
+              <div class="sidebar__icon-wrap">
+                <v-img :src="category.icon" width="22" height="22" class="sidebar__icon" />
+              </div>
             </template>
             <v-list-item-title>{{ category.title }}</v-list-item-title>
           </v-list-item>
-          <v-divider class="my-2"></v-divider>
-          <v-list-item to="/" @click="drawer = false">
+          <v-divider class="my-2 sidebar__divider"></v-divider>
+          <v-list-item to="/" @click="drawer = false" class="sidebar__item" rounded="lg">
             <template v-slot:prepend>
-              <v-icon icon="mdi-home"></v-icon>
+              <div class="sidebar__icon-wrap sidebar__icon-wrap--home">
+                <v-icon icon="mdi-home" size="18"></v-icon>
+              </div>
             </template>
             <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+          <v-list-item target="_blank" to="/pdf_placeholder.pdf" class="sidebar__item" rounded="lg">
+            <template v-slot:prepend>
+              <div class="sidebar__icon-wrap sidebar__icon-wrap--home">
+                <v-icon icon="mdi-book-open" size="18"></v-icon>
+              </div>
+            </template>
+            <v-list-item-title>Data Dictionary</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
@@ -84,8 +112,18 @@ const router = useRouter()
 const drawer = ref(false)
 
 const mainConfig = inject('mainConfig') as any;
+const arrasBranding = inject('arrasBranding') as any;
 const categories = computed(() => mainConfig?.categories || []);
 const orientation = computed(() => window.innerWidth > window.innerHeight ? 'left-right' : 'top-bottom')
+
+const arrasColors = computed<Record<string, string>>(() => arrasBranding?.colors || {});
+const sidebarHeaderStyle = computed(() => {
+  const darkBlue = arrasColors.value['dark-blue'] || '#1d4389';
+  const paleBlue = arrasColors.value['pale-blue'] || '#7fa0ac';
+  return {
+    background: `linear-gradient(135deg, ${paleBlue} -10%, ${darkBlue} 100%)`,
+  };
+});
 
 watch(router.currentRoute, (newRoute, oldRoute) => {
   if(!window.location.search.includes('theme') && newRoute.name === 'map') {
@@ -108,6 +146,94 @@ onBeforeMount(() => {
 .sidebar {
   z-index: 1000;
   height: calc(100% + -14px) !important;
+  border-radius: 18px;
+  overflow: hidden;
+  /* box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22); */
+}
+
+.sidebar__header {
+  padding: 16px 16px 14px 16px;
+  color: #fff;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar__logo {
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
+.sidebar__brand-text {
+  min-width: 0;
+}
+
+.sidebar__title {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 1.15;
+}
+
+.sidebar__subtitle {
+  font-size: 0.85rem;
+  opacity: 0.92;
+  margin-top: 2px;
+}
+
+.sidebar__divider {
+  opacity: 0.7;
+}
+
+.sidebar__list {
+  padding: 10px 8px 12px 8px;
+}
+
+.sidebar__item :deep(.v-list-item__content) {
+  padding: 8px 2px;
+}
+
+.sidebar__icon-wrap {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 1;
+}
+
+.sidebar__icon-wrap--home {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.sidebar__item :deep(.v-list-item-title) {
+  font-weight: 520;
+  letter-spacing: 0.1px;
+}
+
+.sidebar__item :deep(.v-list-item__prepend) {
+  margin-inline-end: 10px;
+}
+
+.sidebar__item:hover :deep(.v-list-item__overlay) {
+  opacity: 0.06;
+}
+
+.sidebar :deep(.v-list-item--active) {
+  background: rgba(var(--v-theme-primary), 0.10);
+  border: 1px solid rgba(var(--v-theme-primary), 0.22);
+}
+
+.sidebar :deep(.v-list-item--active .v-list-item-title) {
+  font-weight: 700;
+}
+
+.sidebar :deep(.v-list-item--disabled) {
+  opacity: 0.55;
 }
 .logo {
   height: 6em;

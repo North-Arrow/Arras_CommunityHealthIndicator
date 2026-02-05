@@ -176,6 +176,12 @@ The following properties MUST be present in every indicator object:
 
 The following properties MAY be present in indicator objects:
 
+#### `tooltip-info` (string)
+- **Type**: String
+- **Description**: OPTIONAL. Longer descriptive text shown in UI tooltips/info panels for the indicator (definition, context, caveats, and data notes)
+- **Usage**: Recommended for providing a plain-language explanation and interpretation guidance (e.g., what higher/lower values mean, and key limitations)
+- **Example**: `"This indicator measures the share of adults who smoke cigarettes. Values are shown by census tract and year where available. Higher values indicate a larger share of adults who smoke."`
+
 #### `map` (object)
 - **Type**: Object
 - **Description**: Configuration for map visualization styling

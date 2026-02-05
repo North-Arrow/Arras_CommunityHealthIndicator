@@ -2,7 +2,12 @@
   <div class="color-legend" :class="{ 'left': side === 'left', 'right': side === 'right' }">
     <div class="legend-container">
       <div class="legend-header">
-        <span class="legend-title">{{ selectedIndicator?.title || 'Indicator' }}</span>
+        <span class="legend-title">{{ selectedIndicator?.title || 'Indicator' }} <v-tooltip
+            style="display: inline-block; max-width: 500px;" location="bottom" :text="selectedIndicator['tooltip-info']">
+            <template v-slot:activator="{ props }">
+              <v-icon v-bind="props" icon="mdi-information-outline" size="18" class="mx-2"></v-icon>
+            </template>
+          </v-tooltip></span>
       </div>
       <div class="legend-content">
         <div class="legend-gradient">
@@ -14,9 +19,10 @@
           <span class="min-label">{{ legendTitle.min }}</span>
           <span class="max-label">{{ legendTitle.max }}</span>
         </div>
-        
+
         <div class="extra-layer" v-if="extraLayerHtml" v-html="extraLayerHtml"></div>
-        <div class="data-source">Data Source: <a :href="source?.url" target="_blank">{{ source?.text }} <v-icon icon="mdi-open-in-new" size="12" /></a></div>
+        <div v-show="source" class="data-source">Data Source: <a :href="source?.url" target="_blank">{{ source?.text }}
+            <v-icon icon="mdi-open-in-new" size="12" /></a></div>
 
       </div>
 
@@ -164,12 +170,12 @@ const maxColor = computed(() => {
 }
 </style>
 <style>
-  .protected-lands-swatch {
-    width: 10px;
-    height: 10px;
-    border: 2px solid #f00;
-    display: inline-block;
-    margin-left: 4px;
-    vertical-align: middle;
-  }
+.protected-lands-swatch {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #f00;
+  display: inline-block;
+  margin-left: 4px;
+  vertical-align: middle;
+}
 </style>

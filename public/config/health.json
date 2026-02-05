@@ -2,7 +2,7 @@
   "indicators": [
     {
       "title": "Current cigarette smoking among adults",
-      "data_source":"cdc",
+      "data_source": "cdc",
       "short_title": "Smokers",
       "geotype": "tract",
       "default": "left",
@@ -25,11 +25,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Current cigarette smoking among adults. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
     },
     {
       "title": "Percentage of working-age adults (ages 19 to 64) who have no health insurance coverage",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Health Insurance",
       "geotype": "tract",
       "default": "right",
@@ -52,11 +53,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percentage of working-age adults (ages 19 to 64) who have no health insurance coverage. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Food insecurity crude prevalence (%)",
-      "data_source":"cdc",
+      "data_source": "cdc",
       "short_title": "Food Insecurity",
       "geotype": "tract",
       "default": false,
@@ -79,11 +81,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Food insecurity crude prevalence (%). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
     },
     {
       "title": "Heart disease mortality rate",
-      "data_source":"sc_public_health",
+      "data_source": "sc_public_health",
       "short_title": "Heart Disease Mortality",
       "geotype": "tract",
       "default": false,
@@ -106,11 +109,12 @@
       },
       "map": {
         "color": "pop"
-      }
+      },
+      "tooltip-info": "This indicator measures: Heart disease mortality rate. Values are shown by tract and may vary by year where available. Higher values indicate a higher rate (often normalized per population, e.g. per 100,000). Data source: sc_public_health."
     },
     {
       "title": "Percent of babies born with low birth rate",
-      "data_source":"kids_count",
+      "data_source": "kids_count",
       "short_title": "Low Birth Weight",
       "geotype": "county",
       "default": false,
@@ -132,11 +136,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of babies born with low birth rate. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: kids_count."
     },
     {
       "title": "Cancer (malignant neoplasms) mortality rate",
-      "data_source":"sc_public_health",
+      "data_source": "sc_public_health",
       "short_title": "Cancer Mortality",
       "geotype": "county",
       "default": false,
@@ -159,11 +164,12 @@
       },
       "map": {
         "color": "pop"
-      }
+      },
+      "tooltip-info": "This indicator measures: Cancer (malignant neoplasms) mortality rate. Values are shown by county and may vary by year where available. Higher values indicate a higher rate (often normalized per population, e.g. per 100,000). Data source: sc_public_health."
     },
     {
       "title": "Prevalence of frequent mental distress among adults",
-      "data_source":"cdc",
+      "data_source": "cdc",
       "short_title": "Mental Health Distress",
       "geotype": "tract",
       "default": false,
@@ -186,11 +192,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Prevalence of frequent mental distress among adults. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
     },
     {
       "title": "Visits to doctor for routine checkup within the past year among adults aged ≥18 years",
-      "data_source":"cdc",
+      "data_source": "cdc",
       "short_title": "Routine Checkups",
       "geotype": "tract",
       "default": false,
@@ -213,11 +220,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Visits to doctor for routine checkup within the past year among adults aged ≥18 years. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
     },
     {
       "title": "Population to primary care provider ratio",
-      "data_source":"hsra",
+      "data_source": "hsra",
       "short_title": "Primary Care Providers",
       "geotype": "county",
       "default": false,
@@ -240,7 +248,8 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Population to primary care provider ratio. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: hsra."
     },
     {
       "title": "Population to mental health care provider ratio",
@@ -249,7 +258,7 @@
       "default": false,
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTVCNz20UXGQSJynxm2JeMA8JBmNGd9plBDL-YYR-N8XCKXPwOvpwkYYE-aZG1m1hxmKdr98ZNYKRtP/pub?gid=737318173&single=true&output=csv",
       "short_name": "mental-health-care-provider-ratio",
-      "data_source":"hsra",
+      "data_source": "hsra",
       "timeline": {
         "yearValuePrefix": "pct_",
         "yearValueShortFormat": "{{value}}%",
@@ -267,7 +276,8 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Population to mental health care provider ratio. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: hsra."
     }
   ]
 }

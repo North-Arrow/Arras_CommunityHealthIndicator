@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arras Community Indicator Tool</title>
+  </head>
+  <body>
+    <script>
+      // GitHub Pages SPA fallback that supports BOTH:
+      // - /<repo>/...      (main)
+      // - /<repo>/dev/...  (dev)
+      //
+      // Redirects missing routes to the appropriate base with a `?/` encoded path,
+      // which `index.html` decodes on load.
+      (function () {
+        var l = window.location;
+        var parts = l.pathname.split('/').filter(Boolean); // [repo, (dev), ...rest]
+        if (!parts.length) return;
+
+        var repo = parts[0];
+        var isDev = parts[1] === 'dev';
+        var keep = isDev ? 2 : 1;
+        var base = '/' + parts.slice(0, keep).join('/') + '/';
+
+        var rest = parts.slice(keep).join('/');
+        var search = l.search ? '&' + l.search.slice(1) : '';
+        var hash = l.hash || '';
+
+        // Use ~and~ to avoid ambiguity with '&' separators.
+        var encodedRest = rest.replace(/&/g, '~and~');
+        var encodedSearch = search.replace(/&/g, '~and~');
+
+        l.replace(base + '?/' + encodedRest + encodedSearch + hash);
+      })();
+    </script>
+  </body>
+</html>
+

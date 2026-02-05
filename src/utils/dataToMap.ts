@@ -244,6 +244,11 @@ export class DataToMap {
     };
 
     this.map.on("mousemove", this.events.mousemove);
+
+    this.events.click = (_event: any) => {
+      this.frozenPopup = !this.frozenPopup;
+    };
+    this.map.on("click", this.events.click);
   }
 
   /**

@@ -2,7 +2,7 @@
   "indicators": [
     {
       "title": "Percent of 3 and 4 Year Olds enrolled in Pre-K (both public and private schools)",
-     "data_source":"census",
+      "data_source": "census",
       "short_title": "Pre-K Enrollment",
       "geotype": "tract",
       "default": "right",
@@ -22,11 +22,12 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of 3 and 4 year olds"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of 3 and 4 Year Olds enrolled in Pre-K (both public and private schools). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Out of all families with children, the percent whose income in the past 12 months is below the federal poverty level",
-     "data_source":"census",
+      "data_source": "census",
       "short_title": "Child Poverty",
       "default": "left",
       "geotype": "tract",
@@ -46,11 +47,12 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of families"
-      }
+      },
+      "tooltip-info": "This indicator measures: Out of all families with children, the percent whose income in the past 12 months is below the federal poverty level. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Childcare Center Capacity",
-     "data_source":"abc_qual",
+      "data_source": "abc_qual",
       "short_title": "Childcare Capacity",
       "geotype": "facility",
       "default": false,
@@ -59,7 +61,9 @@
       "timeline": {
         "yearValuePrefix": "count_",
         "yearValueShortFormat": "{{value}}",
-        "filterOut": ["statewide"]
+        "filterOut": [
+          "statewide"
+        ]
       },
       "popup": {
         "format": {
@@ -74,11 +78,12 @@
       "map": {
         "size": "count",
         "color": null
-      }
+      },
+      "tooltip-info": "This indicator measures: Childcare Center Capacity. Values are shown by facility and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source: abc_qual."
     },
     {
       "title": "3rd Grade Math Readiness (% of students meeting or exceeding expectations)",
-     "data_source":"sc_depofed",
+      "data_source": "sc_depofed",
       "short_title": "3rd Grade Math Ready",
       "geotype": "school",
       "default": false,
@@ -104,11 +109,12 @@
       "map": {
         "size": "pop",
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: 3rd Grade Math Readiness (% of students meeting or exceeding expectations). Values are shown by school and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: sc_depofed."
     },
     {
       "title": "3rd Grade ELA Readiness (% of students meeting or exceeding expectations)",
-     "data_source":"sc_depofed",
+      "data_source": "sc_depofed",
       "short_title": "3rd Grade ELA Ready",
       "geotype": "school",
       "default": false,
@@ -134,11 +140,12 @@
         "title": "{{pop}} students tested",
         "secondary-title-column": "pct",
         "secondary-title": "{{pct}}% of students ready"
-      }
+      },
+      "tooltip-info": "This indicator measures: 3rd Grade ELA Readiness (% of students meeting or exceeding expectations). Values are shown by school and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: sc_depofed."
     },
     {
       "title": "8th Grade Math Readiness (% of students meeting or exceeding expectations)",
-     "data_source":"sc_depofed",
+      "data_source": "sc_depofed",
       "short_title": "8th Grade Math Ready",
       "geotype": "school",
       "default": false,
@@ -164,11 +171,12 @@
         "title": "{{pop}} students tested",
         "secondary-title-column": "pct",
         "secondary-title": "{{pct}}% of students ready"
-      }
+      },
+      "tooltip-info": "This indicator measures: 8th Grade Math Readiness (% of students meeting or exceeding expectations). Values are shown by school and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: sc_depofed."
     },
     {
       "title": "8th Grade ELA Readiness (% of students meeting or exceeding expectations)",
-     "data_source":"sc_depofed",
+      "data_source": "sc_depofed",
       "short_title": "8th Grade ELA Ready",
       "geotype": "school",
       "default": false,
@@ -194,11 +202,12 @@
       "map": {
         "size": "pop",
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: 8th Grade ELA Readiness (% of students meeting or exceeding expectations). Values are shown by school and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: sc_depofed."
     },
     {
       "title": "High School Graduation Rate (4-year cohort)",
-     "data_source":"sc_depofed",
+      "data_source": "sc_depofed",
       "short_title": "HS Grad. Rate",
       "geotype": "school",
       "default": false,
@@ -224,11 +233,12 @@
       "map": {
         "size": "pop",
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: High School Graduation Rate (4-year cohort). Values are shown by school and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: sc_depofed."
     },
     {
       "title": "High School Career Readiness (% of students in graduating cohort that were career ready)",
-     "data_source":"sc_depofed",
+      "data_source": "sc_depofed",
       "short_title": "HS Career Ready",
       "geotype": "school",
       "default": false,
@@ -254,11 +264,12 @@
       "map": {
         "size": "pop",
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: High School Career Readiness (% of students in graduating cohort that were career ready). Values are shown by school and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: sc_depofed."
     },
     {
       "title": "High School College Readiness (% of students in graduating cohort that were college ready)",
-     "data_source":"sc_depofed",
+      "data_source": "sc_depofed",
       "short_title": "HS College Ready",
       "geotype": "school",
       "default": false,
@@ -284,11 +295,12 @@
       "map": {
         "size": "pop",
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: High School College Readiness (% of students in graduating cohort that were college ready). Values are shown by school and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: sc_depofed."
     },
     {
       "title": "Disconnected Youth (16 to 18 year olds not in school nor employed)",
-     "data_source":"census",
+      "data_source": "census",
       "short_title": "Disconnected Youth",
       "geotype": "tract",
       "default": false,
@@ -308,11 +320,12 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of children"
-      }
+      },
+      "tooltip-info": "This indicator measures: Disconnected Youth (16 to 18 year olds not in school nor employed). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Kindergarten Readiness",
-     "data_source":"sc_depofed",
+      "data_source": "sc_depofed",
       "short_title": "K Ready",
       "geotype": "school",
       "default": false,
@@ -334,7 +347,8 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Kindergarten Readiness. Values are shown by school and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: sc_depofed."
     }
   ]
 }

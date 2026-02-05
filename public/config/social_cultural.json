@@ -11,7 +11,10 @@
       "timeline": {
         "yearValuePrefix": "count_",
         "yearValueShortFormat": "{{value}}",
-        "filterOut": ["statewide", "overall"]
+        "filterOut": [
+          "statewide",
+          "overall"
+        ]
       },
       "popup": {
         "format": {
@@ -22,7 +25,8 @@
       "legend": {
         "title-column": "count",
         "title": "{{count}} grandchildren"
-      }
+      },
+      "tooltip-info": "This indicator measures: Number of grandparent householders responsible for own grandchildren under 18 years. Values are shown by tract and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source details will be added later."
     },
     {
       "title": "Lack of social and emotional support among adults",
@@ -46,7 +50,8 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of adults"
-      }
+      },
+      "tooltip-info": "This indicator measures: Lack of social and emotional support among adults. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
     },
     {
       "title": "Percent of population that is working age(18-64)",
@@ -70,7 +75,8 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of adults"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of population that is working age(18-64). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
     },
     {
       "title": "Rate of population change (10 year intervals)",
@@ -94,7 +100,8 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% change"
-      }
+      },
+      "tooltip-info": "This indicator measures: Rate of population change (10 year intervals). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
     },
     {
       "title": "Percent of families with children (under 18) with 1 householder and no spouse present",
@@ -118,7 +125,8 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of households"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of families with children (under 18) with 1 householder and no spouse present. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
     },
     {
       "title": "Percent of registered voters who voted in general elections",
@@ -142,7 +150,8 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of voters"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of registered voters who voted in general elections. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
     },
     {
       "title": "The rate of membership organizations per 10,000 people",
@@ -150,8 +159,8 @@
       "short_title": "Social Associations",
       "geotype": "county",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7fphbAk3DI-8pEddwSfbxmeTuL9f868w-qTeyL9687ms1oYyYKj1_J7YVp-_7-LMmhxn9394BVzUL/pub?gid=0&single=true&output=csv",
-      "short_name": "voter_turnout",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTUg8wMqDyz733CyK3bDNe3pF96ZvGgbsLJRc0IfWD_yBExMNU-gV88hM81CYOiO5efhFSvZeIDXc5/pub?gid=0&single=true&output=csv",
+      "short_name": "soc_associations",
       "timeline": {
         "yearValuePrefix": "pct_",
         "yearValueShortFormat": "{{value}}%",
@@ -166,7 +175,8 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}} per 10,000 residents"
-      }
+      },
+      "tooltip-info": "This indicator measures: The rate of membership organizations per 10,000 people. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
     }
   ]
 }

@@ -82,6 +82,7 @@ export class AreaDataToMap extends DataToMap {
     const data = this.data;
 
     this.events.mousemove = (event: any) => {
+      if(this.frozenPopup) return;
       // Create popup once
       this.createPopupIfNeeded();
       const features = map.queryRenderedFeatures(event.point, {
@@ -157,13 +158,14 @@ export class AreaDataToMap extends DataToMap {
       }
 
 
-
-      map.setPaintProperty(data.layers.outline, "line-color", [
-        "case",
-        ["==", ["get", "geoid"], features[0].properties.geoid],
-        ["literal", "#08ff"],
-        "#0000",
-      ]);
+      if(map.getLayer(data.layers.outline)) {
+        map.setPaintProperty(data.layers.outline, "line-color", [
+          "case",
+          ["==", ["get", "geoid"], features[0].properties.geoid],
+          ["literal", "#08ff"],
+          "#0000",
+        ]);
+      }
       this.emitter?.emit(
         `feature-${this.side || "left"}-clicked`,
         features[0].properties.geoid

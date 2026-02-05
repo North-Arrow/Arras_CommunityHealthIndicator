@@ -1,23 +1,14 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { copyFileSync } from 'fs'
-import { resolve } from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
-    {
-      name: 'copy-404',
-      closeBundle() {
-        // Copy index.html to 404.html after build for GitHub Pages SPA routing
-        const distPath = resolve(__dirname, 'dist')
-        copyFileSync(
-          resolve(distPath, 'index.html'),
-          resolve(distPath, '404.html')
-        )
-      }
-    }
+    vue()
   ],
-  base: process.env.NODE_ENV === 'production' ? '' : ''
+  // Allow GitHub Pages deployments under a sub-path.
+  // - main: VITE_BASE=/<repo>/
+  // - dev:  VITE_BASE=/<repo>/dev/
+  // Can also be overridden via `vite build --base=...`
+  base: process.env.VITE_BASE || '/'
 })

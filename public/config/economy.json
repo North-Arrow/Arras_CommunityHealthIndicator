@@ -2,7 +2,7 @@
   "indicators": [
     {
       "title": "Percent of adults (ages 25+) with bachelor's degree or higher",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Adults with Bachelor's Degree",
       "geotype": "tract",
       "default": "left",
@@ -22,11 +22,12 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of adults"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of adults (ages 25+) with bachelor's degree or higher. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Percent of families with children living in 'concentrated poverty'-—areas where the poverty rate is over 40%",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Children in Poverty",
       "geotype": "tract",
       "default": false,
@@ -46,11 +47,12 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of children"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of families with children living in 'concentrated poverty'-—areas where the poverty rate is over 40%. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Median household income",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Median Income",
       "geotype": "tract",
       "default": false,
@@ -69,11 +71,12 @@
       "legend": {
         "title-column": "count",
         "title": "${{count}} median household income"
-      }
+      },
+      "tooltip-info": "This indicator measures: Median household income. Values are shown by tract and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source: census."
     },
     {
       "title": "Percent of households using more than 30% of their income to pay for housing costs",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Housing Cost Burden",
       "geotype": "tract",
       "default": false,
@@ -93,11 +96,12 @@
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of households"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of households using more than 30% of their income to pay for housing costs. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Percent of adults (ages 25+) with a high school diploma or equivalent",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "HS Diploma",
       "geotype": "tract",
       "default": false,
@@ -120,11 +124,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of adults (ages 25+) with a high school diploma or equivalent. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Percent of workers (16+) whose travel time to work is 45 minutes or more",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Long Commutes",
       "geotype": "tract",
       "default": false,
@@ -147,11 +152,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of workers (16+) whose travel time to work is 45 minutes or more. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Percent of total population living below the federal poverty line",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Poverty Rate",
       "geotype": "tract",
       "default": "right",
@@ -174,11 +180,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of total population living below the federal poverty line. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Share of the civilian labor force living below the federal poverty line (ages 16+)",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Workforce in Poverty",
       "geotype": "tract",
       "default": false,
@@ -201,11 +208,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Share of the civilian labor force living below the federal poverty line (ages 16+). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Percent of people (16+) in the civilian labor force who are unemployed",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Unemployment Rate",
       "geotype": "tract",
       "default": false,
@@ -228,11 +236,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of people (16+) in the civilian labor force who are unemployed. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Percent of housing units that lack complete plumbing facilities for exclusive use",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Substandard Housing",
       "geotype": "tract",
       "default": false,
@@ -255,11 +264,12 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of housing units that lack complete plumbing facilities for exclusive use. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     },
     {
       "title": "Percent of households with no available vehicle",
-      "data_source":"census",
+      "data_source": "census",
       "short_title": "Vehicles Available",
       "geotype": "tract",
       "default": false,
@@ -282,7 +292,8 @@
       },
       "map": {
         "color": "pct"
-      }
+      },
+      "tooltip-info": "This indicator measures: Percent of households with no available vehicle. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
     }
   ]
 }

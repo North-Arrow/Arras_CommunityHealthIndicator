@@ -4,11 +4,11 @@
         <!-- Feature Details -->
         <div class="feature-details">
             <!-- Header -->
-            <div class="popup-header">
+            <div class="popup-header" v-if="!(currentIndicator?.geotype === 'protected' || currentIndicator?.geotype === 'tract' || currentIndicator?.geotype === 'county')">
                 <v-icon icon="mdi-map-marker" size="24" color="primary" class="header-icon"></v-icon>
                 <div class="header-content">
                     <h3 class="feature-name" v-if="properties.name">{{ properties.name }}</h3>
-                    <h3 class="feature-name" v-else-if="properties.geoid"> {{ currentIndicator?.geotype === 'tract' ? 'Census Tract Number' : currentIndicator?.geotype === 'county' ? 'County FIPS code' : 'ID' }}: {{ properties.geoid }}</h3>
+                    <h3 class="feature-name"  v-else-if="properties.geoid"> {{ currentIndicator?.geotype === 'tract' ? 'Census Tract Number' : currentIndicator?.geotype === 'county' ? 'County FIPS code' : 'ID' }}: {{ properties.geoid }}</h3>
                     <div v-if="properties.address" class="feature-address">
                         <v-icon icon="mdi-map-marker-outline" size="14" class="mr-1"></v-icon>
                         {{ decodeURIComponent(properties.address) }}
@@ -58,6 +58,18 @@
                     </v-expansion-panel>
                 </v-expansion-panels>
             </div>
+            <div v-if="currentIndicator?.geotype === 'protected' || currentIndicator?.geotype === 'tract' || currentIndicator?.geotype === 'county'" class="popup-header area">
+                <v-icon icon="mdi-map-marker" size="24" color="primary" class="header-icon"></v-icon>
+                <div class="header-content">
+                    <h3 class="feature-name" v-if="properties.name">{{ properties.name }}</h3>
+                    <h3 class="feature-name"  v-else-if="properties.geoid"> {{ currentIndicator?.geotype === 'tract' ? 'Census Tract Number' : currentIndicator?.geotype === 'county' ? 'County FIPS code' : 'ID' }}: {{ properties.geoid }}</h3>
+                    <div v-if="properties.address" class="feature-address">
+                        <v-icon icon="mdi-map-marker-outline" size="14" class="mr-1"></v-icon>
+                        {{ decodeURIComponent(properties.address) }}
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -201,6 +213,27 @@ const stats = computed(() => {
     color: #1e293b;
     margin: 0 0 0.5rem 0;
     line-height: 1.3;
+    word-wrap: break-word;
+}
+
+.popup-header.area {
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    margin-top: .4rem;
+    margin-bottom: -.75rem;
+}
+.area .header-icon {
+    margin-top: -0.25rem;
+    vertical-align: top;
+}
+.area .feature-name{
+    vertical-align: bottom;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
+    line-height: 1;
     word-wrap: break-word;
 }
 
