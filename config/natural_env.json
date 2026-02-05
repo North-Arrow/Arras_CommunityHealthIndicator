@@ -75,7 +75,13 @@
       },
       "legend": {
         "title-column": "count",
-        "title": "${{count}}"
+        "title": "${{count}} awarded",
+        "secondary-title-column": "acres",
+        "secondary-title": "{{acres}} acres of protected land"
+      },
+      "map": {
+        "size": "count",
+        "color": "acres"
       },
       "tooltip-info": "This indicator measures: Awards given by the SC Conservation Bank. Values are shown by facility and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source: sc_conserv_bank."
     }
