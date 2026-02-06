@@ -3,7 +3,7 @@
         <v-container style="padding-top: 0px; height: 100%;">
             <v-card :style="{ 'background-color': arrasBrandingColor }" class="theme-title mt-2" elevation="2" rounded="lg">
                 <v-card-title v-if="currentThemeConfig" class="text-center pa-0 ma-0 theme-title__text" :style="{ 'background-color': arrasBrandingColor }">
-                    <v-img inline :src="invertedIconPath" width="48" height="48" class="mr-2 title-theme-icon"></v-img>
+                    <v-img inline :src="invertedIconPath" width="36" height="36" class="mr-2 title-theme-icon"></v-img>
                     {{ currentThemeConfig.title }}
                 </v-card-title>
             </v-card>
@@ -14,7 +14,7 @@
 </template>
 <style>
 .maplibregl-compare-type-toggle.top {
-    margin-top: 8px;
+    margin-top: 12px;
 }
 .full-screen-main{
     display: block;
@@ -42,7 +42,7 @@
 .theme-title__text {
     font-weight: 650;
     letter-spacing: 0.2px;
-    font-size: 2rem; /* slight bump, not “big” */
+    font-size: 1.6rem; /* slight bump, not “big” */
     line-height: 1.25;
     color: white;
 }
