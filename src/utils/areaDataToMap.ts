@@ -36,6 +36,7 @@ export class AreaDataToMap extends DataToMap {
 
     const source: any = map.getSource(data.source_name);
     const geojson = await source.getData();
+  
     geojson.features = geojson.features.map((feature: any) => {
       let properties = data.google_sheets_data.data.find(
         (row: any) => +row.geoid === +feature.properties.geoid
@@ -186,7 +187,6 @@ export class AreaDataToMap extends DataToMap {
     if (!map) return false;
     const data = this.data;
     const fillColor = this.getGradientExpression();
-    console.log(fillColor);
     if (!fillColor) {
       console.error("Failed to generate gradient expression");
       return false;
@@ -196,7 +196,6 @@ export class AreaDataToMap extends DataToMap {
     map.setLayoutProperty(data.layers.main, "visibility", "visible");
     if (data.layers.supplementary) {
       data.layers.supplementary.forEach((layer: string) => {
-        console.log(layer);
         map.setLayoutProperty(layer, "visibility", "visible");
       });
     }

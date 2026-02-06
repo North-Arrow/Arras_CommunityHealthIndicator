@@ -38,6 +38,7 @@ export class DataToMap {
     count: { min: number | null; max: number | null };
     pop: { min: number | null; max: number | null };
     pct: { min: number | null; max: number | null };
+    acres: { min: number | null; max: number | null };
   };
   constructor(
     _data: IndicatorConfig,
@@ -45,7 +46,7 @@ export class DataToMap {
     side: "left" | "right" | null = null,
     _emitter?: Emitter<any>,
     _arrasBranding?: any,
-    _sitePath?: string
+    _sitePath?: string,
   ) {
     this.data = _data;
     this.map = _map;
@@ -78,6 +79,10 @@ export class DataToMap {
         min: 0,
         max: 100,
       },
+      acres: {
+        min: 0,
+        max: 100,
+      },
     };
   }
 
@@ -89,6 +94,8 @@ export class DataToMap {
     this.rangeValues.pct.max = this.getMax("pct") ?? null;
     this.rangeValues.count.min = this.getMin("count") ?? null;
     this.rangeValues.count.max = this.getMax("count") ?? null;
+    this.rangeValues.acres.min = this.getMin("acres") ?? null;
+    this.rangeValues.acres.max = this.getMax("acres") ?? null;
     const { minValue, maxValue } = this.getMinMaxValues();
     this.minValue = minValue;
     this.maxValue = maxValue;
@@ -168,11 +175,15 @@ export class DataToMap {
       this.map.setLayoutProperty(
         this.data.layers.outline,
         "visibility",
-        "none"
+        "none",
       );
     }
     if (this.data.legend?.extra_layers?.layer_name) {
-      this.map.setLayoutProperty(this.data.legend?.extra_layers?.layer_name, "visibility", "none");
+      this.map.setLayoutProperty(
+        this.data.legend?.extra_layers?.layer_name,
+        "visibility",
+        "none",
+      );
     }
     if (this.data.layers.circle) {
       //console.log('off circle', this.data.layers.circle);
@@ -232,12 +243,12 @@ export class DataToMap {
         this.hoveringPlaceId = features[0].id as number;
         this.map.setFeatureState(
           { source: "places-source", id: this.hoveringPlaceId },
-          { hover: true }
+          { hover: true },
         );
       } else {
         this.map.setFeatureState(
           { source: "places-source", id: this.hoveringPlaceId },
-          { hover: false }
+          { hover: false },
         );
         this.hoveringPlaceId = -1;
       }
@@ -356,18 +367,22 @@ export class DataToMap {
       this.map.setLayoutProperty(
         this.data.layers.main,
         "visibility",
-        "visible"
+        "visible",
       );
     }
     if (this.map && this.data.layers.outline) {
       this.map.setLayoutProperty(
         this.data.layers.outline,
         "visibility",
-        "visible"
+        "visible",
       );
     }
     if (this.map && this.data.legend?.extra_layers?.layer_name) {
-      this.map.setLayoutProperty(this.data.legend?.extra_layers?.layer_name, "visibility", "visible");
+      this.map.setLayoutProperty(
+        this.data.legend?.extra_layers?.layer_name,
+        "visibility",
+        "visible",
+      );
     }
     return true;
   }
@@ -378,36 +393,63 @@ export class DataToMap {
       new Set(
         shortNames
           .map((year: string) =>
-            Number(year.toLowerCase().replace("count_", "").replace("pop_", "").replace("pct_", ""))
+            Number(
+              year
+                .toLowerCase()
+                .replace("count_", "")
+                .replace("pop_", "")
+                .replace("pct_", ""),
+            ),
           )
-          .filter((year: string | number) => !isNaN(+year))
-      )
+          .filter((year: string | number) => !isNaN(+year)),
+      ),
     );
   }
 
   getMinForYear(prop: string, year: number | null) {
     const data = this.data.google_sheets_data.data;
-    let filteredData = data.filter(
-      (feature: any) => feature.geoid !== null && feature.geoid !== undefined && feature[prop + "_" + (year || this.year)] !== null && feature[prop + "_" + (year || this.year)] !== undefined
-    )
-    if (prop === "pop" || prop === "count") {
+    let filteredData;
+    if (prop === "acres") {
+      filteredData = data.filter(
+        (feature: any) =>
+          feature.geoid !== null &&
+          feature.geoid !== undefined &&
+          feature["acres"] !== null &&
+          feature["acres"] !== undefined,
+      );
+    } else {
+      filteredData = data.filter(
+        (feature: any) =>
+          feature.geoid !== null &&
+          feature.geoid !== undefined &&
+          feature[prop + "_" + (year || this.year)] !== null &&
+          feature[prop + "_" + (year || this.year)] !== undefined,
+      );
+    }
+
+    if (prop === "pop" || prop === "count" || prop === "acres") {
       filteredData = filteredData.filter(
         (feature: any) =>
           !EXCLUDED_GEO_PATTERNS.some((pattern) =>
-            feature?.geoid?.toLowerCase()?.includes(pattern)
-          )
+            feature?.geoid?.toLowerCase()?.includes(pattern),
+          ),
       );
     }
     if (filteredData.length === 0) {
       console.warn(year, prop, "no data");
       return null;
     }
-    
-    const min = Math.min(
-      ...filteredData.map(
-        (feature: any) => +feature[prop + "_" + (year || this.year)]
-      )
-    );
+
+    let min;
+    if (prop === "acres") {
+      min = Math.min(...filteredData.map((feature: any) => +feature["acres"]));
+    } else {
+      min = Math.min(
+        ...filteredData.map(
+          (feature: any) => +feature[prop + "_" + (year || this.year)],
+        ),
+      );
+    }
     if (isNaN(+min)) {
       console.warn(year, prop, "isNaN", min);
       return Number.MAX_SAFE_INTEGER;
@@ -421,27 +463,47 @@ export class DataToMap {
   }
   getMaxForYear(prop: string, year: number | null) {
     const data = this.data.google_sheets_data.data;
-    let filteredData = data.filter(
-      (feature: any) => feature.geoid !== null && feature.geoid !== undefined && feature[prop + "_" + (year || this.year)] !== null && feature[prop + "_" + (year || this.year)] !== undefined
-    );
-   
-    if (prop === "pop" || prop === "count") {
+    let filteredData;
+    if (prop === "acres") {
+      filteredData = data.filter(
+        (feature: any) =>
+          feature.geoid !== null &&
+          feature.geoid !== undefined &&
+          feature["acres"] !== null &&
+          feature["acres"] !== undefined,
+      );
+    } else {
+      filteredData = data.filter(
+        (feature: any) =>
+          feature.geoid !== null &&
+          feature.geoid !== undefined &&
+          feature[prop + "_" + (year || this.year)] !== null &&
+          feature[prop + "_" + (year || this.year)] !== undefined,
+      );
+    }
+
+    if (prop === "pop" || prop === "count" || prop === "acres") {
       filteredData = filteredData.filter(
         (feature: any) =>
           !EXCLUDED_GEO_PATTERNS.some((pattern) =>
-            feature?.geoid?.toLowerCase()?.includes(pattern)
-          )
+            feature?.geoid?.toLowerCase()?.includes(pattern),
+          ),
       );
     }
     if (filteredData.length === 0) {
       console.warn(year, prop, "no data");
       return Number.MAX_SAFE_INTEGER;
     }
-    const max = Math.max(
-      ...filteredData.map(
-        (feature: any) => +feature[prop + "_" + (year || this.year)]
-      )
-    );
+    let max;
+    if (prop === "acres") {
+      max = Math.max(...filteredData.map((feature: any) => +feature["acres"]));
+    } else {
+      max = Math.max(
+        ...filteredData.map(
+          (feature: any) => +feature[prop + "_" + (year || this.year)],
+        ),
+      );
+    }
     if (isNaN(max)) {
       console.warn(year, prop, "isNaN", max);
       return Number.MAX_SAFE_INTEGER;
@@ -493,7 +555,7 @@ export class DataToMap {
       (year: string) =>
         yearValuePrefix.length > 0
           ? year.startsWith(yearValuePrefix)
-          : YEAR_PATTERN.test(year) && !isNaN(Number(year))
+          : YEAR_PATTERN.test(year) && !isNaN(Number(year)),
     );
     //console.log(years);
 
@@ -509,13 +571,13 @@ export class DataToMap {
           const geoid = feature?.geoid?.toLowerCase() || "";
           const name = feature?.name?.toLowerCase() || "";
           return !EXCLUDED_GEO_PATTERNS.some(
-            (pattern) => geoid.includes(pattern) || name.includes(pattern)
+            (pattern) => geoid.includes(pattern) || name.includes(pattern),
           );
         })
         .map((feature: any) => feature[yearColumn])
         .filter(
           (value: any) =>
-            value !== null && value !== undefined && !isNaN(Number(value))
+            value !== null && value !== undefined && !isNaN(Number(value)),
         );
       if (yearValues.length === 0) continue;
 

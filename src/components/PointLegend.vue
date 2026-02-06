@@ -14,17 +14,20 @@
           <tbody>
             
             <tr>
-              <td style="text-align: left;">
+              <td style="text-align: left; vertical-align: bottom;">
                 <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%;"
-                  :style="{ backgroundColor: maxColor }"></span>
+                  :style="{ border: `1px solid black` }">
+                </span>
               </td>
-              <td style="text-align: center;">
+              <td style="text-align: center; vertical-align: bottom;">
                 <span style="display: inline-block; width: 16px; height: 16px; border-radius: 50%;"
-                  :style="{ backgroundColor: maxColor }"></span>
+                  :style="{ border: `1px solid black` }">
+                </span>
               </td>
-              <td style="text-align: right;"><span
+              <td style="text-align: right; vertical-align: bottom;"><span
                   style="display: inline-block; width: 32px; height: 32px; border-radius: 50%;"
-                  :style="{ backgroundColor: maxColor }" /></td>
+                  :style="{ border: `1px solid black` }" />
+                </td>
             </tr>
             <tr class="legend-labels">
               <td style="text-align: left;">
@@ -45,6 +48,8 @@
             </tr>
           </tbody>
         </table>
+        
+
         <div v-if="secondaryTitleColumn" class="gradient-bar" :style="{ width:'100%',
             background: `linear-gradient(to right, ${minColor}, ${maxColor})`
           }"></div>
@@ -92,13 +97,13 @@ const mainConfig = inject('mainConfig') as any;
 
 const source = computed(() => mainConfig?.data_sources?.[props.selectedIndicator?.data_source as string] as any);
 const secondaryTitleColumn = computed(() => {
-  return props.selectedIndicator?.legend?.['secondary-title-column'] as 'count' | 'pop' | 'pct' | undefined;
+  return props.selectedIndicator?.legend?.['secondary-title-column'] as 'count' | 'pop' | 'pct' | 'acres' | undefined;
 })
 
 const secondaryTitle = computed(() => {
   const titleTemplate = props.selectedIndicator?.legend?.['secondary-title'] as string | undefined;
-  const minValue = indicatorLevelStore.getMinValue(secondaryTitleColumn.value as 'count' | 'pop' | 'pct') ?? 0;
-  const maxValue = indicatorLevelStore.getMaxValue(secondaryTitleColumn.value as 'count' | 'pop' | 'pct') ?? 0;
+  const minValue = indicatorLevelStore.getMinValue(secondaryTitleColumn.value as 'count' | 'pop' | 'pct' | 'acres') ?? 0;
+  const maxValue = indicatorLevelStore.getMaxValue(secondaryTitleColumn.value as 'count' | 'pop' | 'pct' | 'acres') ?? 0;
   const midValue = ((minValue + maxValue) / 2).toFixed(0).toLocaleString();
 
   if (titleTemplate) {
@@ -118,9 +123,9 @@ const secondaryTitle = computed(() => {
 
 const legendTitle = computed(() => {
   const titleTemplate = props.selectedIndicator?.legend?.['title'] as string | undefined;
-  const titleColumn = props.selectedIndicator?.legend?.['title-column'] as 'count' | 'pop' | 'pct' | undefined;
-  const minValue = indicatorLevelStore.getMinValue(titleColumn as 'count' | 'pop' | 'pct') ?? 0;
-  const maxValue = indicatorLevelStore.getMaxValue(titleColumn as 'count' | 'pop' | 'pct') ?? 0;
+  const titleColumn = props.selectedIndicator?.legend?.['title-column'] as 'count' | 'pop' | 'pct' | 'acres' | undefined;
+  const minValue = indicatorLevelStore.getMinValue(titleColumn as 'count' | 'pop' | 'pct' | 'acres') ?? 0;
+  const maxValue = indicatorLevelStore.getMaxValue(titleColumn as 'count' | 'pop' | 'pct' | 'acres') ?? 0;
   const midValue = +(((minValue + maxValue) / 2).toFixed(0)).toLocaleString();
 
 
@@ -232,9 +237,12 @@ const minColor = computed(() => {
 .legend-icon-container {
   width: 100%;
   margin: 0 auto;
-  border-collapse: collapse;
-  vertical-align: middle;
+  /* border-collapse: collapse;
+  vertical-align: middle; */
   justify-content: space-around;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .legend-icon-container td {

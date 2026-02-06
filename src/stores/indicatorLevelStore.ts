@@ -171,24 +171,28 @@ const indicatorLevelStore = (storeName: 'left' | 'right') => {
         return currentIndicator.value || null
     }
 
-    function getMinValue(type: 'count' | 'pop' | 'pct'): number | null {
+    function getMinValue(type: 'count' | 'pop' | 'pct' | 'acres'): number | null {
         if(type === 'count') {
             return worker?.rangeValues.count.min ?? null;
         } else if(type === 'pop') {
             return worker?.rangeValues.pop.min ?? null;
         } else if(type === 'pct') {
             return worker?.rangeValues.pct.min ?? null;
+        } else if(type === 'acres') {
+            return worker?.rangeValues.acres.min ?? null;
         }
         return null;
     }
 
-    function getMaxValue(type: 'count' | 'pop' | 'pct'): number | null {
+    function getMaxValue(type: 'count' | 'pop' | 'pct' | 'acres'): number | null {
         if(type === 'count') {
             return worker?.rangeValues.count.max ?? null;
         } else if(type === 'pop') {
             return worker?.rangeValues.pop.max ?? null;
         } else if(type === 'pct') {
             return worker?.rangeValues.pct.max ?? null;
+        } else if(type === 'acres') {
+            return worker?.rangeValues.acres.max ?? null;
         }
         return null;
     }
