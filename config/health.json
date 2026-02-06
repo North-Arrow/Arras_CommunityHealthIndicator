@@ -88,7 +88,7 @@
       "title": "Heart disease mortality rate",
       "data_source": "sc_public_health",
       "short_title": "Heart Disease Mortality",
-      "geotype": "tract",
+      "geotype": "county",
       "default": false,
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQAZ7te1R2RjauYyukLy8AzDXjLJgYofIjfn8ktnOt7TV2_j9TqtnoW31hWBOPqmtF8O4Y12dpUdSD5/pub?gid=361602694&single=true&output=csv",
       "short_name": "heart-disease",
