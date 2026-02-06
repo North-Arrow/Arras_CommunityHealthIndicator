@@ -3,7 +3,7 @@
         <v-container style="padding-top: 0px; height: 100%;">
             <v-card :style="{ 'background-color': arrasBrandingColor }" class="theme-title mt-2" elevation="2" rounded="lg">
                 <v-card-title v-if="currentThemeConfig" class="text-center pa-0 ma-0 theme-title__text" :style="{ 'background-color': arrasBrandingColor }">
-                    <v-img inline :src="invertedIconPath" width="24" height="24" class="mr-2 title-theme-icon"></v-img>
+                    <v-img inline :src="invertedIconPath" width="48" height="48" class="mr-2 title-theme-icon"></v-img>
                     {{ currentThemeConfig.title }}
                 </v-card-title>
             </v-card>
@@ -13,6 +13,9 @@
     </v-main>
 </template>
 <style>
+.maplibregl-compare-type-toggle.top {
+    margin-top: 8px;
+}
 .full-screen-main{
     display: block;
     left: 0;
@@ -32,14 +35,14 @@
     /* Stand out on top of the map */
     /* background-color: rgba(var(--v-theme-surface), 0.92); */
     border: 1px solid black;
-    border-left: 6px solid white;
+    /* border-left: 6px solid white; */
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
 }
 
 .theme-title__text {
     font-weight: 650;
     letter-spacing: 0.2px;
-    font-size: 1.05rem; /* slight bump, not “big” */
+    font-size: 2rem; /* slight bump, not “big” */
     line-height: 1.25;
     color: white;
 }
@@ -76,21 +79,21 @@ export default {
         next(true)
     },
     //We should find a way to avoid this:
-    async beforeRouteUpdate(to, from, next) {
-        console.log('beforeRouteUpdate')
-        // Handle route updates when component is reused (e.g., theme query param changes)
-        if (to.query.theme !== from.query.theme) {
-            document.getElementById('loading').style.display = 'flex'
-            const success = await useThemeLevelStore().setCurrentTheme(to.query.theme)
-            if(!success){
-                next(false)
-                return
-            }
-            // Hide loading after a brief delay to ensure theme is fully loaded
-            await this.$nextTick()
-        }
-        next()
-    },
+    // async beforeRouteUpdate(to, from, next) {
+    //     console.log('beforeRouteUpdate')
+    //     // Handle route updates when component is reused (e.g., theme query param changes)
+    //     if (to.query.theme !== from.query.theme) {
+    //         document.getElementById('loading').style.display = 'flex'
+    //         const success = await useThemeLevelStore().setCurrentTheme(to.query.theme)
+    //         if(!success){
+    //             next(false)
+    //             return
+    //         }
+    //         // Hide loading after a brief delay to ensure theme is fully loaded
+    //         await this.$nextTick()
+    //     }
+    //     next()
+    // },
     async beforeRouteLeave(to, from, next) {
         console.log('beforeRouteLeave')
         await useThemeLevelStore().setCurrentTheme()

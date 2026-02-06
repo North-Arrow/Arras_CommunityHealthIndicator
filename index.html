@@ -15,16 +15,18 @@
     <div id="app"></div>
     <script type="text/javascript">
       // Decode GitHub Pages SPA redirect (`?/path&query`) back into a real URL.
+      // Format: `?/path&param1=value1&param2=value2` -> `/path?param1=value1&param2=value2`
       (function (l) {
         if (l.search && l.search[1] === '/') {
-          var decoded = l.search
-            .slice(1)
-            .split('&')
-            .map(function (s) {
-              return s.replace(/~and~/g, '&');
-            })
-            .join('?');
-          window.history.replaceState(null, null, l.pathname.replace(/\/$/, '') + decoded + l.hash);
+          var parts = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          });
+          // First part is the path, rest are query params
+          var path = parts[0] || '';
+          var query = parts.slice(1).join('&');
+          var newPath = l.pathname.replace(/\/$/, '') + (path ? '/' + path : '');
+          var newUrl = newPath + (query ? '?' + query : '') + l.hash;
+          window.history.replaceState(null, null, newUrl);
         }
       })(window.location);
     </script>
