@@ -15,7 +15,7 @@
     },
     "places-source": {
       "type": "geojson",
-      "data": "https://services8.arcgis.com/Md1Xw98rMGIJNURK/ArcGIS/rest/services/ArrasIncorporatedPlaces/FeatureServer/0/query?where=OBJECTID%3E-1&objectIds=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&outDistance=&relationParam=&returnGeodetic=false&outFields=*&returnGeometry=true&returnCentroid=false&returnEnvelope=false&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&defaultSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&collation=&orderByFields=&groupByFieldsForStatistics=&returnAggIds=false&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnTrueCurves=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pgeojson&token=AAPTxy8BH1VEsoebNVZXo8HurIeMuENS73kZqZHjRkbmCmUqodq0aZ3k4LkzH1hNzZt_ByURd7Ag3XoF1eOr43EFk6RMAKLoCDShkeXEaATvQIvvvyJidHeLEHtMhKYFXz-yz1y9R0QSUSOLQ1CMFeeVvd4t1-rsB2LSsNLk0TdveE7yyURu2F7LTkgtYpR3vdEUtooxW_1GHUzZjrPmjIPMW43Vh0wI35F_QOda3QKzwFo.AT1_tCIPsJMe",
+      "data": "sc_town_labels.geojson",
       "generateId": true
     },
     "tracts-harmonized": {
@@ -4801,9 +4801,10 @@
       "source": "counties-source",
       "layout": {
         "visibility": "visible",
-        "text-field": "{NAME} County",
+        "text-field": "{NAME}",
         "text-font": ["Noto Sans Bold"],
-        "text-size": 12
+        "text-size": 12,
+        "text-allow-overlap": true
       },
       "paint": {"text-color": "#088"}
     },
@@ -4812,6 +4813,7 @@
       "type": "symbol",
       "source": "places-source",
       "maxzoom": 10,
+      "minzoom": 7.5,
       "layout": {"visibility": "visible",
         "text-field": "{NAME}",
         "text-font": ["Noto Sans Regular"],
