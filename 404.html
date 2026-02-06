@@ -21,14 +21,15 @@
         var base = isDev ? '/dev/' : '/';
 
         var rest = parts.slice(keep).join('/');
-        var search = l.search ? '&' + l.search.slice(1) : '';
+        // Encode & in path only, not in query string
+        var encodedRest = rest.replace(/&/g, '~and~');
+        
+        // Keep query string as-is (with & separators), just remove leading ?
+        var search = l.search ? l.search.slice(1) : '';
         var hash = l.hash || '';
 
-        // Use ~and~ to avoid ambiguity with '&' separators.
-        var encodedRest = rest.replace(/&/g, '~and~');
-        var encodedSearch = search.replace(/&/g, '~and~');
-
-        l.replace(base + '?/' + encodedRest + encodedSearch + hash);
+        // Format: ?/path&query (query params separated by &, not encoded)
+        l.replace(base + '?/' + encodedRest + (search ? '&' + search : '') + hash);
       })();
     </script>
   </body>
