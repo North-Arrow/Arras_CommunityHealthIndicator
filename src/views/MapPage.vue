@@ -60,10 +60,13 @@ export default {
         LocationSearch
     },
     data() {
-        return { }
+        return {
+            arrasBrandingColors: inject('arrasBranding').colors
+         }
     },
     watch: {},
     async beforeRouteEnter(to, from, next) {
+        console.log('beforeRouteEnter')
         document.getElementById('loading').style.display = 'flex'
        const success = await useThemeLevelStore().setCurrentTheme(to.query.theme)
        if(!success){
@@ -72,23 +75,24 @@ export default {
        }
         next(true)
     },
-    async beforeRouteUpdate(to, from, next) {
-        // Handle route updates when component is reused (e.g., theme query param changes)
-        if (to.query.theme !== from.query.theme) {
-            document.getElementById('loading').style.display = 'flex'
-            const success = await useThemeLevelStore().setCurrentTheme(to.query.theme)
-            if(!success){
-              //  document.getElementById('loading').style.display = 'none'
-                next(false)
-                return
-            }
-            // Hide loading after a brief delay to ensure theme is fully loaded
-            await this.$nextTick()
-          //  document.getElementById('loading').style.display = 'none'
-        }
-        next()
-    },
+    //Pretty sure we don't need this:
+    // async beforeRouteUpdate(to, from, next) {
+    //     console.log('beforeRouteUpdate')
+    //     // Handle route updates when component is reused (e.g., theme query param changes)
+    //     if (to.query.theme !== from.query.theme) {
+    //         document.getElementById('loading').style.display = 'flex'
+    //         const success = await useThemeLevelStore().setCurrentTheme(to.query.theme)
+    //         if(!success){
+    //             next(false)
+    //             return
+    //         }
+    //         // Hide loading after a brief delay to ensure theme is fully loaded
+    //         await this.$nextTick()
+    //     }
+    //     next()
+    // },
     async beforeRouteLeave(to, from, next) {
+        console.log('beforeRouteLeave')
         await useThemeLevelStore().setCurrentTheme()
         next()
     },
@@ -102,9 +106,8 @@ export default {
             return this.currentThemeConfig?.icon?.replace(/_[^/]*\.png$/i, '_white.png')
         },
         arrasBrandingColor() {
-            const arrasBrandingColors = inject('arrasBranding').colors
             const themeColorName = this.currentThemeConfig.style.colors.icon;
-            return arrasBrandingColors[themeColorName]
+            return this.arrasBrandingColors[themeColorName]
         },
         currentThemeConfig() {
             return useThemeLevelStore().getMainConfigForCurrentTheme()

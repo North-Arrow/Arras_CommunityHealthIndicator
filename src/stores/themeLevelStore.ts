@@ -26,7 +26,6 @@ export const useThemeLevelStore = defineStore('themeLevel', () => {
         currentThemeShortName.value = shortName
         currentThemeConfig.value = categoryConfigs[shortName] as any
         mainConfigForCurrentTheme.value = mainConfig?.categories?.find((cat: any) => cat.query_str === shortName)
-        //console.log('mainConfigForCurrentTheme', mainConfigForCurrentTheme.value)
         //Get data from google sheets and store along with all the indicators in categoryConfigs
         const currentIndicatorConfigs: IndicatorConfig[] | null = getAllCurrentThemeIndicators()
         if (currentIndicatorConfigs) {
