@@ -11,25 +11,24 @@
       // - /...      (main on custom domain root)
       // - /dev/...  (dev on custom domain subpath)
       //
-      // Redirects missing routes to the appropriate base with a `?/` encoded path,
-      // which `index.html` decodes on load.
+      // Redirects to base with path/query/hash encoded in a query param,
+      // which index.html decodes and restores the original URL.
       (function () {
         var l = window.location;
-        var parts = l.pathname.split('/').filter(Boolean); // [(dev), ...rest]
+        var parts = l.pathname.split('/').filter(Boolean);
         var isDev = parts[0] === 'dev';
-        var keep = isDev ? 1 : 0;
         var base = isDev ? '/dev/' : '/';
-
-        var rest = parts.slice(keep).join('/');
-        // Encode & in path only, not in query string
-        var encodedRest = rest.replace(/&/g, '~and~');
         
-        // Keep query string as-is (with & separators), just remove leading ?
-        var search = l.search ? l.search.slice(1) : '';
-        var hash = l.hash || '';
-
-        // Format: ?/path&query (query params separated by &, not encoded)
-        l.replace(base + '?/' + encodedRest + (search ? '&' + search : '') + hash);
+        // Reconstruct the full path (excluding base)
+        var path = parts.slice(isDev ? 1 : 0).join('/');
+        
+        // Encode the full URL path + query + hash as a single query parameter
+        var fullPath = path + l.search + l.hash;
+        // Use base64-like encoding, but URL-safe (avoiding = which breaks query params)
+        var encoded = encodeURIComponent(fullPath);
+        
+        // Redirect to base with encoded path as query param
+        l.replace(base + '?_redirect=' + encoded);
       })();
     </script>
   </body>

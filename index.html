@@ -16,19 +16,19 @@
   <body>
     <div id="app"></div>
     <script type="text/javascript">
-      // Decode GitHub Pages SPA redirect (`?/path&query`) back into a real URL.
-      // Format: `?/path&param1=value1&param2=value2` -> `/path?param1=value1&param2=value2`
+      // Decode GitHub Pages SPA redirect from 404.html
+      // Format: `?_redirect=encodedPath` -> restores original `/path?query#hash`
       (function (l) {
-        if (l.search && l.search[1] === '/') {
-          var parts = l.search.slice(1).split('&').map(function (s) {
-            return s.replace(/~and~/g, '&');
-          });
-          // First part is the path, rest are query params
-          var path = parts[0] || '';
-          var query = parts.slice(1).join('&');
-          var newPath = l.pathname.replace(/\/$/, '') + (path ? '/' + path : '');
-          var newUrl = newPath + (query ? '?' + query : '') + l.hash;
-          window.history.replaceState(null, null, newUrl);
+        var params = new URLSearchParams(l.search);
+        var redirect = params.get('_redirect');
+        if (redirect) {
+          try {
+            var decoded = decodeURIComponent(redirect);
+            // Remove the redirect param from URL and restore the original path
+            window.history.replaceState(null, null, decoded);
+          } catch (e) {
+            console.error('Failed to decode redirect:', e);
+          }
         }
       })(window.location);
     </script>
