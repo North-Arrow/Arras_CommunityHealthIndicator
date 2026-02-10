@@ -26,7 +26,7 @@
         "title-column": "count",
         "title": "{{count}} grandchildren"
       },
-      "tooltip-info": "This indicator measures: Number of grandparent householders responsible for own grandchildren under 18 years. Values are shown by tract and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source details will be added later."
+      "tooltip-info": "The phenomenon of grandparents raising grandchildren reflects underlying societal issues that lead to parents being unable to care for their children, such as substance abuse, incarcerateion, neglect or abuse, and poverty and economic hardship. It also points to the need for support systems for these families."
     },
     {
       "title": "Lack of social and emotional support among adults",
@@ -51,7 +51,7 @@
         "title-column": "pct",
         "title": "{{pct}}% of adults"
       },
-      "tooltip-info": "This indicator measures: Lack of social and emotional support among adults. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+      "tooltip-info": "Lack of social and emotional support is strongly correlated with a wide range of negative physical, mental, and economic consequences. It is associated with increased risk of mortality (even greater than other risk factors such as obeisity or physical inactivity)."
     },
     {
       "title": "Percent of population that is working age(18-64)",
@@ -76,7 +76,7 @@
         "title-column": "pct",
         "title": "{{pct}}% of adults"
       },
-      "tooltip-info": "This indicator measures: Percent of population that is working age(18-64). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+      "tooltip-info": "The percentage of working-age residents demonstrates available labor resources for producing goods and services. A growing working-age population generally contributes to economic expansion, supports social safety nets, and provides increased public funds."
     },
     {
       "title": "Rate of population change (10 year intervals)",
@@ -101,7 +101,7 @@
         "title-column": "pct",
         "title": "{{pct}}% change"
       },
-      "tooltip-info": "This indicator measures: Rate of population change (10 year intervals). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+      "tooltip-info": "Tracking population growth or decline is vital for long-term community planning. It helps local leaders anticipate changes in demand for infrastructure, housing, schools, and healthcare services, while also signaling the region's overall economic attractiveness."
     },
     {
       "title": "Percent of families with children (under 18) with 1 householder and no spouse present",
@@ -126,7 +126,7 @@
         "title-column": "pct",
         "title": "{{pct}}% of households"
       },
-      "tooltip-info": "This indicator measures: Percent of families with children (under 18) with 1 householder and no spouse present. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+      "tooltip-info": "Single-parent households serve as an indicator of several important social and economic factors that impact the wellbeing of children and adults. Single-parent households are associated with lower socioeconomic status, impacting access to resources, challenging family structure and stability , and impacting children's emotionl well-being and academic achievement."
     },
     {
       "title": "Percent of registered voters who voted in general elections",
@@ -151,7 +151,7 @@
         "title-column": "pct",
         "title": "{{pct}}% of voters"
       },
-      "tooltip-info": "This indicator measures: Percent of registered voters who voted in general elections. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+      "tooltip-info": "Registered voters are more likely to advocate for their communities and to participate in civic wellbeing in other ways. Higher voter turnout indicates that citizens are engaged and invested in the political process."
     },
     {
       "title": "The rate of membership organizations per 10,000 people",
@@ -175,7 +175,7 @@
         "title-column": "pct",
         "title": "{{pct}} per 10,000 residents"
       },
-      "tooltip-info": "This indicator measures: The rate of membership organizations per 10,000 people. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source details will be added later."
+      "tooltip-info": "Social associations reflects the number of membership associations per 10,000 population. Social isolation and loneliness have adverse effects on various outocmes, including CV disease, cognitive impairement, depression, chronic stress, and premature mortality. Research suggests that the magnitude of risk associated with social isolation is similiar to the risk of cigarette smoking. There is not currently a reliable, national source of data for measuring social or community support at the local level. This measure does not account for important social connections offered via family support structures, informal networks, faith orgs, or community service orgs."
     }
   ]
 }
