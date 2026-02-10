@@ -27,7 +27,7 @@
           "html": "<span class='protected-lands-outline'>Protected Lands<span class='protected-lands-swatch'></span></span>"
         }
       },
-      "tooltip-info": "This indicator measures: Acres of Protected Land. Values are shown by protected and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source: sc_conserv_bank."
+      "tooltip-info": "Protected land preserves greenspaces, waterways, riparian boundaries and critical ecosystems."
     },
     {
       "title": "Average daily density of fine particulate matter (PM2.5)",
@@ -52,7 +52,7 @@
         "title-column": "pct",
         "title": "{{pct}}% of residents"
       },
-      "tooltip-info": "This indicator measures: Average daily density of fine particulate matter (PM2.5). Values are shown by protected and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: county_health_rankings."
+      "tooltip-info": "Outdoor air pollution has direct health impacts (e.g. bronchitis, decreased lung function, asthma, and premature mortality), environmental consequences (e.g. acid rain, ozone layer depletion, visibility impairment, and damage to crops and structures), and economic and social impacts (e.g. increased healthcare costs, lost productivity, and lower quality of life)."
     },
     {
       "title": "Awards given by the SC Conservation Bank",
@@ -83,7 +83,7 @@
         "size": "count",
         "color": "acres"
       },
-      "tooltip-info": "This indicator measures: Awards given by the SC Conservation Bank. Values are shown by facility and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source: sc_conserv_bank."
+      "tooltip-info": "Dedicated funding for conservation is essential to acquire and maintain protected lands. It reflects the community's financial commitment to preserving critical ecosystems, protecting water quality, and ensuring access to green spaces that support physical and mental well-being."
     }
   ]
 }
