@@ -23,7 +23,7 @@
         "title-column": "pct",
         "title": "{{pct}}% of adults"
       },
-      "tooltip-info": "This indicator measures: Percent of adults (ages 25+) with bachelor's degree or higher. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "Educational attainment is strongly linked to various outcomes for individuals and society. On average, higher education equates to higher income, greater economic stability, and better health outcomes throughout the lifespan."
     },
     {
       "title": "Percent of families with children living in 'concentrated poverty'-—areas where the poverty rate is over 40%",
@@ -48,7 +48,7 @@
         "title-column": "pct",
         "title": "{{pct}}% of children"
       },
-      "tooltip-info": "This indicator measures: Percent of families with children living in 'concentrated poverty'-—areas where the poverty rate is over 40%. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "Children living in ares of concentrated poverty face a range of challenges that can negatively impact their development and well-being.  They are less likely to have access to quality schools, safe places to play, and essential services."
     },
     {
       "title": "Median household income",
@@ -72,7 +72,7 @@
         "title-column": "count",
         "title": "${{count}} median household income"
       },
-      "tooltip-info": "This indicator measures: Median household income. Values are shown by tract and may vary by year where available. Higher values indicate more total people/households/events meeting the definition. Data source: census."
+      "tooltip-info": "Average household income provides general understanding of the economic well-being of a population or region. It helps assess the standard of living, track economic trends, and identify potential areas of need or inequality."
     },
     {
       "title": "Percent of households using more than 30% of their income to pay for housing costs",
@@ -97,7 +97,7 @@
         "title-column": "pct",
         "title": "{{pct}}% of households"
       },
-      "tooltip-info": "This indicator measures: Percent of households using more than 30% of their income to pay for housing costs. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "Households considered cost-burdened, meaning they spend more than 30% of their income on housing, are likely experiencing financial strain, leaving less money for other essentials like food, healthcare, transportation, and childcare. More broadly, this metric reveals housing market issues."
     },
     {
       "title": "Percent of adults (ages 25+) with a high school diploma or equivalent",
@@ -125,7 +125,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Percent of adults (ages 25+) with a high school diploma or equivalent. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "Educational attainment is strongly linked to various outcomes for individuals and society.  For example, on the average, higher education equates to higher income and greater opportunity."
     },
     {
       "title": "Percent of workers (16+) whose travel time to work is 45 minutes or more",
@@ -153,7 +153,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Percent of workers (16+) whose travel time to work is 45 minutes or more. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "Commuting patterns can reflect the structure and flexibility of the local labor market; for example, whether good jobs exist locally.  Long commutes can also reflect congestion, poor infruastructure, and poor planning."
     },
     {
       "title": "Percent of total population living below the federal poverty line",
@@ -181,7 +181,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Percent of total population living below the federal poverty line. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "This is one important metric for understanding the economic well-being of people (related or not) living in households. It reflects living conditions in the community and helps identify vulnerable groups."
     },
     {
       "title": "Share of the civilian labor force living below the federal poverty line (ages 16+)",
@@ -209,7 +209,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Share of the civilian labor force living below the federal poverty line (ages 16+). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "The percentage of the working population living below the poverty line hilights insufficient wages, reveals deficits in job quality, draws attention to disparities that certain groups experience, and reflects economic insecurity."
     },
     {
       "title": "Percent of people (16+) in the civilian labor force who are unemployed",
@@ -237,7 +237,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Percent of people (16+) in the civilian labor force who are unemployed. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "The unemployment rate is the percentage of the labor force actively seeking employment but unable to find it, suggesting broader economimc trends and challenges."
     },
     {
       "title": "Percent of housing units that lack complete plumbing facilities for exclusive use",
@@ -265,7 +265,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Percent of housing units that lack complete plumbing facilities for exclusive use. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "Substandard housing is a powerful indicator of various interconnected issues, particularly concerning public health, socioeconimic conditions, and inequalities. Substandard housinging conditions, such as mold, pests, structural issues, and inadequate ventilation, directly contribute to health problems like respiratory infections, asthma, lead poisoning, inuries and chronic diseases."
     },
     {
       "title": "Percent of households with no available vehicle",
@@ -293,7 +293,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Percent of households with no available vehicle. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "The number/percentage of households with no vehicle available provides insight into need for and access to public transportation, and hilights social and economic disparities.  Households without vehicles often face significant barrieres in accessing essential services and opportunities."
     }
   ]
 }
