@@ -26,7 +26,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Current cigarette smoking among adults. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
+      "tooltip-info": "Smoking is a primary predictor of chronic disease."
     },
     {
       "title": "Percentage of working-age adults (ages 19 to 64) who have no health insurance coverage",
@@ -54,7 +54,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Percentage of working-age adults (ages 19 to 64) who have no health insurance coverage. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: census."
+      "tooltip-info": "For working-age people in SC, health insurance coverage is associated with well-paying jobs since residents over age 18 and under age 65 do not have access to health insurance by entitlement (Medicaid and Medicare)."
     },
     {
       "title": "Food insecurity crude prevalence (%)",
@@ -82,7 +82,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Food insecurity crude prevalence (%). Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
+      "tooltip-info": "Food insecurity directly impacts individual health and well-being, as well as the overall health of communities. It is a significant factor in economic productiviey and social stability."
     },
     {
       "title": "Heart disease mortality rate",
@@ -110,7 +110,7 @@
       "map": {
         "color": "pop"
       },
-      "tooltip-info": "This indicator measures: Heart disease mortality rate. Values are shown by tract and may vary by year where available. Higher values indicate a higher rate (often normalized per population, e.g. per 100,000). Data source: sc_public_health."
+      "tooltip-info": "Heart disease is a leading cause of death and disability. Monitoring mortality rates helps identify the prevalence of risk factors (such as obesity, smoking, and hypertension) and assesses the effectiveness of local healthcare systems in managing chronic cardiovascular conditions."
     },
     {
       "title": "Percent of babies born with low birth rate",
@@ -137,7 +137,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Percent of babies born with low birth rate. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: kids_count."
+      "tooltip-info": "Low birth weight is a major predictor of neonatal mortality and morbidity and can lead to long-term health and developmental problems. It is also an outcome of inadequate prenatal care."
     },
     {
       "title": "Cancer (malignant neoplasms) mortality rate",
@@ -165,7 +165,7 @@
       "map": {
         "color": "pop"
       },
-      "tooltip-info": "This indicator measures: Cancer (malignant neoplasms) mortality rate. Values are shown by county and may vary by year where available. Higher values indicate a higher rate (often normalized per population, e.g. per 100,000). Data source: sc_public_health."
+      "tooltip-info": "Cancer mortality rates reflect the severe burden of disease within the community. This metric highlights the impact of environmental and behavioral risk factors, as well as the availability and utilization of early detection screenings and quality treatment services."
     },
     {
       "title": "Prevalence of frequent mental distress among adults",
@@ -193,7 +193,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Prevalence of frequent mental distress among adults. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
+      "tooltip-info": "These are measures of health-related Quality of Life (HRQoL) that reflect the experience of people with chronic conditions. These are summary measures of health status of a particular place."
     },
     {
       "title": "Visits to doctor for routine checkup within the past year among adults aged ≥18 years",
@@ -221,7 +221,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Visits to doctor for routine checkup within the past year among adults aged ≥18 years. Values are shown by tract and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: cdc."
+      "tooltip-info": "Routine visits to a doctor (physicals or checkups) are critical in identifying health risk factors, managing disease, obtaining preventive screenings, and establishing continuity of care."
     },
     {
       "title": "Population to primary care provider ratio",
@@ -249,7 +249,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Population to primary care provider ratio. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: hsra."
+      "tooltip-info": "Sufficient availability of primary care physicians is essential for preventive and primary care and, when needed, referrals to appropriate specialty care."
     },
     {
       "title": "Population to mental health care provider ratio",
@@ -277,7 +277,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "This indicator measures: Population to mental health care provider ratio. Values are shown by county and may vary by year where available. Higher values indicate a larger share of the population/households meeting the definition. Data source: hsra."
+      "tooltip-info": "Many people live in shortage areas for behavioral health care providers, limiting their access to treatment. A high population-to-provider ratio means each provider likely has a larger workload and limited availability. Adequate access to care is vital for overall community health."
     }
   ]
 }
