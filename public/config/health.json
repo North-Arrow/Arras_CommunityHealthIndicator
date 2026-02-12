@@ -233,18 +233,18 @@
       "short_name": "primary-care-provider-ratio",
       "timeline": {
         "yearValuePrefix": "pct_",
-        "yearValueShortFormat": "{{value}}%",
+        "yearValueShortFormat": "{{value}}/100k",
         "filterOut": []
       },
       "popup": {
         "format": {
-          "title": "{{pct}}% of residents",
-          "subtitle": "{{count}} out of {{pop}} residents"
+          "title": "{{pct}} providers per 100k residents",
+          "subtitle": "{{count}} providers for {{pop}} residents total"
         }
       },
       "legend": {
         "title-column": "pct",
-        "title": "{{pct}}% of residents"
+        "title": "{{pct}} providers per 100k residents"
       },
       "map": {
         "color": "pct"
@@ -261,18 +261,18 @@
       "data_source": "hsra",
       "timeline": {
         "yearValuePrefix": "pct_",
-        "yearValueShortFormat": "{{value}}%",
+        "yearValueShortFormat": "{{value}}/100k",
         "filterOut": []
       },
       "popup": {
         "format": {
-          "title": "{{pct}}% of residents",
-          "subtitle": "{{count}} out of {{pop}} residents"
+          "title": "{{pct}} providers per 100k residents",
+          "subtitle": "{{count}} providers for {{pop}} residents total"
         }
       },
       "legend": {
         "title-column": "pct",
-        "title": "{{pct}}% of residents"
+        "title": "{{pct}} providers per 100k residents"
       },
       "map": {
         "color": "pct"
