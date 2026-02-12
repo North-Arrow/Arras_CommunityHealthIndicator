@@ -2,8 +2,12 @@
   <div class="color-legend" :class="{ 'left': side === 'left', 'right': side === 'right' }">
     <div class="legend-container">
       <div class="legend-header">
-        <span class="legend-title">{{ selectedIndicator?.title || 'Indicator' }} <v-tooltip
-            style="display: inline-block; max-width: 500px;" location="bottom" :text="selectedIndicator['tooltip-info']">
+        <span class="legend-title">{{ selectedIndicator?.title || 'Indicator' }} 
+          <v-tooltip
+            style="display: inline-block;"
+            :max-width="500"
+            :location="side === 'left' ? 'bottom start' : 'bottom end'"
+            :text="selectedIndicator['tooltip-info']">
             <template v-slot:activator="{ props }">
               <v-icon v-bind="props" icon="mdi-information-outline" size="18" class="mx-2"></v-icon>
             </template>
