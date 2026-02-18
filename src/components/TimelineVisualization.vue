@@ -40,7 +40,6 @@ import { ref, onMounted, onUnmounted, watch, nextTick, inject, computed, type Co
 import useIndicatorLevelStore from '../stores/indicatorLevelStore';
 import IndicatorSelector from './IndicatorSelector.vue';
 import { YEAR_PATTERN } from '../constants';
-import type { Emitter } from 'mitt';
 
 const emitter = inject('mitt') as any
 interface Props {
