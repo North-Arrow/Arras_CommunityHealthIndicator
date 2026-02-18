@@ -126,7 +126,7 @@ const viewMode = ref<'side-by-side' | 'solo-left' | 'solo-right'>('side-by-side'
 function resizeMaps() {
   leftMap?.resize()
   rightMap?.resize()
-  
+  emitter.emit('resize-maps')
 
 }
 
@@ -223,15 +223,15 @@ onMounted(async () => {
     } as { orientation?: string; type?: string; position?: string[]; showTypeToggle?: boolean }
     _compare = new Compare(leftMap, rightMap, comparisonContainer, compareOpts);
     // bbox as [west, south, east, north] using LngLatBoundsLike
-    let bbox = new maplibregl.LngLatBounds([-81.63527368320112, 34.24556219498636], [-78.89220264452729, 35.22169720245361]) as LngLatBoundsLike;
+    let bbox = new maplibregl.LngLatBounds([-81.63527368320112, 34.24556219498636], [-80.2, 35.22169720245361]) as LngLatBoundsLike;
 
     if (!hasHash) {
       leftMap.fitBounds(bbox, {
-        padding: { top: 10, bottom: 25, left: 15, right: 5 },
+        padding: { top: 10, bottom: 25, left: 5, right: 5 },
         animate: false
       });
       rightMap.fitBounds(bbox, {
-        padding: { top: 10, bottom: 25, left: 15, right: 5 },
+        padding: { top: 10, bottom: 25, left: 5, right: 5 },
         animate: false
       });
     }
@@ -491,6 +491,10 @@ onUnmounted(() => {
   width: 100%;
 }
 
+#comparison-container.sideBySide .legend-container {
+  width: auto;
+} 
+
 #comparison-container.solo-right .left-panel {
   display: none;
 }
@@ -636,5 +640,16 @@ onUnmounted(() => {
 
 .maplibregl-compare-type-toggle.top {
   top: 42px !important;
+}
+
+.color-legend, .point-legend {
+  justify-self: center;
+} 
+
+.solo-right .color-legend, .solo-right .point-legend,
+.solo-left .color-legend, .solo-left .point-legend {
+  justify-self: flex-start;
+  left: 125px;
+  max-width: 30%;
 }
 </style>

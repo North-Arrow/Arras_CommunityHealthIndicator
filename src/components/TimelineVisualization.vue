@@ -40,6 +40,7 @@ import { ref, onMounted, onUnmounted, watch, nextTick, inject, computed, type Co
 import useIndicatorLevelStore from '../stores/indicatorLevelStore';
 import IndicatorSelector from './IndicatorSelector.vue';
 import { YEAR_PATTERN } from '../constants';
+import type { Emitter } from 'mitt';
 
 const emitter = inject('mitt') as any
 interface Props {
@@ -62,7 +63,7 @@ const hoveredColorRef = ref(hoveredColor);
 
 const showValuesOnTimeline = false;
 
-//const container = ref<HTMLElement>()
+const container = ref<HTMLElement | null>(null)
 const svg = ref<SVGElement>()
 
 let svgElement: d3.Selection<SVGElement, unknown, null, undefined>
@@ -70,6 +71,17 @@ let width = document.body.clientWidth * 0.33
 let height = 130
 let margin = { top: 15, right: 5, bottom: 0, left: 20 }
 let yScale: d3.ScaleLinear<number, number> = d3.scaleLinear().domain([0, 100]).range([height - margin.bottom, margin.top])
+
+/** Update width from the chart container so the chart scales to the current container size. */
+function updateWidthFromContainer() {
+  if (container.value) {
+    const w = container.value.clientWidth
+    if (w > 0) width = w
+  } else {
+    width = document.body.clientWidth * 0.33
+  }
+  yScale.range([height - margin.bottom, margin.top])
+}
 
 // Year selector - get available years from the indicator data
 const availableYears = computed(() => {
@@ -150,13 +162,15 @@ const processData = (_feature: string | number | null) => {
 const createChart = () => {
   if (!svg.value) return
 
+  updateWidthFromContainer()
+
   const data = processData(null)
 
   if (data.length === 0) return
 
   // Clear previous chart
   d3.select(svg.value).selectAll('*').remove()
-
+  console.log('createChart', width, height, margin)
   svgElement = d3.select(svg.value)
     .attr('width', width)
     .attr('height', height)
@@ -564,6 +578,15 @@ const showStatewide = computed(() => {
   return indicatorStore?.getCurrentIndicator()?.google_sheets_data?.data?.find((feature: any) => feature?.geoid?.toLowerCase() === 'statewide') !== undefined && !indicatorStore?.getCurrentIndicator()?.timeline?.filterOut?.some((filter: string) => filter.toLowerCase() === 'statewide')
 }) as ComputedRef<boolean>
 
+//const emitter = inject('mitt') as Emitter<any>
+emitter.on('resize-maps', () => {
+  nextTick(() => {
+    updateWidthFromContainer()
+    createChart()
+    addFeatureLine('statewide')
+  })
+})
+
 // Watch for data changes
 watch([() => indicatorStore.getCurrentIndicator(), () => indicatorStore.getCurrentYear(), () => indicatorStore.getCurrentGeoSelection()],
   () => {
@@ -702,21 +725,21 @@ onUnmounted(() => {
 .timeline-header {
   position: absolute;
   bottom: 3em;
-  width: 15%;
-  left: 0px;
+  width: 24%;
+  left: 5px;
   z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 25%;
+  /* max-width: 25%; */
 }
 
 .right .timeline-header {
-  left: calc(50% + 5px);
+  /* left: calc(50% + 5px); */
 }
 
 .left .timeline-header {
-  left: 5px;
+  /* left: 5px; */
 }
 
 .left .timeline-visualization {
@@ -851,17 +874,18 @@ onUnmounted(() => {
 }
 
 .year-selector {
-  width: 15%;
+  width: 24%;
   position: absolute;
   bottom: 5px;
-}
-
-.left .year-selector {
   left: 5px;
 }
 
+.left .year-selector {
+  /* left: 5px; */
+}
+
 .right .year-selector {
-  left: calc(50% + 5px);
+  /* left: calc(50% + 5px); */
 }
 </style>
 <style>

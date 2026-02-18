@@ -172,13 +172,15 @@ const minColor = computed(() => {
   user-select: none;
 }
 
-.color-legend.left {
-  /* right: 20px; */
+/* .color-legend.left {
+  right: 20px;
 }
 
 .color-legend.right {
   right: 0px;
-}
+} */
+
+
 
 .legend-header {
   padding: 8px 12px 4px;
