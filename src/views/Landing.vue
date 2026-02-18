@@ -90,6 +90,14 @@
                     </v-btn>
                   </v-col>
                 </v-row>
+                <v-list-item target="_blank" to="/pdf_placeholder.pdf" class="sidebar__item" rounded="lg">
+            <template v-slot:prepend>
+              <div class="sidebar__icon-wrap sidebar__icon-wrap--home">
+                <v-icon icon="mdi-book-open" size="18"></v-icon>
+              </div>
+            </template>
+            <v-list-item-title>Data Dictionary</v-list-item-title>
+          </v-list-item>
               </v-card-text>
             </v-card>
           </v-col>
