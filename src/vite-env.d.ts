@@ -17,7 +17,7 @@ declare module '../assets/maplibre-gl-compare.js' {
       left: any,
       right: any,
       container: string | HTMLElement,
-      opts?: { type?: string }
+      opts?: { type?: string; orientation?: string; position?: string[]; showTypeToggle?: boolean }
     )
     switchType(type: string): void
   }

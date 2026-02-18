@@ -4,7 +4,8 @@
       <div class="legend-header">
         <span class="legend-title">{{ selectedIndicator?.title || 'Indicator' }} 
           <v-tooltip
-          close-on-content-click
+          interactive
+          close-delay="1250"
             style="display: inline-block;"
             :max-width="500"
             :location="side === 'left' ? 'bottom start' : 'bottom end'"

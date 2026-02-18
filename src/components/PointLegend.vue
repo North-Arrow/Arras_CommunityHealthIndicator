@@ -3,7 +3,8 @@
     <div class="legend-container">
       <div class="legend-header">
         <span class="legend-title">{{ selectedIndicator?.title || 'Indicator' }} <v-tooltip
-          close-on-content-click
+          interactive
+          close-delay="1250"
             style="display: inline-block; max-width: 500px;" location="bottom" :text="selectedIndicator['tooltip-info']">
             <template v-slot:activator="{ props }">
               <v-icon v-bind="props" icon="mdi-information-outline" size="18" class="mx-2"></v-icon>
@@ -172,9 +173,6 @@ const minColor = computed(() => {
   z-index: 1000;
   user-select: none;
 }
-
-
-
 
 
 .legend-header {

@@ -165,7 +165,7 @@
 }
 .maplibregl-compare-type-toggle.horiz-center {
   left: 50%;
-  transform: translateX(-50%);
+  /* transform: translateX(-50%); */
 }
 
 .maplibregl-compare-type-toggle.vert-center {
