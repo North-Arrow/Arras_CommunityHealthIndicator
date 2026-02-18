@@ -93,15 +93,18 @@ function Compare(a, b, container, options) {
   a.on('resize', this._onResize)
   window.addEventListener('resize', this._onResize)
 
-  // Create and append the type toggle switch
-  this._typeToggle = this._createTypeToggle()
-  if (typeof container === 'string' && document.body.querySelectorAll) {
-    const appendTarget = document.body.querySelectorAll(container)[0]
-    if (appendTarget) {
-      appendTarget.append(this._typeToggle)
+  // Create and append the type toggle switch only if showTypeToggle is not false
+  this._typeToggle = null
+  if (this.options.showTypeToggle !== false) {
+    this._typeToggle = this._createTypeToggle()
+    if (typeof container === 'string' && document.body.querySelectorAll) {
+      const appendTarget = document.body.querySelectorAll(container)[0]
+      if (appendTarget) {
+        appendTarget.append(this._typeToggle)
+      }
+    } else if (container instanceof Element && container.appendChild) {
+      container.append(this._typeToggle)
     }
-  } else if (container instanceof Element && container.appendChild) {
-    container.append(this._typeToggle)
   }
 
   this.switchType(this?.options?.type || 'slider')
@@ -299,7 +302,7 @@ Compare.prototype = {
       = this.orientation === ORIENTATION.LEFT_RIGHT ? this._bounds.width / 2 : this._bounds.height / 2
     this._setPosition(swiperPosition)
 
-    // Update toggle switch state
+    // Update toggle switch state (if type toggle exists)
     if (this._typeToggle) {
       const switchInput = this._typeToggle.querySelector('.toggle-switch')
       if (switchInput) {
@@ -315,7 +318,7 @@ Compare.prototype = {
       if (this.orientation === ORIENTATION.TOP_BOTTOM) {
         b.getContainer().style.transform = 'none'
       } else {
-        b.getContainer().style.transform = 'translateX(50%)'
+        // b.getContainer().style.transform = 'translateX(50%)'
       }
       this._controlContainer.style.display = 'none'
       // document.querySelectorAll('.compare-swiper-vertical')[0].style.display = 'none'

@@ -673,7 +673,7 @@ onUnmounted(() => {
 }
 
 .timeline-visualization-container.left {
-  left: 0;
+
 }
 
 .orientation-top-bottom .timeline-visualization-container.right {
@@ -684,10 +684,10 @@ onUnmounted(() => {
 
 .timeline-visualization {
   position: absolute;
-  right: 20px;
-  left: auto;
-  top: auto;
-  width: 33%;
+  position: absolute;
+    right: 5px;
+    left: 25%;
+    top: auto;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid #e5e7eb;
   border-radius: 5px;
@@ -720,8 +720,8 @@ onUnmounted(() => {
 }
 
 .left .timeline-visualization {
-  left: 50%;
-  transform: translateX(-101%);
+    /* left: 50%;
+    transform: translateX(-101%); */
 }
 
 .right .timeline-visualization {

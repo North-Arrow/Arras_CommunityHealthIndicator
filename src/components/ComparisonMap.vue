@@ -1,28 +1,83 @@
 <template>
-  <div id="comparison-container">
-    <div ref="mapContainerLeft" class="map-container left"> </div>
-    <TimelineVisualization side="left" />
-    <ColorLegend
-      v-if="leftIndicatorLevelStore.getCurrentIndicator() && leftIndicatorLevelStore.getCurrentIndicator()?.geolevel === 'area'"
-      :selectedIndicator="leftIndicatorLevelStore.getCurrentIndicator()" side="left" />
-    <PointLegend
-      v-else-if="leftIndicatorLevelStore.getCurrentIndicator() && leftIndicatorLevelStore.getCurrentIndicator()?.geolevel === 'point'"
-      :selected-indicator="leftIndicatorLevelStore.getCurrentIndicator()" side="left" />
-    <div ref="mapContainerRight" class="map-container right"> </div>
-    <TimelineVisualization side="right" />
-    <ColorLegend
-      v-if="rightIndicatorLevelStore.getCurrentIndicator() && rightIndicatorLevelStore.getCurrentIndicator()?.geolevel === 'area'"
-      :selectedIndicator="rightIndicatorLevelStore.getCurrentIndicator()" side="right" />
-    <PointLegend
-      v-else-if="rightIndicatorLevelStore.getCurrentIndicator() && rightIndicatorLevelStore.getCurrentIndicator()?.geolevel === 'point'"
-      :selected-indicator="rightIndicatorLevelStore.getCurrentIndicator()" side="right" />
+  <div
+    id="comparison-container"
+    :class="[
+      orientation === 'top-bottom' ? 'orientation-top-bottom' : 'orientation-left-right',
+      viewMode === 'solo-left' ? 'solo-left' : viewMode === 'solo-right' ? 'solo-right' : 'sideBySide'
+    ]"
+  >
+    <!-- Solo / Back button (visible in solo mode) -->
+    <div v-if="viewMode !== 'side-by-side'" class="solo-exit-wrap">
+      <v-btn
+        size="small"
+        variant="tonal"
+        color="primary"
+        class="solo-exit-btn"
+        @click="viewMode = 'side-by-side'; nextTick(resizeMaps)"
+      >
+        <v-icon start icon="mdi-arrow-left-right" />
+        Back to side-by-side
+      </v-btn>
+    </div>
+
+    <!-- Left side -->
+    <div v-show="viewMode !== 'solo-right'" class="side-panel left-panel">
+      <div ref="mapContainerLeft" class="map-container left"> </div>
+      <v-btn
+        v-if="viewMode === 'side-by-side'"
+        size="small"
+        variant="tonal"
+        class="solo-btn solo-btn-left"
+        @click="viewMode = 'solo-left'; nextTick(resizeMaps)"
+      >
+        <v-icon start icon="mdi-fullscreen" size="18" />
+        Solo
+      </v-btn>
+      <TimelineVisualization side="left" />
+      <ColorLegend
+        v-if="leftIndicatorLevelStore.getCurrentIndicator() && leftIndicatorLevelStore.getCurrentIndicator()?.geolevel === 'area'"
+        :selectedIndicator="leftIndicatorLevelStore.getCurrentIndicator()"
+        side="left"
+      />
+      <PointLegend
+        v-else-if="leftIndicatorLevelStore.getCurrentIndicator() && leftIndicatorLevelStore.getCurrentIndicator()?.geolevel === 'point'"
+        :selected-indicator="leftIndicatorLevelStore.getCurrentIndicator()"
+        side="left"
+      />
+    </div>
+
+    <!-- Right side -->
+    <div v-show="viewMode !== 'solo-left'" class="side-panel right-panel">
+      <div ref="mapContainerRight" class="map-container right"> </div>
+      <v-btn
+        v-if="viewMode === 'side-by-side'"
+        size="small"
+        variant="tonal"
+        class="solo-btn solo-btn-right"
+        @click="viewMode = 'solo-right'; nextTick(resizeMaps)"
+      >
+        <v-icon start icon="mdi-fullscreen" size="18" />
+        Solo
+      </v-btn>
+      <TimelineVisualization side="right" />
+      <ColorLegend
+        v-if="rightIndicatorLevelStore.getCurrentIndicator() && rightIndicatorLevelStore.getCurrentIndicator()?.geolevel === 'area'"
+        :selectedIndicator="rightIndicatorLevelStore.getCurrentIndicator()"
+        side="right"
+      />
+      <PointLegend
+        v-else-if="rightIndicatorLevelStore.getCurrentIndicator() && rightIndicatorLevelStore.getCurrentIndicator()?.geolevel === 'point'"
+        :selected-indicator="rightIndicatorLevelStore.getCurrentIndicator()"
+        side="right"
+      />
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { inject, onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue'
+import { inject, nextTick, onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue'
 import Compare from '../assets/maplibre-gl-compare.js'
 import '../assets/maplibre-gl-compare.css';
 import TimelineVisualization from './TimelineVisualization.vue'
@@ -65,10 +120,15 @@ let leftMarker: maplibregl.Marker | null = null
 let rightMarker: maplibregl.Marker | null = null
 
 let _compare: Compare | null = null
-// Watch for changes in props._type and execute function based on value
-watch(() => props._type, (newType) => {
-  if (_compare) _compare.switchType(newType)
-})
+
+const viewMode = ref<'side-by-side' | 'solo-left' | 'solo-right'>('side-by-side')
+
+function resizeMaps() {
+  leftMap?.resize()
+  rightMap?.resize()
+  
+
+}
 
 // Watch for theme changes and reinitialize indicators
 watch(() => themeLevelStore.currentThemeShortName, async (newThemeShortName, oldThemeShortName) => {
@@ -116,6 +176,15 @@ onMounted(async () => {
       attributionControl: false,
       transformRequest
     })
+    .addControl(new maplibregl.NavigationControl({
+        visualizePitch: true,
+        visualizeRoll: true,
+        showZoom: true,
+        showCompass: true
+      }))
+      .addControl(new maplibregl.AttributionControl({
+        compact: true
+      }), 'top-right');
 
     leftIndicatorLevelStore.initializeMap(leftMap, emitter)
   }
@@ -146,7 +215,13 @@ onMounted(async () => {
 
   if (leftMap && rightMap) {
     const position = orientation.value === 'top-bottom' ? ['bottom', 'left'] : ['top', 'horiz-center'] as any
-    _compare = new Compare(leftMap, rightMap, comparisonContainer, { orientation: orientation.value, type: props._type, position });
+    const compareOpts = {
+      orientation: orientation.value,
+      type: 'sideBySide',
+      position,
+      showTypeToggle: false
+    } as { orientation?: string; type?: string; position?: string[]; showTypeToggle?: boolean }
+    _compare = new Compare(leftMap, rightMap, comparisonContainer, compareOpts);
     // bbox as [west, south, east, north] using LngLatBoundsLike
     let bbox = new maplibregl.LngLatBounds([-81.63527368320112, 34.24556219498636], [-78.89220264452729, 35.22169720245361]) as LngLatBoundsLike;
 
@@ -315,12 +390,26 @@ onUnmounted(() => {
 })
 </script>
 <style>
+#comparison-container.solo-left .maplibregl-ctrl-top-right, 
+#comparison-container.solo-right .maplibregl-ctrl-top-right {
+  /* right: 5px;
+  left: unset; */
+}
+
+.left-panel .maplibregl-ctrl-top-right {
+  display: none;
+}
+
+#comparison-container.solo-left .left-panel .maplibregl-ctrl-top-right{
+  display: inline-block;
+}
+
 .maplibregl-ctrl-bottom-right {
   bottom: 150px;
 }
 
 .maplibregl-ctrl-top-right {
-  right: 50%;
+  right: 5px;
   left: unset;
 }
 
@@ -378,6 +467,66 @@ onUnmounted(() => {
   overflow: hidden;
 }
 
+/* Side panels: side-by-side each 50%; solo mode one panel full width */
+.side-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+}
+.side-panel.left-panel {
+  left: 0;
+}
+.side-panel.right-panel {
+  left: 50%;
+}
+.side-panel .map-container {
+  width: 100%;
+}
+
+#comparison-container.solo-left .right-panel {
+  display: none;
+}
+#comparison-container.solo-left .left-panel {
+  width: 100%;
+}
+
+#comparison-container.solo-right .left-panel {
+  display: none;
+}
+#comparison-container.solo-right .right-panel {
+  width: 100%;
+  left: 0;
+}
+
+/* Solo button on each side */
+.solo-btn {
+  top: 4rem;
+  position: absolute;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.solo-btn-left {
+  /* top: 8px; */
+  right: 8px;
+}
+.solo-btn-right {
+  /* top: 8px; */
+  left: 8px;
+}
+
+/* Back to side-by-side (solo mode only) */
+.solo-exit-wrap {
+  position: absolute;
+  top: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+}
+.solo-exit-btn {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
 .location-marker {
   position: relative;
   cursor: pointer;
@@ -385,7 +534,7 @@ onUnmounted(() => {
 
 .pin-icon {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  transform: translateX(50%);
+  /* transform: translateX(50%); */
 }
 
 .location-marker:hover .pin-icon {
@@ -420,15 +569,29 @@ onUnmounted(() => {
   transform: scale(1.1);
 }
 
+#comparison-container.orientation-top-bottom.sideBySide .side-panel {
+  width: 100%;
+  height: 50%;
+  left: 0;
+}
+#comparison-container.orientation-top-bottom.sideBySide .side-panel.right-panel {
+  top: 50%;
+  left: 0;
+}
 #comparison-container.orientation-top-bottom.sideBySide .map-container {
   position: relative;
-  height: 50%;
+  height: 100%;
   width: 100%;
   border-left: none;
 }
 
 #comparison-container.orientation-top-bottom.sideBySide .map-container.right {
   border-top: 1px solid black;
+}
+
+#comparison-container.orientation-top-bottom.solo-left .left-panel,
+#comparison-container.orientation-top-bottom.solo-right .right-panel {
+  height: 100%;
 }
 
 #comparison-container.orientation-top-bottom .maplibregl-ctrl-bottom-right {

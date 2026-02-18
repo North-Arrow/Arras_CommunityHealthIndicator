@@ -6,7 +6,7 @@ export default class Compare {
     left: any,
     right: any,
     container: string | HTMLElement,
-    opts?: { type?: string, orientation?: string, position?: string[] }
+    opts?: { type?: string; orientation?: string; position?: string[]; showTypeToggle?: boolean }
   )
   switchType(type: string): void
 }
