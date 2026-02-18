@@ -4,6 +4,7 @@
       <div class="legend-header">
         <span class="legend-title">{{ selectedIndicator?.title || 'Indicator' }} 
           <v-tooltip
+          close-on-content-click
             style="display: inline-block;"
             :max-width="500"
             :location="side === 'left' ? 'bottom start' : 'bottom end'"
@@ -102,13 +103,7 @@ const maxColor = computed(() => {
   user-select: none;
 }
 
-.color-legend.left {
-  /* right: 20px; */
-}
 
-.color-legend.right {
-  right: 0px;
-}
 
 .legend-header {
   padding: 8px 12px 4px;
