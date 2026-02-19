@@ -169,7 +169,6 @@ const createChart = () => {
 
   // Clear previous chart
   d3.select(svg.value).selectAll('*').remove()
-  console.log('createChart', width, height, margin)
   svgElement = d3.select(svg.value)
     .attr('width', width)
     .attr('height', height)

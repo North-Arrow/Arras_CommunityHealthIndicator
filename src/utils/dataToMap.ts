@@ -11,6 +11,7 @@ import {
   MIN_MULTIPLIER,
   MAX_MULTIPLIER,
 } from "../constants";
+import { formatGoogleSheetData } from "./data-transformations.js";
 
 /**
  * Base class for mapping indicator data to MapLibre GL maps
@@ -99,6 +100,10 @@ export class DataToMap {
     const { minValue, maxValue } = this.getMinMaxValues();
     this.minValue = minValue;
     this.maxValue = maxValue;
+    const legendExtra = this.data.legend?.extra_layers as { data_merge?: { source?: string; google_sheets_url?: string } } | undefined;
+    if(legendExtra?.data_merge) {
+      await this.generateExtraGeojson(legendExtra.data_merge);
+    }
     // Don't mutate shared indicator config - values are stored in instance properties
     return true;
   }
@@ -107,7 +112,38 @@ export class DataToMap {
    * Generates GeoJSON from data
    * Overridden by subclasses (AreaDataToMap uses existing sources, PointDataToMap generates from coordinates)
    */
-  generateGeojson() {}
+  async generateExtraGeojson(dataMerge: { source?: string; google_sheets_url?: string } | undefined) {
+    if(!this.map || !this.data) return null;
+    if(!dataMerge) return null;
+    const googleSheetsUrl = dataMerge?.google_sheets_url;
+   
+    if (dataMerge?.source) {
+      const source = this.map.getSource(dataMerge.source as string);
+      if (source) {
+        const geojson = await (source as any).getData();
+        if (googleSheetsUrl) {
+          const response = await fetch(googleSheetsUrl);
+          const data = await response.text();
+          const formattedData = formatGoogleSheetData(data);
+          geojson.features = geojson.features.map((feature: any) => {
+            const row = formattedData.data.find((row: any) => +row.geoid === +feature.properties.geoid);
+            if (row) {
+              return {
+                ...feature,
+                properties: row,
+              };
+            }
+          });
+        }
+        if (source && typeof (source as any).setData === "function") {
+          (source as any).setData(geojson);
+        } else {
+          console.error(`Source ${dataMerge.source} not found`);
+        }
+      }
+    }
+    return null;
+  }
 
   /**
    * Generates a MapLibre GL expression for gradient fill color based on data values
@@ -383,6 +419,28 @@ export class DataToMap {
         "visibility",
         "visible",
       );
+      const styling = this.data.legend?.extra_layers?.styling;
+      if(styling) {
+        if(styling.image) {
+          const image = await this.map.loadImage(styling.image.url);
+          this.map.addImage(styling.image.id, image.data);
+        }
+          if(styling.paint) {
+            Object.entries(styling.paint).forEach(([key, value]) => {
+              this.map.setPaintProperty(this.data.legend?.extra_layers?.layer_name as string, key, value);
+            });
+        }
+        if(styling.filter) {
+          const _filter = JSON.stringify(styling.filter)
+          .replace(/\{\{pct\}\}/g, `pct_${year || this.year}`)
+          .replace(/\{\{count\}\}/g, `count_${year || this.year}`)
+          .replace(/\{\{pop\}\}/g, `pop_${year || this.year}`);
+
+          const parsedFilter = JSON.parse(_filter);
+          this.map.setFilter(this.data.legend?.extra_layers?.layer_name as string, parsedFilter);
+
+        }
+      }
     }
     return true;
   }

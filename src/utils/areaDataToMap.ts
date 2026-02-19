@@ -206,7 +206,7 @@ export class AreaDataToMap extends DataToMap {
    * Area data uses existing GeoJSON sources, so this is a no-op
    * The GeoJSON is already loaded from the map style
    */
-  generateGeojson() {
-    super.generateGeojson();
+  async generateGeojson() {
+   
   }
 }

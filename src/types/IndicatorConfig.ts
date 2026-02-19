@@ -5,8 +5,13 @@ export interface Icon {
 export interface IndicatorConfig {
     legend?: {
         extra_layers?: {
+            styling: any;
             layer_name?: string | null;
             html?: string | null;
+            data_merge?: {
+                source?: string;
+                google_sheets_url?: string;
+            };
         };
         [key: string]: any;
     };
@@ -21,6 +26,10 @@ export interface IndicatorConfig {
     extra_layers?: {
         layer_name?: string;
         html?: string | null;
+        data_merge?: {
+            source?: string;
+            google_sheets_url?: string;
+        };
     };
 
     timeline: any;

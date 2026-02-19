@@ -22,6 +22,10 @@
       "type": "geojson",
       "data": "ChestLanTractsHarmonized.geojson"
     },
+    "tracts-harmonized-dup": {
+      "type": "geojson",
+      "data": "ChestLanTractsHarmonized.geojson"
+    },
     "protected-source":{
       "type": "geojson",
       "data": "/Acres_of_protected_lands_clipped.geojson"
@@ -4782,6 +4786,14 @@
       "source": "tracts-harmonized",
       "layout": {"visibility": "visible"},
       "paint": {"line-width": 2, "line-color": "#0000"}
+    },
+    {
+        "id": "child-poverty-tracts",
+        "type": "fill",
+        "source": "tracts-harmonized-dup",
+        "layout": {"visibility": "visible"},
+        "paint": {"fill-color": "#0000", "fill-opacity": 0.5},
+        "filter": ["any", [">", ["to-number",["get","{{pct}}"]], 40]]
     },
     {"id": "point-data", "type": "circle", "source": "points-source",
     "paint": {"circle-stroke-width": 1, "circle-stroke-color": "#000"}},

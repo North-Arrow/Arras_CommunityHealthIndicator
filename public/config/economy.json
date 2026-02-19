@@ -31,7 +31,7 @@
       "short_title": "Children in Poverty",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR9zeolHtawv9gwC_vD12fwM_GuujMxXi8KVJoF3PqSONsdw3LvX2sZRZOnji09mBVopP1I0tDXOMN6/pub?gid=646151606&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5brqPPF4bUPlKzP2a6utP4cdJCaitWTx9D34NEiTFFuvXHvnGzIbBiCq7nLf8rI-L_qf8pWDh5_5z/pub?gid=622872564&single=true&output=csv",
       "short_name": "concentrated_poverty",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -46,7 +46,38 @@
       },
       "legend": {
         "title-column": "pct",
-        "title": "{{pct}}% of children"
+        "title": "{{pct}}% of children",
+        "extra_layers": {
+          "layer_name": "child-poverty-tracts",
+          "html": "<span class='legend-title'>Over 40% in Poverty: <img src='assets/pattern-a.png' class='poverty-pattern' /></span>",
+          "styling": {
+            "image": {
+              "id":"poverty-pattern",
+              "url":"assets/pattern-a.png"
+            },
+            "paint":{
+              "fill-pattern": "poverty-pattern"
+            },
+            "filter": [
+              "any",
+              [
+                ">",
+                [
+                  "to-number",
+                  [
+                    "get",
+                    "{{pct}}"
+                  ]
+                ],
+                40
+              ]
+            ]
+          },
+          "data_merge": {
+            "source": "tracts-harmonized-dup",
+            "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5brqPPF4bUPlKzP2a6utP4cdJCaitWTx9D34NEiTFFuvXHvnGzIbBiCq7nLf8rI-L_qf8pWDh5_5z/pub?gid=622872564&single=true&output=csv"
+          }
+        }
       },
       "tooltip-info": "Children living in areas of concentrated poverty face a range of challenges that can negatively impact their development and well-being. They are less likely to have access to quality schools, safe places to play, and essential services."
     },

@@ -179,8 +179,7 @@ export class PointDataToMap extends DataToMap {
    * Converts tabular data with lat/lng coordinates into GeoJSON Point features
    * @returns GeoJSON FeatureCollection with Point geometries
    */
-  generateGeojson() {
-    super.generateGeojson();
+   generateGeojson() {
     const rawGoogleData = this.data.google_sheets_data.data;
     const geojson = {
       type: "FeatureCollection",
@@ -195,7 +194,7 @@ export class PointDataToMap extends DataToMap {
         };
       }),
     };
-    console.log(geojson);
+    //console.log(geojson);
     return geojson;
   }
 }
