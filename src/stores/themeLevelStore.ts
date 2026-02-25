@@ -16,6 +16,7 @@ export const useThemeLevelStore = defineStore('themeLevel', () => {
     const categoryConfigs = inject('categoryConfigs') as any
     const mainConfig = inject('mainConfig') as any
     const mainConfigForCurrentTheme = ref<any>(null)
+
     async function setCurrentTheme(shortName?: string): Promise<boolean> {
         if(!shortName){
             currentThemeShortName.value = null

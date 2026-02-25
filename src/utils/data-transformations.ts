@@ -1,11 +1,11 @@
 function formatGoogleSheetData(csvString: string) {
   const rows = csvString.split("\n");
   let shortNameRowIdx = rows.findIndex(
-    (row) => !row.includes("-") && row.includes("geoid") && !row.includes(" ")
+    (row) => !row.includes("-") && row.toLowerCase().includes("geoid") && !row.includes(" ")
   );
   if (shortNameRowIdx === -1) {
     shortNameRowIdx = rows.findIndex(
-      (row) => !row.includes("-") && row.includes("geoid")
+      (row) => !row.includes("-") && row.toLowerCase().includes("geoid")
     );
   }
   if (!rows[shortNameRowIdx] || !rows[shortNameRowIdx].split) {

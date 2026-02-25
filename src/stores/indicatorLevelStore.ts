@@ -34,10 +34,14 @@ const indicatorLevelStore = (storeName: 'left' | 'right') => {
     const currentYear = ref<number | null>(DEFAULT_YEAR)
     const minValue = ref<number | null>(null)
     const maxValue = ref<number | null>(null)
-    
+    const csvData = ref<string | null>(null)
     // Helper function to get current theme indicators dynamically
     function getCurrentThemeIndicators() {
         return themeLevelStore.getAllCurrentThemeIndicators()
+    }
+
+    function getCsvData(): string | null {
+        return csvData.value
     }
 
     function initializeMap(_map: maplibregl.Map, emitter?: Emitter<any>) {
@@ -141,16 +145,10 @@ const indicatorLevelStore = (storeName: 'left' | 'right') => {
                         ).map((year: string) => Number(year.replace(indicator.timeline?.yearValuePrefix || '', '')));
                 }
                 
-                // Use the latest year as default
-                // let defaultYear = null;
-                // if (defaultYears !== null && defaultYears.length > 0) {
-                //     defaultYear = defaultYears[defaultYears.length - 1];
-                //     await worker.setupIndicator(defaultYear);
-                //     // Update min/max values from worker after setup
-                //     minValue.value = (worker as any).minValue ?? null;
-                //     maxValue.value = (worker as any).maxValue ?? null;
-                // }
                 await worker.setupIndicator(defaultYears[defaultYears.length - 1]);
+                const rawData = worker?.getCsvData()
+                csvData.value = rawData.headerLabels + '\n' + rawData.data.map((d: { [s: string]: unknown } | ArrayLike<unknown>) => Object.values(d).join(',')).join('\n')
+                console.log(csvData.value)
                 // Update min/max values from worker after setup
                 minValue.value = (worker as any).minValue ?? null;
                 maxValue.value = (worker as any).maxValue ?? null;
@@ -197,7 +195,7 @@ const indicatorLevelStore = (storeName: 'left' | 'right') => {
         return null;
     }
 
-    return { setIndicatorFromIndicatorShortName, getCurrentIndicator, initializeMap, removeMap, setCurrentYear, getCurrentYear, getCurrentGeoSelection, setCurrentGeoSelection, getMinValue, getMaxValue, minValue, maxValue }
+    return { setIndicatorFromIndicatorShortName, getCurrentIndicator, initializeMap, removeMap, setCurrentYear, getCurrentYear, getCurrentGeoSelection, setCurrentGeoSelection, getMinValue, getMaxValue, minValue, maxValue, getCsvData }
 }
 
 // This is where the difference is to make unique stores:

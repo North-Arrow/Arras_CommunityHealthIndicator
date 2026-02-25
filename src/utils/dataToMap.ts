@@ -145,6 +145,12 @@ export class DataToMap {
     return null;
   }
 
+  getCsvData() {
+    if(!this.data) return null;
+    if(!this.data.google_sheets_data) return null;
+    return this.data.google_sheets_data;
+  }
+
   /**
    * Generates a MapLibre GL expression for gradient fill color based on data values
    * @returns MapLibre expression array or false if data is invalid

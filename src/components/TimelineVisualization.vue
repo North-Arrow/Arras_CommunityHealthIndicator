@@ -25,6 +25,9 @@
                 <span v-show="hoveredGeo" class="hovered-geo mx-0">Selected area<br /><span class="hovered-color"
                     :style="{ border: `2px solid ${hoveredColorRef}` }"></span></span>
               </td>
+              <td style="text-align: right;">
+                <span class="csv-data mx-0"><v-btn text="Download CSV Data" color="primary" append-icon="mdi-file-export" size="small" variant="tonal" @click="downloadCsvData"></v-btn></span>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -158,6 +161,15 @@ const processData = (_feature: string | number | null) => {
   return data
 }
 
+const downloadCsvData = () => {
+  const csvData = indicatorStore.getCsvData()
+  console.log(csvData)
+  if (!csvData || typeof csvData !== 'string') return;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csvData], { type: 'text/csv' }));
+  a.download = `${indicatorStore.getCurrentIndicator()?.short_name}.csv`;
+  a.click();
+}
 const createChart = () => {
   if (!svg.value) return
 
@@ -757,7 +769,7 @@ onUnmounted(() => {
   padding-bottom: 0px;
   text-align: left;
   line-height: .9em;
-
+  width: 100%;
 }
 
 
