@@ -78,24 +78,21 @@ export default {
        }
         next(true)
     },
-    //We should find a way to avoid this:
-    // async beforeRouteUpdate(to, from, next) {
-    //     console.log('beforeRouteUpdate')
-    //     // Handle route updates when component is reused (e.g., theme query param changes)
-    //     if (to.query.theme !== from.query.theme) {
-    //         document.getElementById('loading').style.display = 'flex'
-    //         const success = await useThemeLevelStore().setCurrentTheme(to.query.theme)
-    //         if(!success){
-    //             next(false)
-    //             return
-    //         }
-    //         // Hide loading after a brief delay to ensure theme is fully loaded
-    //         await this.$nextTick()
-    //     }
-    //     next()
-    // },
+    async beforeRouteUpdate(to, from, next) {
+        if (to.query.theme !== from.query.theme) {
+            const loadingEl = document.getElementById('loading');
+            if (loadingEl?.style) loadingEl.style.display = 'flex';
+            const success = await useThemeLevelStore().setCurrentTheme(to.query.theme);
+            if (!success) {
+                next(false);
+                return;
+            }
+            await this.$nextTick();
+        }
+        next();
+    },
     async beforeRouteLeave(to, from, next) {
-        console.log('beforeRouteLeave')
+        
         await useThemeLevelStore().setCurrentTheme()
         next()
     },

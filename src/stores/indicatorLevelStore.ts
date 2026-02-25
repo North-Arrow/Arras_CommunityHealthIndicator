@@ -148,7 +148,7 @@ const indicatorLevelStore = (storeName: 'left' | 'right') => {
                 await worker.setupIndicator(defaultYears[defaultYears.length - 1]);
                 const rawData = worker?.getCsvData()
                 csvData.value = rawData.headerLabels + '\n' + rawData.data.map((d: { [s: string]: unknown } | ArrayLike<unknown>) => Object.values(d).join(',')).join('\n')
-                console.log(csvData.value)
+
                 // Update min/max values from worker after setup
                 minValue.value = (worker as any).minValue ?? null;
                 maxValue.value = (worker as any).maxValue ?? null;

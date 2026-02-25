@@ -106,10 +106,16 @@
   </main>
 </template>
 <script setup lang="ts">
-import { ref, inject, computed, watch, onBeforeMount } from 'vue'
+import { ref, inject, computed, watch, onBeforeMount, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useEmbedSync, isInIframe } from './composables/useEmbedSync'
+
 const router = useRouter()
 const drawer = ref(false)
+
+onMounted(() => {
+  useEmbedSync(router)
+})
 
 const mainConfig = inject('mainConfig') as any;
 const arrasBranding = inject('arrasBranding') as any;
@@ -132,12 +138,12 @@ watch(router.currentRoute, (newRoute, oldRoute) => {
     return
   }
 
-    if(newRoute.name === 'map' && oldRoute?.name === 'map') {
-      console.log('reloading')
-      //window.location.replace(newRoute.fullPath)
+  if (newRoute.name === 'map' && oldRoute?.name === 'map') {
+    if (!isInIframe()) {
       window.location.reload()
-      //window.location.replace(newRoute.fullPath)
     }
+    // When in iframe, URL is synced to parent via useEmbedSync; no reload.
+  }
 }, { immediate: true })
 onBeforeMount(() => {
   document.body.style.zoom = window.innerWidth < 1280 ? '0.8' : '1';
