@@ -3,7 +3,7 @@
     {
       "title": "Percent of adults (ages 25+) with bachelor's degree or higher",
       "data_source": "census",
-      "short_title": "Adults with Bachelor's Degree",
+      "short_title": "Bachelor's Degree",
       "geotype": "tract",
       "default": "left",
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQLH2WHaIW_W1rCEHkcCALW2GFVgr20hRmIu2DOKyETmKi3-vMDv0dF5WFbLU47By9gDXSeTdA4oJH6/pub?gid=936536633&single=true&output=csv",
@@ -28,7 +28,7 @@
     {
       "title": "Percent of families with children living in 'concentrated poverty'-—areas where the poverty rate is over 40%",
       "data_source": "census",
-      "short_title": "Children in Poverty",
+      "short_title": "Children in Concentrated Poverty",
       "geotype": "tract",
       "default": false,
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5brqPPF4bUPlKzP2a6utP4cdJCaitWTx9D34NEiTFFuvXHvnGzIbBiCq7nLf8rI-L_qf8pWDh5_5z/pub?gid=622872564&single=true&output=csv",
@@ -84,7 +84,7 @@
     {
       "title": "Median household income",
       "data_source": "census",
-      "short_title": "Median Income",
+      "short_title": "Household Income",
       "geotype": "tract",
       "default": false,
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxBdPEeiYzDaPP8ZRebLlTvX_OzEFwRL6c7zC45u0HES0ZlD5v2o8tUdL0xcBmYKTpCL_I4ALJoWNR/pub?gid=956489115&single=true&output=csv",
@@ -108,7 +108,7 @@
     {
       "title": "Percent of households using more than 30% of their income to pay for housing costs",
       "data_source": "census",
-      "short_title": "Housing Cost Burden",
+      "short_title": "Cost-Burdened Households",
       "geotype": "tract",
       "default": false,
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS0QQ808Zlb6SD7sdjmijEDSlqLhHs2qElErij9mqKt8AQEKH_dAZxfxlyIeqogfI6EN8rMy1qPyb22/pub?gid=1195534552&single=true&output=csv",
@@ -301,7 +301,7 @@
     {
       "title": "Percent of households with no available vehicle",
       "data_source": "census",
-      "short_title": "Vehicles Available",
+      "short_title": "No Vehicles Available",
       "geotype": "tract",
       "default": false,
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGKDlQUqjd1dhm5DsfWiGlktvYsWXFQqFInKPnVssJGP_ohAE0aPKXLxleOUSfWqa-Jq9X5EGYWedB/pub?gid=66299098&single=true&output=csv",
