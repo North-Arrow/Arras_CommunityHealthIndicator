@@ -9,22 +9,19 @@
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9sGRCKoXuLSJ5tURB-k1iXI7hng56SqraMUy8G4YIA9Z4uFM2w5VOIbU2V2L43S5aBhvxjLtQzXNr/pub?gid=2104564019&single=true&output=csv",
       "short_name": "grandchildren",
       "timeline": {
-        "yearValuePrefix": "count_",
+        "yearValuePrefix": "pct_",
         "yearValueShortFormat": "{{value}}",
-        "filterOut": [
-          "statewide",
-          "overall"
-        ]
+        "filterOut": []
       },
       "popup": {
         "format": {
-          "title": "{{count}} grandparents",
+          "title": "{{pct}}% of grandparents",
           "subtitle": null
         }
       },
       "legend": {
-        "title-column": "count",
-        "title": "{{count}} grandchildren"
+        "title-column": "pct",
+        "title": "{{pct}}% of grandparents"
       },
       "tooltip-info": "The phenomenon of grandparents raising grandchildren reflects underlying societal issues that lead to parents being unable to care for their children, such as substance abuse, incarcerateion, neglect or abuse, and poverty and economic hardship. It also points to the need for support systems for these families."
     },
