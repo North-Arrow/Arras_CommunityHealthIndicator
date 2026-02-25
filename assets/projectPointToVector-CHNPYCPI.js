@@ -1,0 +1,1 @@
+import{aZ as a}from"./MapPage-aQQPudaX.js";import{J as c,o as i,F as p}from"./projectionUtils-CKjxTYzn.js";function x(r,t,f,o){if(c(r.spatialReference,f)){e[0]=r.x,e[1]=r.y;const s=r.z;return e[2]=s??o??0,i(e,r.spatialReference,0,t,f,0)}const n=p(r,f);return!!n&&(t[0]=n?.x,t[1]=n?.y,t[2]=n?.z??o??0,!0)}const e=a();export{x as i};
