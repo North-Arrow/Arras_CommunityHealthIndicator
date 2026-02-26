@@ -5,7 +5,7 @@ This app can be embedded in an iframe and kept in sync with the parent page’s 
 ## How it works
 
 1. **Parent page** includes an iframe and the `parent-sync.js` script (after the iframe tag).
-2. On load, the script sets the iframe’s `src` to your app origin plus the parent’s current `pathname`, `search`, and `hash`, so the app loads with the correct route, theme (`?theme=...`), and map position (hash: `zoom/lat/lng`).
+2. On load, the script sets the iframe’s `src` to your app origin plus the *app path* (pathname, search, hash). If the parent page lives in a subdirectory (e.g. `/embed-test/`), set `pathPrefix` so the script strips it and uses the app’s routes (e.g. `/map`) for the iframe, not the parent path.
 3. When the user changes theme or moves the map inside the iframe, the app sends a message to the parent; the parent updates its own URL with `history.replaceState` (or `pushState` if configured).
 4. When the user uses the browser back/forward on the parent, the parent sends a message to the iframe so the app navigates to the new URL.
 
@@ -21,6 +21,7 @@ This app can be embedded in an iframe and kept in sync with the parent page’s 
    <script>
      window.initHealthIndicatorEmbed({
        appOrigin: 'https://your-app-origin.com',
+       pathPrefix: '/embed-test',
        iframeSelector: 'iframe[data-health-indicator-embed]',
        usePushState: false,
        allowedIframeOrigin: 'https://your-app-origin.com'
@@ -28,13 +29,14 @@ This app can be embedded in an iframe and kept in sync with the parent page’s 
    </script>
    ```
 
-3. Your parent page URL should mirror the app’s routes when you want to show the map, e.g. `/map?theme=social_cultural` and optionally a hash for map position (e.g. `#8.57/34.65/-80.17`). The script builds the iframe URL as `appOrigin + pathname + search + hash`.
+3. When the parent page is in a subdirectory (e.g. `https://yoursite.com/embed-test/`), set `pathPrefix: '/embed-test'`. The script strips that prefix from the parent pathname to get the app path (e.g. `/embed-test/map` → `/map`), so the iframe loads the app at `/map`, not `/embed-test/map`. When the iframe reports URL changes, the parent URL is updated *with* the prefix (e.g. `/embed-test/map?theme=...`).
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `appOrigin` | string | (required) | Origin of the deployed app (e.g. `https://example.com`). No trailing slash. |
+| `pathPrefix` | string | `''` | Parent page subdirectory to strip from pathname (e.g. `'/embed-test'`). The iframe gets app paths like `/map`; the parent URL stays under this prefix (e.g. `/embed-test/map?theme=...`). |
 | `iframeSelector` | string | `'iframe[data-health-indicator-embed]'` | CSS selector for the iframe. |
 | `iframeId` | string | — | If set, used instead of `iframeSelector` to find the iframe by ID. |
 | `usePushState` | boolean | `false` | If `true`, use `history.pushState` on URL updates so each change creates a history entry; if `false`, use `replaceState`. |
@@ -51,7 +53,7 @@ When the app’s URL changes (route, query, or hash), it sends:
 - **Type:** `HEALTH_INDICATOR_URL_UPDATE`
 - **Payload:** `{ type, pathname, search, hash }` (all strings; `search` includes `?`, `hash` includes `#`).
 
-The parent should update its URL to `pathname + search + hash` (e.g. via `history.replaceState` or `pushState`).
+The parent should update its URL to `pathPrefix + pathname + search + hash` (e.g. via `history.replaceState` or `pushState`) so the parent stays under its subdirectory.
 
 ### Parent → iframe: navigate
 
@@ -68,4 +70,4 @@ The iframe app will call `router.replace(pathname + search)` and set `window.loc
 
 ## Example
 
-See `embed/example.html` for a minimal parent page that loads the script and configures the embed. For local testing, run the app (e.g. `npm run dev`) and open the example from a page whose URL includes the map route and theme, e.g. `http://localhost:3000/map?theme=social_cultural`, or adjust the example so the parent’s initial URL matches that structure.
+See `index.html` in this folder for a minimal parent page. When the parent is at `https://yoursite.com/embed-test/`, set `pathPrefix: '/embed-test'` so the iframe loads the app at `/` (landing). When the user opens the map in the iframe, the parent URL becomes `https://yoursite.com/embed-test/map?theme=...` and the iframe continues to use app paths (`/map`, etc.).

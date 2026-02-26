@@ -22,9 +22,10 @@
   <script src="parent-sync.js"></script>
   <script>
     // Point to your deployed app origin (or use relative path if same host).
-    var APP_ORIGIN = 'http://localhost:5173';
+    var APP_ORIGIN = 'https://arras.north-arrow.org/';
     window.initHealthIndicatorEmbed({
       appOrigin: APP_ORIGIN,
+      pathPrefix: '/embed-test',
       iframeSelector: 'iframe[data-health-indicator-embed]',
       usePushState: false,
       allowedIframeOrigin: APP_ORIGIN
