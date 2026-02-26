@@ -69,7 +69,7 @@ export default {
     },
     watch: {},
     async beforeRouteEnter(to, from, next) {
-        console.log('beforeRouteEnter')
+        //console.log('beforeRouteEnter')
         document.getElementById('loading').style.display = 'flex'
        const success = await useThemeLevelStore().setCurrentTheme(to.query.theme)
        if(!success){

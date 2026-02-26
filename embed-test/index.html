@@ -19,17 +19,24 @@
       src="about:blank"
     ></iframe>
   </div>
-  <script src="parent-sync.js"></script>
+
   <script>
     // Point to your deployed app origin (or use relative path if same host).
     var APP_ORIGIN = 'https://arras.north-arrow.org/';
-    window.initHealthIndicatorEmbed({
-      appOrigin: APP_ORIGIN,
-      pathPrefix: '/embed-test',
-      iframeSelector: 'iframe[data-health-indicator-embed]',
-      usePushState: false,
-      allowedIframeOrigin: APP_ORIGIN
-    });
+    var PATH_PREFIX = '/embed-test';
+
+    var script = document.createElement('script');
+    script.src = `${PATH_PREFIX}/parent-sync.js`;
+    document.head.appendChild(script);
+    script.onload = function() {
+      window.initHealthIndicatorEmbed({
+        appOrigin: APP_ORIGIN,
+        pathPrefix: PATH_PREFIX,
+        iframeSelector: 'iframe[data-health-indicator-embed]',
+        usePushState: false,
+        allowedIframeOrigin: APP_ORIGIN
+      });
+    };
   </script>
 </body>
 </html>

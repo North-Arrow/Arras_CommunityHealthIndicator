@@ -235,14 +235,9 @@ onMounted(async () => {
         animate: false
       });
     }
-    // rightMap.on('moveend', () => {
-    //   console.log(rightMap.getBounds());
-    // });
-    // leftMap.on('moveend', () => {
-    //   console.log(leftMap.getBounds());
-    // });
 
-    _compare.onceBoth('load', () => {
+    //Maybe redundant to use on instead of once, but just in case
+    _compare.onBoth('load', () => {
       const loadingEl = document.getElementById('loading');
       if (loadingEl && loadingEl.style) {
         loadingEl.style.display = 'none';
