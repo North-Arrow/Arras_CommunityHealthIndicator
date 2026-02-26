@@ -2,10 +2,44 @@
 
 This app can be embedded in an iframe and kept in sync with the parent page’s URL (route, theme query, and map hash) using `postMessage`.
 
+## Quick Start
+
+- Change the PATH_PREFIX variable to the path of the page that the iframe will be embedded in (eg. /map-page) and copy it into the body of the page:
+
+```html
+<div class="embed-container">
+  <iframe
+    id="health-indicator-iframe"
+    data-health-indicator-embed
+    title="Community Health Indicator"
+    src="about:blank"
+  ></iframe>
+</div>
+
+<script>
+  // Point to your deployed app origin (or use relative path if same host).
+  var APP_ORIGIN = "https://arras.north-arrow.org/"; // Do NOT change this, it is the origin of the app
+  var PATH_PREFIX = "/embed-test"; // DO change this to the path of the page this will be embedded in
+
+  var script = document.createElement("script");
+  script.src = `${PATH_PREFIX}/parent-sync.js`;
+  document.head.appendChild(script);
+  script.onload = function () {
+    window.initHealthIndicatorEmbed({
+      appOrigin: APP_ORIGIN,
+      pathPrefix: PATH_PREFIX,
+      iframeSelector: "iframe[data-health-indicator-embed]",
+      usePushState: false,
+      allowedIframeOrigin: APP_ORIGIN,
+    });
+  };
+</script>
+```
+
 ## How it works
 
 1. **Parent page** includes an iframe and the `parent-sync.js` script (after the iframe tag).
-2. On load, the script sets the iframe’s `src` to your app origin plus the app path, theme, and map hash. If the parent page lives in a subdirectory (e.g. `/embed-test/`), set `pathPrefix`. By default the app route and theme are stored in the *parent’s query string* (`?path=/map&theme=...`) so the parent path never changes—the server only needs to serve the embed page at `/embed-test/`, not `/embed-test/map`.
+2. On load, the script sets the iframe’s `src` to your app origin plus the app path, theme, and map hash. If the parent page lives in a subdirectory (e.g. `/embed-test/`), set `pathPrefix`. By default the app route and theme are stored in the _parent’s query string_ (`?path=/map&theme=...`) so the parent path never changes—the server only needs to serve the embed page at `/embed-test/`, not `/embed-test/map`.
 3. When the user changes theme or moves the map inside the iframe, the app sends a message to the parent; the parent updates its own URL (query and hash only when using query mode).
 4. When the user uses the browser back/forward on the parent, the parent sends a message to the iframe so the app navigates to the new state.
 
@@ -16,18 +50,36 @@ This app can be embedded in an iframe and kept in sync with the parent page’s 
 2. Include the parent script after the iframe:
 
    ```html
-   <iframe id="health-indicator-iframe" data-health-indicator-embed title="Community Health Indicator" src="about:blank"></iframe>
-   <script src="path/to/parent-sync.js"></script>
-   <script>
-     window.initHealthIndicatorEmbed({
-       appOrigin: 'https://your-app-origin.com',
-       pathPrefix: '/embed-test',
-       iframeSelector: 'iframe[data-health-indicator-embed]',
-       usePushState: false,
-       allowedIframeOrigin: 'https://your-app-origin.com'
-     });
-   </script>
+   <div class="embed-container">
+     <iframe
+       id="health-indicator-iframe"
+       data-health-indicator-embed
+       title="Community Health Indicator"
+       src="about:blank"
+     ></iframe>
+   </div>
    ```
+
+  <script>
+    // Point to your deployed app origin (or use relative path if same host).
+    var APP_ORIGIN = 'https://arras.north-arrow.org/'; // Do NOT change this, it is the origin of the app
+    var PATH_PREFIX = '/embed-test'; // DO change this to the path of the page this will be embedded in
+
+    var script = document.createElement('script');
+    script.src = `${PATH_PREFIX}/parent-sync.js`;
+    document.head.appendChild(script);
+    script.onload = function() {
+      window.initHealthIndicatorEmbed({
+        appOrigin: APP_ORIGIN,
+        pathPrefix: PATH_PREFIX,
+        iframeSelector: 'iframe[data-health-indicator-embed]',
+        usePushState: false,
+        allowedIframeOrigin: APP_ORIGIN
+      });
+    };
+  </script>
+
+```
 
 3. When the parent page is in a subdirectory (e.g. `https://yoursite.com/embed-test/`), set `pathPrefix: '/embed-test'`. By default (`pathInQuery: true`) the app route and theme are stored in the parent’s query string, so the parent URL stays `https://yoursite.com/embed-test/?path=/map&theme=social_cultural#8/34/-80`. The server never receives a request for `/embed-test/map`—only for `/embed-test/`. Set `pathInQuery: false` if you prefer path-based parent URLs (e.g. `/embed-test/map?theme=...`); then your server must be configured to serve the same embed page for all paths under `pathPrefix`.
 
@@ -72,3 +124,4 @@ The iframe app will call `router.replace(pathname + search)` and set `window.loc
 ## Example
 
 See `index.html` in this folder. With `pathPrefix: '/embed-test'` and default `pathInQuery: true`, the parent URL stays at `https://yoursite.com/embed-test/` and becomes `https://yoursite.com/embed-test/?path=/map&theme=social_cultural#8/34/-80` when the user opens the map and pans/zooms. No server configuration is required beyond serving the embed page at `/embed-test/`.
+```

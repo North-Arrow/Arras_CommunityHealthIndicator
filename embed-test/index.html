@@ -22,8 +22,8 @@
 
   <script>
     // Point to your deployed app origin (or use relative path if same host).
-    var APP_ORIGIN = 'https://arras.north-arrow.org/';
-    var PATH_PREFIX = '/embed-test';
+    var APP_ORIGIN = 'https://arras.north-arrow.org/'; // Do NOT change this, it is the origin of the app
+    var PATH_PREFIX = '/embed-test'; // DO change this to the path of the page this will be embedded in
 
     var script = document.createElement('script');
     script.src = `${PATH_PREFIX}/parent-sync.js`;

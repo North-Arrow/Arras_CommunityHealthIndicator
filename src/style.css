@@ -1,5 +1,29 @@
+@font-face {
+  font-family: 'Benton Sans';
+  src: url('./assets/Benton Sans/bentonsanslight/BentonSans%20Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Benton Sans';
+  src: url('./assets/Benton Sans/bentonsansregular/BentonSans%20Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Benton Sans';
+  src: url('./assets/Benton Sans/bentonsansbold/BentonSans%20Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Benton Sans', Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -28,6 +52,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: 'Benton Sans', Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Vuetify app wrapper inherits root font */
+.v-application {
+  font-family: 'Benton Sans', Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 h1 {
