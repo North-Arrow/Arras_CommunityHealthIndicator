@@ -5,9 +5,9 @@ This app can be embedded in an iframe and kept in sync with the parent page’s 
 ## How it works
 
 1. **Parent page** includes an iframe and the `parent-sync.js` script (after the iframe tag).
-2. On load, the script sets the iframe’s `src` to your app origin plus the *app path* (pathname, search, hash). If the parent page lives in a subdirectory (e.g. `/embed-test/`), set `pathPrefix` so the script strips it and uses the app’s routes (e.g. `/map`) for the iframe, not the parent path.
-3. When the user changes theme or moves the map inside the iframe, the app sends a message to the parent; the parent updates its own URL with `history.replaceState` (or `pushState` if configured).
-4. When the user uses the browser back/forward on the parent, the parent sends a message to the iframe so the app navigates to the new URL.
+2. On load, the script sets the iframe’s `src` to your app origin plus the app path, theme, and map hash. If the parent page lives in a subdirectory (e.g. `/embed-test/`), set `pathPrefix`. By default the app route and theme are stored in the *parent’s query string* (`?path=/map&theme=...`) so the parent path never changes—the server only needs to serve the embed page at `/embed-test/`, not `/embed-test/map`.
+3. When the user changes theme or moves the map inside the iframe, the app sends a message to the parent; the parent updates its own URL (query and hash only when using query mode).
+4. When the user uses the browser back/forward on the parent, the parent sends a message to the iframe so the app navigates to the new state.
 
 ## Parent page setup
 
@@ -29,14 +29,15 @@ This app can be embedded in an iframe and kept in sync with the parent page’s 
    </script>
    ```
 
-3. When the parent page is in a subdirectory (e.g. `https://yoursite.com/embed-test/`), set `pathPrefix: '/embed-test'`. The script strips that prefix from the parent pathname to get the app path (e.g. `/embed-test/map` → `/map`), so the iframe loads the app at `/map`, not `/embed-test/map`. When the iframe reports URL changes, the parent URL is updated *with* the prefix (e.g. `/embed-test/map?theme=...`).
+3. When the parent page is in a subdirectory (e.g. `https://yoursite.com/embed-test/`), set `pathPrefix: '/embed-test'`. By default (`pathInQuery: true`) the app route and theme are stored in the parent’s query string, so the parent URL stays `https://yoursite.com/embed-test/?path=/map&theme=social_cultural#8/34/-80`. The server never receives a request for `/embed-test/map`—only for `/embed-test/`. Set `pathInQuery: false` if you prefer path-based parent URLs (e.g. `/embed-test/map?theme=...`); then your server must be configured to serve the same embed page for all paths under `pathPrefix`.
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `appOrigin` | string | (required) | Origin of the deployed app (e.g. `https://example.com`). No trailing slash. |
-| `pathPrefix` | string | `''` | Parent page subdirectory to strip from pathname (e.g. `'/embed-test'`). The iframe gets app paths like `/map`; the parent URL stays under this prefix (e.g. `/embed-test/map?theme=...`). |
+| `pathPrefix` | string | `''` | Parent page subdirectory (e.g. `'/embed-test'`). When set, the iframe gets app paths like `/map`; see `pathInQuery`. |
+| `pathInQuery` | boolean | `true` | When `pathPrefix` is set: if `true`, store app path and theme in the parent’s query string (`/embed-test/?path=/map&theme=...`), so the server only serves the embed at `/embed-test/`. If `false`, parent URL becomes `/embed-test/map?theme=...` (requires server to serve the embed page for all `pathPrefix/*`). |
 | `iframeSelector` | string | `'iframe[data-health-indicator-embed]'` | CSS selector for the iframe. |
 | `iframeId` | string | — | If set, used instead of `iframeSelector` to find the iframe by ID. |
 | `usePushState` | boolean | `false` | If `true`, use `history.pushState` on URL updates so each change creates a history entry; if `false`, use `replaceState`. |
@@ -53,7 +54,7 @@ When the app’s URL changes (route, query, or hash), it sends:
 - **Type:** `HEALTH_INDICATOR_URL_UPDATE`
 - **Payload:** `{ type, pathname, search, hash }` (all strings; `search` includes `?`, `hash` includes `#`).
 
-The parent should update its URL to `pathPrefix + pathname + search + hash` (e.g. via `history.replaceState` or `pushState`) so the parent stays under its subdirectory.
+The parent updates its URL accordingly: in query mode it uses `pathPrefix + '?' + path=...&theme=...` + hash; otherwise `pathPrefix + pathname + search + hash`.
 
 ### Parent → iframe: navigate
 
@@ -70,4 +71,4 @@ The iframe app will call `router.replace(pathname + search)` and set `window.loc
 
 ## Example
 
-See `index.html` in this folder for a minimal parent page. When the parent is at `https://yoursite.com/embed-test/`, set `pathPrefix: '/embed-test'` so the iframe loads the app at `/` (landing). When the user opens the map in the iframe, the parent URL becomes `https://yoursite.com/embed-test/map?theme=...` and the iframe continues to use app paths (`/map`, etc.).
+See `index.html` in this folder. With `pathPrefix: '/embed-test'` and default `pathInQuery: true`, the parent URL stays at `https://yoursite.com/embed-test/` and becomes `https://yoursite.com/embed-test/?path=/map&theme=social_cultural#8/34/-80` when the user opens the map and pans/zooms. No server configuration is required beyond serving the embed page at `/embed-test/`.

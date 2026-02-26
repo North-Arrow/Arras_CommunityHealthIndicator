@@ -55,6 +55,9 @@ export function useEmbedSync(
   // Send URL to parent when hash changes (map pan/zoom via MapLibre).
   window.addEventListener('hashchange', sendUrlToParent);
 
+  // Send initial URL so parent is in sync as soon as the iframe is ready.
+  sendUrlToParent();
+
   // Apply parent-sent navigation (e.g. back/forward on parent).
   const handleMessage = (event: MessageEvent) => {
     if (!isNavigatePayload(event.data)) return;
