@@ -237,7 +237,7 @@ onMounted(async () => {
     }
 
     //Maybe redundant to use on instead of once, but just in case
-    _compare.onBoth('load', () => {
+    _compare.onBoth('idle', () => {
       const loadingEl = document.getElementById('loading');
       if (loadingEl && loadingEl.style) {
         loadingEl.style.display = 'none';
