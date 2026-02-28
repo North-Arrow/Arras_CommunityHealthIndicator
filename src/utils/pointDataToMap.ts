@@ -144,7 +144,6 @@ export class PointDataToMap extends DataToMap {
         this.emitter?.emit(`feature-${this.side || "left"}-clicked`, null as any);
       } else {
         this.emitter?.emit(`feature-${this.side || "left"}-clicked`, features[0].properties.geoid);
-        console.log(features[0].properties.name)
         this.emitter?.emit(`feature-name-${this.side || "left"}-clicked`, features[0].properties.name ?? features[0].properties.geoid);
       }
     };

@@ -22,7 +22,7 @@
                   :style="{ border: `2px solid ${statewideColor}` }"></span>
               </td>
               <td>
-                <span v-show="hoveredGeo" class="hovered-geo mx-0">{{ blueLineGeo }}<br /><span class="hovered-color"
+                <span v-show="hoveredGeo" class="hovered-geo mx-0">{{ hoveredGeoName }}<br /><span class="hovered-color"
                     :style="{ border: `2px solid ${hoveredColorRef}` }"></span></span>
               </td>
               <td style="text-align: right;">
