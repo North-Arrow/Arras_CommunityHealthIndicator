@@ -14,7 +14,7 @@
             <tr>
               <td
                 v-if="!indicatorStore?.getCurrentIndicator()?.timeline?.filterOut?.some((filter: string) => filter.toLowerCase() === 'overall')">
-                <span class="hovered-geo mx-0">Chester & Lancaster avg.<br /><span class="selected-color"
+                <span class="hovered-geo mx-0">{{ blueLineGeo }}<br /><span class="selected-color"
                     :style="{ border: `2px solid ${selectedColorRef}` }"></span></span>
               </td>
               <td v-if="showStatewide">
@@ -22,7 +22,7 @@
                   :style="{ border: `2px solid ${statewideColor}` }"></span>
               </td>
               <td>
-                <span v-show="hoveredGeo" class="hovered-geo mx-0">Selected area<br /><span class="hovered-color"
+                <span v-show="hoveredGeo" class="hovered-geo mx-0">{{ blueLineGeo }}<br /><span class="hovered-color"
                     :style="{ border: `2px solid ${hoveredColorRef}` }"></span></span>
               </td>
               <td style="text-align: right;">
@@ -334,11 +334,16 @@ const createChart = () => {
 
 }
 const hoveredGeo = ref('');
+const blueLineGeo = ref('Chester & Lancaster avg.');
 const hoveredGeoName = ref('');
 const addFeatureLine = (feature: string) => {
   const statewide = feature.toLowerCase().includes("statewide")
 
-  hoveredGeo.value = statewide ? hoveredGeo.value : feature;
+  const counties = {
+    '45023': 'Chester',
+    '45057': 'Lancaster',
+  }
+  hoveredGeo.value = counties[feature as keyof typeof counties] ?? feature;
   if (!svg.value) return
   const data = processData(feature)
 
@@ -621,13 +626,31 @@ onMounted(() => {
     if (feature === null) {
       hoveredGeo.value = ''
     } else {
-      hoveredGeo.value = feature;
+      
+      // const counties = {
+      //   '45023': 'Chester',
+      //   '45057': 'Lancaster',
+      // }
+      hoveredGeo.value = feature;//counties[feature as keyof typeof counties] ?? feature;
+     // console.log(hoveredGeo.value);
       addFeatureLine(feature)
     }
     // }
   })
-  emitter.on(`feature-name-${props.side}-hovered`, (feature: string | null) => {
+  emitter.on(`feature-${props.side}-clicked`, (feature: string | null) => {
+    console.log(feature);
     if (feature === null) {
+      blueLineGeo.value = 'Chester & Lancaster avg.';
+    } else {
+      const counties = {
+        '45023': 'Chester Co.',
+        '45057': 'Lancaster Co.',
+      }
+      blueLineGeo.value = counties[feature as keyof typeof counties] ?? feature;
+    }
+  })
+  emitter.on(`feature-name-${props.side}-hovered`, (feature: string | null) => {
+    if (!feature || feature === null) {
       hoveredGeoName.value = ''
     } else {
       hoveredGeoName.value = feature;

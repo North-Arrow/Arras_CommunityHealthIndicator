@@ -94,7 +94,7 @@ export class PointDataToMap extends DataToMap {
     if (!map) return;
 
     this.events.mousemove = (event: any) => {
-      if (this.frozenPopup) return;
+    //  if (this.frozenPopup) return;
       this.createPopupIfNeeded();
       const features = map.queryRenderedFeatures(event.point, {
         layers: [mainLayer],
@@ -128,11 +128,27 @@ export class PointDataToMap extends DataToMap {
 
         this.emitter?.emit(
           `feature-name-${this.side || "left"}-hovered`,
-          features[0].properties.name
+          features[0].properties.name ?? features[0].properties.geoid
         );
       }
     };
     map.on("mousemove", this.events.mousemove);
+
+    this.events.click = (event: any) => {
+      if (!map) return;
+      const features = map.queryRenderedFeatures(event.point, {
+        layers: [mainLayer],
+      });
+      //console.log(features);
+      if (features.length === 0) {
+        this.emitter?.emit(`feature-${this.side || "left"}-clicked`, null as any);
+      } else {
+        this.emitter?.emit(`feature-${this.side || "left"}-clicked`, features[0].properties.geoid);
+        console.log(features[0].properties.name)
+        this.emitter?.emit(`feature-name-${this.side || "left"}-clicked`, features[0].properties.name ?? features[0].properties.geoid);
+      }
+    };
+    map.on("click", this.events.click);
     
   }
 

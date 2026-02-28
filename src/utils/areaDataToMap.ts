@@ -83,7 +83,7 @@ export class AreaDataToMap extends DataToMap {
     const data = this.data;
 
     this.events.mousemove = (event: any) => {
-      if(this.frozenPopup) return;
+      //if(this.frozenPopup) return;
       // Create popup once
       this.createPopupIfNeeded();
       const features = map.queryRenderedFeatures(event.point, {
@@ -136,6 +136,11 @@ export class AreaDataToMap extends DataToMap {
         `feature-${this.side || "left"}-hovered`,
         feature.properties.geoid
       );
+
+      this.emitter?.emit(
+        `feature-name-${this.side || "left"}-hovered`,
+        feature.properties.name ?? feature.properties.geoid
+      );
     };
 
     map.on("mousemove", this.events.mousemove);
@@ -171,6 +176,7 @@ export class AreaDataToMap extends DataToMap {
         `feature-${this.side || "left"}-clicked`,
         features[0].properties.geoid
       );
+      
       this.selectedGeography = features[0].properties.geoid;
     };
     map.on("click", this.events.click);
