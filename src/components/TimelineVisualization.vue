@@ -163,7 +163,6 @@ const processData = (_feature: string | number | null) => {
 
 const downloadCsvData = () => {
   const csvData = indicatorStore.getCsvData()
-  console.log(csvData)
   if (!csvData || typeof csvData !== 'string') return;
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csvData], { type: 'text/csv' }));
@@ -626,19 +625,14 @@ onMounted(() => {
     if (feature === null) {
       hoveredGeo.value = ''
     } else {
-      
-      // const counties = {
-      //   '45023': 'Chester',
-      //   '45057': 'Lancaster',
-      // }
+
       hoveredGeo.value = feature;//counties[feature as keyof typeof counties] ?? feature;
-     // console.log(hoveredGeo.value);
+    
       addFeatureLine(feature)
     }
-    // }
   })
-  emitter.on(`feature-${props.side}-clicked`, (feature: string | null) => {
-    console.log(feature);
+  emitter.on(`feature-name-${props.side}-clicked`, (feature: string | null) => {
+ 
     if (feature === null) {
       blueLineGeo.value = 'Chester & Lancaster avg.';
     } else {

@@ -176,7 +176,10 @@ export class AreaDataToMap extends DataToMap {
         `feature-${this.side || "left"}-clicked`,
         features[0].properties.geoid
       );
-      
+      this.emitter?.emit(
+        `feature-name-${this.side || "left"}-clicked`,
+        features[0].properties.name ?? features[0].properties.geoid
+      );
       this.selectedGeography = features[0].properties.geoid;
     };
     map.on("click", this.events.click);
