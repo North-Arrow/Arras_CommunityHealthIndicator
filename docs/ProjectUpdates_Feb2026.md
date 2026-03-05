@@ -35,7 +35,7 @@
 #### IndicatorConfig and Data Merge
 - `IndicatorConfig`: added `style.lineColorExpression` (optional) for outline line-color expressions; added `legend.extra_layers.data_merge` with `source` and `google_sheets_url`
 - `dataToMap.ts`: `generateExtraGeojson` now receives `data_merge` from `legend.extra_layers` with proper typing (variable + cast where needed)
-- Fixed `extra_layers`/data-merge access so `generateGeojson` and `generateExtraGeojson` use the correct config shape
+- Fixed `extra_layers`/data-merge access so `generateGeojson` and `generateExtraGeojson` use the correct config shape.
 
 #### 2 Hour
 ---
