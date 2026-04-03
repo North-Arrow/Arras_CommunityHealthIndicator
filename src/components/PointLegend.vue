@@ -11,6 +11,12 @@
             </template>
           </v-tooltip></span>      </div>
       <div class="legend-content">
+        <p
+          v-if="pointLegendNarrative"
+          class="legend-narrative text-body-2"
+        >
+          {{ pointLegendNarrative }}
+        </p>
 
         <table class="legend-icon-container" v-if="legendTitle.min !== '' && legendTitle.max !== '' && legendTitle.mid !== ''">
           <tbody>
@@ -98,6 +104,11 @@ const indicatorLevelStore = useIndicatorLevelStore(props.side as 'left' | 'right
 const mainConfig = inject('mainConfig') as any;
 
 const source = computed(() => mainConfig?.data_sources?.[props.selectedIndicator?.data_source as string] as any);
+
+const pointLegendNarrative = computed(
+  () => (props.selectedIndicator?.legend?.narrative as string | undefined)?.trim() || ''
+);
+
 const secondaryTitleColumn = computed(() => {
   return props.selectedIndicator?.legend?.['secondary-title-column'] as 'count' | 'pop' | 'pct' | 'acres' | undefined;
 })
@@ -260,5 +271,11 @@ const minColor = computed(() => {
   height: 12px;
   border-radius: 2px;
   border: 1px solid #d1d5db;
+}
+
+.legend-narrative {
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.75);
 }
 </style>

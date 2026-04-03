@@ -249,6 +249,7 @@ export class DataToMap {
     }
     if (this.events.click) {
       this.map.off("click", this.events.click);
+      this.events.click = null;
     }
     if (this.events.mousemove) {
       this.map.off("mousemove", this.events.mousemove);
@@ -297,11 +298,8 @@ export class DataToMap {
     };
 
     this.map.on("mousemove", this.events.mousemove);
-
-    this.events.click = (_event: any) => {
-      this.frozenPopup = !this.frozenPopup;
-    };
-    this.map.on("click", this.events.click);
+    // Click / frozen popup is handled by AreaDataToMap / PointDataToMap so we do not
+    // register a second map click listener here (avoids duplicate handlers).
   }
 
   /**
@@ -315,6 +313,9 @@ export class DataToMap {
         closeOnClick: false,
         closeOnMove: false,
         focusAfterOpen: false,
+      });
+      this.popup.on("close", () => {
+        this.frozenPopup = false;
       });
     }
   }

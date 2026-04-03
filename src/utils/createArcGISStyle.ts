@@ -1,11 +1,14 @@
 import { ARCGIS_TOKEN } from "./arcgisConfig";
 import { sources, layers } from "./addedData.json";
+import { applyMunicipalSuffixStripToStyle } from "./mapLabelExpressions";
 export default async function createArcGISStyle(sitePath: string) {
   const USE_LOCAL_STYLE = true;
   if(USE_LOCAL_STYLE) {
-    return await fetch(
+    const local = await fetch(
       sitePath + 'assets/localStyle.json'
     ).then((res) => res.json());
+    applyMunicipalSuffixStripToStyle(local);
+    return local;
   }
   const _token = ARCGIS_TOKEN;
   const STYLES = {

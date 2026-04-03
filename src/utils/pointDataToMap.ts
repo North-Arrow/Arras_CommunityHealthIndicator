@@ -102,7 +102,9 @@ export class PointDataToMap extends DataToMap {
 
       if (features.length === 0) {
         map.setPaintProperty(mainLayer, "circle-opacity", CIRCLE_OPACITY_DEFAULT);
-        this.removePopup();
+        if (!this.frozenPopup) {
+          this.removePopup();
+        }
         this.emitter?.emit(`feature-${this.side || "left"}-hovered`, null);
         this.emitter?.emit(`feature-name-${this.side || "left"}-hovered`, null);
         return;
@@ -139,10 +141,17 @@ export class PointDataToMap extends DataToMap {
       const features = map.queryRenderedFeatures(event.point, {
         layers: [mainLayer],
       });
-      //console.log(features);
       if (features.length === 0) {
+        this.frozenPopup = false;
+        this.removePopup();
         this.emitter?.emit(`feature-${this.side || "left"}-clicked`, null as any);
       } else {
+        this.showPopup(
+          event.lngLat,
+          features[0].properties,
+          this.side as "left" | "right"
+        );
+        this.frozenPopup = true;
         this.emitter?.emit(`feature-${this.side || "left"}-clicked`, features[0].properties.geoid);
         this.emitter?.emit(`feature-name-${this.side || "left"}-clicked`, features[0].properties.name ?? features[0].properties.geoid);
       }

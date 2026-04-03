@@ -3,6 +3,12 @@
     :items="themeLevelStore?.getAllCurrentThemeIndicators() || []" return-object item-title="short_title" density="compact"
     variant="outlined" width="100%" hide-details class="indicator-select"
     @update:model-value="handleIndicatorChange">
+    <template #prepend-item>
+      <v-list-subheader v-if="themeTitle" class="indicator-select-theme-title text-high-emphasis font-weight-bold">
+        {{ themeTitle }}
+      </v-list-subheader>
+      <v-divider v-if="themeTitle" class="mb-1" />
+    </template>
     <template v-slot:item="{ props: itemProps }">
       <v-list-item class="indicator-select-item" v-bind="itemProps"></v-list-item>
     </template>
@@ -10,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { inject } from 'vue'
+import { inject, computed } from 'vue'
 import useIndicatorLevelStore from '../stores/indicatorLevelStore'
 import { useThemeLevelStore } from '../stores/themeLevelStore'
 
@@ -22,6 +28,8 @@ const props = defineProps<Props>()
 const indicatorStore = useIndicatorLevelStore(props.side)
 const themeLevelStore = useThemeLevelStore()
 const emitter = inject('mitt') as any
+
+const themeTitle = computed(() => themeLevelStore.getMainConfigForCurrentTheme()?.title ?? '')
 
 const handleIndicatorChange = async (indicator: any) => {
   await indicatorStore.setIndicatorFromIndicatorShortName(indicator.short_name, emitter)
@@ -103,5 +111,13 @@ defineExpose({
   text-overflow: ellipsis;
   white-space: normal !important;
   border-bottom: 1px solid lightgray;
+}
+
+.indicator-select-theme-title {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  white-space: normal;
+  height: auto !important;
+  padding-top: 8px;
 }
 </style>

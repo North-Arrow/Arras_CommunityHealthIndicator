@@ -88,6 +88,7 @@ import PointLegend from './PointLegend.vue'
 import type { Emitter } from 'mitt'
 import createArcGISStyle from '../utils/createArcGISStyle'
 import { createMapRequestTransform } from '../utils/mapRequestTransform'
+import { setSearchLocationCoordinates } from '../utils/searchLocationLayer'
 import { MIN_ZOOM_ON_LOCATION, LOCATION_FLY_DURATION_MS, RIGHT_PADDING_RATIO } from '../constants'
 import type { LngLatBoundsLike } from 'maplibre-gl'
 
@@ -115,9 +116,6 @@ const rightIndicatorLevelStore = useIndicatorLevelStore('right')
 const themeLevelStore = useThemeLevelStore()
 
 const emitter = inject('mitt') as Emitter<any>
-
-let leftMarker: maplibregl.Marker | null = null
-let rightMarker: maplibregl.Marker | null = null
 
 let _compare: Compare | null = null
 
@@ -254,115 +252,71 @@ onMounted(async () => {
 })
 
 /**
+ * Padding for flyTo when centering on a search result.
+ * In side-by-side mode each map is only ~half the viewport; using full window
+ * width for `padding.right` breaks camera fitting and misplaces/clips markers.
+ */
+function getLocationFlyPadding(map: maplibregl.Map): maplibregl.PaddingOptions {
+  if (viewMode.value === 'side-by-side') {
+    const el = map.getContainer()
+    const w = el.clientWidth
+    const h = el.clientHeight
+    // Symmetric inset only: asymmetric padding shifts the camera center while
+    // @mapbox/mapbox-gl-sync-move copies getCenter()/zoom between maps, which
+    // interact badly and skew HTML markers vs tiles in split view.
+    const inset = Math.max(16, Math.round(Math.min(w, h) * 0.06))
+    return { top: inset, bottom: inset, left: inset, right: inset }
+  }
+  return {
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: window.innerWidth * RIGHT_PADDING_RATIO,
+  }
+}
+
+/** One map must drive flyTo; sync-move will mirror pose to the other map. */
+function getPrimaryMapForSearch(): maplibregl.Map | null {
+  if (viewMode.value === 'solo-right' && rightMap) return rightMap
+  return leftMap
+}
+
+function handleLocationCleared() {
+  setSearchLocationCoordinates(leftMap, null)
+  setSearchLocationCoordinates(rightMap, null)
+}
+
+/**
  * Handles location selection from search
  * Centers both maps on the selected coordinates
  */
 const handleLocationSelected = (data: { coordinates: [number, number], text: string }) => {
-  const [lng, lat] = data.coordinates;
+  const [lng, lat] = data.coordinates
+  const coords: [number, number] = [lng, lat]
 
-  // Center both maps on the location
-  if (leftMap) {
-    leftMap.flyTo({
+  // GeoJSON circle layers (not HTML markers) so pins use the same WebGL
+  // transform as the basemap—avoids DOM/canvas drift in split view.
+  setSearchLocationCoordinates(leftMap, coords, handleLocationCleared)
+  setSearchLocationCoordinates(rightMap, coords, handleLocationCleared)
+
+  const primary = getPrimaryMapForSearch()
+  if (primary) {
+    primary.resize()
+    if (primary === leftMap) rightMap?.resize()
+    else leftMap?.resize()
+
+    const targetZoom = Math.max(primary.getZoom(), MIN_ZOOM_ON_LOCATION)
+    primary.flyTo({
       center: [lng, lat],
-      zoom: Math.max(leftMap.getZoom(), MIN_ZOOM_ON_LOCATION),
+      zoom: targetZoom,
       duration: LOCATION_FLY_DURATION_MS,
-      padding: {
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: window.innerWidth * RIGHT_PADDING_RATIO
-      }
-    });
-
-    leftMap.once('moveend', () => {
-      rightMap?.flyTo({
-        center: [lng, lat],
-        zoom: Math.max(rightMap.getZoom(), MIN_ZOOM_ON_LOCATION),
-        duration: LOCATION_FLY_DURATION_MS,
-        padding: {
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: window.innerWidth * RIGHT_PADDING_RATIO
-        }
-      });
-    });
-  }
-
-  // Remove existing markers
-  if (leftMarker) {
-    leftMarker.remove()
-    leftMarker = null
-  }
-
-  if (rightMarker) {
-    rightMarker.remove()
-    rightMarker = null
-  }
-
-  /**
-   * Creates a marker element with a pin icon and click handler
-   * Clicking the marker clears the location selection
-   */
-  const createMarkerElement = () => {
-    const el = document.createElement('div')
-    el.className = 'location-marker'
-
-    // Create pin icon
-    const pinIcon = document.createElement('div')
-    pinIcon.className = 'pin-icon'
-    pinIcon.innerHTML = `
-      <svg width="32" height="40" viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16 0C7.163 0 0 7.163 0 16C0 24.837 16 40 16 40C16 40 32 24.837 32 16C32 7.163 24.837 0 16 0Z" fill="#dc2626"/>
-        <circle cx="16" cy="16" r="8" fill="white"/>
-      </svg>
-    `
-
-    el.onclick = (e: any) => {
-      e.stopPropagation()
-      handleLocationCleared()
-    }
-
-    el.appendChild(pinIcon)
-
-
-    return el
-  }
-
-  // Add markers to both maps
-  if (leftMap) {
-    const leftMarkerEl = createMarkerElement()
-    leftMarker = new maplibregl.Marker({
-      element: leftMarkerEl,
-      anchor: 'bottom'
+      padding: getLocationFlyPadding(primary),
     })
-      .setLngLat([lng, lat])
-      .addTo(leftMap)
-  }
 
-  if (rightMap) {
-    const rightMarkerEl = createMarkerElement()
-    rightMarker = new maplibregl.Marker({
-      element: rightMarkerEl,
-      anchor: 'bottom'
+    primary.once('moveend', () => {
+      leftMap?.resize()
+      rightMap?.resize()
     })
-      .setLngLat([lng, lat])
-      .addTo(rightMap)
-  }
-}
-
-/**
- * Removes location markers from both maps
- * Called when location search is cleared
- */
-const handleLocationCleared = () => {
-  if (leftMarker) {
-    leftMarker.remove();
-    leftMarker = null;
-  }
-  if (rightMarker) {
-    rightMarker.remove();
-    rightMarker = null;
   }
 }
 
@@ -385,12 +339,6 @@ onUnmounted(() => {
 })
 </script>
 <style>
-#comparison-container.solo-left .maplibregl-ctrl-top-right, 
-#comparison-container.solo-right .maplibregl-ctrl-top-right {
-  /* right: 5px;
-  left: unset; */
-}
-
 .left-panel .maplibregl-ctrl-top-right {
   display: none;
 }
@@ -524,48 +472,6 @@ onUnmounted(() => {
 }
 .solo-exit-btn {
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-.location-marker {
-  position: relative;
-  cursor: pointer;
-}
-
-.pin-icon {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  /* transform: translateX(50%); */
-}
-
-.location-marker:hover .pin-icon {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-}
-
-.marker-close-btn {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-  border: 2px solid #dc2626;
-  color: #dc2626;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 1;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s;
-  z-index: 10;
-}
-
-.marker-close-btn:hover {
-  background: #dc2626;
-  color: white;
-  transform: scale(1.1);
 }
 
 #comparison-container.orientation-top-bottom.sideBySide .side-panel {

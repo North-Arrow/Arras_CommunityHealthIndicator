@@ -1,6 +1,6 @@
 'use strict'
 
-import syncMove from '@mapbox/mapbox-gl-sync-move'
+import syncMove from '../utils/mapboxGlSyncMoveWithPadding'
 
 /**
  *

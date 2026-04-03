@@ -3577,7 +3577,7 @@
       "type": "symbol",
       "source": "esri",
       "source-layer": "Admin2 area/label",
-      "minzoom": 9,
+      "minzoom": 8,
       "maxzoom": 11,
       "filter": ["==", "_label_class", 1],
       "layout": {
@@ -3603,7 +3603,7 @@
       "type": "symbol",
       "source": "esri",
       "source-layer": "Admin2 area/label",
-      "minzoom": 9,
+      "minzoom": 8,
       "maxzoom": 11,
       "filter": ["==", "_label_class", 0],
       "layout": {

@@ -111,7 +111,9 @@ export class AreaDataToMap extends DataToMap {
             "#0000",
           ]);
         }
-        this.removePopup();
+        if (!this.frozenPopup) {
+          this.removePopup();
+        }
         return;
       }
       const feature = features[0];
@@ -157,12 +159,13 @@ export class AreaDataToMap extends DataToMap {
           null as any
         );
         this.selectedGeography = null;
+        this.frozenPopup = false;
+        this.removePopup();
         if (data.layers.outline) {
           map.setPaintProperty(data.layers.outline, "line-color", "#0000");
         }
         return;
       }
-
 
       if(map.getLayer(data.layers.outline)) {
         map.setPaintProperty(data.layers.outline, "line-color", [
@@ -172,6 +175,12 @@ export class AreaDataToMap extends DataToMap {
           "#0000",
         ]);
       }
+      this.showPopup(
+        event.lngLat,
+        features[0].properties,
+        this.side as "left" | "right"
+      );
+      this.frozenPopup = true;
       this.emitter?.emit(
         `feature-${this.side || "left"}-clicked`,
         features[0].properties.geoid

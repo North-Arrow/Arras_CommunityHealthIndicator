@@ -4,6 +4,8 @@ export interface Icon {
 }
 export interface IndicatorConfig {
     legend?: {
+        /** Short plain-language note for legends (e.g. bubble size + color scale). */
+        narrative?: string;
         extra_layers?: {
             styling: any;
             layer_name?: string | null;
