@@ -544,13 +544,16 @@ onUnmounted(() => {
 }
 
 .color-legend, .point-legend {
-  justify-self: center;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
 } 
 
 .solo-right .color-legend, .solo-right .point-legend,
 .solo-left .color-legend, .solo-left .point-legend {
-  justify-self: flex-start;
   left: 125px;
+  right: auto;
+  transform: none;
   max-width: 30%;
 }
 </style>
