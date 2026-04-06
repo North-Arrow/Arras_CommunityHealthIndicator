@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "sc_town_labels",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "NAME": "Chester city" }, "geometry": { "type": "Point", "coordinates": [ -81.213210896802735, 34.705027188815727 ] } },
+{ "type": "Feature", "properties": { "NAME": "Fort Lawn" }, "geometry": { "type": "Point", "coordinates": [ -80.899124005128613, 34.7002403246181 ] } },
+{ "type": "Feature", "properties": { "NAME": "Great Falls" }, "geometry": { "type": "Point", "coordinates": [ -80.904822603898751, 34.575347748377695 ] } },
+{ "type": "Feature", "properties": { "NAME": "Heath Springs" }, "geometry": { "type": "Point", "coordinates": [ -80.675050377824746, 34.593274805736414 ] } },
+{ "type": "Feature", "properties": { "NAME": "Kershaw" }, "geometry": { "type": "Point", "coordinates": [ -80.587219989098458, 34.546252741150106 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lancaster city" }, "geometry": { "type": "Point", "coordinates": [ -80.780477089971114, 34.724861430330591 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lockhart" }, "geometry": { "type": "Point", "coordinates": [ -81.461360898599892, 34.792071483570609 ] } },
+{ "type": "Feature", "properties": { "NAME": "Lowrys" }, "geometry": { "type": "Point", "coordinates": [ -81.237225467491243, 34.804016439942657 ] } },
+{ "type": "Feature", "properties": { "NAME": "Richburg" }, "geometry": { "type": "Point", "coordinates": [ -81.019581114457367, 34.716629150026705 ] } },
+{ "type": "Feature", "properties": { "NAME": "Van Wyck" }, "geometry": { "type": "Point", "coordinates": [ -80.833179872943305, 34.853298029577005 ] } }
+]
+}

@@ -1,0 +1,361 @@
+{
+  "indicators": [
+    {
+      "title": "Percent of 3 and 4 Year Olds enrolled in Pre-K (both public and private schools)",
+      "data_source": "census",
+      "short_title": "Pre-K Enrollment",
+      "geotype": "tract",
+      "default": "right",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSygEfL4IXNKghq9ZCxT2_eIivEdHBXiddv-_Pb2U44ltaoSd8Qjgeu3m18JAJVK-VNHeDNXSMr25V1/pub?gid=1483288023&single=true&output=csv",
+      "short_name": "prek",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of 3 and 4 year olds",
+          "subtitle": "{{count}} out of {{pop}} children"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of 3 and 4 year olds"
+      },
+      "tooltip-info": "Early childhood education, including preschool, plays a crucial role in establishing foundational skills, social-emotional learning, and academic readiness, ultimately influencing a child's trajectory throughout their schooling and beyond."
+    },
+    {
+      "title": "Out of all families with children, the percent whose income in the past 12 months is below the federal poverty level",
+      "data_source": "census",
+      "short_title": "Child Poverty",
+      "default": "left",
+      "geotype": "tract",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRT9sRzNbN3RA9jfOSwV8VWN8-QCyd60ejnfQhNSS8MQkGn8u-BSXbIxkzwAFtE6CzVfv5Jr8nzMs7T/pub?gid=622872564&single=true&output=csv",
+      "short_name": "poverty",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of families",
+          "subtitle": "{{count}} out of {{pop}} families"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of families"
+      },
+      "tooltip-info": "Children who live below 100% of the federal poverty threshold are at risk of impaired physical and cognitive development, poor academic achievement, and long-term negative health outcomes."
+    },
+    {
+      "title": "Childcare Center Capacity",
+      "data_source": "abc_qual",
+      "short_title": "Childcare Capacity",
+      "geotype": "facility",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSMz-sXo5YL08yptNOf64atoW_IT7F1ATHxMAQSWLHkmBZ7_60Fdf7wTGMYrDS-p_YlHsFwy9PZMwKQ/pub?gid=1305246607&single=true&output=csv",
+      "short_name": "childcare",
+      "timeline": {
+        "yearValuePrefix": "count_",
+        "yearValueShortFormat": "{{value}}",
+        "filterOut": [
+          "statewide"
+        ]
+      },
+      "popup": {
+        "format": {
+          "title": "{{count}} children",
+          "subtitle": null
+        }
+      },
+      "legend": {
+        "title-column": "count",
+        "title": "{{count}} children"
+      },
+      "map": {
+        "size": "count",
+        "color": null
+      },
+      "tooltip-info": "High-quality child care not only supports children's cognitive, social-emotional, and physical development, but also positively influences their long-term educational achievement, health, and economic prospects. Furthermore, it contributes to the economic stability of families, enabling parents to participate more fully in the workforce, and has positive impacts on the economy as a whole."
+    },
+    {
+      "title": "3rd Grade Math Readiness (% of students meeting or exceeding expectations)",
+      "data_source": "sc_depofed",
+      "short_title": "3rd Grade Math Ready",
+      "geotype": "school",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSCu5kjxric5yfSKfHIDWjgb5-aYVInFA6Dxb09sf59l7dEvI3EETNvW_jEbjBp9Zmvzfe0Ba79UN-e/pub?gid=1083324309&single=true&output=csv",
+      "short_name": "3rdGradeMathReadiness",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of students",
+          "subtitle": "{{count}} out of {{pop}} students"
+        }
+      },
+      "legend": {
+        "title-column": "pop",
+        "title": "{{pop}} students tested",
+        "secondary-title-column": "pct",
+        "secondary-title": "{{pct}}% of students ready",
+        "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
+      },
+      "map": {
+        "size": "pop",
+        "color": "pct"
+      },
+      "tooltip-info": "Third grade math standards reflect achievement of crucial early concepts like multiplication, dividion, fractions, measurement and basic geometry.  Mastering these foundational skills is essential for success in more advanced math topics."
+    },
+    {
+      "title": "3rd Grade ELA Readiness (% of students meeting or exceeding expectations)",
+      "data_source": "sc_depofed",
+      "short_title": "3rd Grade ELA Ready",
+      "geotype": "school",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRf32BM5HywH4IqtpbBCPy1SlDBIkuTVDfjY82kLHmqWVelJ3a7QpIz9gJ3z3TLR-wTh2O0ILkfNFJw/pub?gid=519161792&single=true&output=csv",
+      "short_name": "3rdGradeELAReadiness",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of students",
+          "subtitle": "{{count}} out of {{pop}} students"
+        }
+      },
+      "map": {
+        "size": "pop",
+        "color": "pct"
+      },
+      "legend": {
+        "title-column": "pop",
+        "title": "{{pop}} students tested",
+        "secondary-title-column": "pct",
+        "secondary-title": "{{pct}}% of students ready",
+        "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
+      },
+      "tooltip-info": "For students who do not read at grade level, up to half of the printed fourth-grade curriculum is incomprehensible. Three-quarters of students who are poor readers in third grade will remain poor readers in high school. These students tend to have more behavioral and social problems in subsequent grades and high rates of grade retention. Students who can’t read proficiently by third grade are four times more likely to drop out of school."
+    },
+    {
+      "title": "8th Grade Math Readiness (% of students meeting or exceeding expectations)",
+      "data_source": "sc_depofed",
+      "short_title": "8th Grade Math Ready",
+      "geotype": "school",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHeife7ClQQFcuKRP9n0fBNGs58kcP6_AflLZO03xwvmKo1r5WGL-OuhbVA52xjAhu5xeGdlzjJbN7/pub?gid=513352825&single=true&output=csv",
+      "short_name": "8thGradeMathReadiness",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of students",
+          "subtitle": "{{count}} out of {{pop}} students"
+        }
+      },
+      "map": {
+        "size": "pop",
+        "color": "pct"
+      },
+      "legend": {
+        "title-column": "pop",
+        "title": "{{pop}} students tested",
+        "secondary-title-column": "pct",
+        "secondary-title": "{{pct}}% of students ready",
+        "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
+      },
+      "tooltip-info": "Eighth grade math proficiency is a strong predictor of high school, college, and career success. Poor performance limits a student’s access to advanced math and science courses such as calculus and physics."
+    },
+    {
+      "title": "8th Grade ELA Readiness (% of students meeting or exceeding expectations)",
+      "data_source": "sc_depofed",
+      "short_title": "8th Grade ELA Ready",
+      "geotype": "school",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS6FPF6zgHXWsooV1Nt7NjbywhsspWKDoGaRBj9Z6urjVm_7eszcS-lKdX7lNnE827V7ENLF4BFhtNG/pub?gid=646730336&single=true&output=csv",
+      "short_name": "8thGradeELAReadiness",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of students",
+          "subtitle": "{{count}} out of {{pop}} students"
+        }
+      },
+      "legend": {
+        "title-column": "pop",
+        "title": "{{pop}} students tested",
+        "secondary-title-column": "pct",
+        "secondary-title": "{{pct}}% of students ready",
+        "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
+      },
+      "map": {
+        "size": "pop",
+        "color": "pct"
+      },
+      "tooltip-info": "Eighth grade ELA standards represent foundational skill attainment and connection to future academic success and college/career readiness. Foundational skills include reading comprehension and critical thinking, effective communication, reasoning, and vocabulary development."
+    },
+    {
+      "title": "High School Graduation Rate (4-year cohort)",
+      "data_source": "sc_depofed",
+      "short_title": "HS Grad. Rate",
+      "geotype": "school",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQRMExRmu74MTZeJpvkmWPtITx0-Dgb3T6PF2ZtWGrQBcH2bd0GM89lkbPPW-xfRT59ThohYoNdWTD3/pub?gid=54733314&single=true&output=csv",
+      "short_name": "highSchoolCompletion",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pop}} students enrolled",
+          "subtitle": "{{count}} out of {{pop}} students"
+        }
+      },
+      "legend": {
+        "title-column": "pop",
+        "title": "{{pop}} students enrolled",
+        "secondary-title-column": "pct",
+        "secondary-title": "{{pct}}% of students graduated",
+        "narrative": "Each dot is a school. Larger dots mean a larger graduating cohort; color shows the share of students who completed high school in four years (warmer or more saturated colors = higher graduation rate)."
+      },
+      "map": {
+        "size": "pop",
+        "color": "pct"
+      },
+      "tooltip-info": "Earning a high school diploma increases employment prospects and lifelong earning potential and decreases the risk of premature death. Lack of one increases the chances of living in poverty. A GED is associated with lower earning potential and generally poorer health outcomes than a standard diploma."
+    },
+    {
+      "title": "High School Career Readiness (% of students in graduating cohort that were career ready)",
+      "data_source": "sc_depofed",
+      "short_title": "HS Career Ready",
+      "geotype": "school",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8jPJ9dEnqbCW0PWrpRaDMCgrVUQcTnOPOzxtfPin1iEOIZAVDBNf3PWJskRJtI67fVPfm905vGUz1/pub?gid=633516775&single=true&output=csv",
+      "short_name": "highSchoolCareerReadiness",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of students",
+          "subtitle": "{{count}} out of {{pop}} enrolled"
+        }
+      },
+      "legend": {
+        "title-column": "pop",
+        "title": "{{pop}} students enrolled",
+        "secondary-title-column": "pct",
+        "secondary-title": "{{pct}}% of students ready",
+        "narrative": "Each dot is a school. Larger dots mean more students in the cohort; color shows the share counted as career-ready (warmer or more saturated colors = higher readiness)."
+      },
+      "map": {
+        "size": "pop",
+        "color": "pct"
+      },
+      "tooltip-info": "This indicator measures the percentage of students possessing the skills and certifications necessary to enter the workforce immediately. It reflects the alignment between the education system and local economic needs, ensuring youth have viable pathways to financial independence without a four-year degree."
+    },
+    {
+      "title": "High School College Readiness (% of students in graduating cohort that were college ready)",
+      "data_source": "sc_depofed",
+      "short_title": "HS College Ready",
+      "geotype": "school",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmSnL3B1lHsHv5wWwDDCQ7B8Cf7hF7xLGhT907Gik-xZc0x4FBX-JqvV9OWCUYMagfj-hzvdWLT793/pub?gid=1658262532&single=true&output=csv",
+      "short_name": "highSchoolCollegeReadiness",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of students",
+          "subtitle": "{{count}} out of {{pop}} enrolled"
+        }
+      },
+      "legend": {
+        "title-column": "pop",
+        "title": "{{pop}} students enrolled",
+        "secondary-title-column": "pct",
+        "secondary-title": "{{pct}}% of students ready",
+        "narrative": "Each dot is a school. Larger dots mean more students in the cohort; color shows the share counted as college-ready (warmer or more saturated colors = higher readiness)."
+      },
+      "map": {
+        "size": "pop",
+        "color": "pct"
+      },
+      "tooltip-info": "College readiness indicates whether students are prepared for credit-bearing post-secondary coursework without the need for remediation. It is a key predictor of degree completion, which is tied to significantly higher lifetime earnings and lower unemployment rates."
+    },
+    {
+      "title": "Disconnected Youth (16 to 18 year olds not in school nor employed)",
+      "data_source": "census",
+      "short_title": "Disconnected Youth",
+      "geotype": "tract",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDWAG9o2tS_C9Kxjn3DpBkx7F2u3dh3AVFOz5OSGzaz3rx_hg_M7KzYatkCwzo4NuPnQTiKDqnKxvj/pub?gid=0&single=true&output=csv",
+      "short_name": "disconnectedYouth",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of children",
+          "subtitle": "{{count}} out of {{pop}} children"
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of children"
+      },
+      "tooltip-info": "Teens age 16 to 19 who are not enrolled in school (full- or part-time) and not employed (full- or part-time). This measure is sometimes referred to as “Idle Teens” or “Disconnected Youth.” Youth disconnection rates reveal disparities in access to education, employment, and social support networks, indicating which groups and areas need specific help."
+    },
+    {
+      "title": "Kindergarten Readiness",
+      "data_source": "sc_depofed",
+      "short_title": "K Ready",
+      "geotype": "school",
+      "default": false,
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDAYHOcGSybhfAirkRiKEyW7vgIj4aomJt_pNCcxAASGSwwNwtO5h7oPx6BVxyiN1Uij5nj7xdVDsU/pub?gid=1682018538&single=true&output=csv",
+      "short_name": "kReadiness",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of students"
+        }
+      },
+      "legend": {
+        "secondary-title-column": "pct",
+        "secondary-title": "{{pct}}% of students"
+      },
+      "map": {
+        "color": "pct"
+      },
+      "tooltip-info": "Entering kindergarten with low levels of cognitive and social-emotional skills is associated with poorer academic outcomes from elementary to high school. Children rated poor in academic readiness are nine to ten times more likely to have low reading scores at the end of first grade. Low social competence and emotional maturity at school entry is associated with poorer well-being in later grades"
+    }
+  ]
+}

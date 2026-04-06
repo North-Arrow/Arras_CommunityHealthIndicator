@@ -1,0 +1,89 @@
+{
+  "indicators": [
+    {
+      "title": "Acres of Protected Land",
+      "data_source": "sc_conserv_bank",
+      "short_title": "Protected Land",
+      "geotype": "protected",
+      "default": "left",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnq8Ae0o31UFOqO9ubmedo1zmYJAsUh4dFhx4PaLRQjX9ks4-Tq8muSC2Wv5yBLxG5CBplDASxEJdm/pub?gid=162120824&single=true&output=csv",
+      "short_name": "protected_land",
+      "timeline": {
+        "yearValuePrefix": "count_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{count}} acres of protected land",
+          "subtitle": null
+        }
+      },
+      "legend": {
+        "title-column": "count",
+        "title": "{{count}} acres of protected land",
+        "extra_layers": {
+          "layer_name": "protected_outline",
+          "html": "<span class='protected-lands-outline'>Protected Lands<span class='protected-lands-swatch'></span></span>"
+        }
+      },
+      "tooltip-info": "Protected land preserves greenspaces, waterways, riparian boundaries and critical ecosystems."
+    },
+    {
+      "title": "Average daily density of fine particulate matter (PM2.5)",
+      "short_title": "Air pollution rate",
+      "geotype": "protected",
+      "default": "right",
+      "data_source": "county_health_rankings",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGdqqgaN6wAWaicLjxM5A1da7trVXWYXxavwHMs03056hZgognkNQ8ykvlxlB92BrBv1TXzSLlMsDH/pub?gid=1437757701&single=true&output=csv",
+      "short_name": "pollution",
+      "timeline": {
+        "yearValuePrefix": "pct_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "{{pct}}% of days",
+          "subtitle": null
+        }
+      },
+      "legend": {
+        "title-column": "pct",
+        "title": "{{pct}}% of residents"
+      },
+      "tooltip-info": "Outdoor air pollution has direct health impacts (e.g. bronchitis, decreased lung function, asthma, and premature mortality), environmental consequences (e.g. acid rain, ozone layer depletion, visibility impairment, and damage to crops and structures), and economic and social impacts (e.g. increased healthcare costs, lost productivity, and lower quality of life)."
+    },
+    {
+      "title": "Awards given by the SC Conservation Bank",
+      "data_source": "sc_conserv_bank",
+      "short_title": "Conservation Funding",
+      "geotype": "facility",
+      "default": "sc_dep_conserv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSdmuURhWtn7eBRfF8mZB85n7cNV2VZ7oycQLSOdpF_RW26RqZFlwf0iUhMMuO3vAtndpbMUCF29dMb/pub?gid=1089528394&single=true&output=csv",
+      "short_name": "protected_land_awards",
+      "timeline": {
+        "yearValuePrefix": "count_",
+        "yearValueShortFormat": "{{value}}%",
+        "filterOut": []
+      },
+      "popup": {
+        "format": {
+          "title": "${{count}}",
+          "subtitle": null
+        }
+      },
+      "legend": {
+        "title-column": "count",
+        "title": "${{count}} awarded",
+        "secondary-title-column": "acres",
+        "secondary-title": "{{acres}} acres of protected land"
+      },
+      "map": {
+        "size": "count",
+        "color": "acres"
+      },
+      "tooltip-info": "Dedicated funding for conservation is essential to acquire and maintain protected lands. It reflects the community's financial commitment to preserving critical ecosystems, protecting water quality, and ensuring access to green spaces that support physical and mental well-being."
+    }
+  ]
+}
