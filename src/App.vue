@@ -48,7 +48,7 @@
             />
             <div class="sidebar__brand-text">
               <div class="sidebar__title">Health Indicators</div>
-              <div class="sidebar__subtitle">Choose a theme</div>
+              <div class="sidebar__subtitle">Choose an indicator area</div>
             </div>
           </div>
         </div>

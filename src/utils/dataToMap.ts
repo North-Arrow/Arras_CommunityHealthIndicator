@@ -1,10 +1,6 @@
 import type { IndicatorConfig } from "../types/IndicatorConfig";
 import type { Map, MapGeoJSONFeature } from "maplibre-gl";
 import type { Emitter } from "mitt";
-import maplibregl from "maplibre-gl";
-import { createApp, type App, reactive } from "vue";
-import Popup from "../components/Popup.vue";
-import vuetify from "../plugins/vuetify.js";
 import {
   YEAR_PATTERN,
   EXCLUDED_GEO_PATTERNS,
@@ -26,10 +22,7 @@ export class DataToMap {
   side: "left" | "right" | null;
   protected popup: any = null;
   protected frozenPopup: boolean = false;
-  protected popupApp: App | null = null;
   protected highlightedGeoid: string | null | MapGeoJSONFeature = null;
-  protected lastPopupGeoid: string | null | MapGeoJSONFeature = null;
-  protected popupProperties: ReturnType<typeof reactive> | null = null;
   protected arrasBranding: any;
   protected sitePath: string;
   protected hoveringPlaceId: number = -1;
@@ -237,14 +230,6 @@ export class DataToMap {
   removeOldEvents() {
     if (!this.map) {
       // Clean up popup even if map is gone
-      if (this.popupApp) {
-        this.popupApp.unmount();
-        this.popupApp = null;
-      }
-      if (this.popup) {
-        this.popup.remove();
-        this.popup = null;
-      }
       return;
     }
     if (this.events.click) {
@@ -257,14 +242,7 @@ export class DataToMap {
     if (this.events.mouseleave) {
       this.map.off("mouseleave", this.events.mouseleave);
     }
-    if (this.popupApp) {
-      this.popupApp.unmount();
-      this.popupApp = null;
-    }
-    if (this.popup) {
-      this.popup.remove();
-      this.popup = null;
-    }
+    this.removePopup();
   }
   /**
    * Adds base event handlers for mouse interactions
@@ -306,19 +284,7 @@ export class DataToMap {
    * Creates a MapLibre popup instance if one doesn't exist
    * Popup is reused across interactions to improve performance
    */
-  protected createPopupIfNeeded() {
-    if (!this.popup) {
-      this.popup = new maplibregl.Popup({
-        closeButton: true,
-        closeOnClick: false,
-        closeOnMove: false,
-        focusAfterOpen: false,
-      });
-      this.popup.on("close", () => {
-        this.frozenPopup = false;
-      });
-    }
-  }
+  protected createPopupIfNeeded() {}
 
   /**
    * Shows a popup at the specified location with feature properties
@@ -327,55 +293,12 @@ export class DataToMap {
    * @param properties - Feature properties to display in popup
    * @param side - Which map side ('left' or 'right') for unique container ID
    */
-  protected showPopup(lngLat: any, properties: any, side: "left" | "right") {
-    if (!this.map) return;
-
-    // Get the geoid from properties to detect if we're hovering the same feature
-    const currentGeoid = properties?.geoid || properties?.id || null;
-    const geoidChanged = currentGeoid !== this.lastPopupGeoid;
-
-    // Use unique container ID based on side to avoid conflicts between left and right popups
-    const containerId = `popup-container-${side}`;
-    this.createPopupIfNeeded();
-
-    // Always update popup position
-    this.popup.setLngLat(lngLat);
-
-    // Only recreate the HTML container if geoid changed or popup doesn't exist
-    if (geoidChanged || !this.popupApp) {
-      this.popup.setHTML(`<div id="${containerId}"></div>`).addTo(this.map);
-    }
-
-    const popupContainer = document.getElementById(containerId);
-
-    if (popupContainer) {
-      if (geoidChanged || !this.popupApp) {
-        // Unmount existing app if it exists
-        if (this.popupApp) {
-          this.popupApp.unmount();
-          this.popupApp = null;
-        }
-
-        // Create reactive object for properties
-        this.popupProperties = reactive({ ...properties });
-
-        // Create and mount new app instance with reactive properties
-        this.popupApp = createApp(Popup, {
-          properties: this.popupProperties,
-          side,
-        }).use(vuetify);
-        this.popupApp.mount(popupContainer);
-
-        // Update last geoid to track which feature is currently displayed
-        this.lastPopupGeoid = currentGeoid;
-      } else {
-        // Same geoid - just update the reactive properties by copying new values
-        // This avoids unnecessary Vue component recreation
-        if (this.popupProperties) {
-          Object.assign(this.popupProperties, properties);
-        }
-      }
-    }
+  protected showPopup(properties: any, side: "left" | "right") {
+    this.emitter?.emit(`popup-${side}-changed`, {
+      visible: true,
+      frozen: this.frozenPopup,
+      properties,
+    });
   }
 
   /**
@@ -383,16 +306,12 @@ export class DataToMap {
    * Called when mouse leaves a feature or when switching indicators
    */
   protected removePopup() {
-    if (this.popupApp) {
-      this.popupApp.unmount();
-      this.popupApp = null;
-    }
-    if (this.popup) {
-      this.popup.remove();
-      this.popup = null;
-    }
-    this.lastPopupGeoid = null;
-    this.popupProperties = null;
+    if (!this.side) return;
+    this.emitter?.emit(`popup-${this.side}-changed`, {
+      visible: false,
+      frozen: false,
+      properties: null,
+    });
   }
 
   /**

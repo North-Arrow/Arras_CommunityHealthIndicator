@@ -921,7 +921,9 @@ onUnmounted(() => {
 }
 
 .orientation-top-bottom .color-legend {
-  right: 0;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
 }
 
 .orientation-top-bottom .legend-container {

@@ -60,7 +60,7 @@
             >
               <v-card-title class="text-h5 font-weight-bold pa-6 pb-4">
                 <v-icon icon="mdi-view-grid" class="mr-2"></v-icon>
-                Explore Themes
+                Explore Indicator Areas
               </v-card-title>
               <v-card-text class="pa-6 pt-0">
                 <v-row dense>

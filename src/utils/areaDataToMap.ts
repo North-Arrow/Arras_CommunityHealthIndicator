@@ -9,6 +9,7 @@ import type { Emitter } from "mitt";
  */
 export class AreaDataToMap extends DataToMap {
   selectedGeography: string | null = null;
+  private clearPanelHandler: (() => void) | null = null;
 
   constructor(
     data: IndicatorConfig,
@@ -68,6 +69,10 @@ export class AreaDataToMap extends DataToMap {
   }
 
   removeOldEvents() {
+    if (this.clearPanelHandler) {
+      this.emitter?.off(`popup-${this.side || "left"}-clear`, this.clearPanelHandler);
+      this.clearPanelHandler = null;
+    }
     super.removeOldEvents();
   }
 
@@ -81,9 +86,20 @@ export class AreaDataToMap extends DataToMap {
     const mainLayer = this.data.layers.main;
     if (!map) return;
     const data = this.data;
+    this.clearPanelHandler = () => {
+      this.selectedGeography = null;
+      this.frozenPopup = false;
+      this.removePopup();
+      if (data.layers.outline && map.getLayer(data.layers.outline)) {
+        map.setPaintProperty(data.layers.outline, "line-color", "#0000");
+      }
+      this.emitter?.emit(`feature-${this.side || "left"}-clicked`, null as any);
+      this.emitter?.emit(`feature-name-${this.side || "left"}-clicked`, null);
+    };
+    this.emitter?.on(`popup-${this.side || "left"}-clear`, this.clearPanelHandler);
 
     this.events.mousemove = (event: any) => {
-      //if(this.frozenPopup) return;
+      if (this.frozenPopup) return;
       // Create popup once
       this.createPopupIfNeeded();
       const features = map.queryRenderedFeatures(event.point, {
@@ -130,7 +146,6 @@ export class AreaDataToMap extends DataToMap {
       }
       // Show popup with Vue component
       this.showPopup(
-        event.lngLat,
         feature.properties,
         this.side as "left" | "right"
       );
@@ -176,11 +191,15 @@ export class AreaDataToMap extends DataToMap {
         ]);
       }
       this.showPopup(
-        event.lngLat,
         features[0].properties,
         this.side as "left" | "right"
       );
       this.frozenPopup = true;
+      this.emitter?.emit(`popup-${this.side || "left"}-changed`, {
+        visible: true,
+        frozen: true,
+        properties: features[0].properties,
+      });
       this.emitter?.emit(
         `feature-${this.side || "left"}-clicked`,
         features[0].properties.geoid
