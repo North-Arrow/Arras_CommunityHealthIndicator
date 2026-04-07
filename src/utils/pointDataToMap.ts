@@ -12,6 +12,7 @@ import {
 } from "../constants";
 
 export class PointDataToMap extends DataToMap {
+  private clearPanelHandler: (() => void) | null = null;
 
 
   constructor(
@@ -79,6 +80,10 @@ export class PointDataToMap extends DataToMap {
 
 
   removeOldEvents() {
+    if (this.clearPanelHandler) {
+      this.emitter?.off(`popup-${this.side || "left"}-clear`, this.clearPanelHandler);
+      this.clearPanelHandler = null;
+    }
     super.removeOldEvents();
   }
 
@@ -90,11 +95,21 @@ export class PointDataToMap extends DataToMap {
     super.addNewEvents();
     const map = (this as any).map as Map;
     const mainLayer = this.data.layers.main;
+    const clearPanelEvent = `popup-${this.side || "left"}-clear`;
 
     if (!map) return;
 
+    this.clearPanelHandler = () => {
+      this.frozenPopup = false;
+      map.setPaintProperty(mainLayer, "circle-opacity", CIRCLE_OPACITY_DEFAULT);
+      this.removePopup();
+      this.emitter?.emit(`feature-${this.side || "left"}-clicked`, null as any);
+      this.emitter?.emit(`feature-name-${this.side || "left"}-clicked`, null);
+    };
+    this.emitter?.on(clearPanelEvent, this.clearPanelHandler);
+
     this.events.mousemove = (event: any) => {
-    //  if (this.frozenPopup) return;
+      if (this.frozenPopup) return;
       this.createPopupIfNeeded();
       const features = map.queryRenderedFeatures(event.point, {
         layers: [mainLayer],
@@ -117,11 +132,7 @@ export class PointDataToMap extends DataToMap {
         ]);
 
         // Show popup with Vue component
-        this.showPopup(
-          event.lngLat,
-          features[0].properties,
-          this.side as "left" | "right"
-        );
+        this.showPopup(features[0].properties, this.side as "left" | "right");
 
         this.emitter?.emit(
           `feature-${this.side || "left"}-hovered`,
@@ -146,12 +157,13 @@ export class PointDataToMap extends DataToMap {
         this.removePopup();
         this.emitter?.emit(`feature-${this.side || "left"}-clicked`, null as any);
       } else {
-        this.showPopup(
-          event.lngLat,
-          features[0].properties,
-          this.side as "left" | "right"
-        );
         this.frozenPopup = true;
+        this.showPopup(features[0].properties, this.side as "left" | "right");
+        this.emitter?.emit(`popup-${this.side || "left"}-changed`, {
+          visible: true,
+          frozen: true,
+          properties: features[0].properties,
+        });
         this.emitter?.emit(`feature-${this.side || "left"}-clicked`, features[0].properties.geoid);
         this.emitter?.emit(`feature-name-${this.side || "left"}-clicked`, features[0].properties.name ?? features[0].properties.geoid);
       }

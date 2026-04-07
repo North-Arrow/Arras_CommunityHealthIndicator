@@ -23,6 +23,10 @@
     <!-- Left side -->
     <div v-show="viewMode !== 'solo-right'" class="side-panel left-panel">
       <div ref="mapContainerLeft" class="map-container left"> </div>
+      <div v-if="leftPanel.visible && leftPanel.properties" class="feature-panel left-feature-panel">
+        <button class="feature-panel-close" @click="clearFeaturePanel('left')">x</button>
+        <Popup :properties="leftPanel.properties" side="left" :compact="true" />
+      </div>
       <v-btn
         v-if="viewMode === 'side-by-side'"
         size="small"
@@ -49,6 +53,10 @@
     <!-- Right side -->
     <div v-show="viewMode !== 'solo-left'" class="side-panel right-panel">
       <div ref="mapContainerRight" class="map-container right"> </div>
+      <div v-if="rightPanel.visible && rightPanel.properties" class="feature-panel right-feature-panel">
+        <button class="feature-panel-close" @click="clearFeaturePanel('right')">x</button>
+        <Popup :properties="rightPanel.properties" side="right" :compact="true" />
+      </div>
       <v-btn
         v-if="viewMode === 'side-by-side'"
         size="small"
@@ -81,6 +89,7 @@ import { inject, nextTick, onBeforeMount, onMounted, onUnmounted, ref, watch } f
 import Compare from '../assets/maplibre-gl-compare.js'
 import '../assets/maplibre-gl-compare.css';
 import TimelineVisualization from './TimelineVisualization.vue'
+import Popup from './Popup.vue'
 import { useIndicatorLevelStore } from '../stores/indicatorLevelStore'
 import { useThemeLevelStore } from '../stores/themeLevelStore'
 import ColorLegend from './ColorLegend.vue'
@@ -116,6 +125,16 @@ const rightIndicatorLevelStore = useIndicatorLevelStore('right')
 const themeLevelStore = useThemeLevelStore()
 
 const emitter = inject('mitt') as Emitter<any>
+const leftPanel = ref<{ visible: boolean; frozen: boolean; properties: any | null }>({
+  visible: false,
+  frozen: false,
+  properties: null,
+})
+const rightPanel = ref<{ visible: boolean; frozen: boolean; properties: any | null }>({
+  visible: false,
+  frozen: false,
+  properties: null,
+})
 
 let _compare: Compare | null = null
 
@@ -249,7 +268,21 @@ onMounted(async () => {
   // Listen for location selection events
   emitter.on('location-selected', handleLocationSelected)
   emitter.on('location-cleared', handleLocationCleared)
+  emitter.on('popup-left-changed', updateLeftPanel)
+  emitter.on('popup-right-changed', updateRightPanel)
 })
+
+function updateLeftPanel(payload: { visible: boolean; frozen: boolean; properties: any | null }) {
+  leftPanel.value = payload
+}
+
+function updateRightPanel(payload: { visible: boolean; frozen: boolean; properties: any | null }) {
+  rightPanel.value = payload
+}
+
+function clearFeaturePanel(side: 'left' | 'right') {
+  emitter.emit(`popup-${side}-clear`)
+}
 
 /**
  * Padding for flyTo when centering on a search result.
@@ -323,6 +356,8 @@ const handleLocationSelected = (data: { coordinates: [number, number], text: str
 onUnmounted(() => {
   emitter.off('location-selected', handleLocationSelected)
   emitter.off('location-cleared', handleLocationCleared)
+  emitter.off('popup-left-changed', updateLeftPanel)
+  emitter.off('popup-right-changed', updateRightPanel)
 
   handleLocationCleared()
 
@@ -460,6 +495,48 @@ onUnmounted(() => {
 .solo-btn-right {
   /* top: 8px; */
   left: 8px;
+}
+
+.feature-panel {
+  position: absolute;
+  left: 5px;
+  bottom: 9rem;
+  width: 24%;
+  /* min-width: 240px; */
+  max-width: 340px;
+  z-index: 1001;
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  padding: 8px 8px 6px;
+}
+
+.feature-panel-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.feature-panel-close:hover {
+  background: #f1f5f9;
+  color: #1e293b;
 }
 
 /* Back to side-by-side (solo mode only) */

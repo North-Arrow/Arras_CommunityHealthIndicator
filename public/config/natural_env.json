@@ -14,6 +14,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "Amount acres of protected land",
+          "subtitle": null
+        },
         "format": {
           "title": "{{count}} acres of protected land",
           "subtitle": null
@@ -43,6 +47,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of days",
+          "subtitle": null
+        },
         "format": {
           "title": "{{pct}}% of days",
           "subtitle": null
@@ -68,6 +76,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "$Amount",
+          "subtitle": null
+        },
         "format": {
           "title": "${{count}}",
           "subtitle": null
