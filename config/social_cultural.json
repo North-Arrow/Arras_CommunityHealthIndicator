@@ -14,6 +14,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of grandparents",
+          "subtitle": null
+        },
         "format": {
           "title": "{{pct}}% of grandparents",
           "subtitle": null
@@ -39,9 +43,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of adults",
+          "subtitle": "Amount out of total adults"
+        },
         "format": {
           "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} out of {{pop}} adults"
+          "subtitle": "{{count}} of {{pop}} adults"
         }
       },
       "legend": {
@@ -64,9 +72,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of adults",
+          "subtitle": "Amount out of total adults"
+        },
         "format": {
           "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} out of {{pop}} adults"
+          "subtitle": "{{count}} of {{pop}} adults"
         }
       },
       "legend": {
@@ -89,9 +101,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% change",
+          "subtitle": "Amount out of total people"
+        },
         "format": {
           "title": "{{pct}}% change",
-          "subtitle": "{{count}} out of {{pop}} people"
+          "subtitle": "{{count}} of {{pop}} people"
         }
       },
       "legend": {
@@ -114,9 +130,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of households",
+          "subtitle": "Amount out of total households"
+        },
         "format": {
           "title": "{{pct}}% of households",
-          "subtitle": "{{count}} out of {{pop}} households"
+          "subtitle": "{{count}} of {{pop}} households"
         }
       },
       "legend": {
@@ -139,9 +159,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of voters",
+          "subtitle": "Amount out of total voters"
+        },
         "format": {
           "title": "{{pct}}% of voters",
-          "subtitle": "{{count}} out of {{pop}} voters"
+          "subtitle": "{{count}} of {{pop}} voters"
         }
       },
       "legend": {
@@ -164,6 +188,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% per 10,000 residents",
+          "subtitle": null
+        },
         "format": {
           "title": "{{pct}} per 10,000 residents"
         }

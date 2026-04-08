@@ -14,9 +14,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of adults",
+          "subtitle": "Amount out of total adults"
+        },
         "format": {
           "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} out of {{pop}} adults"
+          "subtitle": "{{count}} of {{pop}} adults"
         }
       },
       "legend": {
@@ -42,9 +46,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "%",
+          "subtitle": "Amount out of total working age adults"
+        },
         "format": {
           "title": "{{pct}}%",
-          "subtitle": "{{count}} out of {{pop}} working age adults"
+          "subtitle": "{{count}} of {{pop}} working age adults"
         }
       },
       "legend": {
@@ -70,9 +78,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of residents",
+          "subtitle": "Amount out of total residents"
+        },
         "format": {
           "title": "{{pct}}% of residents",
-          "subtitle": "{{count}} out of {{pop}} residents"
+          "subtitle": "{{count}} of {{pop}} residents"
         }
       },
       "legend": {
@@ -98,6 +110,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "Total per 100k",
+          "subtitle": "Amount residents total"
+        },
         "format": {
           "title": "{{pop}} per 100k",
           "subtitle": "{{count}} residents total"
@@ -126,6 +142,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of births",
+          "subtitle": null
+        },
         "format": {
           "title": "{{pct}}% of births"
         }
@@ -153,6 +173,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "Total per 100k",
+          "subtitle": "Amount residents total"
+        },
         "format": {
           "title": "{{pop}} per 100k",
           "subtitle": "{{count}} residents total"
@@ -181,9 +205,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of adults",
+          "subtitle": "Amount out of total adults"
+        },
         "format": {
           "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} out of {{pop}} adults"
+          "subtitle": "{{count}} of {{pop}} adults"
         }
       },
       "legend": {
@@ -196,7 +224,7 @@
       "tooltip-info": "These are measures of health-related Quality of Life (HRQoL) that reflect the experience of people with chronic conditions. These are summary measures of health status of a particular place."
     },
     {
-      "title": "Visits to doctor for routine checkup within the past year among adults aged ≥18 years",
+      "title": "Visits to doctor for routine checkup within the past year among adults aged \u226518 years",
       "data_source": "cdc",
       "short_title": "Routine Checkups",
       "geotype": "tract",
@@ -209,9 +237,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of adults",
+          "subtitle": "Amount out of total adults"
+        },
         "format": {
           "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} out of {{pop}} adults"
+          "subtitle": "{{count}} of {{pop}} adults"
         }
       },
       "legend": {
@@ -237,6 +269,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% providers per 100k residents",
+          "subtitle": "Amount out of total residents total"
+        },
         "format": {
           "title": "{{pct}} providers per 100k residents",
           "subtitle": "{{count}} providers for {{pop}} residents total"
@@ -265,6 +301,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% providers per 100k residents",
+          "subtitle": "Amount out of total residents total"
+        },
         "format": {
           "title": "{{pct}} providers per 100k residents",
           "subtitle": "{{count}} providers for {{pop}} residents total"

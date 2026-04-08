@@ -14,9 +14,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of adults",
+          "subtitle": "Amount out of total adults"
+        },
         "format": {
           "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} out of {{pop}} adults"
+          "subtitle": "{{count}} of {{pop}} adults"
         }
       },
       "legend": {
@@ -26,7 +30,7 @@
       "tooltip-info": "Educational attainment is strongly linked to various outcomes for individuals and society. On average, higher education equates to higher income, greater economic stability, and better health outcomes throughout the lifespan."
     },
     {
-      "title": "Percent of families with children living in 'concentrated poverty'-—areas where the poverty rate is over 40%",
+      "title": "Percent of families with children living in 'concentrated poverty'-\u2014areas where the poverty rate is over 40%",
       "data_source": "census",
       "short_title": "Children in Concentrated Poverty",
       "geotype": "tract",
@@ -39,6 +43,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of children",
+          "subtitle": null
+        },
         "format": {
           "title": "{{pct}}% of children",
           "subtitle": null
@@ -52,10 +60,10 @@
           "html": "<span class='legend-title'>Over 40% in Poverty: <img src='assets/pattern-a.png' class='poverty-pattern' /></span>",
           "styling": {
             "image": {
-              "id":"poverty-pattern",
-              "url":"assets/pattern-a.png"
+              "id": "poverty-pattern",
+              "url": "assets/pattern-a.png"
             },
-            "paint":{
+            "paint": {
               "fill-pattern": "poverty-pattern"
             },
             "filter": [
@@ -95,6 +103,10 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "$Amount",
+          "subtitle": null
+        },
         "format": {
           "title": "${{count}}"
         }
@@ -119,9 +131,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of households",
+          "subtitle": "Amount out of total households"
+        },
         "format": {
           "title": "{{pct}}% of households",
-          "subtitle": "{{count}} out of {{pop}} households"
+          "subtitle": "{{count}} of {{pop}} households"
         }
       },
       "legend": {
@@ -144,9 +160,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of adults",
+          "subtitle": "Amount out of total adults"
+        },
         "format": {
           "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} out of {{pop}} adults"
+          "subtitle": "{{count}} of {{pop}} adults"
         }
       },
       "legend": {
@@ -172,9 +192,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of workers",
+          "subtitle": "Amount out of total workers"
+        },
         "format": {
           "title": "{{pct}}% of workers",
-          "subtitle": "{{count}} out of {{pop}} workers"
+          "subtitle": "{{count}} of {{pop}} workers"
         }
       },
       "legend": {
@@ -200,9 +224,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of residents",
+          "subtitle": "Amount out of total residents"
+        },
         "format": {
           "title": "{{pct}}% of residents",
-          "subtitle": "{{count}} out of {{pop}} residents"
+          "subtitle": "{{count}} of {{pop}} residents"
         }
       },
       "legend": {
@@ -228,9 +256,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of workforce",
+          "subtitle": "Amount out of total workers"
+        },
         "format": {
           "title": "{{pct}}% of workforce",
-          "subtitle": "{{count}} out of {{pop}} workers"
+          "subtitle": "{{count}} of {{pop}} workers"
         }
       },
       "legend": {
@@ -256,9 +288,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of residents",
+          "subtitle": "Amount out of total residents"
+        },
         "format": {
           "title": "{{pct}}% of residents",
-          "subtitle": "{{count}} out of {{pop}} residents"
+          "subtitle": "{{count}} of {{pop}} residents"
         }
       },
       "legend": {
@@ -284,9 +320,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of housing units",
+          "subtitle": "Amount out of total housing units"
+        },
         "format": {
           "title": "{{pct}}% of housing units",
-          "subtitle": "{{count}} out of {{pop}} housing units"
+          "subtitle": "{{count}} of {{pop}} housing units"
         }
       },
       "legend": {
@@ -312,9 +352,13 @@
         "filterOut": []
       },
       "popup": {
+        "popup_legend": {
+          "title": "% of households",
+          "subtitle": "Amount out of total households"
+        },
         "format": {
           "title": "{{pct}}% of households",
-          "subtitle": "{{count}} out of {{pop}} households"
+          "subtitle": "{{count}} of {{pop}} households"
         }
       },
       "legend": {
