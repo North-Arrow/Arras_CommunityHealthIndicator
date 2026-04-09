@@ -19,7 +19,7 @@
           "subtitle": null
         },
         "format": {
-          "title": "{{pct}}% of grandparents",
+          "title": "{{pct}}%",
           "subtitle": null
         }
       },
@@ -48,8 +48,8 @@
           "subtitle": "Amount out of total adults"
         },
         "format": {
-          "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} of {{pop}} adults"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -77,8 +77,8 @@
           "subtitle": "Amount out of total adults"
         },
         "format": {
-          "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} of {{pop}} adults"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -106,8 +106,8 @@
           "subtitle": "Amount out of total people"
         },
         "format": {
-          "title": "{{pct}}% change",
-          "subtitle": "{{count}} of {{pop}} people"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -135,8 +135,8 @@
           "subtitle": "Amount out of total households"
         },
         "format": {
-          "title": "{{pct}}% of households",
-          "subtitle": "{{count}} of {{pop}} households"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -164,8 +164,8 @@
           "subtitle": "Amount out of total voters"
         },
         "format": {
-          "title": "{{pct}}% of voters",
-          "subtitle": "{{count}} of {{pop}} voters"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -189,16 +189,17 @@
       },
       "popup": {
         "popup_legend": {
-          "title": "% per 10,000 residents",
+          "title": "Rate of social associations per 10,000 residents",
           "subtitle": null
         },
         "format": {
-          "title": "{{pct}} per 10,000 residents"
+          "title": "{{pct}}",
+          "subtitle": null
         }
       },
       "legend": {
         "title-column": "pct",
-        "title": "{{pct}} per 10,000 residents"
+        "title": "{{pct}} rate of social associations per 10,000 residents"
       },
       "tooltip-info": "Social associations reflects the number of membership associations per 10,000 population. Social isolation and loneliness have adverse effects on various outocmes, including CV disease, cognitive impairement, depression, chronic stress, and premature mortality. Research suggests that the magnitude of risk associated with social isolation is similiar to the risk of cigarette smoking. There is not currently a reliable, national source of data for measuring social or community support at the local level. This measure does not account for important social connections offered via family support structures, informal networks, faith orgs, or community service orgs."
     }

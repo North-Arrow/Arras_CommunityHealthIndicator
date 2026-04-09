@@ -19,8 +19,8 @@
           "subtitle": "Amount out of total adults"
         },
         "format": {
-          "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} of {{pop}} adults"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -52,7 +52,7 @@
         },
         "format": {
           "title": "{{pct}}%",
-          "subtitle": "{{count}} of {{pop}} working age adults"
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -83,8 +83,8 @@
           "subtitle": "Amount out of total residents"
         },
         "format": {
-          "title": "{{pct}}% of residents",
-          "subtitle": "{{count}} of {{pop}} residents"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -116,7 +116,7 @@
         },
         "format": {
           "title": "{{pop}} per 100k",
-          "subtitle": "{{count}} residents total"
+          "subtitle": "{{count}}"
         }
       },
       "legend": {
@@ -147,7 +147,8 @@
           "subtitle": null
         },
         "format": {
-          "title": "{{pct}}% of births"
+          "title": "{{pct}}%",
+          "subtitle": null
         }
       },
       "legend": {
@@ -179,7 +180,7 @@
         },
         "format": {
           "title": "{{pop}} per 100k",
-          "subtitle": "{{count}} residents total"
+          "subtitle": "{{count}}"
         }
       },
       "legend": {
@@ -210,8 +211,8 @@
           "subtitle": "Amount out of total adults"
         },
         "format": {
-          "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} of {{pop}} adults"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -224,7 +225,7 @@
       "tooltip-info": "These are measures of health-related Quality of Life (HRQoL) that reflect the experience of people with chronic conditions. These are summary measures of health status of a particular place."
     },
     {
-      "title": "Visits to doctor for routine checkup within the past year among adults aged \u226518 years",
+      "title": "Visits to doctor for routine checkup within the past year among adults aged ≥18 years",
       "data_source": "cdc",
       "short_title": "Routine Checkups",
       "geotype": "tract",
@@ -242,8 +243,8 @@
           "subtitle": "Amount out of total adults"
         },
         "format": {
-          "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} of {{pop}} adults"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -271,11 +272,11 @@
       "popup": {
         "popup_legend": {
           "title": "% providers per 100k residents",
-          "subtitle": "Amount out of total residents total"
+          "subtitle": "Amount out of total residents"
         },
         "format": {
-          "title": "{{pct}} providers per 100k residents",
-          "subtitle": "{{count}} providers for {{pop}} residents total"
+          "title": "{{pct}} per 100k",
+          "subtitle": "{{count}} for {{pop}}"
         }
       },
       "legend": {
@@ -303,11 +304,11 @@
       "popup": {
         "popup_legend": {
           "title": "% providers per 100k residents",
-          "subtitle": "Amount out of total residents total"
+          "subtitle": "Amount out of total residents"
         },
         "format": {
-          "title": "{{pct}} providers per 100k residents",
-          "subtitle": "{{count}} providers for {{pop}} residents total"
+          "title": "{{pct}} per 100k",
+          "subtitle": "{{count}} for {{pop}}"
         }
       },
       "legend": {

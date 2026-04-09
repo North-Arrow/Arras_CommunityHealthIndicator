@@ -23,7 +23,11 @@
     <!-- Left side -->
     <div v-show="viewMode !== 'solo-right'" class="side-panel left-panel">
       <div ref="mapContainerLeft" class="map-container left"> </div>
-      <div v-if="leftPanel.visible && leftPanel.properties" class="feature-panel left-feature-panel">
+      <div
+        v-if="leftPanel.visible && leftPanel.properties"
+        class="feature-panel left-feature-panel"
+        :class="{ 'feature-panel--frozen': leftPanel.frozen }"
+      >
         <button class="feature-panel-close" @click="clearFeaturePanel('left')">x</button>
         <Popup :properties="leftPanel.properties" side="left" :compact="true" />
       </div>
@@ -53,7 +57,11 @@
     <!-- Right side -->
     <div v-show="viewMode !== 'solo-left'" class="side-panel right-panel">
       <div ref="mapContainerRight" class="map-container right"> </div>
-      <div v-if="rightPanel.visible && rightPanel.properties" class="feature-panel right-feature-panel">
+      <div
+        v-if="rightPanel.visible && rightPanel.properties"
+        class="feature-panel right-feature-panel"
+        :class="{ 'feature-panel--frozen': rightPanel.frozen }"
+      >
         <button class="feature-panel-close" @click="clearFeaturePanel('right')">x</button>
         <Popup :properties="rightPanel.properties" side="right" :compact="true" />
       </div>
@@ -506,11 +514,16 @@ onUnmounted(() => {
   max-width: 340px;
   z-index: 1001;
   pointer-events: all;
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(2px);
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   padding: 8px 8px 6px;
+}
+
+.feature-panel--frozen {
+  border: 1px solid #008fff;
 }
 
 .feature-panel-close {

@@ -159,11 +159,6 @@ export class PointDataToMap extends DataToMap {
       } else {
         this.frozenPopup = true;
         this.showPopup(features[0].properties, this.side as "left" | "right");
-        this.emitter?.emit(`popup-${this.side || "left"}-changed`, {
-          visible: true,
-          frozen: true,
-          properties: features[0].properties,
-        });
         this.emitter?.emit(`feature-${this.side || "left"}-clicked`, features[0].properties.geoid);
         this.emitter?.emit(`feature-name-${this.side || "left"}-clicked`, features[0].properties.name ?? features[0].properties.geoid);
       }

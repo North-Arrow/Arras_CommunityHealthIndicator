@@ -190,16 +190,11 @@ export class AreaDataToMap extends DataToMap {
           "#0000",
         ]);
       }
+      this.frozenPopup = true;
       this.showPopup(
         features[0].properties,
         this.side as "left" | "right"
       );
-      this.frozenPopup = true;
-      this.emitter?.emit(`popup-${this.side || "left"}-changed`, {
-        visible: true,
-        frozen: true,
-        properties: features[0].properties,
-      });
       this.emitter?.emit(
         `feature-${this.side || "left"}-clicked`,
         features[0].properties.geoid

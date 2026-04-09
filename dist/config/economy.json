@@ -19,8 +19,8 @@
           "subtitle": "Amount out of total adults"
         },
         "format": {
-          "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} of {{pop}} adults"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -30,7 +30,7 @@
       "tooltip-info": "Educational attainment is strongly linked to various outcomes for individuals and society. On average, higher education equates to higher income, greater economic stability, and better health outcomes throughout the lifespan."
     },
     {
-      "title": "Percent of families with children living in 'concentrated poverty'-\u2014areas where the poverty rate is over 40%",
+      "title": "Percent of families with children living in 'concentrated poverty'-—areas where the poverty rate is over 40%",
       "data_source": "census",
       "short_title": "Children in Concentrated Poverty",
       "geotype": "tract",
@@ -48,7 +48,7 @@
           "subtitle": null
         },
         "format": {
-          "title": "{{pct}}% of children",
+          "title": "{{pct}}%",
           "subtitle": null
         }
       },
@@ -104,7 +104,7 @@
       },
       "popup": {
         "popup_legend": {
-          "title": "$Amount",
+          "title": "$ Amount",
           "subtitle": null
         },
         "format": {
@@ -136,8 +136,8 @@
           "subtitle": "Amount out of total households"
         },
         "format": {
-          "title": "{{pct}}% of households",
-          "subtitle": "{{count}} of {{pop}} households"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -165,8 +165,8 @@
           "subtitle": "Amount out of total adults"
         },
         "format": {
-          "title": "{{pct}}% of adults",
-          "subtitle": "{{count}} of {{pop}} adults"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -197,8 +197,8 @@
           "subtitle": "Amount out of total workers"
         },
         "format": {
-          "title": "{{pct}}% of workers",
-          "subtitle": "{{count}} of {{pop}} workers"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -229,8 +229,8 @@
           "subtitle": "Amount out of total residents"
         },
         "format": {
-          "title": "{{pct}}% of residents",
-          "subtitle": "{{count}} of {{pop}} residents"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -261,8 +261,8 @@
           "subtitle": "Amount out of total workers"
         },
         "format": {
-          "title": "{{pct}}% of workforce",
-          "subtitle": "{{count}} of {{pop}} workers"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -293,8 +293,8 @@
           "subtitle": "Amount out of total residents"
         },
         "format": {
-          "title": "{{pct}}% of residents",
-          "subtitle": "{{count}} of {{pop}} residents"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -325,8 +325,8 @@
           "subtitle": "Amount out of total housing units"
         },
         "format": {
-          "title": "{{pct}}% of housing units",
-          "subtitle": "{{count}} of {{pop}} housing units"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -357,8 +357,8 @@
           "subtitle": "Amount out of total households"
         },
         "format": {
-          "title": "{{pct}}% of households",
-          "subtitle": "{{count}} of {{pop}} households"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {

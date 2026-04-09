@@ -144,6 +144,7 @@ const popupLegend = computed(() => {
     margin: 0;
     line-height: 1.2;
     overflow-wrap: anywhere;
+    max-width: 90%;
 }
 
 .feature-address {
@@ -169,7 +170,7 @@ const popupLegend = computed(() => {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 4.5rem), 1fr));
     gap: 4px;
 }
 

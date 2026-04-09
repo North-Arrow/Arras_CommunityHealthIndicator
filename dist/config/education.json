@@ -16,10 +16,10 @@
       "popup": {
         "popup_legend": {
           "title": "% of 3 and 4 year olds",
-          "subtitle": "Amount out of total"
+          "subtitle": "Amount out of total 3 and 4 year olds"
         },
         "format": {
-          "title": "{{pct}}% of 3 and 4 year olds",
+          "title": "{{pct}}%",
           "subtitle": "{{count}} of {{pop}}"
         }
       },
@@ -45,11 +45,11 @@
       "popup": {
         "popup_legend": {
           "title": "% of families",
-          "subtitle": "Amount out of total families"
+          "subtitle": "Amount out of total families with children"
         },
         "format": {
-          "title": "{{pct}}% of families",
-          "subtitle": "{{count}} of {{pop}} families"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -75,11 +75,11 @@
       },
       "popup": {
         "popup_legend": {
-          "title": "Amount children",
+          "title": "Amount of children",
           "subtitle": null
         },
         "format": {
-          "title": "{{count}} children",
+          "title": "{{count}}",
           "subtitle": null
         }
       },
@@ -112,8 +112,8 @@
           "subtitle": "Amount out of total students"
         },
         "format": {
-          "title": "{{pct}}% of students",
-          "subtitle": "{{count}} of {{pop}} students"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -148,8 +148,8 @@
           "subtitle": "Amount out of total students"
         },
         "format": {
-          "title": "{{pct}}% of students",
-          "subtitle": "{{count}} of {{pop}} students"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "map": {
@@ -163,7 +163,7 @@
         "secondary-title": "{{pct}}% of students ready",
         "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
       },
-      "tooltip-info": "For students who do not read at grade level, up to half of the printed fourth-grade curriculum is incomprehensible. Three-quarters of students who are poor readers in third grade will remain poor readers in high school. These students tend to have more behavioral and social problems in subsequent grades and high rates of grade retention. Students who can\u2019t read proficiently by third grade are four times more likely to drop out of school."
+      "tooltip-info": "For students who do not read at grade level, up to half of the printed fourth-grade curriculum is incomprehensible. Three-quarters of students who are poor readers in third grade will remain poor readers in high school. These students tend to have more behavioral and social problems in subsequent grades and high rates of grade retention. Students who can’t read proficiently by third grade are four times more likely to drop out of school."
     },
     {
       "title": "8th Grade Math Readiness (% of students meeting or exceeding expectations)",
@@ -184,8 +184,8 @@
           "subtitle": "Amount out of total students"
         },
         "format": {
-          "title": "{{pct}}% of students",
-          "subtitle": "{{count}} of {{pop}} students"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "map": {
@@ -199,7 +199,7 @@
         "secondary-title": "{{pct}}% of students ready",
         "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
       },
-      "tooltip-info": "Eighth grade math proficiency is a strong predictor of high school, college, and career success. Poor performance limits a student\u2019s access to advanced math and science courses such as calculus and physics."
+      "tooltip-info": "Eighth grade math proficiency is a strong predictor of high school, college, and career success. Poor performance limits a student’s access to advanced math and science courses such as calculus and physics."
     },
     {
       "title": "8th Grade ELA Readiness (% of students meeting or exceeding expectations)",
@@ -220,8 +220,8 @@
           "subtitle": "Amount out of total students"
         },
         "format": {
-          "title": "{{pct}}% of students",
-          "subtitle": "{{count}} of {{pop}} students"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -253,11 +253,11 @@
       "popup": {
         "popup_legend": {
           "title": "Total students enrolled",
-          "subtitle": "Amount out of total students"
+          "subtitle": "Amount out of total students graduating"
         },
         "format": {
-          "title": "{{pop}} students enrolled",
-          "subtitle": "{{count}} of {{pop}} students"
+          "title": "{{pop}}",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -288,12 +288,12 @@
       },
       "popup": {
         "popup_legend": {
-          "title": "% of students",
+          "title": "% of HS students",
           "subtitle": "Amount out of total enrolled"
         },
         "format": {
-          "title": "{{pct}}% of students",
-          "subtitle": "{{count}} of {{pop}} enrolled"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -324,12 +324,12 @@
       },
       "popup": {
         "popup_legend": {
-          "title": "% of students",
+          "title": "% of HS students",
           "subtitle": "Amount out of total enrolled"
         },
         "format": {
-          "title": "{{pct}}% of students",
-          "subtitle": "{{count}} of {{pop}} enrolled"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
@@ -364,15 +364,15 @@
           "subtitle": "Amount out of total children"
         },
         "format": {
-          "title": "{{pct}}% of children",
-          "subtitle": "{{count}} of {{pop}} children"
+          "title": "{{pct}}%",
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% of children"
       },
-      "tooltip-info": "Teens age 16 to 19 who are not enrolled in school (full- or part-time) and not employed (full- or part-time). This measure is sometimes referred to as \u201cIdle Teens\u201d or \u201cDisconnected Youth.\u201d Youth disconnection rates reveal disparities in access to education, employment, and social support networks, indicating which groups and areas need specific help."
+      "tooltip-info": "Teens age 16 to 19 who are not enrolled in school (full- or part-time) and not employed (full- or part-time). This measure is sometimes referred to as “Idle Teens” or “Disconnected Youth.” Youth disconnection rates reveal disparities in access to education, employment, and social support networks, indicating which groups and areas need specific help."
     },
     {
       "title": "Kindergarten Readiness",
@@ -389,11 +389,12 @@
       },
       "popup": {
         "popup_legend": {
-          "title": "% of students",
+          "title": "% of K students",
           "subtitle": null
         },
         "format": {
-          "title": "{{pct}}% of students"
+          "title": "{{pct}}%",
+          "subtitle": null
         }
       },
       "legend": {
