@@ -15,11 +15,11 @@
       },
       "popup": {
         "popup_legend": {
-          "title": "Amount acres of protected land",
+          "title": "Acres of protected land",
           "subtitle": null
         },
         "format": {
-          "title": "{{count}} acres of protected land",
+          "title": "{{count}} acres",
           "subtitle": null
         }
       },
@@ -52,7 +52,7 @@
           "subtitle": null
         },
         "format": {
-          "title": "{{pct}}% of days",
+          "title": "{{pct}}%",
           "subtitle": null
         }
       },
@@ -77,7 +77,7 @@
       },
       "popup": {
         "popup_legend": {
-          "title": "$Amount",
+          "title": "$ Amount",
           "subtitle": null
         },
         "format": {
