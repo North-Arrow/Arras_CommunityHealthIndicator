@@ -39,7 +39,7 @@
       "geotype": "protected",
       "default": "right",
       "data_source": "county_health_rankings",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIlq4yPmv4sAlBJCKgdZqge9peA-nfqHbjl79p4J1_SqbDG8okNfC_V1o0DGTnYHWB4LWfA7km4rLo/pub?gid=1456834255&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGdqqgaN6wAWaicLjxM5A1da7trVXWYXxavwHMs03056hZgognkNQ8ykvlxlB92BrBv1TXzSLlMsDH/pub?gid=1437757701&single=true&output=csv",
       "short_name": "pollution",
       "timeline": {
         "yearValuePrefix": "pct_",
