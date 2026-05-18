@@ -1,4 +1,5 @@
 {
+  "landing_text": "Welcome to the Community Health Indicator Dashboard, an interactive platform designed to track progress across five areas: Economic Vitality, Education, Health, Natural Environment, and Social & Cultural Wellbeing. This tool empowers anyone - residents, partners, or policymakers - to uncover patterns in complex data to make informed decisions for our region’s success. Easily monitor changes over time and identify geographic trends through dynamic maps and longitudinal visualizations. Use the integrated comparative tools to benchmark county data, evaluate local indicators against state averages, and analyze the relationships between indicators within specific priority indicator areas.We are excited to offer the Community Health Indicator Dashboard to reflect community conditions facing those who live and work in Lancaster and Chester Counties. Let’s use these insights to build a stronger, healthier community for all residents - together.",
   "categories": [
     {
       "title": "Economic Vitality",
@@ -70,7 +71,7 @@
       "title": "Natural Environment",
       "query_str": "nat_env",
       "icon": "assets/theme_icons/nature_green.png",
-      "enabled":true,
+      "enabled": true,
       "config": "/config/natural_env.json",
       "style": {
         "colors": {
@@ -111,8 +112,8 @@
       }
     }
   ],
-  "geo":{
-    "tract":{
+  "geo": {
+    "tract": {
       "geolevel": "area",
       "source_name": "tracts-harmonized",
       "layers": {
@@ -120,14 +121,14 @@
         "outline": "tracts-harmonized-outline"
       }
     },
-    "county":{
+    "county": {
       "geolevel": "area",
       "source_name": "counties-source",
       "layers": {
         "main": "counties-data"
       }
     },
-    "school":{
+    "school": {
       "geolevel": "point",
       "source_name": "points-source",
       "layers": {
@@ -135,7 +136,7 @@
         "circle": false
       }
     },
-    "facility":{
+    "facility": {
       "geolevel": "point",
       "source_name": "points-source",
       "layers": {
@@ -143,7 +144,7 @@
         "circle": false
       }
     },
-    "protected":{
+    "protected": {
       "geolevel": "area",
       "source_name": "counties-source",
       "layers": {
@@ -151,7 +152,7 @@
       }
     }
   },
-  "data_sources":{
+  "data_sources": {
     "census": {
       "text": "ACS & Census",
       "url": "https://www.census.gov"
@@ -168,11 +169,11 @@
       "text": "SC Public Health",
       "url": "https://apps.dhec.sc.gov/Health/SCAN_BDP/tables/death2table.aspx"
     },
-    "brfss":{
+    "brfss": {
       "text": "BRFSS",
-      "url":"https://dph.sc.gov/health-wellness/south-carolina-health-compass-dashboards/health-compass-dashboard-communities"
+      "url": "https://dph.sc.gov/health-wellness/south-carolina-health-compass-dashboards/health-compass-dashboard-communities"
     },
-    "sc_depofed":{
+    "sc_depofed": {
       "text": "SC Department of Education",
       "url": "https://ed.sc.gov/data/report-cards/state-report-cards/"
     },
@@ -180,15 +181,15 @@
       "text": "Kids Count",
       "url": "https://datacenter.aecf.org/data/tables/2899-babies-born-with-low-birthweight-by-race"
     },
-    "abc_qual":{
+    "abc_qual": {
       "text": "ABC Quality",
-      "url":"https://abcquality.org"
+      "url": "https://abcquality.org"
     },
-    "sc_conserv_bank":{
+    "sc_conserv_bank": {
       "text": "SC Conservation Bank",
       "url": "https://www.sccbank.sc.gov/"
     },
-    "county_health_rankings":{
+    "county_health_rankings": {
       "text": "County Health Rankings",
       "url": "https://www.countyhealthrankings.org/health-data/south-carolina/chester"
     }

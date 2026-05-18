@@ -27,3 +27,8 @@ declare module './plugins/vuetify.js' {
   const vuetify: any
   export default vuetify
 }
+
+declare module 'virtual:slideshow-images' {
+  const filenames: string[]
+  export default filenames
+}

@@ -165,7 +165,7 @@ const downloadCsvData = () => {
   const csvData = indicatorStore.getCsvData()
   if (!csvData || typeof csvData !== 'string') return;
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csvData], { type: 'text/csv' }));
+  a.href = indicatorStore.getCurrentIndicator()?.google_sheets_url || '';
   a.download = `${indicatorStore.getCurrentIndicator()?.short_name}.csv`;
   a.click();
 }
