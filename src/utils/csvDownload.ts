@@ -64,6 +64,16 @@ function formatCsvLine(fields: string[]): string {
     .join(',')
 }
 
+/** Decode URL-encoded cell text from Google Sheets exports (e.g. %2C → comma). */
+function decodeCsvCellValue(cell: string): string {
+  if (!/%[0-9A-Fa-f]{2}/.test(cell)) return cell
+  try {
+    return decodeURIComponent(cell.replace(/\+/g, ' '))
+  } catch {
+    return cell
+  }
+}
+
 export function transformCsvForDownload(
   csvText: string,
   replacements: Record<string, string> = CSV_DOWNLOAD_CELL_REPLACEMENTS,
@@ -71,7 +81,6 @@ export function transformCsvForDownload(
   const lookup = new Map(
     Object.entries(replacements).map(([key, value]) => [key.trim().toLowerCase(), value]),
   )
-  if (lookup.size === 0) return csvText
 
   const lines = csvText.split(/\r?\n/)
   return lines
@@ -79,8 +88,9 @@ export function transformCsvForDownload(
       if (!line.trim()) return line
       const fields = parseCsvLine(line)
       const updated = fields.map((cell) => {
-        const replacement = lookup.get(cell.trim().toLowerCase())
-        return replacement ?? cell
+        const decoded = decodeCsvCellValue(cell)
+        const replacement = lookup.get(decoded.trim().toLowerCase())
+        return replacement ?? decoded
       })
       return formatCsvLine(updated)
     })
