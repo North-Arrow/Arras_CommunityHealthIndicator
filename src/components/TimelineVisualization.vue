@@ -43,6 +43,7 @@ import { ref, onMounted, onUnmounted, watch, nextTick, inject, computed, type Co
 import useIndicatorLevelStore from '../stores/indicatorLevelStore';
 import IndicatorSelector from './IndicatorSelector.vue';
 import { YEAR_PATTERN } from '../constants';
+import { downloadGoogleSheetCsv } from '../utils/csvDownload';
 
 const emitter = inject('mitt') as any
 interface Props {
@@ -161,13 +162,18 @@ const processData = (_feature: string | number | null) => {
   return data
 }
 
-const downloadCsvData = () => {
-  const csvData = indicatorStore.getCsvData()
-  if (!csvData || typeof csvData !== 'string') return;
-  const a = document.createElement('a');
-  a.href = indicatorStore.getCurrentIndicator()?.google_sheets_url || '';
-  a.download = `${indicatorStore.getCurrentIndicator()?.short_name}.csv`;
-  a.click();
+const downloadCsvData = async () => {
+  const indicator = indicatorStore.getCurrentIndicator()
+  const url = indicator?.google_sheets_url
+  if (!url) return
+
+  try {
+    await downloadGoogleSheetCsv(url, {
+      fallbackFilename: `${indicator?.short_name ?? 'data'}.csv`,
+    })
+  } catch (error) {
+    console.error('Failed to download CSV from Google Sheet', error)
+  }
 }
 const createChart = () => {
   if (!svg.value) return

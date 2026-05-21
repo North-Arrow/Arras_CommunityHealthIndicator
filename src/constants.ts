@@ -45,6 +45,11 @@ export const LAYER_VISIBILITY_NONE = 'none';
 // Excluded geo identifiers (for filtering data)
 export const EXCLUDED_GEO_PATTERNS = ['overall', 'statewide', 'school district'];
 
+/** Rewritten in downloaded CSV only (Google Sheet source is unchanged). Keys are matched case-insensitively on trimmed cell values. */
+export const CSV_DOWNLOAD_CELL_REPLACEMENTS: Record<string, string> = {
+  overall: 'Lancaster and Chester Counties',
+};
+
 // Min/max calculation multipliers
 export const MIN_MULTIPLIER = 0.95;
 export const MAX_MULTIPLIER = 1.05;

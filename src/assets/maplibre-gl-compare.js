@@ -271,7 +271,7 @@ Compare.prototype = {
 
   _getX(e) {
     e = e.touches ? e.touches[0] : e
-    const x = e.clientX - this._bounds.left
+    let x = e.clientX - this._bounds.left
     if (x < 0) {
       x = 0
     }
@@ -283,7 +283,7 @@ Compare.prototype = {
 
   _getY(e) {
     e = e.touches ? e.touches[0] : e
-    const y = e.clientY - this._bounds.top
+    let y = e.clientY - this._bounds.top
     if (y < 0) {
       return 0
     }
