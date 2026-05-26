@@ -192,7 +192,7 @@ export class PointDataToMap extends DataToMap {
       0,
     ]);
 
-    const maxColor = this.arrasBranding.colors[this.data.style.max.color];
+    const maxColor = this.arrasBranding.colors[this.data.style?.max?.color as string];
     const circleColor =
       this.data.map?.color === null
         ? maxColor
