@@ -110,6 +110,20 @@
           "subtitle": "{{count}} of {{pop}}"
         }
       },
+      "style-exception": {
+        "min": {
+          "color": "pale-blue",
+          "value": -20
+        },
+        "mid": {
+          "color": "white",
+          "value": 0
+        },
+        "max": {
+          "color": "pink",
+          "value": 100
+        }
+      },
       "legend": {
         "title-column": "pct",
         "title": "{{pct}}% change"
