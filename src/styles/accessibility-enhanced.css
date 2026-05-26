@@ -1,0 +1,84 @@
+/* Visual accessibility enhancements — toggled via html.a11y-enhanced (does not change arras_branding.json) */
+
+html.a11y-enhanced :focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
+}
+
+/* Improve legibility of white theme title on brand backgrounds without changing brand hex values */
+html.a11y-enhanced .theme-title__label,
+html.a11y-enhanced .theme-title .v-card-title {
+  text-shadow:
+    0 0 1px rgba(0, 0, 0, 0.9),
+    0 1px 3px rgba(0, 0, 0, 0.75),
+    0 0 8px rgba(0, 0, 0, 0.45);
+}
+
+html.a11y-enhanced .color-legend .legend-labels span,
+html.a11y-enhanced .point-legend .legend-labels span,
+html.a11y-enhanced .color-legend .data-source,
+html.a11y-enhanced .point-legend .data-source {
+  color: #1a1a1a !important;
+  font-size: 0.8rem !important;
+  font-weight: 600;
+}
+
+html.a11y-enhanced .feature-panel,
+html.a11y-enhanced .timeline-visualization,
+html.a11y-enhanced .location-search-container {
+  border-width: 2px;
+  border-color: #1a1a1a;
+}
+
+html.a11y-enhanced .popup-legend-title::before {
+  content: 'Primary value: ';
+  font-weight: 400;
+  color: inherit;
+}
+
+html.a11y-enhanced .popup-legend-subtitle::before {
+  content: 'Secondary value: ';
+  font-weight: 400;
+  color: inherit;
+}
+
+html.a11y-enhanced .stat-value.percentage::before {
+  content: 'Share: ';
+  font-weight: 500;
+}
+
+html.a11y-enhanced .stat-value.count::before {
+  content: 'Count: ';
+  font-weight: 500;
+}
+
+html.a11y-enhanced .loading-screen .loading-logo,
+html.a11y-enhanced .loading-screen .loading-dots .dot,
+html.a11y-enhanced .loading-content {
+  animation: none !important;
+}
+
+html.a11y-enhanced .carousel-card:hover,
+html.a11y-enhanced .categories-card:hover,
+html.a11y-enhanced .category-btn:hover:not(.category-btn-disabled) {
+  transform: none !important;
+}
+
+/* Side-by-side mode hides zoom on the left map by default; enhanced mode restores them */
+html.a11y-enhanced .left-panel .maplibregl-ctrl-top-right {
+  display: block !important;
+}
+
+html.a11y-enhanced body {
+  zoom: 1 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.a11y-enhanced *,
+  html.a11y-enhanced *::before,
+  html.a11y-enhanced *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

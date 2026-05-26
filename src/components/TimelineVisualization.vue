@@ -14,16 +14,16 @@
             <tr>
               <td
                 v-if="!indicatorStore?.getCurrentIndicator()?.timeline?.filterOut?.some((filter: string) => filter.toLowerCase() === 'overall')">
-                <span class="hovered-geo mx-0">{{ blueLineGeo }}<br /><span class="selected-color"
-                    :style="{ border: `2px solid ${selectedColorRef}` }"></span></span>
+                <span class="hovered-geo mx-0">{{ blueLineGeo }} (selected average)<br /><span class="selected-color"
+                    :style="{ border: `2px solid ${selectedColorRef}` }" aria-hidden="true"></span></span>
               </td>
               <td v-if="showStatewide">
                 <span class="selected-geo">Statewide</span><br /><span class="selected-color"
-                  :style="{ border: `2px solid ${statewideColor}` }"></span>
+                  :style="{ border: `2px solid ${statewideColor}` }" aria-hidden="true"></span>
               </td>
               <td>
-                <span v-show="hoveredGeo" class="hovered-geo mx-0">{{ hoveredGeoName }}<br /><span class="hovered-color"
-                    :style="{ border: `2px solid ${hoveredColorRef}` }"></span></span>
+                <span v-show="hoveredGeo" class="hovered-geo mx-0">{{ hoveredGeoName }} (hovered)<br /><span class="hovered-color"
+                    :style="{ border: `2px solid ${hoveredColorRef}` }" aria-hidden="true"></span></span>
               </td>
               <td style="text-align: right;">
                 <span class="csv-data mx-0"><v-btn text="Download CSV Data" color="primary" append-icon="mdi-file-export" size="small" variant="tonal" @click="downloadCsvData"></v-btn></span>
@@ -33,7 +33,28 @@
         </table>
       </div>
       <div ref="chartPlot" class="chart-plot">
-        <svg ref="svg" class="timeline-chart"></svg>
+        <svg
+          ref="svg"
+          class="timeline-chart"
+          role="img"
+          :aria-label="chartAriaLabel"
+          tabindex="0"
+        ></svg>
+        <table v-if="chartTableRows.length" class="sr-only timeline-data-table">
+          <caption>Timeline values for the selected geography</caption>
+          <thead>
+            <tr>
+              <th scope="col">Year</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in chartTableRows" :key="row.year">
+              <td>{{ row.year }}</td>
+              <td>{{ row.valueLabel }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -46,6 +67,7 @@ import useIndicatorLevelStore from '../stores/indicatorLevelStore';
 import IndicatorSelector from './IndicatorSelector.vue';
 import { YEAR_PATTERN } from '../constants';
 import { downloadGoogleSheetCsv } from '../utils/csvDownload';
+import { useAccessibilityStore } from '../stores/accessibilityStore';
 
 const emitter = inject('mitt') as any
 interface Props {
@@ -54,6 +76,14 @@ interface Props {
 
 const props = defineProps<Props>()
 const indicatorStore = useIndicatorLevelStore(props.side)
+const accessibilityStore = useAccessibilityStore()
+
+function transitionMs() {
+  return accessibilityStore.enhancedVisual ||
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? 0
+    : 200
+}
 
 defineEmits<{
   indicatorChanged: [indicator: any, side: 'left' | 'right']
@@ -67,6 +97,29 @@ const selectedColorRef = ref(selectedColor);
 const hoveredColorRef = ref(hoveredColor);
 
 const showValuesOnTimeline = false;
+const chartTableRows = ref<Array<{ year: number; valueLabel: string }>>([])
+const chartAriaLabel = ref('Indicator timeline chart')
+
+function formatChartValue(value: number | null | undefined) {
+  if (value == null || Number.isNaN(+value)) return 'No data'
+  return value.toLocaleString()
+}
+
+function bindChartPointAccessibility(
+  selection: d3.Selection<SVGCircleElement, { year: number; value: number | null }, d3.BaseType, unknown>,
+  onActivate: (year: number) => void,
+) {
+  selection
+    .attr('tabindex', 0)
+    .attr('role', 'button')
+    .attr('aria-label', (d) => `Select year ${d.year}, value ${formatChartValue(d.value)}`)
+    .on('keydown', function (event: KeyboardEvent, d) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        onActivate(d.year)
+      }
+    })
+}
 
 const container = ref<HTMLElement | null>(null)
 const chartPlot = ref<HTMLElement | null>(null)
@@ -211,10 +264,20 @@ const createChart = () => {
     value: d.value?.toFixed(2) ? Number(d.value?.toFixed(2)) : null
   }))
   if (validData.length === 0) {
+    chartTableRows.value = []
+    chartAriaLabel.value = 'Timeline chart has no data for the selected geography'
     // Just show x-axis with years
     createAxisOnly(data)
     return
   }
+
+  chartTableRows.value = validData.map((d) => ({
+    year: d.year,
+    valueLabel: formatChartValue(d.value),
+  }))
+  const indicator = indicatorStore.getCurrentIndicator() as { short_title?: string; title?: string } | null
+  const indicatorTitle = indicator?.short_title ?? indicator?.title ?? 'Indicator'
+  chartAriaLabel.value = `${indicatorTitle} timeline, years ${validData[0].year} to ${validData[validData.length - 1].year}`
 
   // Calculate scales
   const xScale = createXScale(data)
@@ -305,27 +368,22 @@ const createChart = () => {
     .style('stroke-width', 2)
     .style('cursor', 'pointer')
     .on('click', (_, d) => {
-      //emit('yearSelected', d.year)
       indicatorStore.setCurrentYear(d.year)
     })
+
+  bindChartPointAccessibility(circles, (year) => indicatorStore.setCurrentYear(year))
+
+  circles
     .on('mouseover', function (_, d) {
       if (d.year !== indicatorStore.getCurrentYear()) {
-        d3.select(this)
-          .transition()
-          .duration(200)
-          .attr('r', 6)
-          .style('fill', '#1d4ed8')
+        const t = d3.select(this).transition().duration(transitionMs())
+        t.attr('r', 6).style('fill', '#1d4ed8')
       }
     })
     .on('mouseout', function (_, d) {
       if (d.year !== indicatorStore.getCurrentYear()) {
-        d3.select(this)
-          .transition()
-          .duration(200)
-          .attr('r', 4)
-          .style('fill', '#2563eb')
-
-
+        const t = d3.select(this).transition().duration(transitionMs())
+        t.attr('r', 4).style('fill', '#2563eb')
       }
     })
   // Highlight selected year
@@ -438,19 +496,12 @@ const addFeatureLine = (feature: string) => {
     })
     .on('mouseover', function (_, d) {
       if (d.year !== indicatorStore.getCurrentYear()) {
-        d3.select(this)
-          .transition()
-          .duration(200)
-          .attr('r', 6)
+        d3.select(this).transition().duration(transitionMs()).attr('r', 6)
       }
     })
     .on('mouseout', function (_, d) {
       if (d.year !== indicatorStore.getCurrentYear()) {
-        d3.select(this)
-          .transition()
-          .duration(200)
-          .attr('r', 4)
-
+        d3.select(this).transition().duration(transitionMs()).attr('r', 4)
       }
     })
   // Highlight selected year
@@ -713,9 +764,9 @@ onUnmounted(() => {
 .viz-legend {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #e5e7eb;
+  /* border: 1px solid #e5e7eb;
   border-radius: 5px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); */
 }
 
 .viz-legend td {
@@ -845,7 +896,8 @@ onUnmounted(() => {
   text-align: left;
   line-height: 1.15;
   width: 100%;
-  max-height: 3.2em;
+  /* max-height: 3.2em; */
+  margin-bottom: -.5rem;
   overflow: hidden;
 }
 

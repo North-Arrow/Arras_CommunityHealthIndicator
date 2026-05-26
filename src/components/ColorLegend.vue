@@ -10,14 +10,24 @@
             :max-width="500"
             :location="side === 'left' ? 'bottom start' : 'bottom end'"
             :text="selectedIndicator['tooltip-info']">
-            <template v-slot:activator="{ props }">
-              <v-icon v-bind="props" icon="mdi-information-outline" size="18" class="mx-2"></v-icon>
+            <template v-slot:activator="{ props: activatorProps }">
+              <v-icon
+                v-bind="activatorProps"
+                icon="mdi-information-outline"
+                size="18"
+                class="mx-2"
+                aria-label="Indicator information"
+              ></v-icon>
             </template>
           </v-tooltip></span>
       </div>
       <div class="legend-content">
         <div class="legend-gradient">
-          <div class="gradient-bar" :style="{
+          <div
+            class="gradient-bar"
+            role="img"
+            :aria-label="gradientAriaLabel"
+            :style="{
             background: `linear-gradient(to right, ${minColor} ${midColor ? ','+midColor : ''}, ${maxColor})`
           }"></div>
         </div>
@@ -28,8 +38,8 @@
         </div>
 
         <div class="extra-layer" v-if="extraLayerHtml" v-html="extraLayerHtml"></div>
-        <div v-show="source" class="data-source">Data Source: <a :href="source?.url" target="_blank">{{ source?.text }}
-            <v-icon icon="mdi-open-in-new" size="12" /></a></div>
+        <div v-show="source" class="data-source">Data Source: <a :href="source?.url" target="_blank" rel="noopener noreferrer">{{ source?.text }}
+            <span class="opens-new-tab"></span><v-icon icon="mdi-open-in-new" size="12" aria-hidden="true" /></a></div>
 
       </div>
 
@@ -101,6 +111,16 @@ const maxColor = computed(() => {
     return arrasBranding.colors[colorName];
   }
   return '#000000';
+})
+
+const gradientAriaLabel = computed(() => {
+  const title = props.selectedIndicator?.title ?? 'Indicator'
+  const min = legendTitle.value.min || 'minimum'
+  const max = legendTitle.value.max || 'maximum'
+  const mid = legendTitle.value.mid
+  return mid
+    ? `${title} color scale from ${min} through ${mid} to ${max}`
+    : `${title} color scale from ${min} to ${max}`
 })
 </script>
 

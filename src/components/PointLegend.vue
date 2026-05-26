@@ -73,7 +73,7 @@
           </tbody>
 
         </table>
-        <div v-show="source" class="data-source">Data Source: <a :href="source?.url" target="_blank">{{ source?.text }} <v-icon icon="mdi-open-in-new" size="12" /></a></div>
+        <div v-show="source" class="data-source">Data Source: <a :href="source?.url" target="_blank" rel="noopener noreferrer">{{ source?.text }}<span class="opens-new-tab"></span> <v-icon icon="mdi-open-in-new" size="12" aria-hidden="true" /></a></div>
       </div>
       
     </div>

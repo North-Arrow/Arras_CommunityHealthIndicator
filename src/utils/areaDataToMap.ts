@@ -10,6 +10,7 @@ import type { Emitter } from "mitt";
 export class AreaDataToMap extends DataToMap {
   selectedGeography: string | null = null;
   private clearPanelHandler: (() => void) | null = null;
+  private a11ySelectHandler: ((payload: { side: string; properties: Record<string, unknown> }) => void) | null = null;
 
   constructor(
     data: IndicatorConfig,
@@ -72,6 +73,10 @@ export class AreaDataToMap extends DataToMap {
     if (this.clearPanelHandler) {
       this.emitter?.off(`popup-${this.side || "left"}-clear`, this.clearPanelHandler);
       this.clearPanelHandler = null;
+    }
+    if (this.a11ySelectHandler) {
+      this.emitter?.off("a11y-select-feature", this.a11ySelectHandler);
+      this.a11ySelectHandler = null;
     }
     super.removeOldEvents();
   }
@@ -206,6 +211,36 @@ export class AreaDataToMap extends DataToMap {
       this.selectedGeography = features[0].properties.geoid;
     };
     map.on("click", this.events.click);
+
+    this.a11ySelectHandler = (payload: { side: string; properties: Record<string, unknown> }) => {
+      if (payload.side !== (this.side || "left")) return;
+      const properties = payload.properties;
+      const geoid = properties?.geoid;
+      if (geoid == null) return;
+
+      if (data.layers.outline && map.getLayer(data.layers.outline)) {
+        map.setPaintProperty(data.layers.outline, "line-color", [
+          "case",
+          ["==", ["get", "geoid"], geoid],
+          ["literal", "#08ff"],
+          "#0000",
+        ]);
+      }
+      this.frozenPopup = true;
+      this.selectedGeography = String(geoid);
+      this.showPopup(properties, this.side as "left" | "right");
+      this.emitter?.emit(`feature-${this.side || "left"}-clicked`, geoid as any);
+      this.emitter?.emit(
+        `feature-name-${this.side || "left"}-clicked`,
+        (properties.name as string) ?? String(geoid),
+      );
+      this.emitter?.emit(`feature-${this.side || "left"}-hovered`, geoid as any);
+      this.emitter?.emit(
+        `feature-name-${this.side || "left"}-hovered`,
+        (properties.name as string) ?? String(geoid),
+      );
+    };
+    this.emitter?.on("a11y-select-feature", this.a11ySelectHandler);
   }
 
  

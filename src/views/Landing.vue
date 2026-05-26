@@ -3,6 +3,7 @@
   <v-container fluid class="pa-0 ma-0 hero-section">
     <!-- Main Content -->
     <v-container class="mt-0">
+      <h1 class="sr-only">Arras Community Health Indicator Tool</h1>
       <v-row>
         <v-col cols="12" md="12">
           <v-card variant="flat" style="background-color: rgba(255, 255, 255, 0.5);" class="pa-6 mt-2">
@@ -15,19 +16,20 @@
         <v-col cols="12" md="7" class="mb-6 mb-md-0">
           <v-card class="carousel-card" elevation="4" rounded="lg">
             <v-carousel
-              v-if="slideshowImageUrls.length"
-              cycle
+              v-if="slideshowItems.length"
+              :cycle="!reduceCarouselMotion"
               show-arrows="hover"
               height="400"
               hide-delimiter-background
               delimiter-icon="mdi-circle"
             >
               <v-carousel-item
-                v-for="src in slideshowImageUrls"
-                :key="src"
-                :src="src"
+                v-for="item in slideshowItems"
+                :key="item.src"
+                :src="item.src"
                 cover
                 class="carousel-item"
+                :aria-label="item.alt"
               />
             </v-carousel>
           </v-card>
@@ -37,8 +39,8 @@
         <v-col cols="12" md="5">
           <v-card class="categories-card" elevation="4" rounded="lg">
             <v-card-title class="text-h5 font-weight-bold pa-6 pb-4">
-              <v-icon icon="mdi-view-grid" class="mr-2"></v-icon>
-              Explore Indicator Areas
+              <v-icon icon="mdi-view-grid" class="mr-2" aria-hidden="true"></v-icon>
+              <span role="heading" aria-level="2">Explore Indicator Areas</span>
             </v-card-title>
             <v-card-text class="pa-6 pt-0">
               <v-row dense>
@@ -46,7 +48,7 @@
                   <v-btn @click="navigateToMap(cat.query_str)" :to="`/map?theme=${cat.query_str}`"
                     :disabled="!cat.enabled" block size="large" variant="elevated" class="category-btn mb-3"
                     :class="{ 'category-btn-disabled': !cat.enabled }">
-                    <v-img :src="cat.icon" width="24" height="24" class="mr-2"></v-img>
+                    <v-img :src="cat.icon" width="24" height="24" class="mr-2" alt="" aria-hidden="true"></v-img>
                     <!-- <v-icon 
                         :icon="cat.icon || 'mdi-chart-line'" 
                         class="mr-2"
@@ -55,13 +57,13 @@
                   </v-btn>
                 </v-col>
               </v-row>
-              <v-list-item target="_blank" to="/user_guide.pdf" class="sidebar__item" rounded="lg">
+              <v-list-item target="_blank" to="/user_guide.pdf" class="sidebar__item" rounded="lg" rel="noopener noreferrer">
                 <template v-slot:prepend>
                   <div class="sidebar__icon-wrap sidebar__icon-wrap--home">
-                    <v-icon icon="mdi-book-open" size="18"></v-icon>
+                    <v-icon icon="mdi-book-open" size="18" aria-hidden="true"></v-icon>
                   </div>
                 </template>
-                <v-list-item-title>User Guide</v-list-item-title>
+                <v-list-item-title>User Guide<span class="opens-new-tab"></span></v-list-item-title>
               </v-list-item>
             </v-card-text>
           </v-card>
@@ -76,6 +78,7 @@ import { inject, computed } from 'vue';
 //import { onBeforeRouteLeave } from 'vue-router';
 import { useThemeLevelStore } from '../stores/themeLevelStore';
 import { useRouter } from 'vue-router';
+import { useAccessibilityStore } from '../stores/accessibilityStore';
 import slideshowFilenames from 'virtual:slideshow-images';
 
 const mainConfig = inject('mainConfig') as any;
@@ -87,9 +90,20 @@ const slideshowBase = import.meta.env.BASE_URL.endsWith('/')
   : `${import.meta.env.BASE_URL}/`;
 
 /** Filenames from public/slideshow (jpg/png), discovered at build/dev time. */
-const slideshowImageUrls = slideshowFilenames.map(
-  (filename) => `${slideshowBase}slideshow/${filename}`,
-);
+const accessibilityStore = useAccessibilityStore()
+
+const slideshowItems = slideshowFilenames.map((filename) => {
+  const src = `${slideshowBase}slideshow/${filename}`
+  const label = filename.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ')
+  return { src, alt: `Community photo: ${label}` }
+})
+
+const reduceCarouselMotion = computed(
+  () =>
+    accessibilityStore.enhancedVisual ||
+    (typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches),
+)
 // onBeforeRouteLeave(async (to: any, from: any, next: any) => {
 //   await useThemeLevelStore().setCurrentTheme(to.query.theme as string)
 //   next()

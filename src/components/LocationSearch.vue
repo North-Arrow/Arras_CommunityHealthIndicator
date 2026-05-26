@@ -1,7 +1,8 @@
 <template>
-  <div class="location-search-container">
-    <arcgis-search id="search-component"></arcgis-search>
-  </div>
+  <section class="location-search-container" aria-labelledby="location-search-label">
+    <span id="location-search-label" class="sr-only">Search for a location on the map</span>
+    <arcgis-search id="search-component" aria-labelledby="location-search-label"></arcgis-search>
+  </section>
 </template>
 <script lang="ts" setup>
 import { inject, onMounted } from 'vue'

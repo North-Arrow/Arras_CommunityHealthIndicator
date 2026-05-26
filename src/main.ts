@@ -6,6 +6,8 @@ import axios from 'axios';
 import App from './App.vue'
 import mitt from 'mitt';
 import './style.css';
+import './styles/accessibility-base.css';
+import './styles/accessibility-enhanced.css';
 const emitter = mitt();
 
 const app = createApp(App)
@@ -82,5 +84,16 @@ const router = createRouter({
 })
 
 app.use(pinia).use(vuetify).use(router)
+
+router.afterEach((to) => {
+  const base = 'Arras Community Indicator Tool'
+  if (to.name === 'map') {
+    const theme = (to.query.theme as string) || ''
+    document.title = theme ? `${theme} — ${base}` : `Map — ${base}`
+    return
+  }
+  const pageTitle = (to.meta?.title as string) || ''
+  document.title = pageTitle ? `${pageTitle} — ${base}` : base
+})
 
 app.mount('#app')

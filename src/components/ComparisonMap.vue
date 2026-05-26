@@ -22,14 +22,25 @@
 
     <!-- Left side -->
     <div v-show="viewMode !== 'solo-right'" class="side-panel left-panel">
-      <div ref="mapContainerLeft" class="map-container left"> </div>
+      <AccessibleGeographyList v-show="accessibilityStore.enhancedVisual" side="left" />
+      <div
+        ref="mapContainerLeft"
+        class="map-container left"
+        role="region"
+        aria-label="Left comparison map. Use Browse geographies to select a place with the keyboard."
+      />
       <div
         v-if="leftPanel.visible && leftPanel.properties"
+        ref="leftFeaturePanelEl"
         class="feature-panel left-feature-panel"
         :class="{ 'feature-panel--frozen': leftPanel.frozen }"
+        role="dialog"
+        aria-modal="false"
+        aria-labelledby="feature-panel-title-left"
+        @keydown.escape="clearFeaturePanel('left')"
       >
-        <button class="feature-panel-close" @click="clearFeaturePanel('left')">x</button>
-        <Popup :properties="leftPanel.properties" side="left" :compact="true" />
+        <button type="button" class="feature-panel-close" aria-label="Close feature details" @click="clearFeaturePanel('left')">×</button>
+        <Popup id="feature-panel-title-left" :properties="leftPanel.properties" side="left" :compact="true" />
       </div>
       <v-btn
         v-if="viewMode === 'side-by-side'"
@@ -56,14 +67,25 @@
 
     <!-- Right side -->
     <div v-show="viewMode !== 'solo-left'" class="side-panel right-panel">
-      <div ref="mapContainerRight" class="map-container right"> </div>
+      <AccessibleGeographyList v-show="accessibilityStore.enhancedVisual" side="right" />
+      <div
+        ref="mapContainerRight"
+        class="map-container right"
+        role="region"
+        aria-label="Right comparison map. Use Browse geographies to select a place with the keyboard."
+      />
       <div
         v-if="rightPanel.visible && rightPanel.properties"
+        ref="rightFeaturePanelEl"
         class="feature-panel right-feature-panel"
         :class="{ 'feature-panel--frozen': rightPanel.frozen }"
+        role="dialog"
+        aria-modal="false"
+        aria-labelledby="feature-panel-title-right"
+        @keydown.escape="clearFeaturePanel('right')"
       >
-        <button class="feature-panel-close" @click="clearFeaturePanel('right')">x</button>
-        <Popup :properties="rightPanel.properties" side="right" :compact="true" />
+        <button type="button" class="feature-panel-close" aria-label="Close feature details" @click="clearFeaturePanel('right')">×</button>
+        <Popup id="feature-panel-title-right" :properties="rightPanel.properties" side="right" :compact="true" />
       </div>
       <v-btn
         v-if="viewMode === 'side-by-side'"
@@ -98,6 +120,8 @@ import Compare from '../assets/maplibre-gl-compare.js'
 import '../assets/maplibre-gl-compare.css';
 import TimelineVisualization from './TimelineVisualization.vue'
 import Popup from './Popup.vue'
+import AccessibleGeographyList from './AccessibleGeographyList.vue'
+import { useAccessibilityStore } from '../stores/accessibilityStore'
 import { useIndicatorLevelStore } from '../stores/indicatorLevelStore'
 import { useThemeLevelStore } from '../stores/themeLevelStore'
 import ColorLegend from './ColorLegend.vue'
@@ -133,6 +157,9 @@ const rightIndicatorLevelStore = useIndicatorLevelStore('right')
 const themeLevelStore = useThemeLevelStore()
 
 const emitter = inject('mitt') as Emitter<any>
+const accessibilityStore = useAccessibilityStore()
+const leftFeaturePanelEl = ref<HTMLElement | null>(null)
+const rightFeaturePanelEl = ref<HTMLElement | null>(null)
 const leftPanel = ref<{ visible: boolean; frozen: boolean; properties: any | null }>({
   visible: false,
   frozen: false,
@@ -147,6 +174,16 @@ const rightPanel = ref<{ visible: boolean; frozen: boolean; properties: any | nu
 let _compare: Compare | null = null
 
 const viewMode = ref<'side-by-side' | 'solo-left' | 'solo-right'>('side-by-side')
+
+watch(viewMode, (mode) => {
+  const labels: Record<string, string> = {
+    'side-by-side': 'Side by side map view.',
+    'solo-left': 'Solo left map view.',
+    'solo-right': 'Solo right map view.',
+  }
+  accessibilityStore.announce(labels[mode] ?? '')
+  nextTick(resizeMaps)
+})
 
 function resizeMaps() {
   leftMap?.resize()
@@ -266,7 +303,9 @@ onMounted(async () => {
       const loadingEl = document.getElementById('loading');
       if (loadingEl && loadingEl.style) {
         loadingEl.style.display = 'none';
+        loadingEl.setAttribute('aria-busy', 'false');
       }
+      accessibilityStore.announce('Map data loaded.');
       Array.from(document.getElementsByClassName('maplibregl-ctrl-attrib') as unknown as HTMLElement[]).forEach((element) => {
         element.classList.remove('maplibregl-compact-show');
       });
@@ -282,10 +321,24 @@ onMounted(async () => {
 
 function updateLeftPanel(payload: { visible: boolean; frozen: boolean; properties: any | null }) {
   leftPanel.value = payload
+  if (payload.visible) {
+    nextTick(() => {
+      leftFeaturePanelEl.value?.querySelector<HTMLButtonElement>('.feature-panel-close')?.focus()
+    })
+    const name = payload.properties?.name ?? payload.properties?.geoid ?? 'Feature'
+    accessibilityStore.announce(`${payload.frozen ? 'Pinned' : 'Showing'} details for ${name} on left map.`)
+  }
 }
 
 function updateRightPanel(payload: { visible: boolean; frozen: boolean; properties: any | null }) {
   rightPanel.value = payload
+  if (payload.visible) {
+    nextTick(() => {
+      rightFeaturePanelEl.value?.querySelector<HTMLButtonElement>('.feature-panel-close')?.focus()
+    })
+    const name = payload.properties?.name ?? payload.properties?.geoid ?? 'Feature'
+    accessibilityStore.announce(`${payload.frozen ? 'Pinned' : 'Showing'} details for ${name} on right map.`)
+  }
 }
 
 function clearFeaturePanel(side: 'left' | 'right') {
@@ -347,12 +400,17 @@ const handleLocationSelected = (data: { coordinates: [number, number], text: str
     else leftMap?.resize()
 
     const targetZoom = Math.max(primary.getZoom(), MIN_ZOOM_ON_LOCATION)
+    const reduceMotion =
+      accessibilityStore.enhancedVisual ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
     primary.flyTo({
       center: [lng, lat],
       zoom: targetZoom,
-      duration: LOCATION_FLY_DURATION_MS,
+      duration: reduceMotion ? 0 : LOCATION_FLY_DURATION_MS,
       padding: getLocationFlyPadding(primary),
     })
+    accessibilityStore.announce(`Map centered on ${data.text}.`)
 
     primary.once('moveend', () => {
       leftMap?.resize()
@@ -383,7 +441,7 @@ onUnmounted(() => {
 </script>
 <style>
 .left-panel .maplibregl-ctrl-top-right {
-  display: none;
+  display: none !important;
 }
 
 #comparison-container.solo-left .left-panel .maplibregl-ctrl-top-right{

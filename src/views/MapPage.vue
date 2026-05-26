@@ -1,18 +1,18 @@
 <template>
     <v-main class="d-flex align-center justify-center" style="padding-top: 0px;">
         <v-container ref="mapPage" class="map-page" fluid style="padding-top: 0px; height: 100%;">
-            <div class="map-page-map">
-                <ComparisonMap :_center="[-80.17, 34.652]" :_zoom="8.57" :_type="'sideBySide'" />
-            </div>
             <header ref="mapPageHeader" class="map-page-header">
                 <v-card :style="{ 'background-color': arrasBrandingColor }" class="theme-title mt-2" elevation="2" rounded="lg">
-                    <v-card-title v-if="currentThemeConfig" class="text-center pa-0 ma-0 theme-title__text" :style="{ 'background-color': arrasBrandingColor }">
-                        <v-img inline :src="invertedIconPath" width="36" height="36" class="mr-2 title-theme-icon flex-shrink-0"></v-img>
-                        <span class="theme-title__label">{{ currentThemeConfig.title }}</span>
-                    </v-card-title>
+                    <div v-if="currentThemeConfig" class="text-center pa-0 ma-0 theme-title__text" :style="{ 'background-color': arrasBrandingColor }">
+                        <v-img inline :src="invertedIconPath" width="36" height="36" class="mr-2 title-theme-icon flex-shrink-0" alt="" />
+                        <h1 class="theme-title__label">{{ currentThemeConfig.title }}</h1>
+                    </div>
                 </v-card>
                 <LocationSearch />
             </header>
+            <div class="map-page-map" role="application" aria-label="Community health indicator comparison maps">
+                <ComparisonMap :_center="[-80.17, 34.652]" :_zoom="8.57" :_type="'sideBySide'" />
+            </div>
         </v-container>
     </v-main>
 </template>
@@ -72,7 +72,7 @@
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
 }
 
-.theme-title .v-card-title.theme-title__text {
+.theme-title .theme-title__text {
     white-space: normal !important;
     overflow: visible !important;
     text-overflow: unset !important;
@@ -92,6 +92,9 @@
     flex: 1 1 8rem;
     min-width: 0;
     max-width: 100%;
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
     white-space: normal;
     overflow: visible;
     text-overflow: unset;
@@ -120,8 +123,14 @@ export default {
          }
     },
     watch: {
-        currentThemeConfig() {
-            this.$nextTick(() => this.updateMapChromeHeight())
+        currentThemeConfig: {
+            handler(config) {
+                this.$nextTick(() => this.updateMapChromeHeight())
+                if (config?.title) {
+                    document.title = `${config.title} — Arras Community Indicator Tool`
+                }
+            },
+            immediate: true,
         },
     },
     async beforeRouteEnter(to, from, next) {

@@ -2,6 +2,8 @@
   <v-select :model-value="indicatorStore?.getCurrentIndicator()"
     :items="themeLevelStore?.getAllCurrentThemeIndicators() || []" return-object item-title="short_title" density="compact"
     variant="outlined" width="100%" hide-details class="indicator-select"
+    label="Indicator"
+    aria-label="Select health indicator"
     @update:model-value="handleIndicatorChange">
     <template #prepend-item>
       <v-list-subheader v-if="themeTitle" class="indicator-select-theme-title text-high-emphasis font-weight-bold">

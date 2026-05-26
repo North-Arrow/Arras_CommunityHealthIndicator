@@ -1,12 +1,15 @@
 <template>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="a11y-status" class="sr-only" aria-live="polite" aria-atomic="true">{{ accessibilityStore.statusMessage }}</div>
   <main id="main" class="full-screen-main" :class="{ 'orientation-top-bottom': orientation === 'top-bottom', 'orientation-left-right': orientation === 'left-right' }" tabindex="-1">
-    <div id="loading" class="loading-screen">
+    <div id="loading" class="loading-screen" role="status" aria-live="polite" aria-busy="true">
         <div class="loading-content">
           <div class="logo-container">
             <v-img 
               src="ArrasFoundation.png" 
               max-width="300px"
               class="loading-logo"
+              alt="Arras Foundation"
             />
           </div>
           <div class="loading-text">
@@ -45,6 +48,7 @@
               width="44"
               height="44"
               class="sidebar__logo"
+              alt=""
             />
             <div class="sidebar__brand-text">
               <div class="sidebar__title">Health Indicators</div>
@@ -65,7 +69,7 @@
           >
             <template v-slot:prepend>
               <div class="sidebar__icon-wrap">
-                <v-img :src="category.icon" width="22" height="22" class="sidebar__icon" />
+                <v-img :src="category.icon" width="22" height="22" class="sidebar__icon" :alt="''" />
               </div>
             </template>
             <v-list-item-title>{{ category.title }}</v-list-item-title>
@@ -74,30 +78,45 @@
           <v-list-item to="/" @click="drawer = false" class="sidebar__item" rounded="lg">
             <template v-slot:prepend>
               <div class="sidebar__icon-wrap sidebar__icon-wrap--home">
-                <v-icon icon="mdi-home" size="18"></v-icon>
+                <v-icon icon="mdi-home" size="18" aria-hidden="true"></v-icon>
               </div>
             </template>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
-          <v-list-item target="_blank" to="/user_guide.pdf" class="sidebar__item" rounded="lg">
+          <v-list-item target="_blank" to="/user_guide.pdf" class="sidebar__item" rounded="lg" rel="noopener noreferrer">
             <template v-slot:prepend>
               <div class="sidebar__icon-wrap sidebar__icon-wrap--home">
-                <v-icon icon="mdi-book-open" size="18"></v-icon>
+                <v-icon icon="mdi-book-open" size="18" aria-hidden="true"></v-icon>
               </div>
             </template>
-            <v-list-item-title>User Guide</v-list-item-title>
+            <v-list-item-title>User Guide<span class="opens-new-tab"></span></v-list-item-title>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
       <v-app-bar class="app-bar" collapse :elevation="2">
         <template v-slot:prepend>
-          <RouterLink v-slot="{ href, navigate }" to="/">
-            <v-btn size="large"variant="text" :href="href" @click="navigate">
-              <v-img width="50px" src="ArrasFoundation.png" />
-            </v-btn>
-          </RouterLink>
-          <v-icon icon="mdi-menu" size="24" @click="drawer = !drawer" style="cursor: pointer;" />
-         
+          <div class="app-bar__controls">
+            <RouterLink v-slot="{ href, navigate }" to="/">
+              <v-btn size="large" variant="text" :href="href" @click="navigate" aria-label="Home">
+                <v-img width="50px" src="ArrasFoundation.png" alt="Arras Foundation home" />
+              </v-btn>
+            </RouterLink>
+            <v-btn
+              icon="mdi-menu"
+              variant="text"
+              aria-label="Open navigation menu"
+              @click="drawer = !drawer"
+            />
+            <v-btn
+              icon="mdi-human"
+              density="compact"
+              variant="outlined"
+              :aria-pressed="accessibilityStore.enhancedVisual"
+              aria-label="Toggle enhanced accessibility display (contrast, motion, and visual aids)"
+              title="Enhanced accessibility display"
+              @click="accessibilityStore.toggleEnhancedVisual()"
+            />
+          </div>
         </template>
       </v-app-bar>
      
@@ -106,12 +125,16 @@
   </main>
 </template>
 <script setup lang="ts">
-import { ref, inject, computed, watch, onBeforeMount, onMounted } from 'vue'
+import { ref, inject, computed, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useEmbedSync, isInIframe } from './composables/useEmbedSync'
+import { useAccessibilityStore } from './stores/accessibilityStore'
+import { useThemeLevelStore } from './stores/themeLevelStore'
 
 const router = useRouter()
 const drawer = ref(false)
+const accessibilityStore = useAccessibilityStore()
+accessibilityStore.init()
 
 onMounted(() => {
   useEmbedSync(router)
@@ -133,9 +156,16 @@ const sidebarHeaderStyle = computed(() => {
 
 watch(router.currentRoute, (newRoute, oldRoute) => {
   if(!window.location.search.includes('theme') && newRoute.name === 'map') {
-    alert('Please go to the home page to select a theme first.')
+    accessibilityStore.announce('Please go to the home page to select a theme first.')
     window.location.href = '/'
     return
+  }
+
+  if (newRoute.name === 'map') {
+    const themeConfig = useThemeLevelStore().getMainConfigForCurrentTheme()
+    const themeTitle = themeConfig?.title
+    const base = 'Arras Community Indicator Tool'
+    document.title = themeTitle ? `${themeTitle} — ${base}` : `Map — ${base}`
   }
 
   if (newRoute.name === 'map' && oldRoute?.name === 'map') {
@@ -145,9 +175,6 @@ watch(router.currentRoute, (newRoute, oldRoute) => {
     // When in iframe, URL is synced to parent via useEmbedSync; no reload.
   }
 }, { immediate: true })
-onBeforeMount(() => {
-  document.body.style.zoom = window.innerWidth < 1280 ? '0.8' : '1';
-})
 </script>
 <style scoped>
 .sidebar {
@@ -421,6 +448,13 @@ onBeforeMount(() => {
 .point-legend *,
 .color-legend *{
   pointer-events: all;
+}
+
+.app-bar__controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
 }
 
 .app-bar.v-toolbar.v-toolbar--collapse{

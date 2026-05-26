@@ -126,6 +126,11 @@ The following properties MUST be present in every indicator object:
   }
   ```
 
+#### `data_source` (string)
+- **Type**: String
+- **Description**: OPTIONAL. Key into `data_sources` in `main.json` for the legend footer link (e.g. `"census"`, `"cdc"`).
+- **Example**: `"data_source": "census"`
+
 #### `popup` (object)
 - **Type**: Object
 - **Description**: Configuration for popup display when clicking/hovering features
@@ -133,15 +138,27 @@ The following properties MUST be present in every indicator object:
   - `format` (object) - REQUIRED. Format strings for popup display
     - `title` (string) - REQUIRED. Title format string using placeholders like `{{pct}}`, `{{count}}`, `{{pop}}`
     - `subtitle` (string | null) - OPTIONAL. Subtitle format string, or `null` if no subtitle
+- **Optional Properties**:
+  - `popup_legend` (object) - Labels for the compact feature panel legend (`title`, `subtitle` strings; may use `{{pct}}`, `{{count}}`, `{{pop}}` placeholders)
 - **Example**:
   ```json
   {
+    "popup_legend": {
+      "title": "% of adults",
+      "subtitle": "Amount out of total adults"
+    },
     "format": {
-      "title": "{{pct}}% of adults",
-      "subtitle": "{{count}} adults"
+      "title": "{{pct}}%",
+      "subtitle": "{{count}} of {{pop}}"
     }
   }
   ```
+
+## Geographic types (`geotype`) and `main.json`
+
+Per-indicator `geotype` (e.g. `"tract"`, `"school"`, `"county"`) is merged at runtime with the matching entry under `geo` in `main.json`. That merge supplies `geolevel`, `source_name`, and `layers` — these SHOULD NOT be duplicated in category indicator JSON unless overriding defaults.
+
+Allowed `geotype` values are defined in `main.json` → `geo` (see `tract`, `county`, `school`, `facility`, `protected`, etc.).
 
 #### `legend` (object)
 - **Type**: Object

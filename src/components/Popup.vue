@@ -3,8 +3,8 @@
 
         <div class="popup-header">
             <div class="header-content">
-                <h3 class="feature-name" v-if="properties.name">{{ properties.name }}</h3>
-                <h3 class="feature-name" v-else-if="properties.geoid">{{ properties.geoid }}</h3>
+                <h3 :id="headingId" class="feature-name" v-if="properties.name">{{ properties.name }}</h3>
+                <h3 :id="headingId" class="feature-name" v-else-if="properties.geoid">{{ properties.geoid }}</h3>
                 <div v-if="properties.address" class="feature-address">{{ decodeURIComponent(properties.address) }}
                 </div>
             </div>
@@ -34,10 +34,13 @@ import { computed } from 'vue'
 import { useIndicatorLevelStore } from '../stores/indicatorLevelStore'
 
 const props = defineProps<{
+    id?: string
     properties: any
     side: 'left' | 'right'
     compact?: boolean
 }>()
+
+const headingId = computed(() => props.id ?? `feature-popup-${props.side}`)
 
 const indicatorStore = useIndicatorLevelStore(props.side)
 const currentIndicator = computed(() => indicatorStore.getCurrentIndicator())
