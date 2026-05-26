@@ -489,9 +489,9 @@ onUnmounted(() => {
   left: 0;
 }
 
-/* Solo button on each side */
+/* Solo button on each side — below overlay header (see --map-chrome-height on .map-page) */
 .solo-btn {
-  top: 4rem;
+  top: calc(var(--map-chrome-height, 5.5rem) + 8px);
   position: absolute;
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
@@ -555,7 +555,7 @@ onUnmounted(() => {
 /* Back to side-by-side (solo mode only) */
 .solo-exit-wrap {
   position: absolute;
-  top: 4rem;
+  top: calc(var(--map-chrome-height, 5.5rem) + 8px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 15;

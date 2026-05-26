@@ -30,11 +30,7 @@ onMounted(() => {
 
 <style scoped>
 .location-search-container {
-  position: absolute;
-  /* bottom: 205px; */
-  top: 100px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;

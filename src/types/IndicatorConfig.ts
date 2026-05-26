@@ -50,13 +50,17 @@ export interface IndicatorConfig {
         outline: string;
         circle: string | null;
     };
-    style: {
+    style?: {
         colors: any;
         min: {
             color: string;
             value: number;
         };
         max: {
+            color: string;
+            value: number;
+        };
+        mid?: {
             color: string;
             value: number;
         };

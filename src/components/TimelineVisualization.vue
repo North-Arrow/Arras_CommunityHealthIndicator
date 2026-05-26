@@ -32,7 +32,9 @@
           </tbody>
         </table>
       </div>
-      <svg ref="svg" class="timeline-chart"></svg>
+      <div ref="chartPlot" class="chart-plot">
+        <svg ref="svg" class="timeline-chart"></svg>
+      </div>
     </div>
   </div>
 </template>
@@ -67,23 +69,36 @@ const hoveredColorRef = ref(hoveredColor);
 const showValuesOnTimeline = false;
 
 const container = ref<HTMLElement | null>(null)
+const chartPlot = ref<HTMLElement | null>(null)
 const svg = ref<SVGElement>()
 
 let svgElement: d3.Selection<SVGElement, unknown, null, undefined>
 let width = document.body.clientWidth * 0.33
 let height = 130
-let margin = { top: 15, right: 5, bottom: 0, left: 20 }
+const margin = { top: 12, right: 6, bottom: 24, left: 28 }
+/** Extra space between y-axis labels and the first/only year tick. */
+const PLOT_PAD = 16
 let yScale: d3.ScaleLinear<number, number> = d3.scaleLinear().domain([0, 100]).range([height - margin.bottom, margin.top])
 
-/** Update width from the chart container so the chart scales to the current container size. */
-function updateWidthFromContainer() {
-  if (container.value) {
+/** Size the SVG to the plot area so axes and labels stay inside the card. */
+function updateChartDimensions() {
+  const plotEl = chartPlot.value
+  if (plotEl) {
+    const w = plotEl.clientWidth
+    const h = plotEl.clientHeight
+    if (w > 0) width = w
+    if (h > 0) height = h
+  } else if (container.value) {
     const w = container.value.clientWidth
     if (w > 0) width = w
   } else {
     width = document.body.clientWidth * 0.33
   }
   yScale.range([height - margin.bottom, margin.top])
+}
+
+function plotWidth() {
+  return Math.max(1, width - margin.left - margin.right)
 }
 
 // Year selector - get available years from the indicator data
@@ -178,7 +193,7 @@ const downloadCsvData = async () => {
 const createChart = () => {
   if (!svg.value) return
 
-  updateWidthFromContainer()
+  updateChartDimensions()
 
   const data = processData(null)
 
@@ -206,23 +221,27 @@ const createChart = () => {
   yScale = createYScale(validData)
 
   // Create axes
+  const yearTicks = data.map((d) => d.year).filter((y) => !isNaN(y)).sort((a, b) => a - b)
   const xAxis = d3.axisBottom(xScale)
-    .tickFormat(d => d.toString())
-    .tickSize(0)
-    .tickPadding(8)
+    .tickValues(yearTicks)
+    .tickFormat((d) => `${d}`)
+    .tickSize(4)
+    .tickPadding(6)
 
   const yAxis = d3.axisLeft(yScale)
     .tickFormat((d) => {
       return d.toLocaleString().replace(',000', 'K');
     })
-    .tickSize(-width + margin.left + margin.right)
+    .tickSize(-plotWidth())
     .tickPadding(2)
     .ticks(5)
+
+  const xAxisY = height - margin.bottom
 
   // Add axes
   svgElement.append('g')
     .attr('class', 'x-axis')
-    .attr('transform', `translate(0, ${height + margin.bottom})`)
+    .attr('transform', `translate(0, ${xAxisY})`)
     .call(xAxis)
     .selectAll('text')
     .style('font-size', '10px')
@@ -250,7 +269,7 @@ const createChart = () => {
       .attr('x1', currentYearX)
       .attr('x2', currentYearX)
       .attr('y1', margin.top)
-      .attr('y2', height + margin.bottom)
+      .attr('y2', xAxisY)
       .style('stroke', '#dc2626')
       .style('stroke-width', 1.5)
       .style('stroke-dasharray', '3,3')
@@ -341,6 +360,9 @@ const createChart = () => {
 const hoveredGeo = ref('');
 const blueLineGeo = ref('Chester & Lancaster avg.');
 const hoveredGeoName = ref('');
+/** Geoid (or "statewide") for the hover overlay line — used when re-drawing after resize. */
+let lastHoveredFeatureId: string | null = null
+
 const addFeatureLine = (feature: string) => {
   const statewide = feature.toLowerCase().includes("statewide")
 
@@ -350,6 +372,7 @@ const addFeatureLine = (feature: string) => {
   }
   hoveredGeo.value = counties[feature as keyof typeof counties] ?? feature;
   if (!svg.value) return
+  updateChartDimensions()
   const data = processData(feature)
 
   if (data.length === 0) return
@@ -472,15 +495,18 @@ const addFeatureLine = (feature: string) => {
 }
 const createAxisOnly = (data: Array<{ year: number; value: number | null }>) => {
   const xScale = createXScale(data)
+  const yearTicks = data.map((d) => d.year).filter((y) => !isNaN(y)).sort((a, b) => a - b)
+  const xAxisY = height - margin.bottom
 
   const xAxis = d3.axisBottom(xScale)
-    .tickFormat(d => d.toString())
+    .tickValues(yearTicks)
+    .tickFormat((d) => `${d}`)
     .tickSize(0)
-    .tickPadding(8)
+    .tickPadding(6)
 
   svgElement.append('g')
     .attr('class', 'x-axis')
-    .attr('transform', `translate(0, ${height + margin.bottom})`)
+    .attr('transform', `translate(0, ${xAxisY})`)
     .call(xAxis)
     .selectAll('text')
     .style('font-size', '10px')
@@ -495,7 +521,7 @@ const createAxisOnly = (data: Array<{ year: number; value: number | null }>) => 
       .attr('x1', currentYearX)
       .attr('x2', currentYearX)
       .attr('y1', margin.top)
-      .attr('y2', height + margin.bottom)
+      .attr('y2', xAxisY)
       .style('stroke', '#dc2626')
       .style('stroke-width', 1.5)
       .style('stroke-dasharray', '3,3')
@@ -505,7 +531,7 @@ const createAxisOnly = (data: Array<{ year: number; value: number | null }>) => 
   // Add "No data" text
   svgElement.append('text')
     .attr('x', width / 2)
-    .attr('y', height / 2)
+    .attr('y', (margin.top + xAxisY) / 2)
     .attr('text-anchor', 'middle')
     .style('font-size', '12px')
     .style('fill', '#999')
@@ -513,30 +539,28 @@ const createAxisOnly = (data: Array<{ year: number; value: number | null }>) => 
 }
 
 const createXScale = (data: Array<{ year: number; value: number | null }>) => {
+  const years = data
+    .map((d) => d.year)
+    .filter((y) => y !== null && y !== undefined && !isNaN(Number(y)))
+    .sort((a, b) => a - b)
 
-  const years = data.map(d => d.year).filter(d => d !== null && d !== undefined && !isNaN(Number(d))).sort((a: number, b: number) => a - b)
+  const plotLeft = margin.left + PLOT_PAD
+  const plotRight = width - margin.right - PLOT_PAD
 
-  // Create custom scale with variable spacing
-  const yearPositions: number[] = []
-  let currentPos = margin.left + 5
-
-  for (let i = 0; i < years.length; i++) {
-    yearPositions.push(currentPos)
-
-    if (i < years.length - 1) {
-      const currentYear = years[i]
-      const nextYear = years[i + 1]
-      const gap = nextYear - currentYear
-
-      // Larger spacing for decade gaps, smaller for consecutive years
-      const spacing = (width / years.length) * (Math.sqrt(gap) / years.length) * 1.333//<= 1 ? 25 : gap <= 10 ? 50 : 90
-      currentPos += spacing
-    }
+  if (years.length === 0) {
+    return d3.scaleLinear().domain([0, 1]).range([plotLeft, plotRight])
   }
 
-  return d3.scaleOrdinal<number, number>()
-    .domain(years)
-    .range(yearPositions)
+  if (years.length === 1) {
+    const year = years[0]
+    return d3.scaleLinear()
+      .domain([year - 0.5, year + 0.5])
+      .range([plotLeft, plotRight])
+  }
+
+  return d3.scaleLinear()
+    .domain([years[0], years[years.length - 1]])
+    .range([plotLeft, plotRight])
 }
 const getMinMaxValues = () => {
   const indicator = indicatorStore.getCurrentIndicator()
@@ -582,7 +606,7 @@ const createYScale = (data: Array<{ year: number; value: number | null }>) => {
 
   return d3.scaleLinear()
     .domain([minValue, maxValue])
-    .range([height + margin.bottom, margin.top])
+    .range([height - margin.bottom, margin.top])
 }
 
 const handleIndicatorChange = async () => {
@@ -601,11 +625,13 @@ const showStatewide = computed(() => {
 //const emitter = inject('mitt') as Emitter<any>
 emitter.on('resize-maps', () => {
   nextTick(() => {
-    updateWidthFromContainer()
+    updateChartDimensions()
     createChart()
     addFeatureLine('statewide')
   })
 })
+
+let chartResizeObserver: ResizeObserver | null = null
 
 // Watch for data changes
 watch([() => indicatorStore.getCurrentIndicator(), () => indicatorStore.getCurrentYear(), () => indicatorStore.getCurrentGeoSelection()],
@@ -621,7 +647,23 @@ watch([() => indicatorStore.getCurrentIndicator(), () => indicatorStore.getCurre
 onMounted(() => {
   nextTick(() => {
     createChart()
+    addFeatureLine('statewide')
   })
+
+  if (typeof ResizeObserver !== 'undefined' && container.value) {
+    chartResizeObserver = new ResizeObserver(() => {
+      nextTick(() => {
+        updateChartDimensions()
+        createChart()
+        if (lastHoveredFeatureId) {
+          addFeatureLine(lastHoveredFeatureId)
+        } else {
+          addFeatureLine('statewide')
+        }
+      })
+    })
+    chartResizeObserver.observe(container.value)
+  }
   emitter.on(`feature-${props.side}-hovered`, (feature: string | null) => {
     //if (props.side === 'left') {
     d3.selectAll('.timeline-feature-line').remove()
@@ -630,10 +672,10 @@ onMounted(() => {
     d3.selectAll('.data-feature-point-label-background').remove()
     if (feature === null) {
       hoveredGeo.value = ''
+      lastHoveredFeatureId = null
     } else {
-
-      hoveredGeo.value = feature;//counties[feature as keyof typeof counties] ?? feature;
-    
+      lastHoveredFeatureId = feature
+      hoveredGeo.value = feature
       addFeatureLine(feature)
     }
   })
@@ -660,6 +702,8 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  chartResizeObserver?.disconnect()
+  chartResizeObserver = null
   emitter.off('feature-left-hovered', addFeatureLine)
   emitter.off('feature-right-hovered', addFeatureLine)
 })
@@ -675,7 +719,7 @@ onUnmounted(() => {
 }
 
 .viz-legend td {
-  padding: 4px 8px;
+  padding: 4px;
   margin: 0;
   width: 33%;
   text-align: center;
@@ -740,10 +784,12 @@ onUnmounted(() => {
 
 .timeline-visualization {
   position: absolute;
-  position: absolute;
-    right: 5px;
-    left: 25%;
-    top: auto;
+  right: 5px;
+  left: 25%;
+  top: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid #e5e7eb;
   border-radius: 5px;
@@ -753,6 +799,13 @@ onUnmounted(() => {
   user-select: none;
   height: 200px;
   bottom: 5px;
+}
+
+.chart-plot {
+  flex: 1 1 0;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .timeline-header {
@@ -785,14 +838,15 @@ onUnmounted(() => {
 }
 
 .chart-label {
+  flex: 0 0 auto;
   font-weight: 600;
   font-size: smaller;
-  /* color: #6b7280; */
-  padding: 4px 8px;
-  padding-bottom: 0px;
+  padding: 4px 8px 2px;
   text-align: left;
-  line-height: .9em;
+  line-height: 1.15;
   width: 100%;
+  max-height: 3.2em;
+  overflow: hidden;
 }
 
 
@@ -818,20 +872,21 @@ onUnmounted(() => {
 }
 
 .timeline-chart {
-  width: 95%;
+  display: block;
+  width: 100%;
   height: 100%;
-  /* bottom: 0; */
   position: absolute;
-  left: 2.5%;
-  /* top: 1.1em; */
+  left: 0;
+  top: 0;
+  overflow: visible;
 }
 
-/* D3 styles */
 :deep(.x-axis .tick text) {
   font-size: 10px;
   fill: #6b7280;
 }
 
+/* D3 styles */
 :deep(.y-axis .tick text) {
   font-size: 10px;
   fill: #6b7280;

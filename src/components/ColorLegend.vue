@@ -18,11 +18,12 @@
       <div class="legend-content">
         <div class="legend-gradient">
           <div class="gradient-bar" :style="{
-            background: `linear-gradient(to right, ${minColor}, ${maxColor})`
+            background: `linear-gradient(to right, ${minColor} ${midColor ? ','+midColor : ''}, ${maxColor})`
           }"></div>
         </div>
         <div class="legend-labels">
           <span class="min-label">{{ legendTitle.min }}</span>
+          <span class="mid-label" v-if="legendTitle.mid">{{ legendTitle.mid }}</span>
           <span class="max-label">{{ legendTitle.max }}</span>
         </div>
 
@@ -62,10 +63,13 @@ const legendTitle = computed(() => {
   const titleColumn = props.selectedIndicator?.legend?.['title-column'] as 'count' | 'pop' | 'pct' | undefined;
   const minValue = indicatorLevelStore.getMinValue(titleColumn as 'count' | 'pop' | 'pct') ?? 0;
   const maxValue = indicatorLevelStore.getMaxValue(titleColumn as 'count' | 'pop' | 'pct') ?? 0;
+  const midValue = props.selectedIndicator?.style?.mid?.value;
+
 
   if (titleTemplate) {
     return {
       min: titleTemplate.replace(`{{${titleColumn}}}`, (+minValue).toLocaleString()),
+      mid: typeof midValue === 'number' ? titleTemplate.replace(`{{${titleColumn}}}`, (+midValue).toLocaleString()) : null,
       max: titleTemplate.replace(`{{${titleColumn}}}`, (+maxValue).toLocaleString())
     }
   }
@@ -84,6 +88,13 @@ const minColor = computed(() => {
   return '#f2f0f7';
 })
 
+const midColor = computed(() => {
+  const colorName = props.selectedIndicator?.style?.mid?.color;
+  if (colorName) {
+    return arrasBranding.colors[colorName];
+  }
+  return null;
+})
 const maxColor = computed(() => {
   const colorName = props.selectedIndicator?.style?.max?.color;
   if (colorName) {
@@ -146,6 +157,7 @@ const maxColor = computed(() => {
 }
 
 .min-label,
+.mid-label,
 .max-label {
   font-size: 10px;
   color: #6b7280;

@@ -153,8 +153,9 @@ export class DataToMap {
     // Use instance properties if available, otherwise calculate
     const minValue = this.minValue || this.getMinMaxValues().minValue;
     const maxValue = this.maxValue || this.getMinMaxValues().maxValue;
-    const minColor = this.arrasBranding.colors[data.style.min.color];
-    const maxColor = this.arrasBranding.colors[data.style.max.color];
+    const minColor = this.arrasBranding.colors[data.style?.min?.color as string];
+    const maxColor = this.arrasBranding.colors[data.style?.max?.color as string];
+    const midColor = this.arrasBranding.colors[data.style?.mid?.color as string];
     // Don't mutate shared indicator config - values are stored in instance properties
 
     if (
@@ -174,6 +175,16 @@ export class DataToMap {
     }
     const yearValuePrefix = this.data.timeline?.yearValuePrefix || "";
     // Create MapLibre expression: interpolate color based on year value
+
+    const midValue = data.style?.mid?.value;
+  
+    const stops = [minValue,
+      minColor,
+      ...(typeof midValue === 'number' ? [midValue, midColor] : []),
+      maxValue,
+      maxColor,
+    ];
+   
     const fillExp = [
       "case",
       ["has", yearValuePrefix + String(this.year)],
@@ -181,13 +192,11 @@ export class DataToMap {
         "interpolate",
         ["linear"],
         ["to-number", ["get", yearValuePrefix + String(this.year)]],
-        minValue,
-        minColor,
-        maxValue,
-        maxColor,
+        ...stops,
       ],
       "#0000",
     ];
+    
 
     if (!data.layers.main) {
       console.error("data.layers.main is undefined");

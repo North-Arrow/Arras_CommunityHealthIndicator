@@ -5,10 +5,8 @@
     <v-container class="mt-0">
       <v-row>
         <v-col cols="12" md="12">
-          <v-card variant="flat" style="background-color: rgba(255, 255, 255, 0.5);" class="pa-6 mt-2 text-center">
-            <p class="text-body-1 text-medium-emphasis" style="line-height: 1.1em; max-width: 900px; margin: 0 auto;">
-              {{ mainConfig.landing_text }}
-            </p>
+          <v-card variant="flat" style="background-color: rgba(255, 255, 255, 0.5);" class="pa-6 mt-2">
+            <p class="text-body-1 text-medium-emphasis" style="line-height: 1.1em; max-width: 900px; margin: 0 auto;" v-html="mainConfig.landing_text"></p>
           </v-card>
         </v-col>
       </v-row>
@@ -57,13 +55,13 @@
                   </v-btn>
                 </v-col>
               </v-row>
-              <v-list-item target="_blank" to="/pdf_placeholder.pdf" class="sidebar__item" rounded="lg">
+              <v-list-item target="_blank" to="/user_guide.pdf" class="sidebar__item" rounded="lg">
                 <template v-slot:prepend>
                   <div class="sidebar__icon-wrap sidebar__icon-wrap--home">
                     <v-icon icon="mdi-book-open" size="18"></v-icon>
                   </div>
                 </template>
-                <v-list-item-title>Data Dictionary</v-list-item-title>
+                <v-list-item-title>User Guide</v-list-item-title>
               </v-list-item>
             </v-card-text>
           </v-card>

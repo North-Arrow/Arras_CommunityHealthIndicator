@@ -66,7 +66,7 @@ const stats = computed(() => {
             subtitle: popup?.format?.subtitle?.replace('{{count}}', (+count).toLocaleString()).replace('{{pop}}', (+pop).toLocaleString()).replace('{{pct}}', pct.toLocaleString())
         })
     }
-    return stats
+    return stats.reverse()
 })
 
 function formatLegendText(template: string | null | undefined) {
