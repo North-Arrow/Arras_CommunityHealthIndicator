@@ -120,8 +120,7 @@
         "title-column": "pop",
         "title": "{{pop}} students tested",
         "secondary-title-column": "pct",
-        "secondary-title": "{{pct}}% of students ready",
-        "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
+        "secondary-title": "{{pct}}% of students ready"
       },
       "map": {
         "size": "pop",
@@ -160,9 +159,7 @@
         "title-column": "pop",
         "title": "{{pop}} students tested",
         "secondary-title-column": "pct",
-        "secondary-title": "{{pct}}% of students ready",
-        "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
-      },
+        "secondary-title": "{{pct}}% of students ready"
       "tooltip-info": "For students who do not read at grade level, up to half of the printed fourth-grade curriculum is incomprehensible. Three-quarters of students who are poor readers in third grade will remain poor readers in high school. These students tend to have more behavioral and social problems in subsequent grades and high rates of grade retention. Students who can’t read proficiently by third grade are four times more likely to drop out of school."
     },
     {
@@ -196,8 +193,7 @@
         "title-column": "pop",
         "title": "{{pop}} students tested",
         "secondary-title-column": "pct",
-        "secondary-title": "{{pct}}% of students ready",
-        "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
+        "secondary-title": "{{pct}}% of students ready"
       },
       "tooltip-info": "Eighth grade math proficiency is a strong predictor of high school, college, and career success. Poor performance limits a student’s access to advanced math and science courses such as calculus and physics."
     },
@@ -228,8 +224,7 @@
         "title-column": "pop",
         "title": "{{pop}} students tested",
         "secondary-title-column": "pct",
-        "secondary-title": "{{pct}}% of students ready",
-        "narrative": "Each dot is a school. Larger dots mean more students took the test; color shows the share who met or exceeded grade-level expectations (warmer or more saturated colors = higher readiness)."
+        "secondary-title": "{{pct}}% of students ready"
       },
       "map": {
         "size": "pop",
@@ -264,8 +259,7 @@
         "title-column": "pop",
         "title": "{{pop}} students enrolled",
         "secondary-title-column": "pct",
-        "secondary-title": "{{pct}}% of students graduated",
-        "narrative": "Each dot is a school. Larger dots mean a larger graduating cohort; color shows the share of students who completed high school in four years (warmer or more saturated colors = higher graduation rate)."
+        "secondary-title": "{{pct}}% of students graduated"
       },
       "map": {
         "size": "pop",
@@ -300,8 +294,7 @@
         "title-column": "pop",
         "title": "{{pop}} students enrolled",
         "secondary-title-column": "pct",
-        "secondary-title": "{{pct}}% of students ready",
-        "narrative": "Each dot is a school. Larger dots mean more students in the cohort; color shows the share counted as career-ready (warmer or more saturated colors = higher readiness)."
+        "secondary-title": "{{pct}}% of students ready"
       },
       "map": {
         "size": "pop",
@@ -336,8 +329,7 @@
         "title-column": "pop",
         "title": "{{pop}} students enrolled",
         "secondary-title-column": "pct",
-        "secondary-title": "{{pct}}% of students ready",
-        "narrative": "Each dot is a school. Larger dots mean more students in the cohort; color shows the share counted as college-ready (warmer or more saturated colors = higher readiness)."
+        "secondary-title": "{{pct}}% of students ready"
       },
       "map": {
         "size": "pop",
