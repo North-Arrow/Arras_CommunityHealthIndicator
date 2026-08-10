@@ -121,6 +121,7 @@
         "title": "{{pop}} students tested",
         "secondary-title-column": "pct",
         "secondary-title": "{{pct}}% of students ready"
+        },
       "map": {
         "size": "pop",
         "color": "pct"
@@ -159,6 +160,7 @@
         "title": "{{pop}} students tested",
         "secondary-title-column": "pct",
         "secondary-title": "{{pct}}% of students ready"
+        },
       "tooltip-info": "For students who do not read at grade level, up to half of the printed fourth-grade curriculum is incomprehensible. Three-quarters of students who are poor readers in third grade will remain poor readers in high school. These students tend to have more behavioral and social problems in subsequent grades and high rates of grade retention. Students who can’t read proficiently by third grade are four times more likely to drop out of school."
     },
     {
