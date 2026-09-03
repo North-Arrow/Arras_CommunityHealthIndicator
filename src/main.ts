@@ -79,6 +79,12 @@ const router = createRouter({
             name: 'config-editor',
             component: () => import('./views/ConfigEditor.vue'),
             meta: { title: 'Config Editor' }
+        },
+        {
+            path: '/validate',
+            name: 'validate',
+            component: () => import('./views/Validate.vue'),
+            meta: { title: 'Validate' }
         }
     ]
 })

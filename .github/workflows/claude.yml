@@ -1,0 +1,46 @@
+# Claude Code workflow for client-request auto-fixes (triggered by patch101).
+#
+# Install: copy this file to .github/workflows/claude.yml in the target repo,
+# then add an ANTHROPIC_API_KEY secret (repo Settings -> Secrets and variables
+# -> Actions). See deploy/README.md in the patch101 repo for full setup.
+name: Claude Code (client requests)
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  claude:
+    # Only react to @claude mentions from accounts with write access to the
+    # repo (the patch101 bot comments via the maintainer's PAT, so it passes).
+    # This stops random commenters on a public repo from burning API tokens.
+    if: |
+      contains(github.event.comment.body, '@claude') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Client-request fixes branch from and target the staging branch so
+          # clients can preview on the staging URL before anything hits main.
+          base_branch: dev
+          branch_prefix: claude/client-
+          use_sticky_comment: true
+          claude_args: |
+            --model claude-sonnet-4-5
+            --max-turns 40
+            --allowedTools "Read,Glob,Grep,Edit,Write,Bash(npm ci),Bash(npm install),Bash(npm run build),Bash(npx vue-tsc:*)"
