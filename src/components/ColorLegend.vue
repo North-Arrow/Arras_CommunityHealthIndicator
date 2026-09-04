@@ -70,9 +70,9 @@ const extraLayerHtml = computed(() => {
 
 const legendTitle = computed(() => {
   const titleTemplate = props.selectedIndicator?.legend?.title as string | undefined;
-  const titleColumn = props.selectedIndicator?.legend?.['title-column'] as 'count' | 'pop' | 'pct' | undefined;
-  const minValue = indicatorLevelStore.getMinValue(titleColumn as 'count' | 'pop' | 'pct') ?? 0;
-  const maxValue = indicatorLevelStore.getMaxValue(titleColumn as 'count' | 'pop' | 'pct') ?? 0;
+  const titleColumn = props.selectedIndicator?.legend?.['title-column'] as 'count' | 'pop' | 'pct' | 'rate' | undefined;
+  const minValue = indicatorLevelStore.getMinValue(titleColumn as 'count' | 'pop' | 'pct' | 'rate') ?? 0;
+  const maxValue = indicatorLevelStore.getMaxValue(titleColumn as 'count' | 'pop' | 'pct' | 'rate') ?? 0;
   const midValue = props.selectedIndicator?.style?.mid?.value;
 
 

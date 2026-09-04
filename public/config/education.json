@@ -344,7 +344,7 @@
       "short_title": "Disconnected Youth",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDWAG9o2tS_C9Kxjn3DpBkx7F2u3dh3AVFOz5OSGzaz3rx_hg_M7KzYatkCwzo4NuPnQTiKDqnKxvj/pub?gid=0&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTOEbbk1BFErU-Ps5XzzDV3aOjVBXZmVa3SgKJdEt5qYldhUlu032rD3CLzm2OjUZsQEu6JOEaMPUWW/pub?gid=1485468344&single=true&output=csv",
       "short_name": "disconnectedYouth",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -391,6 +391,7 @@
         }
       },
       "legend": {
+        "title": null,
         "secondary-title-column": "pct",
         "secondary-title": "{{pct}}% of students"
       },

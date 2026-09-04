@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { inject, ref } from "vue";
 import type { IndicatorConfig } from "../types/IndicatorConfig";
 import axios from "axios";
-import { formatGoogleSheetData } from "../utils/data-transformations";
+import { formatAndNormalizeGoogleSheetData } from "../utils/data-transformations";
 export interface ThemeConfig {
   title: string;
   query_str: string;
@@ -35,8 +35,9 @@ export const useThemeLevelStore = defineStore("themeLevel", () => {
     if (currentIndicatorConfigs) {
       await Promise.all(
         currentIndicatorConfigs.map(async (indicator: IndicatorConfig) => {
-          indicator.google_sheets_data = formatGoogleSheetData(
+          indicator.google_sheets_data = formatAndNormalizeGoogleSheetData(
             (await axios.get(indicator.google_sheets_url)).data as any,
+            indicator.timeline?.yearValuePrefix,
           );
         }),
       );

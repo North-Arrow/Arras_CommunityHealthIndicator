@@ -48,10 +48,11 @@ const currentIndicator = computed(() => indicatorStore.getCurrentIndicator())
 const keyMapping = {
     "pct": "pct_",
     "count": "count_",
-    "pop": "pop_"
+    "pop": "pop_",
+    "rate": "rate_"
 }
 const stats = computed(() => {
-    const years = Array.from(new Set(Object.keys(props.properties).map(key => Number(key.toLowerCase().replace('count_', '').replace('pop_', '').replace('pct_', ''))).filter(year => !isNaN(+year))))
+    const years = Array.from(new Set(Object.keys(props.properties).map(key => Number(key.toLowerCase().replace('count_', '').replace('pop_', '').replace('pct_', '').replace('rate_', ''))).filter(year => !isNaN(+year))))
 
     const stats = [];
     const popup = currentIndicator?.value?.popup;
@@ -59,14 +60,21 @@ const stats = computed(() => {
         const count = props.properties[keyMapping.count + year.toString()] || '';
         const pop = props.properties[keyMapping.pop + year.toString()] || '';
         const pct = props.properties[keyMapping.pct + year.toString()] || '';
-        const isEmpty = count === '' && pop === '' && pct === '';
-        const pctOnly = pct !== '' && count === '' && pop === '';
+        const rate = props.properties[keyMapping.rate + year.toString()] || '';
+        const isEmpty = count === '' && pop === '' && pct === '' && rate === '';
+        const pctOnly = pct !== '' && count === '' && pop === '' && rate === '';
+        const replacePlaceholders = (template: string | undefined) =>
+            template
+                ?.replace('{{count}}', (+count).toLocaleString())
+                .replace('{{pop}}', (+pop).toLocaleString())
+                .replace('{{pct}}', pct.toLocaleString())
+                .replace('{{rate}}', rate.toLocaleString());
         stats.push({
             isEmpty: isEmpty,
             pctOnly: pctOnly,
             year: year,
-            title: popup?.format?.title?.replace('{{count}}', (+count).toLocaleString()).replace('{{pop}}', (+pop).toLocaleString()).replace('{{pct}}', pct.toLocaleString()),
-            subtitle: popup?.format?.subtitle?.replace('{{count}}', (+count).toLocaleString()).replace('{{pop}}', (+pop).toLocaleString()).replace('{{pct}}', pct.toLocaleString())
+            title: replacePlaceholders(popup?.format?.title),
+            subtitle: replacePlaceholders(popup?.format?.subtitle)
         })
     }
     return stats.reverse()
@@ -78,6 +86,7 @@ function formatLegendText(template: string | null | undefined) {
         .replace(/\{\{pct\}\}/g, '%')
         .replace(/\{\{count\}\}/g, 'Amount')
         .replace(/\{\{pop\}\}/g, 'Total')
+        .replace(/\{\{rate\}\}/g, 'Rate')
         .replace(/\{\{acres\}\}/g, 'Acres')
         .replace(/\s+/g, ' ')
         .trim()

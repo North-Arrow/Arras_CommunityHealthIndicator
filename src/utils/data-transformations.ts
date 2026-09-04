@@ -70,4 +70,75 @@ function formatGoogleSheetData(csvString: string) {
   };
 }
 
-export { formatGoogleSheetData };
+export type FormattedSheetData = {
+  headerLabels: string[];
+  headerShortNames: string[];
+  data: Record<string, string | undefined>[];
+};
+
+/**
+ * Align legacy mortality sheet headers with first-class metric prefixes:
+ * - countall_YYYY → count_YYYY
+ * - bare YYYY → rate_YYYY when yearValuePrefix is rate_ (and rate_YYYY is not already present)
+ */
+function normalizeSheetMetricColumns(
+  parsed: FormattedSheetData,
+  yearValuePrefix?: string
+): FormattedSheetData {
+  const renameMap = new Map<string, string>();
+
+  for (const header of parsed.headerShortNames) {
+    if (header.startsWith("countall_")) {
+      renameMap.set(header, "count_" + header.slice("countall_".length));
+    }
+  }
+
+  if (yearValuePrefix === "rate_") {
+    const existing = new Set(parsed.headerShortNames);
+    for (const header of parsed.headerShortNames) {
+      if (/^\d{4}$/.test(header)) {
+        const target = `rate_${header}`;
+        if (!existing.has(target)) {
+          renameMap.set(header, target);
+        }
+      }
+    }
+  }
+
+  if (renameMap.size === 0) {
+    return parsed;
+  }
+
+  const headerShortNames = parsed.headerShortNames.map(
+    (h) => renameMap.get(h) ?? h
+  );
+  const data = parsed.data.map((row) => {
+    const next: Record<string, string | undefined> = {};
+    for (const [key, value] of Object.entries(row)) {
+      next[renameMap.get(key) ?? key] = value;
+    }
+    return next;
+  });
+
+  return {
+    headerLabels: parsed.headerLabels,
+    headerShortNames,
+    data,
+  };
+}
+
+function formatAndNormalizeGoogleSheetData(
+  csvString: string,
+  yearValuePrefix?: string
+): FormattedSheetData {
+  return normalizeSheetMetricColumns(
+    formatGoogleSheetData(csvString),
+    yearValuePrefix
+  );
+}
+
+export {
+  formatGoogleSheetData,
+  normalizeSheetMetricColumns,
+  formatAndNormalizeGoogleSheetData,
+};

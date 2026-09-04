@@ -7,7 +7,7 @@ import {
   MIN_MULTIPLIER,
   MAX_MULTIPLIER,
 } from "../constants";
-import { formatGoogleSheetData } from "./data-transformations.js";
+import { formatAndNormalizeGoogleSheetData } from "./data-transformations.js";
 
 /**
  * Base class for mapping indicator data to MapLibre GL maps
@@ -32,6 +32,7 @@ export class DataToMap {
     count: { min: number | null; max: number | null };
     pop: { min: number | null; max: number | null };
     pct: { min: number | null; max: number | null };
+    rate: { min: number | null; max: number | null };
     acres: { min: number | null; max: number | null };
   };
   constructor(
@@ -73,6 +74,10 @@ export class DataToMap {
         min: 0,
         max: 100,
       },
+      rate: {
+        min: 0,
+        max: 100,
+      },
       acres: {
         min: 0,
         max: 100,
@@ -86,6 +91,8 @@ export class DataToMap {
     this.rangeValues.pop.max = this.getMax("pop") ?? null;
     this.rangeValues.pct.min = this.getMin("pct") ?? null;
     this.rangeValues.pct.max = this.getMax("pct") ?? null;
+    this.rangeValues.rate.min = this.getMin("rate") ?? null;
+    this.rangeValues.rate.max = this.getMax("rate") ?? null;
     this.rangeValues.count.min = this.getMin("count") ?? null;
     this.rangeValues.count.max = this.getMax("count") ?? null;
     this.rangeValues.acres.min = this.getMin("acres") ?? null;
@@ -117,7 +124,10 @@ export class DataToMap {
         if (googleSheetsUrl) {
           const response = await fetch(googleSheetsUrl);
           const data = await response.text();
-          const formattedData = formatGoogleSheetData(data);
+          const formattedData = formatAndNormalizeGoogleSheetData(
+            data,
+            this.data.timeline?.yearValuePrefix,
+          );
           geojson.features = geojson.features.map((feature: any) => {
             const row = formattedData.data.find((row: any) => +row.geoid === +feature.properties.geoid);
             if (row) {
@@ -369,7 +379,8 @@ export class DataToMap {
           const _filter = JSON.stringify(styling.filter)
           .replace(/\{\{pct\}\}/g, `pct_${year || this.year}`)
           .replace(/\{\{count\}\}/g, `count_${year || this.year}`)
-          .replace(/\{\{pop\}\}/g, `pop_${year || this.year}`);
+          .replace(/\{\{pop\}\}/g, `pop_${year || this.year}`)
+          .replace(/\{\{rate\}\}/g, `rate_${year || this.year}`);
 
           const parsedFilter = JSON.parse(_filter);
           this.map.setFilter(this.data.legend?.extra_layers?.layer_name as string, parsedFilter);
@@ -391,7 +402,8 @@ export class DataToMap {
                 .toLowerCase()
                 .replace("count_", "")
                 .replace("pop_", "")
-                .replace("pct_", ""),
+                .replace("pct_", "")
+                .replace("rate_", ""),
             ),
           )
           .filter((year: string | number) => !isNaN(+year)),

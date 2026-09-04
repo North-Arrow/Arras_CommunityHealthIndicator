@@ -56,7 +56,7 @@ Each indicator has a `google_sheets_url` in its theme config file (e.g. `public/
 The app expects a CSV export with:
 
 - A header row that includes **`geoid`** (and usually **`name`**).
-- Year columns named with prefixes: **`pct_2020`**, **`count_2020`**, **`pop_2020`** (four-digit year). The indicator’s `timeline.yearValuePrefix` in config (e.g. `pct_`) must match your columns.
+- Year columns named with prefixes: **`pct_2020`**, **`count_2020`**, **`pop_2020`**, **`rate_2020`** (four-digit year). The indicator’s `timeline.yearValuePrefix` in config (e.g. `pct_` or `rate_`) must match your columns. Use `rate_` for non-percentage rates (e.g. deaths per 100k).
 
 See [docs/INDICATOR_CONFIG_SPECIFICATION.md](./docs/INDICATOR_CONFIG_SPECIFICATION.md) → *Data Column Naming Convention*.
 
@@ -83,7 +83,7 @@ Adding an indicator requires **both** a Google Sheet **and** a new entry in the 
 
 ### A. Prepare the Google Sheet
 
-Same rules as [Update indicator data](#task-update-indicator-data-google-sheets): `geoid`, optional `name`, and year columns (`pct_YYYY`, etc.).
+Same rules as [Update indicator data](#task-update-indicator-data-google-sheets): `geoid`, optional `name`, and year columns (`pct_YYYY`, `rate_YYYY`, etc.).
 
 ### B. Add configuration
 

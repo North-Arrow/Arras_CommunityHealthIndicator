@@ -114,7 +114,7 @@ The following properties MUST be present in every indicator object:
 - **Type**: Object
 - **Description**: Configuration for timeline visualization
 - **Required Properties**:
-  - `yearValuePrefix` (string) - REQUIRED. Prefix for year-based data columns (e.g., `"pct_"`, `"count_"`, `"pop_"`)
+  - `yearValuePrefix` (string) - REQUIRED. Prefix for year-based data columns (e.g., `"pct_"`, `"count_"`, `"pop_"`, `"rate_"`)
   - `yearValueShortFormat` (string) - REQUIRED. Format string for displaying values in timeline, using `{{value}}` placeholder
   - `filterOut` (array) - REQUIRED. Array of strings representing geoid patterns to exclude from visualization. MUST be an array (empty array `[]` if no filters)
 - **Example**:
@@ -223,9 +223,11 @@ The following properties MAY be present in indicator objects:
 
 Google Sheets data MUST follow this column naming convention:
 - Year-based columns MUST use the format: `{prefix}_{year}` where:
-  - `prefix` is one of: `pct_`, `count_`, or `pop_`
-  - `year` is a 4-digit year (e.g., `2020`)
-- Examples: `pct_2020`, `count_2020`, `pop_2020`
+  - `prefix` is one of: `pct_`, `count_`, `pop_`, or `rate_`
+  - `year` is a 4-digit year (e.g. `2020`)
+- Examples: `pct_2020`, `count_2020`, `pop_2020`, `rate_2020`
+- `rate_` is for rates that are not percentages (e.g. deaths per 100,000). Prefer publishing `rate_YYYY` short names; the loader also accepts legacy bare-year rate columns (`2000`, `2010`, …) when `timeline.yearValuePrefix` is `rate_`.
+- `CountAll_YYYY` is normalized to `count_YYYY` at load time; prefer publishing `count_YYYY`.
 
 ## Template String Placeholders
 
@@ -233,6 +235,7 @@ The following placeholders MAY be used in format strings:
 - `{{pct}}` - Percentage value
 - `{{count}}` - Count value
 - `{{pop}}` - Population value
+- `{{rate}}` - Rate value (e.g. per 100k; uses `rate_YYYY` columns)
 - `{{value}}` - Generic value (used in timeline format)
 
 ## Property Ordering

@@ -110,13 +110,13 @@ const pointLegendNarrative = computed(
 );
 
 const secondaryTitleColumn = computed(() => {
-  return props.selectedIndicator?.legend?.['secondary-title-column'] as 'count' | 'pop' | 'pct' | 'acres' | undefined;
+  return props.selectedIndicator?.legend?.['secondary-title-column'] as 'count' | 'pop' | 'pct' | 'acres' | 'rate' | undefined;
 })
 
 const secondaryTitle = computed(() => {
   const titleTemplate = props.selectedIndicator?.legend?.['secondary-title'] as string | undefined;
-  const minValue = indicatorLevelStore.getMinValue(secondaryTitleColumn.value as 'count' | 'pop' | 'pct' | 'acres') ?? 0;
-  const maxValue = indicatorLevelStore.getMaxValue(secondaryTitleColumn.value as 'count' | 'pop' | 'pct' | 'acres') ?? 0;
+  const minValue = indicatorLevelStore.getMinValue(secondaryTitleColumn.value as 'count' | 'pop' | 'pct' | 'acres' | 'rate') ?? 0;
+  const maxValue = indicatorLevelStore.getMaxValue(secondaryTitleColumn.value as 'count' | 'pop' | 'pct' | 'acres' | 'rate') ?? 0;
   const midValue = ((minValue + maxValue) / 2).toFixed(0).toLocaleString();
 
   if (titleTemplate) {
@@ -136,9 +136,9 @@ const secondaryTitle = computed(() => {
 
 const legendTitle = computed(() => {
   const titleTemplate = props.selectedIndicator?.legend?.['title'] as string | undefined;
-  const titleColumn = props.selectedIndicator?.legend?.['title-column'] as 'count' | 'pop' | 'pct' | 'acres' | undefined;
-  const minValue = indicatorLevelStore.getMinValue(titleColumn as 'count' | 'pop' | 'pct' | 'acres') ?? 0;
-  const maxValue = indicatorLevelStore.getMaxValue(titleColumn as 'count' | 'pop' | 'pct' | 'acres') ?? 0;
+  const titleColumn = props.selectedIndicator?.legend?.['title-column'] as 'count' | 'pop' | 'pct' | 'acres' | 'rate' | undefined;
+  const minValue = indicatorLevelStore.getMinValue(titleColumn as 'count' | 'pop' | 'pct' | 'acres' | 'rate') ?? 0;
+  const maxValue = indicatorLevelStore.getMaxValue(titleColumn as 'count' | 'pop' | 'pct' | 'acres' | 'rate') ?? 0;
   const midValue = +(((minValue + maxValue) / 2).toFixed(0)).toLocaleString();
 
 

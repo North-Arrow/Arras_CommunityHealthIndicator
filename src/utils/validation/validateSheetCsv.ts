@@ -1,4 +1,4 @@
-import { formatGoogleSheetData } from '../data-transformations';
+import { formatAndNormalizeGoogleSheetData } from '../data-transformations';
 import { EXCLUDED_GEO_PATTERNS } from '../../constants';
 import {
   ALLOWED_EXTRA_COLUMNS,
@@ -216,11 +216,28 @@ export function validateSheetCsv(
       });
     }
     const isYear = YEAR_COLUMN_RE.test(name);
-    const isAllowed = ALLOWED_EXTRA_COLUMNS.has(name) || isYear;
+    const isLegacyBareYear =
+      ctx.yearValuePrefix === 'rate_' && /^\d{4}$/.test(name);
+    const isLegacyCountAll = /^countall_\d{4}$/.test(name);
+    const isAllowed =
+      ALLOWED_EXTRA_COLUMNS.has(name) ||
+      isYear ||
+      isLegacyBareYear ||
+      isLegacyCountAll;
     if (!isAllowed) {
       issues.push({
         severity: 'warn',
-        message: `Unrecognized short-name column "${name}" (expected geoid/name/lat/lng/acres or pct_|count_|pop_YYYY)`,
+        message: `Unrecognized short-name column "${name}" (expected geoid/name/lat/lng/acres or pct_|count_|pop_|rate_YYYY)`,
+        row: shortNameRowIdx + 1,
+        column: colIdx + 1,
+        columnName: name,
+      });
+    } else if (isLegacyBareYear || isLegacyCountAll) {
+      issues.push({
+        severity: 'warn',
+        message: isLegacyBareYear
+          ? `Legacy bare year column "${name}" will be treated as rate_${name}; rename the sheet short-name row to rate_${name}`
+          : `Legacy column "${name}" will be treated as count_${name.slice('countall_'.length)}; rename to count_${name.slice('countall_'.length)}`,
         row: shortNameRowIdx + 1,
         column: colIdx + 1,
         columnName: name,
@@ -240,27 +257,6 @@ export function validateSheetCsv(
   }
 
   if (!ctx.isExtraLayer) {
-    if (ctx.yearValuePrefix) {
-      const hasPrefix = headerShortNames.some((h) =>
-        h.startsWith(ctx.yearValuePrefix!)
-      );
-      if (!hasPrefix) {
-        issues.push({
-          severity: 'fail',
-          message: `No columns match timeline.yearValuePrefix "${ctx.yearValuePrefix}"`,
-          row: shortNameRowIdx + 1,
-        });
-      }
-    }
-    for (const prefix of ctx.requiredPrefixes) {
-      if (!headerShortNames.some((h) => h.startsWith(prefix))) {
-        issues.push({
-          severity: 'fail',
-          message: `Config placeholders require columns with prefix "${prefix}" but none found`,
-          row: shortNameRowIdx + 1,
-        });
-      }
-    }
     if (ctx.geotype && POINT_GEOTYPES.has(ctx.geotype)) {
       for (const col of ['lat', 'lng'] as const) {
         if (!headerShortNames.includes(col)) {
@@ -275,18 +271,42 @@ export function validateSheetCsv(
     }
   }
 
-  // Parse via existing helper for data-row checks
-  let parsed: ReturnType<typeof formatGoogleSheetData> | null = null;
+  // Parse via existing helper for data-row checks (normalizes legacy bare years / countall_)
+  let parsed: ReturnType<typeof formatAndNormalizeGoogleSheetData> | null = null;
   try {
-    parsed = formatGoogleSheetData(csvText);
+    parsed = formatAndNormalizeGoogleSheetData(csvText, ctx.yearValuePrefix);
   } catch (e) {
     issues.push({
       severity: 'fail',
-      message: `Failed to parse sheet with formatGoogleSheetData: ${
+      message: `Failed to parse sheet with formatAndNormalizeGoogleSheetData: ${
         e instanceof Error ? e.message : String(e)
       }`,
     });
     return issues;
+  }
+
+  if (!ctx.isExtraLayer) {
+    if (ctx.yearValuePrefix) {
+      const hasPrefix = parsed.headerShortNames.some((h) =>
+        h.startsWith(ctx.yearValuePrefix!)
+      );
+      if (!hasPrefix) {
+        issues.push({
+          severity: 'fail',
+          message: `No columns match timeline.yearValuePrefix "${ctx.yearValuePrefix}"`,
+          row: shortNameRowIdx + 1,
+        });
+      }
+    }
+    for (const prefix of ctx.requiredPrefixes) {
+      if (!parsed.headerShortNames.some((h) => h.startsWith(prefix))) {
+        issues.push({
+          severity: 'fail',
+          message: `Config placeholders require columns with prefix "${prefix}" but none found`,
+          row: shortNameRowIdx + 1,
+        });
+      }
+    }
   }
 
   const geoidSeen = new Map<string, number>();

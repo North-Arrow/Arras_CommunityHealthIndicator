@@ -751,7 +751,7 @@ export function collectSheetTargets(
     const collectFromText = (text: unknown) => {
       if (typeof text !== 'string') return;
       for (const ph of extractPlaceholders(text)) {
-        if (ph === 'pct' || ph === 'count' || ph === 'pop') {
+        if (ph === 'pct' || ph === 'count' || ph === 'pop' || ph === 'rate') {
           requiredPrefixes.add(`${ph}_`);
         }
       }

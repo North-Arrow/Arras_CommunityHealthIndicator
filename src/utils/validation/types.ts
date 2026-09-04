@@ -53,11 +53,12 @@ export const ALLOWED_PLACEHOLDERS = new Set([
   'pct',
   'count',
   'pop',
+  'rate',
   'acres',
   'value',
 ]);
 
-export const YEAR_COLUMN_RE = /^(pct|count|pop)_(\d{4})$/;
+export const YEAR_COLUMN_RE = /^(pct|count|pop|rate)_(\d{4})$/;
 export const ALLOWED_EXTRA_COLUMNS = new Set([
   'geoid',
   'name',
@@ -68,5 +69,5 @@ export const ALLOWED_EXTRA_COLUMNS = new Set([
   'more_info',
 ]);
 export const POINT_GEOTYPES = new Set(['school', 'facility']);
-export const MAP_COLUMN_KINDS = new Set(['pct', 'count', 'pop', 'acres']);
+export const MAP_COLUMN_KINDS = new Set(['pct', 'count', 'pop', 'rate', 'acres']);
 export const SHORT_NAME_RE = /^[a-zA-Z0-9_-]+$/;
