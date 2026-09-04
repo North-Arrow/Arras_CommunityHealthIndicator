@@ -36,6 +36,7 @@
       "default": "left",
       "geotype": "tract",
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRT9sRzNbN3RA9jfOSwV8VWN8-QCyd60ejnfQhNSS8MQkGn8u-BSXbIxkzwAFtE6CzVfv5Jr8nzMs7T/pub?gid=622872564&single=true&output=csv",
+      "dev_google_sheets_url":"https://docs.google.com/spreadsheets/d/e/2PACX-1vRT9sRzNbN3RA9jfOSwV8VWN8-QCyd60ejnfQhNSS8MQkGn8u-BSXbIxkzwAFtE6CzVfv5Jr8nzMs7T/pub?gid=820479073&single=true&output=csv",
       "short_name": "poverty",
       "timeline": {
         "yearValuePrefix": "pct_",
