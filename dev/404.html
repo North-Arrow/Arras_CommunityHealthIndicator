@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arras Community Indicator Tool</title>
+  </head>
+  <body>
+    <script>
+      // GitHub Pages SPA fallback that supports BOTH:
+      // - /...      (main on custom domain root)
+      // - /dev/...  (dev on custom domain subpath)
+      //
+      // Redirects to base with path/query/hash encoded in a query param,
+      // which index.html decodes and restores the original URL.
+      (function () {
+        var l = window.location;
+        var parts = l.pathname.split('/').filter(Boolean);
+        var isDev = parts[0] === 'dev';
+        var base = isDev ? '/dev/' : '/';
+        
+        // Reconstruct the full path (excluding base)
+        var path = parts.slice(isDev ? 1 : 0).join('/');
+        
+        // Encode the full URL path + query + hash as a single query parameter
+        var fullPath = path + l.search + l.hash;
+        // Use base64-like encoding, but URL-safe (avoiding = which breaks query params)
+        var encoded = encodeURIComponent(fullPath);
+        
+        // Redirect to base with encoded path as query param
+        l.replace(base + '?_redirect=' + encoded);
+      })();
+    </script>
+  </body>
+</html>
+
