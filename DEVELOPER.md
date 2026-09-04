@@ -149,14 +149,22 @@ npm run preview      # serve dist locally
 
 ### GitHub Pages (`.github/workflows/deploy.yml`)
 
-| Branch | Build | Publish path |
-|--------|-------|----------------|
-| `main` | `vite build --base=/` | `gh-pages` root → custom domain |
-| `dev` | `vite build --base=/dev/` | `gh-pages/dev/` |
+| Branch | Build | Publish path | URL |
+|--------|-------|----------------|-----|
+| `main` | `vite build --base=/` | `gh-pages` root | https://arras.north-arrow.org/ |
+| `dev` | `vite build --base=/dev/` | `gh-pages/dev/` | https://arras.north-arrow.org/dev/ |
 
 Uses `peaceiris/actions-gh-pages@v4` with `publish_dir: ./dist`. After each build, `npm run verify-dist` fails the job if `index.html` references hashed `/assets/*` files that are not on disk.
 
-**Local production deploy:** `npm run deploy-gh` — builds with `--base=/`, verifies assets, then publishes the **full** `dist/` folder via `gh-pages` (filesystem). This replaced the old `git subtree push --prefix dist` flow, which only published *tracked* files and could ship a new `index.html` without the matching gitignored JS/CSS (live 404s).
+#### Staging vs production workflow
+
+1. Develop and push to **`dev`** (or open PRs into `dev`). Each push runs the `deploy-dev` job and updates the staging site at `/dev/`.
+2. Verify on https://arras.north-arrow.org/dev/ (maps, configs, `/dev/validate`, etc.). Staging uses the same custom domain with Vite `base` `/dev/`, so asset and config paths mirror production.
+3. Promote with a PR **`dev` → `main`** (or merge). Pushing `main` updates production only; `keep_files: true` keeps the existing `/dev/` tree on `gh-pages`.
+
+Do **not** use a separate fork for staging — one repo, two branches is enough.
+
+**Local production deploy:** `npm run deploy-gh` — builds with `--base=/`, verifies assets, then publishes the **full** `dist/` folder via `gh-pages` (filesystem). This replaced the old `git subtree push --prefix dist` flow, which only published *tracked* files and could ship a new `index.html` without the matching gitignored JS/CSS (live 404s). Prefer CI for routine deploys.
 
 `keep_files` / `--add` preserves the `/dev/` preview tree when deploying main.
 
