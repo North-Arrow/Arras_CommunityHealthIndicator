@@ -69,6 +69,17 @@ See [docs/INDICATOR_CONFIG_SPECIFICATION.md](./docs/INDICATOR_CONFIG_SPECIFICATI
 
 If you create a new publish link, a developer must update `google_sheets_url` in the indicator’s JSON and deploy.
 
+### Staging sheet changes (test before production)
+
+Production and staging share the same configs. To try sheet edits without affecting the live site:
+
+1. Duplicate the Google Sheet **tab** (keep the same header structure).
+2. Rename clearly, e.g. `prek (prod)` / `prek (dev)`. Edit only the `(dev)` tab.
+3. **Publish to web** the **dev** tab as CSV and copy its URL (`gid=` will differ).
+4. Add optional `"dev_google_sheets_url": "<dev publish URL>"` next to `google_sheets_url` in the theme JSON (do not change the production URL).
+5. Verify on https://arras.north-arrow.org/dev/ (map + Download CSV + `/dev/validate`). Labels may show `[staging sheet]` when the staging URL is in use.
+6. When approved, copy values into the **prod** tab so the existing production publish link updates. You can leave `dev_google_sheets_url` in place for future edits.
+
 ### 4. Verify
 
 Open the live map for that theme (e.g. `?theme=econ`). Reload the page or switch away and back to the theme so data reloads. Use **Download CSV Data** on the timeline card to spot-check values.
@@ -110,7 +121,8 @@ Required fields (summary):
 | `title` / `short_title` | Names shown in UI |
 | `short_name` | Unique ID (no spaces; use underscores) |
 | `geotype` | `tract`, `county`, `school`, `facility`, etc. (see `main.json` → `geo`) |
-| `google_sheets_url` | Published CSV URL |
+| `google_sheets_url` | Published CSV URL (production) |
+| `dev_google_sheets_url` | Optional staging CSV URL (used on `/dev/` when set) |
 | `default` | `"left"`, `"right"`, or `false` |
 | `timeline` | `yearValuePrefix`, `yearValueShortFormat`, `filterOut` |
 | `popup` | `format` (+ optional `popup_legend`) |

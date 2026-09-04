@@ -3,6 +3,7 @@ import { inject, ref } from "vue";
 import type { IndicatorConfig } from "../types/IndicatorConfig";
 import axios from "axios";
 import { formatAndNormalizeGoogleSheetData } from "../utils/data-transformations";
+import { resolveGoogleSheetsUrl } from "../utils/resolveGoogleSheetsUrl";
 export interface ThemeConfig {
   title: string;
   query_str: string;
@@ -15,6 +16,7 @@ export const useThemeLevelStore = defineStore("themeLevel", () => {
   const currentThemeShortName = ref<string | null>(null);
   const categoryConfigs = inject("categoryConfigs") as any;
   const mainConfig = inject("mainConfig") as any;
+  const sitePath = inject<string>("sitePath", "");
   const mainConfigForCurrentTheme = ref<any>(null);
 
   async function setCurrentTheme(shortName?: string): Promise<boolean> {
@@ -35,8 +37,15 @@ export const useThemeLevelStore = defineStore("themeLevel", () => {
     if (currentIndicatorConfigs) {
       await Promise.all(
         currentIndicatorConfigs.map(async (indicator: IndicatorConfig) => {
+          const sheetsUrl = resolveGoogleSheetsUrl(indicator, sitePath);
+          if (!sheetsUrl) {
+            console.error(
+              `No google_sheets_url for indicator ${indicator.short_name}`,
+            );
+            return;
+          }
           indicator.google_sheets_data = formatAndNormalizeGoogleSheetData(
-            (await axios.get(indicator.google_sheets_url)).data as any,
+            (await axios.get(sheetsUrl)).data as any,
             indicator.timeline?.yearValuePrefix,
           );
         }),

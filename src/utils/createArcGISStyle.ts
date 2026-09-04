@@ -5,7 +5,7 @@ export default async function createArcGISStyle(sitePath: string) {
   const USE_LOCAL_STYLE = true;
   if(USE_LOCAL_STYLE) {
     const local = await fetch(
-      sitePath + 'assets/localStyle.json'
+      `${sitePath}/assets/localStyle.json`
     ).then((res) => res.json());
     applyMunicipalSuffixStripToStyle(local);
     return local;

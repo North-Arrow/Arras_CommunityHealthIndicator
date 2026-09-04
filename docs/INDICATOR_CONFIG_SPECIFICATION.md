@@ -66,9 +66,16 @@ The following properties MUST be present in every indicator object:
 
 #### `google_sheets_url` (string)
 - **Type**: String (URL)
-- **Description**: Public Google Sheets CSV export URL containing the indicator data
+- **Description**: Public Google Sheets CSV export URL containing the indicator data (production)
 - **Format**: MUST be a valid URL ending with `&output=csv`
 - **Example**: `"https://docs.google.com/spreadsheets/d/e/.../pub?gid=123&single=true&output=csv"`
+
+#### `dev_google_sheets_url` (string)
+- **Type**: String (URL)
+- **Description**: OPTIONAL. Staging CSV URL used automatically on the `/dev/` site when set. Production always uses `google_sheets_url`. Safe to leave unset; staging then falls back to production data.
+- **Format**: Same as `google_sheets_url` (`output=csv`)
+- **Example**: `"https://docs.google.com/spreadsheets/d/e/.../pub?gid=456&single=true&output=csv"`
+- **Also allowed** on `legend.extra_layers.data_merge` as `dev_google_sheets_url` alongside `google_sheets_url`
 
 #### ~~`source_name` (string)~~
 #### DEPRICATED (Moved to main.json config)
@@ -340,6 +347,7 @@ When creating a new indicator configuration, verify:
 - [ ] `geolevel` is `"area"` or `"point"`
 - [ ] `geotype` matches the data type
 - [ ] `google_sheets_url` is a valid CSV export URL
+- [ ] If present, `dev_google_sheets_url` is a valid CSV export URL (staging only; optional)
 - [ ] `short_name` is unique and URL-safe
 - [ ] `layers.main` is a valid layer identifier
 - [ ] `timeline.filterOut` is an array

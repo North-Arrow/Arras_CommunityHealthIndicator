@@ -165,7 +165,7 @@ export async function runValidation(
       filename: entry.filename,
       path: entry.path,
       issues,
-      targets: collectSheetTargets(parsed.data),
+      targets: collectSheetTargets(parsed.data, sitePath),
     });
   }
 

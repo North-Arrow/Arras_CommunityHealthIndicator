@@ -13,6 +13,8 @@ export interface IndicatorConfig {
             data_merge?: {
                 source?: string;
                 google_sheets_url?: string;
+                /** Staging CSV; used on /dev when set. */
+                dev_google_sheets_url?: string;
             };
         };
         [key: string]: any;
@@ -31,6 +33,7 @@ export interface IndicatorConfig {
         data_merge?: {
             source?: string;
             google_sheets_url?: string;
+            dev_google_sheets_url?: string;
         };
     };
 
@@ -42,6 +45,8 @@ export interface IndicatorConfig {
     geolevel: string;
     default: 'left' | 'right' | false;
     google_sheets_url: string;
+    /** Optional staging CSV URL; used automatically on the /dev site when set. */
+    dev_google_sheets_url?: string;
     google_sheets_data: any;
     source_name: string;
     layers: {

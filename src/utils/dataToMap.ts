@@ -8,6 +8,7 @@ import {
   MAX_MULTIPLIER,
 } from "../constants";
 import { formatAndNormalizeGoogleSheetData } from "./data-transformations.js";
+import { resolveGoogleSheetsUrl } from "./resolveGoogleSheetsUrl";
 
 /**
  * Base class for mapping indicator data to MapLibre GL maps
@@ -100,7 +101,13 @@ export class DataToMap {
     const { minValue, maxValue } = this.getMinMaxValues();
     this.minValue = minValue;
     this.maxValue = maxValue;
-    const legendExtra = this.data.legend?.extra_layers as { data_merge?: { source?: string; google_sheets_url?: string } } | undefined;
+    const legendExtra = this.data.legend?.extra_layers as {
+      data_merge?: {
+        source?: string;
+        google_sheets_url?: string;
+        dev_google_sheets_url?: string;
+      };
+    } | undefined;
     if(legendExtra?.data_merge) {
       await this.generateExtraGeojson(legendExtra.data_merge);
     }
@@ -112,10 +119,14 @@ export class DataToMap {
    * Generates GeoJSON from data
    * Overridden by subclasses (AreaDataToMap uses existing sources, PointDataToMap generates from coordinates)
    */
-  async generateExtraGeojson(dataMerge: { source?: string; google_sheets_url?: string } | undefined) {
+  async generateExtraGeojson(dataMerge: {
+    source?: string;
+    google_sheets_url?: string;
+    dev_google_sheets_url?: string;
+  } | undefined) {
     if(!this.map || !this.data) return null;
     if(!dataMerge) return null;
-    const googleSheetsUrl = dataMerge?.google_sheets_url;
+    const googleSheetsUrl = resolveGoogleSheetsUrl(dataMerge, this.sitePath);
    
     if (dataMerge?.source) {
       const source = this.map.getSource(dataMerge.source as string);

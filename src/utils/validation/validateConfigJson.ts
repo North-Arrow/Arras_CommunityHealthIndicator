@@ -10,6 +10,10 @@ import {
   locateJsonPath,
   parseJsonErrorPosition,
 } from './locateInText';
+import {
+  resolveGoogleSheetsUrl,
+  resolveGoogleSheetsUrlSource,
+} from '../resolveGoogleSheetsUrl';
 
 function issue(
   severity: ValidationIssue['severity'],
@@ -456,6 +460,46 @@ export function validateThemeConfig(
       }
     }
 
+    if (indicator.dev_google_sheets_url !== undefined && indicator.dev_google_sheets_url !== null) {
+      if (typeof indicator.dev_google_sheets_url !== 'string') {
+        issues.push(
+          issue(
+            'fail',
+            'dev_google_sheets_url must be a string',
+            `${base}.dev_google_sheets_url`,
+            raw,
+            anchor
+          )
+        );
+      } else {
+        const url = indicator.dev_google_sheets_url;
+        if (!url.includes('output=csv')) {
+          issues.push(
+            issue(
+              'fail',
+              'dev_google_sheets_url must be a published CSV URL (contain output=csv)',
+              `${base}.dev_google_sheets_url`,
+              raw,
+              anchor
+            )
+          );
+        }
+        try {
+          void new URL(url);
+        } catch {
+          issues.push(
+            issue(
+              'fail',
+              'dev_google_sheets_url is not a valid URL',
+              `${base}.dev_google_sheets_url`,
+              raw,
+              anchor
+            )
+          );
+        }
+      }
+    }
+
     if (indicator.data_source !== undefined && indicator.data_source !== null) {
       if (typeof indicator.data_source === 'string') {
         if (!ctx.dataSourceKeys.has(indicator.data_source)) {
@@ -645,6 +689,29 @@ export function validateThemeConfig(
                 );
               }
             }
+            if (dm?.dev_google_sheets_url !== undefined) {
+              if (typeof dm.dev_google_sheets_url !== 'string') {
+                issues.push(
+                  issue(
+                    'fail',
+                    'extra_layers data_merge.dev_google_sheets_url must be a string',
+                    `${base}.legend.extra_layers.data_merge.dev_google_sheets_url`,
+                    raw,
+                    anchor
+                  )
+                );
+              } else if (!dm.dev_google_sheets_url.includes('output=csv')) {
+                issues.push(
+                  issue(
+                    'fail',
+                    'extra_layers dev_google_sheets_url must contain output=csv',
+                    `${base}.legend.extra_layers.data_merge.dev_google_sheets_url`,
+                    raw,
+                    anchor
+                  )
+                );
+              }
+            }
           }
         }
       }
@@ -706,7 +773,8 @@ export function validateThemeConfig(
 }
 
 export function collectSheetTargets(
-  data: unknown
+  data: unknown,
+  sitePath: string = ''
 ): Array<{
   shortName: string;
   label: string;
@@ -766,11 +834,24 @@ export function collectSheetTargets(
     walk(indicator.popup);
     walk(indicator.legend);
 
-    if (typeof indicator.google_sheets_url === 'string') {
+    const sheetsFields = {
+      google_sheets_url:
+        typeof indicator.google_sheets_url === 'string'
+          ? indicator.google_sheets_url
+          : undefined,
+      dev_google_sheets_url:
+        typeof indicator.dev_google_sheets_url === 'string'
+          ? indicator.dev_google_sheets_url
+          : undefined,
+    };
+    const url = resolveGoogleSheetsUrl(sheetsFields, sitePath);
+    if (url) {
+      const source = resolveGoogleSheetsUrlSource(sheetsFields, sitePath);
       targets.push({
         shortName,
-        label: `${shortName}`,
-        url: indicator.google_sheets_url,
+        label:
+          source === 'dev' ? `${shortName} [staging sheet]` : `${shortName}`,
+        url,
         geotype,
         yearValuePrefix,
         requiredPrefixes,
@@ -780,15 +861,32 @@ export function collectSheetTargets(
     const legend = indicator.legend as Record<string, unknown> | undefined;
     const extra = legend?.extra_layers as Record<string, unknown> | undefined;
     const dm = extra?.data_merge as Record<string, unknown> | undefined;
-    if (typeof dm?.google_sheets_url === 'string') {
-      targets.push({
-        shortName,
-        label: `${shortName} (extra_layers)`,
-        url: dm.google_sheets_url,
-        geotype,
-        yearValuePrefix: undefined,
-        requiredPrefixes: new Set(),
-      });
+    if (dm) {
+      const extraFields = {
+        google_sheets_url:
+          typeof dm.google_sheets_url === 'string'
+            ? dm.google_sheets_url
+            : undefined,
+        dev_google_sheets_url:
+          typeof dm.dev_google_sheets_url === 'string'
+            ? dm.dev_google_sheets_url
+            : undefined,
+      };
+      const extraUrl = resolveGoogleSheetsUrl(extraFields, sitePath);
+      if (extraUrl) {
+        const source = resolveGoogleSheetsUrlSource(extraFields, sitePath);
+        targets.push({
+          shortName,
+          label:
+            source === 'dev'
+              ? `${shortName} (extra_layers) [staging sheet]`
+              : `${shortName} (extra_layers)`,
+          url: extraUrl,
+          geotype,
+          yearValuePrefix: undefined,
+          requiredPrefixes: new Set(),
+        });
+      }
     }
   });
 

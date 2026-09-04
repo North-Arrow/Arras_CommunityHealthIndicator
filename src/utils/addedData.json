@@ -7,11 +7,11 @@
     },
     "tracts-harmonized": {
       "type": "geojson",
-      "data": "${sitePath}ChestLanTractsHarmonized.geojson"
+      "data": "${sitePath}/ChestLanTractsHarmonized.geojson"
     },
     "counties-source": {
       "type": "geojson",
-      "data": "${sitePath}SC_counties.geojson"
+      "data": "${sitePath}/SC_counties.geojson"
     },
     "points-source": {
       "type": "geojson",

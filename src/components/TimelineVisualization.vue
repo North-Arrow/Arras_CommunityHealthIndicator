@@ -67,9 +67,11 @@ import useIndicatorLevelStore from '../stores/indicatorLevelStore';
 import IndicatorSelector from './IndicatorSelector.vue';
 import { YEAR_PATTERN } from '../constants';
 import { downloadGoogleSheetCsv } from '../utils/csvDownload';
+import { resolveGoogleSheetsUrl } from '../utils/resolveGoogleSheetsUrl';
 import { useAccessibilityStore } from '../stores/accessibilityStore';
 
 const emitter = inject('mitt') as any
+const sitePath = inject<string>('sitePath', '')
 interface Props {
   side: 'left' | 'right'
 }
@@ -232,7 +234,7 @@ const processData = (_feature: string | number | null) => {
 
 const downloadCsvData = async () => {
   const indicator = indicatorStore.getCurrentIndicator()
-  const url = indicator?.google_sheets_url
+  const url = resolveGoogleSheetsUrl(indicator ?? undefined, sitePath)
   if (!url) return
 
   try {
