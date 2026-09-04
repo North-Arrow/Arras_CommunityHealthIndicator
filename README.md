@@ -2,9 +2,17 @@
 
 Interactive dashboard for exploring community health indicators across Lancaster and Chester Counties (side-by-side maps, timelines, and comparisons by theme).
 
-**Live site:** [https://arras.north-arrow.org/](https://arras.north-arrow.org/)
+**Live site:** [https://arras.north-arrow.org/](https://arras.north-arrow.org/)  
+**Staging site:** [https://arras.north-arrow.org/dev/](https://arras.north-arrow.org/dev/)
 
 **For developers:** see [DEVELOPER.md](./DEVELOPER.md) (architecture, deployment, maintenance).
+
+### Editor how-tos (start here)
+
+Step-by-step guides for non-technical users (GitHub website + Google Sheets only):
+
+1. **[Update a config file on GitHub](./docs/editor-guide-update-config-on-github.md)** — edit JSON in the browser on the `dev` branch, validate, check staging, then merge to production with a pull request.  
+2. **[Update Google Sheets data (with a staging copy)](./docs/editor-guide-update-google-sheets.md)** — duplicate a sheet tab, publish the dev CSV, wire `dev_google_sheets_url`, test on `/dev/`, then copy into the production tab when ready.
 
 ---
 
@@ -31,13 +39,13 @@ The app does **not** read Google Docs directly. Data workflows use **Google Shee
 
 ## Publishing changes (non-developers)
 
-Someone with access to the GitHub repository must deploy updates:
+Prefer the detailed guides above. Short version:
 
-1. Edit files (or download from the [Config Editor](#config-editor-browser-tool) and replace files in the repo).
-2. Commit and push to the **`main`** branch on GitHub.
-3. GitHub Actions automatically builds and publishes to the live site (usually within a few minutes).
+1. Make changes on the **`dev`** branch (configs via [GitHub UI guide](./docs/editor-guide-update-config-on-github.md); numbers via [Google Sheets guide](./docs/editor-guide-update-google-sheets.md)).
+2. Check [staging](https://arras.north-arrow.org/dev/) and [validation](https://arras.north-arrow.org/dev/validate).
+3. Merge **`dev` → `main`** with a GitHub pull request when ready (required for config/deployable files; sheet *values* on an existing production publish URL update live after you paste into the prod tab).
 
-**Preview / staging:** Pushes to the **`dev`** branch publish to [https://arras.north-arrow.org/dev/](https://arras.north-arrow.org/dev/) for testing before production.
+GitHub Actions builds automatically after pushes to **`dev`** (staging) and **`main`** (production).
 
 If you do not have GitHub access, send updated config files or spreadsheets to your technical contact with clear instructions.
 
@@ -45,46 +53,11 @@ If you do not have GitHub access, send updated config files or spreadsheets to y
 
 ## Task: Update indicator data (Google Sheets)
 
-Use this when numbers change but the indicator already exists on the map.
+**Full walkthrough:** [docs/editor-guide-update-google-sheets.md](./docs/editor-guide-update-google-sheets.md)
 
-### 1. Open the correct Google Sheet
+Summary: keep the sheet structure (`geoid`, year columns like `pct_2020` / `rate_2020`, no thousands commas), edit a **dev** tab first, publish it as CSV, optionally set `dev_google_sheets_url`, verify on `/dev/`, then copy into the **prod** tab for the live site.
 
-Each indicator has a `google_sheets_url` in its theme config file (e.g. `public/config/economy.json`). Your technical contact can tell you which sheet belongs to which indicator, or you can search the repo for the indicator’s `short_name`.
-
-### 2. Keep the sheet structure
-
-The app expects a CSV export with:
-
-- A header row that includes **`geoid`** (and usually **`name`**).
-- Year columns named with prefixes: **`pct_2020`**, **`count_2020`**, **`pop_2020`**, **`rate_2020`** (four-digit year). The indicator’s `timeline.yearValuePrefix` in config (e.g. `pct_` or `rate_`) must match your columns. Use `rate_` for non-percentage rates (e.g. deaths per 100k).
-
-See [docs/INDICATOR_CONFIG_SPECIFICATION.md](./docs/INDICATOR_CONFIG_SPECIFICATION.md) → *Data Column Naming Convention*.
-
-### 3. Publish the sheet to the web
-
-1. In Google Sheets: **File → Share → Publish to web**.
-2. Choose the correct **sheet/tab** (the URL uses a `gid=` for the tab).
-3. Publish as **Comma-separated values (.csv)**.
-4. Copy the published link. It must end with **`&single=true&output=csv`** (or equivalent `output=csv`).
-
-If you create a new publish link, a developer must update `google_sheets_url` in the indicator’s JSON and deploy.
-
-### Staging sheet changes (test before production)
-
-Production and staging share the same configs. To try sheet edits without affecting the live site:
-
-1. Duplicate the Google Sheet **tab** (keep the same header structure).
-2. Rename clearly, e.g. `prek (prod)` / `prek (dev)`. Edit only the `(dev)` tab.
-3. **Publish to web** the **dev** tab as CSV and copy its URL (`gid=` will differ).
-4. Add optional `"dev_google_sheets_url": "<dev publish URL>"` next to `google_sheets_url` in the theme JSON (do not change the production URL).
-5. Verify on https://arras.north-arrow.org/dev/ (map + Download CSV + `/dev/validate`). Labels may show `[staging sheet]` when the staging URL is in use.
-6. When approved, copy values into the **prod** tab so the existing production publish link updates. You can leave `dev_google_sheets_url` in place for future edits.
-
-### 4. Verify
-
-Open the live map for that theme (e.g. `?theme=econ`). Reload the page or switch away and back to the theme so data reloads. Use **Download CSV Data** on the timeline card to spot-check values.
-
-**You do not need a redeploy** if only cell values changed and the publish URL stayed the same.
+See also [docs/INDICATOR_CONFIG_SPECIFICATION.md](./docs/INDICATOR_CONFIG_SPECIFICATION.md) → *Data Column Naming Convention*.
 
 ---
 
@@ -137,10 +110,14 @@ Commit, push to `main`, wait for GitHub Actions. Confirm the new indicator appea
 
 ## Task: Edit landing page copy
 
-1. Open **`public/config/main.json`**.
+**Prefer:** [Update a config file on GitHub](./docs/editor-guide-update-config-on-github.md) (edit `main.json` on `dev`, validate, merge).
+
+Short version:
+
+1. On branch **`dev`**, open **`public/config/main.json`**.
 2. Find **`landing_text`** (one long string).
-3. Edit the text. You may use **`<br><br>`** for paragraph breaks (HTML is rendered on the landing page).
-4. Deploy (push to `main`).
+3. Edit the text. You may use **`<br><br>`** for paragraph breaks.
+4. Commit on `dev`, check staging, then merge to `main`.
 
 **Do not** remove the `categories` array or other keys unless a developer instructs you.
 

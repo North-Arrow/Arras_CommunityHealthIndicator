@@ -166,7 +166,9 @@ Do **not** use a separate fork for staging — one repo, two branches is enough.
 
 #### Staging Google Sheets data
 
-Indicators may include optional `dev_google_sheets_url`. On `/dev/`, the app loads that CSV when present; production always uses `google_sheets_url`. See README → *Staging sheet changes* for the duplicate-tab + publish steps. Resolver: `src/utils/resolveGoogleSheetsUrl.ts`.
+Indicators may include optional `dev_google_sheets_url`. On `/dev/`, the app loads that CSV when present; production always uses `google_sheets_url`. Resolver: `src/utils/resolveGoogleSheetsUrl.ts`.
+
+**Editor-facing walkthroughs:** [update configs on GitHub](./docs/editor-guide-update-config-on-github.md) · [update Google Sheets with a staging tab](./docs/editor-guide-update-google-sheets.md)
 
 **Local production deploy:** `npm run deploy-gh` — builds with `--base=/`, verifies assets, then publishes the **full** `dist/` folder via `gh-pages` (filesystem). This replaced the old `git subtree push --prefix dist` flow, which only published *tracked* files and could ship a new `index.html` without the matching gitignored JS/CSS (live 404s). Prefer CI for routine deploys.
 
