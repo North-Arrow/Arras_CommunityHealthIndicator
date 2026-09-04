@@ -67,7 +67,7 @@
       "data_source": "sc_conserv_bank",
       "short_title": "Conservation Funding",
       "geotype": "facility",
-      "default": "sc_dep_conserv",
+      "default": false,
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSdmuURhWtn7eBRfF8mZB85n7cNV2VZ7oycQLSOdpF_RW26RqZFlwf0iUhMMuO3vAtndpbMUCF29dMb/pub?gid=1089528394&single=true&output=csv",
       "short_name": "protected_land_awards",
       "timeline": {
