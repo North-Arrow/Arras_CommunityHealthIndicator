@@ -154,9 +154,11 @@ npm run preview      # serve dist locally
 | `main` | `vite build --base=/` | `gh-pages` root → custom domain |
 | `dev` | `vite build --base=/dev/` | `gh-pages/dev/` |
 
-Uses `peaceiris/actions-gh-pages@v4` with `publish_dir: ./dist`.
+Uses `peaceiris/actions-gh-pages@v4` with `publish_dir: ./dist`. After each build, `npm run verify-dist` fails the job if `index.html` references hashed `/assets/*` files that are not on disk.
 
-**Note:** `package.json` script `deploy-gh` (git subtree) is legacy; CI is the source of truth.
+**Local production deploy:** `npm run deploy-gh` — builds with `--base=/`, verifies assets, then publishes the **full** `dist/` folder via `gh-pages` (filesystem). This replaced the old `git subtree push --prefix dist` flow, which only published *tracked* files and could ship a new `index.html` without the matching gitignored JS/CSS (live 404s).
+
+`keep_files` / `--add` preserves the `/dev/` preview tree when deploying main.
 
 `index.html` includes SPA redirect handling for GitHub Pages 404 → `index.html`.
 
@@ -237,7 +239,7 @@ When fixing bugs, start here:
 2. **Indicator missing** → `enabled`, theme JSON, `short_name`, `geotype` in `main.geo`.
 3. **Panel/popup wrong** → `areaDataToMap` / `pointDataToMap` + `Popup.vue` + indicator `popup`.
 4. **Layout/chrome** → `MapPage.vue` CSS vars, `ComparisonMap.vue`.
-5. **Deploy 404 on assets** → ensure full `dist/` published (CI), not partial subtree.
+5. **Deploy 404 on assets** → `index.html` hashes must exist under `dist/assets/`. Use CI or `npm run deploy-gh` (full filesystem publish). Never subtree-push tracked `dist/` alone. `npm run verify-dist` checks this.
 6. **Styles** → Vuetify in `plugins/vuetify.js`; global `style.css` (Benton Sans).
 
 ---

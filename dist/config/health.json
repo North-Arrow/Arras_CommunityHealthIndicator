@@ -105,26 +105,26 @@
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQAZ7te1R2RjauYyukLy8AzDXjLJgYofIjfn8ktnOt7TV2_j9TqtnoW31hWBOPqmtF8O4Y12dpUdSD5/pub?gid=361602694&single=true&output=csv",
       "short_name": "heart-disease",
       "timeline": {
-        "yearValuePrefix": "pop_",
+        "yearValuePrefix": "rate_",
         "yearValueShortFormat": "{{value}}/100k",
         "filterOut": []
       },
       "popup": {
         "popup_legend": {
-          "title": "Total per 100k",
-          "subtitle": "Amount residents total"
+          "title": "Rate per 100k",
+          "subtitle": "Number of deaths"
         },
         "format": {
-          "title": "{{pop}} per 100k",
+          "title": "{{rate}} per 100k",
           "subtitle": "{{count}}"
         }
       },
       "legend": {
-        "title-column": "pop",
-        "title": "{{pop}} per 100,000 residents"
+        "title-column": "rate",
+        "title": "{{rate}} per 100,000 residents"
       },
       "map": {
-        "color": "pop"
+        "color": "rate"
       },
       "tooltip-info": "Heart disease is a leading cause of death and disability. Monitoring mortality rates helps identify the prevalence of risk factors (such as obesity, smoking, and hypertension) and assesses the effectiveness of local healthcare systems in managing chronic cardiovascular conditions."
     },
@@ -169,26 +169,26 @@
       "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQx5IGI_FrPFnuH2_qxNO3csjQq6vE0VJEFPfqB4zGkltxOKuAMJ2CrBYSV6wiS6kE3p76nGqWc8iz/pub?gid=829636489&single=true&output=csv",
       "short_name": "neoplasm-mortality",
       "timeline": {
-        "yearValuePrefix": "pop_",
+        "yearValuePrefix": "rate_",
         "yearValueShortFormat": "{{value}}/100k",
         "filterOut": []
       },
       "popup": {
         "popup_legend": {
-          "title": "Total per 100k",
-          "subtitle": "Amount residents total"
+          "title": "Rate per 100k",
+          "subtitle": "Number of deaths"
         },
         "format": {
-          "title": "{{pop}} per 100k",
+          "title": "{{rate}} per 100k",
           "subtitle": "{{count}}"
         }
       },
       "legend": {
-        "title-column": "pop",
-        "title": "{{pop}} per 100,000 residents"
+        "title-column": "rate",
+        "title": "{{rate}} per 100,000 residents"
       },
       "map": {
-        "color": "pop"
+        "color": "rate"
       },
       "tooltip-info": "Cancer mortality rates reflect the severe burden of disease within the community. This metric highlights the impact of environmental and behavioral risk factors, as well as the availability and utilization of early detection screenings and quality treatment services."
     },

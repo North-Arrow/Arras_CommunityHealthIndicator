@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
-    "deploy-gh": "git push -d origin gh-pages; git subtree push --prefix dist origin gh-pages"
+    "verify-dist": "node scripts/verify-dist-assets.mjs",
+    "deploy-gh": "node scripts/deploy-gh.mjs"
   },
   "dependencies": {
     "@arcgis/map-components": "^4.34.9",

@@ -37,13 +37,19 @@ jobs:
       - name: Build (main -> site root)
         run: npm run build -- --base=/
 
+      - name: Verify dist asset references
+        run: npm run verify-dist
+
       - name: Deploy to gh-pages (root)
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./dist
+          # Keep /dev/ (and other unrelated paths) when publishing root.
+          # Full dist/ from this job is still uploaded, including new hashed assets.
           keep_files: true
+          cname: arras.north-arrow.org
 
   deploy-dev:
     if: github.ref_name == 'dev'
@@ -63,6 +69,9 @@ jobs:
 
       - name: Build (dev -> /dev/)
         run: npm run build -- --base=/dev/
+
+      - name: Verify dist asset references
+        run: npm run verify-dist
 
       - name: Deploy to gh-pages (dev subfolder)
         uses: peaceiris/actions-gh-pages@v4
