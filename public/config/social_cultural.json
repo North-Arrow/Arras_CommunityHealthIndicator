@@ -21,7 +21,7 @@
         },
         "format": {
           "title": "{{pct}}%",
-          "subtitle": null
+          "subtitle": "{{count}} of {{pop}}"
         }
       },
       "legend": {
