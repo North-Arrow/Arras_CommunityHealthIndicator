@@ -6,7 +6,7 @@
       "short_title": "Grandparent Caretakers",
       "geotype": "county",
       "default": "right",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9sGRCKoXuLSJ5tURB-k1iXI7hng56SqraMUy8G4YIA9Z4uFM2w5VOIbU2V2L43S5aBhvxjLtQzXNr/pub?gid=1391789345&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTap76TYvUgSrNBTaekNPbE0KEdaXb06QQrFkvD9p0K5AOGEb4nb_JTwrC2EFW23DhOIG9VskaYestC/pub?gid=505931405&single=true&output=csv",
       "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9sGRCKoXuLSJ5tURB-k1iXI7hng56SqraMUy8G4YIA9Z4uFM2w5VOIbU2V2L43S5aBhvxjLtQzXNr/pub?gid=1425388500&single=true&output=csv",
       "short_name": "grandchildren",
       "timeline": {
@@ -94,7 +94,8 @@
       "short_title": "Population Change",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8gacbSx8FH5jb2LmQNAQnUdxiXnhs1k6edAhwpSsCOG7u-53e9SY3vcrZtOKwouFT4xRC2DIEBuon/pub?gid=1076089840&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8gacbSx8FH5jb2LmQNAQnUdxiXnhs1k6edAhwpSsCOG7u-53e9SY3vcrZtOKwouFT4xRC2DIEBuon/pub?gid=731402692&single=true&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS8gacbSx8FH5jb2LmQNAQnUdxiXnhs1k6edAhwpSsCOG7u-53e9SY3vcrZtOKwouFT4xRC2DIEBuon/pub?gid=731970826&single=true&output=csv",
       "short_name": "population_change",
       "timeline": {
         "yearValuePrefix": "pct_",
