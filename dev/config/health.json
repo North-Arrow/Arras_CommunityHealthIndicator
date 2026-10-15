@@ -39,8 +39,8 @@
       "short_title": "Health Insurance",
       "geotype": "tract",
       "default": "right",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1suIZTqB1RDveP771fMNupzwvoWvh44XMO1dDphuIS2s/export?format=csv&sheet=production",
-      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1suIZTqB1RDveP771fMNupzwvoWvh44XMO1dDphuIS2s/export?format=csv&sheet=staging",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRF737OIBxi-LVgvK_Dg5Bz2DucYYmSJgyfkGwmBQnPkfDYr6ew3Oib9qiR0AMz18J9Aj7bv-lb3xe8/pub?gid=420232433&single=true&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRF737OIBxi-LVgvK_Dg5Bz2DucYYmSJgyfkGwmBQnPkfDYr6ew3Oib9qiR0AMz18J9Aj7bv-lb3xe8/pub?gid=2037614155&single=true&output=csv",
       "short_name": "no_health_insurance",
       "timeline": {
         "yearValuePrefix": "pct_",
