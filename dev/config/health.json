@@ -6,7 +6,8 @@
       "short_title": "Smokers",
       "geotype": "tract",
       "default": "left",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRenE0k_5PqyC_bP8DsVfuheopSPQbHNSdcB6ipGGqqKixPSzyxNT4fiPQw2GUnfKiMUHtuqf5If98c/pub?gid=482200278&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1HSWJkuSilBHnLBsEZkC3JrdVL8rASnNVxFemdM24iY8/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1HSWJkuSilBHnLBsEZkC3JrdVL8rASnNVxFemdM24iY8/export?format=csv&sheet=staging",
       "short_name": "smokers",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -38,7 +39,8 @@
       "short_title": "Health Insurance",
       "geotype": "tract",
       "default": "right",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxPi4GgcloW3FKCIEwM--UA9HhKQjNOGxEoTQC1quZEmlEF-5V9GXIvepoImUQ2c8QXfkmyB79MjS/pub?gid=534592488&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1suIZTqB1RDveP771fMNupzwvoWvh44XMO1dDphuIS2s/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1suIZTqB1RDveP771fMNupzwvoWvh44XMO1dDphuIS2s/export?format=csv&sheet=staging",
       "short_name": "no_health_insurance",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -70,7 +72,8 @@
       "short_title": "Food Insecurity",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSpN9_3frlzhn0QzhN3IVYxJ4T4n6RjdAG9mQfq_Tk0qF5AwRUo-CWraFTIWM5tyznNZxbRW8siUNLm/pub?gid=849801194&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1P7U98rEASmLcLVsbacQfiOCKvek52r68or4ZO7jOvtY/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1P7U98rEASmLcLVsbacQfiOCKvek52r68or4ZO7jOvtY/export?format=csv&sheet=staging",
       "short_name": "food-insecurity",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -102,7 +105,8 @@
       "short_title": "Heart Disease Mortality",
       "geotype": "county",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQAZ7te1R2RjauYyukLy8AzDXjLJgYofIjfn8ktnOt7TV2_j9TqtnoW31hWBOPqmtF8O4Y12dpUdSD5/pub?gid=361602694&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/12T2Lq9VzFVqVZkRTeCkXY94HcueM6CjG8z_npAo_oIU/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/12T2Lq9VzFVqVZkRTeCkXY94HcueM6CjG8z_npAo_oIU/export?format=csv&sheet=staging",
       "short_name": "heart-disease",
       "timeline": {
         "yearValuePrefix": "rate_",
@@ -134,7 +138,8 @@
       "short_title": "Low Birth Weight",
       "geotype": "county",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTSIDstR1PxU_mFXK6GbZGvKUoLN8HXi4UASSww3tFAxBzkV2EZMmtkh9_v_OSkZxAc2g2oSNYogSav/pub?gid=0&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1G0kJ3xXoWnp_kP5lNlgDx9UGcw1O9qSZWmRdf-Tu5Xs/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1G0kJ3xXoWnp_kP5lNlgDx9UGcw1O9qSZWmRdf-Tu5Xs/export?format=csv&sheet=staging",
       "short_name": "birth-weight",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -166,7 +171,8 @@
       "short_title": "Cancer Mortality",
       "geotype": "county",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQx5IGI_FrPFnuH2_qxNO3csjQq6vE0VJEFPfqB4zGkltxOKuAMJ2CrBYSV6wiS6kE3p76nGqWc8iz/pub?gid=829636489&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/14gme1vIbDna-LGAUVGfQZ4fMzPjqH2WEpnXVvRy-3Tw/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/14gme1vIbDna-LGAUVGfQZ4fMzPjqH2WEpnXVvRy-3Tw/export?format=csv&sheet=staging",
       "short_name": "neoplasm-mortality",
       "timeline": {
         "yearValuePrefix": "rate_",
@@ -198,7 +204,8 @@
       "short_title": "Mental Health Distress",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSiMSkw-to8lXOD0pyjuoci-xIFvCdL3woQsEsPtPI0w1TO-g-zt1UVAOV4TOczQ_0RIWX_iFm4EasK/pub?gid=876954295&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1gVeKP9gYdIjOJ3ofZNkGAhph62SicTFeCgegKrgYrD4/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1gVeKP9gYdIjOJ3ofZNkGAhph62SicTFeCgegKrgYrD4/export?format=csv&sheet=staging",
       "short_name": "mental-health-distress",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -230,7 +237,8 @@
       "short_title": "Routine Checkups",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSnJkFJHxwHVr8YseJRFPdIzYbvWY9G5Rgzo2Izrg1Tg2s_tVYSV5E38dgz-Fl4CFwcCIFxPv9F_o1N/pub?gid=0&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1Jw-j1j-E11p4FK3sciztHLbXXSGBEgBS35uuuIz0YCU/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1Jw-j1j-E11p4FK3sciztHLbXXSGBEgBS35uuuIz0YCU/export?format=csv&sheet=staging",
       "short_name": "doctor-visits",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -262,7 +270,8 @@
       "short_title": "Primary Care Providers",
       "geotype": "county",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGdqqgaN6wAWaicLjxM5A1da7trVXWYXxavwHMs03056hZgognkNQ8ykvlxlB92BrBv1TXzSLlMsDH/pub?gid=1437757701&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1-fS4XweJM27ItkIrIKJhcXzF2_v6OFEuaUu3Y02a19U/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1-fS4XweJM27ItkIrIKJhcXzF2_v6OFEuaUu3Y02a19U/export?format=csv&sheet=staging",
       "short_name": "primary-care-provider-ratio",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -293,7 +302,8 @@
       "short_title": "Mental Health Providers",
       "geotype": "county",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTVCNz20UXGQSJynxm2JeMA8JBmNGd9plBDL-YYR-N8XCKXPwOvpwkYYE-aZG1m1hxmKdr98ZNYKRtP/pub?gid=737318173&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1ndtGU-uQsxnwfe_3iyqju6YwgFvH5n0X9e1kSLeQXqk/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1ndtGU-uQsxnwfe_3iyqju6YwgFvH5n0X9e1kSLeQXqk/export?format=csv&sheet=staging",
       "short_name": "mental-health-care-provider-ratio",
       "data_source": "hsra",
       "timeline": {
