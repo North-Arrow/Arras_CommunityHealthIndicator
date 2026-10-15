@@ -677,7 +677,7 @@ export function validateThemeConfig(
                     anchor
                   )
                 );
-              } else if (!dm.google_sheets_url.includes('output=csv')) {
+              } else if (!dm.google_sheets_url.includes('output=csv') && !dm.google_sheets_url.includes('export?format=csv')) {
                 issues.push(
                   issue(
                     'fail',
@@ -700,7 +700,7 @@ export function validateThemeConfig(
                     anchor
                   )
                 );
-              } else if (!dm.dev_google_sheets_url.includes('output=csv')) {
+              } else if (!dm.dev_google_sheets_url.includes('output=csv') && !dm.dev_google_sheets_url.includes('export?format=csv')) {
                 issues.push(
                   issue(
                     'fail',
