@@ -85,7 +85,8 @@
           },
           "data_merge": {
             "source": "tracts-harmonized-dup",
-            "google_sheets_url": "https://docs.google.com/spreadsheets/d/1sourXTieXo10vsNWjas0W1OKSA0ErVuF7YK9pJbd-Hs/export?format=csv&sheet=production"
+            "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSBClnDkRDqdSfmA32qtB_sYtq4RwbHDbpeDTQuT7Icde9whZdKDrV2wMrfgihZfjQbF5ad_Yd817wL/pub?gid=1735437551&single=true&output=csv",
+            "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSBClnDkRDqdSfmA32qtB_sYtq4RwbHDbpeDTQuT7Icde9whZdKDrV2wMrfgihZfjQbF5ad_Yd817wL/pub?gid=724440388&single=true&output=csv"
           }
         }
       },

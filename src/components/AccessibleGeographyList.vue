@@ -50,7 +50,12 @@ const items = computed(() => {
       title: String(row.name ?? row.geoid ?? ''),
       properties: row,
     }))
-    .sort((a: { title: string }, b: { title: string }) => a.title.localeCompare(b.title))
+    .sort((a: { title: string }, b: { title: string }) => {
+      const aNum = a.title.trim() !== '' && !isNaN(Number(a.title))
+      const bNum = b.title.trim() !== '' && !isNaN(Number(b.title))
+      if (aNum !== bNum) return aNum ? 1 : -1
+      return aNum ? Number(a.title) - Number(b.title) : a.title.localeCompare(b.title)
+    })
 })
 
 watch(
