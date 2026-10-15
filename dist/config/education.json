@@ -4,9 +4,10 @@
       "title": "Percent of 3 and 4 Year Olds enrolled in Pre-K (both public and private schools)",
       "data_source": "census",
       "short_title": "Pre-K Enrollment",
-      "geotype": "tract",
+      "geotype": "county",
       "default": "right",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSygEfL4IXNKghq9ZCxT2_eIivEdHBXiddv-_Pb2U44ltaoSd8Qjgeu3m18JAJVK-VNHeDNXSMr25V1/pub?gid=1483288023&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/14oC6W3hOaxBn8Fbh0TsYJ2AYxSN2dczoNIib7gtZJSU/export?format=csv&gid=1665543815&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/14oC6W3hOaxBn8Fbh0TsYJ2AYxSN2dczoNIib7gtZJSU/export?format=csv&gid=1376481816&output=csv",
       "short_name": "prek",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -35,7 +36,8 @@
       "short_title": "Child Poverty",
       "default": "left",
       "geotype": "tract",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRT9sRzNbN3RA9jfOSwV8VWN8-QCyd60ejnfQhNSS8MQkGn8u-BSXbIxkzwAFtE6CzVfv5Jr8nzMs7T/pub?gid=622872564&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1NipKtGxKmjLqVNUp_AJHUngyDaF8HxM87dWoTmlCLDQ/export?format=csv&gid=11524395&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1NipKtGxKmjLqVNUp_AJHUngyDaF8HxM87dWoTmlCLDQ/export?format=csv&gid=564730409&output=csv",
       "short_name": "poverty",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -64,7 +66,9 @@
       "short_title": "Childcare Capacity",
       "geotype": "facility",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSMz-sXo5YL08yptNOf64atoW_IT7F1ATHxMAQSWLHkmBZ7_60Fdf7wTGMYrDS-p_YlHsFwy9PZMwKQ/pub?gid=1305246607&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1nRCLBH04UArf_apG1jrmphmqeYFFqpwUyGXpYnK8kSM/export?format=csv&gid=1198654312&output=csv",
+
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1nRCLBH04UArf_apG1jrmphmqeYFFqpwUyGXpYnK8kSM/export?format=csv&gid=1195219428&output=csv",
       "short_name": "childcare",
       "timeline": {
         "yearValuePrefix": "count_",
@@ -99,7 +103,8 @@
       "short_title": "3rd Grade Math Ready",
       "geotype": "school",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSCu5kjxric5yfSKfHIDWjgb5-aYVInFA6Dxb09sf59l7dEvI3EETNvW_jEbjBp9Zmvzfe0Ba79UN-e/pub?gid=1083324309&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1lewSGDjGeMTJBKzc16KlWNStzQ37CnXMuN9SvOUBDh8/export?format=csv&gid=175510818&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1lewSGDjGeMTJBKzc16KlWNStzQ37CnXMuN9SvOUBDh8/export?format=csv&gid=1690665923&output=csv",
       "short_name": "3rdGradeMathReadiness",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -134,7 +139,9 @@
       "short_title": "3rd Grade ELA Ready",
       "geotype": "school",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRf32BM5HywH4IqtpbBCPy1SlDBIkuTVDfjY82kLHmqWVelJ3a7QpIz9gJ3z3TLR-wTh2O0ILkfNFJw/pub?gid=519161792&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1jM7WOowRCsyfQl5NW97IlEM-WqabzuQ1cj4johqm1_A/export?format=csv&gid=1453452310&output=csv",
+
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1jM7WOowRCsyfQl5NW97IlEM-WqabzuQ1cj4johqm1_A/export?format=csv&gid=919574633&output=csv",
       "short_name": "3rdGradeELAReadiness",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -169,7 +176,8 @@
       "short_title": "8th Grade Math Ready",
       "geotype": "school",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHeife7ClQQFcuKRP9n0fBNGs58kcP6_AflLZO03xwvmKo1r5WGL-OuhbVA52xjAhu5xeGdlzjJbN7/pub?gid=513352825&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1HHl1J37CEawTckOjvLhG9Tsi8nOlQCEZSc6wda6AHAc/export?format=csv&gid=1402210549&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1HHl1J37CEawTckOjvLhG9Tsi8nOlQCEZSc6wda6AHAc/export?format=csv&gid=716260323&output=csv",
       "short_name": "8thGradeMathReadiness",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -204,7 +212,8 @@
       "short_title": "8th Grade ELA Ready",
       "geotype": "school",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS6FPF6zgHXWsooV1Nt7NjbywhsspWKDoGaRBj9Z6urjVm_7eszcS-lKdX7lNnE827V7ENLF4BFhtNG/pub?gid=646730336&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/19gtIHZ-b7B9kWgZw9XIpKRPKAY_Xj5J87GU5Tkfn1-8/export?format=csv&gid=995233798&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/19gtIHZ-b7B9kWgZw9XIpKRPKAY_Xj5J87GU5Tkfn1-8/export?format=csv&gid=398243571&output=csv",
       "short_name": "8thGradeELAReadiness",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -239,7 +248,8 @@
       "short_title": "HS Grad. Rate",
       "geotype": "school",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQRMExRmu74MTZeJpvkmWPtITx0-Dgb3T6PF2ZtWGrQBcH2bd0GM89lkbPPW-xfRT59ThohYoNdWTD3/pub?gid=54733314&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1_VZtJ-la-5najxaXMuj10v5q1-fb0Oa6bSwZo_IyZYw/export?format=csv&gid=1685941359&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1_VZtJ-la-5najxaXMuj10v5q1-fb0Oa6bSwZo_IyZYw/export?format=csv&gid=160865101&output=csv",
       "short_name": "highSchoolCompletion",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -274,7 +284,8 @@
       "short_title": "HS Career Ready",
       "geotype": "school",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8jPJ9dEnqbCW0PWrpRaDMCgrVUQcTnOPOzxtfPin1iEOIZAVDBNf3PWJskRJtI67fVPfm905vGUz1/pub?gid=633516775&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1GPNe4Q99PbCCFOGAyMwixPf2A7HGXFogsa0AbrRYf6w/export?format=csv&gid=349773571&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1GPNe4Q99PbCCFOGAyMwixPf2A7HGXFogsa0AbrRYf6w/export?format=csv&gid=1035857372&output=csv",
       "short_name": "highSchoolCareerReadiness",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -309,7 +320,8 @@
       "short_title": "HS College Ready",
       "geotype": "school",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmSnL3B1lHsHv5wWwDDCQ7B8Cf7hF7xLGhT907Gik-xZc0x4FBX-JqvV9OWCUYMagfj-hzvdWLT793/pub?gid=1658262532&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1pT1VxZDzFS8t1KGo82moQ5FfJdYliAbX2yviGg_P3X0/export?format=csv&gid=1421303498&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1pT1VxZDzFS8t1KGo82moQ5FfJdYliAbX2yviGg_P3X0/export?format=csv&gid=1866072675&output=csv",
       "short_name": "highSchoolCollegeReadiness",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -344,7 +356,8 @@
       "short_title": "Disconnected Youth",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTOEbbk1BFErU-Ps5XzzDV3aOjVBXZmVa3SgKJdEt5qYldhUlu032rD3CLzm2OjUZsQEu6JOEaMPUWW/pub?gid=1485468344&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1JhvQuaalBAgqxAX81SGdJ44nYPHTpvC9XrLN7ZebBGk/export?format=csv&gid=1646901911&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1JhvQuaalBAgqxAX81SGdJ44nYPHTpvC9XrLN7ZebBGk/export?format=csv&gid=1900715556&output=csv",
       "short_name": "disconnectedYouth",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -373,7 +386,8 @@
       "short_title": "K Ready",
       "geotype": "school",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDAYHOcGSybhfAirkRiKEyW7vgIj4aomJt_pNCcxAASGSwwNwtO5h7oPx6BVxyiN1Uij5nj7xdVDsU/pub?gid=1682018538&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1R-vQB2nbltHtjKriCUjyCPy1WpU129hF4kLMT6T5LKY/export?format=csv&gid=1783628388&output=csv",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1R-vQB2nbltHtjKriCUjyCPy1WpU129hF4kLMT6T5LKY/export?format=csv&gid=308967243&output=csv",
       "short_name": "kReadiness",
       "timeline": {
         "yearValuePrefix": "pct_",

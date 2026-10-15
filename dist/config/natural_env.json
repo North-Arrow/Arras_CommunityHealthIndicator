@@ -6,7 +6,8 @@
       "short_title": "Protected Land",
       "geotype": "protected",
       "default": "left",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTnq8Ae0o31UFOqO9ubmedo1zmYJAsUh4dFhx4PaLRQjX9ks4-Tq8muSC2Wv5yBLxG5CBplDASxEJdm/pub?gid=162120824&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1IrEln3OmOoWpjg4AdeukBb4o1-7uCULApntGHMhridk/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1IrEln3OmOoWpjg4AdeukBb4o1-7uCULApntGHMhridk/export?format=csv&sheet=staging",
       "short_name": "protected_land",
       "timeline": {
         "yearValuePrefix": "count_",
@@ -39,7 +40,8 @@
       "geotype": "protected",
       "default": "right",
       "data_source": "county_health_rankings",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSGdqqgaN6wAWaicLjxM5A1da7trVXWYXxavwHMs03056hZgognkNQ8ykvlxlB92BrBv1TXzSLlMsDH/pub?gid=1437757701&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1D3qeCldsGfYENd1JYseTc6QS6vG4KRwCnFytj50LQto/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1D3qeCldsGfYENd1JYseTc6QS6vG4KRwCnFytj50LQto/export?format=csv&sheet=staging",
       "short_name": "pollution",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -68,7 +70,8 @@
       "short_title": "Conservation Funding",
       "geotype": "facility",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSdmuURhWtn7eBRfF8mZB85n7cNV2VZ7oycQLSOdpF_RW26RqZFlwf0iUhMMuO3vAtndpbMUCF29dMb/pub?gid=1089528394&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1oSfwj0L488-FF9qPw3f-RxZuGySgtS7y-l27Ml4ZV5M/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1oSfwj0L488-FF9qPw3f-RxZuGySgtS7y-l27Ml4ZV5M/export?format=csv&sheet=staging",
       "short_name": "protected_land_awards",
       "timeline": {
         "yearValuePrefix": "count_",

@@ -434,7 +434,7 @@ export function validateThemeConfig(
 
     if (typeof indicator.google_sheets_url === 'string') {
       const url = indicator.google_sheets_url;
-      if (!url.includes('output=csv')) {
+      if (!url.includes('output=csv') && !url.includes('export?format=csv')) {
         issues.push(
           issue(
             'fail',
@@ -473,7 +473,7 @@ export function validateThemeConfig(
         );
       } else {
         const url = indicator.dev_google_sheets_url;
-        if (!url.includes('output=csv')) {
+        if (!url.includes('output=csv') && !url.includes('export?format=csv')) {
           issues.push(
             issue(
               'fail',
