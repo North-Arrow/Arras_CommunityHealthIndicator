@@ -31,7 +31,7 @@
       "tooltip-info": "Educational attainment is strongly linked to various outcomes for individuals and society. On average, higher education equates to higher income, greater economic stability, and better health outcomes throughout the lifespan."
     },
     {
-      "title": "Percent of families with children living in 'concentrated poverty'-—areas where the poverty rate is over 40%",
+      "title": "Percent of families with children living in 'concentrated poverty'-—areas where the poverty rate is over 20%",
       "data_source": "census",
       "short_title": "Children in Concentrated Poverty",
       "geotype": "tract",
@@ -59,7 +59,7 @@
         "title": "{{pct}}% of children",
         "extra_layers": {
           "layer_name": "child-poverty-tracts",
-          "html": "<span class='legend-title'>Over 40% in Poverty: <img src='assets/pattern-a.png' class='poverty-pattern' /></span>",
+          "html": "<span class='legend-title'>Over 20% in Poverty: <img src='assets/pattern-a.png' class='poverty-pattern' /></span>",
           "styling": {
             "image": {
               "id": "poverty-pattern",
@@ -79,7 +79,7 @@
                     "{{pct}}"
                   ]
                 ],
-                40
+                20
               ]
             ]
           },
@@ -314,7 +314,7 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "The unemployment rate is the percentage of the labor force actively seeking employment but unable to find it, suggesting broader economimc trends and challenges."
+      "tooltip-info": "The unemployment rate is the percentage of the labor force actively seeking employment but unable to find it, suggesting broader economic trends and challenges."
     },
     {
       "title": "Percent of housing units that lack complete plumbing facilities for exclusive use",
