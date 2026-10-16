@@ -83,7 +83,7 @@
             </template>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
-          <v-list-item target="_blank" to="/user_guide.pdf" class="sidebar__item" rounded="lg" rel="noopener noreferrer">
+          <v-list-item target="_blank" href="https://docs.google.com/document/d/e/2PACX-1vRBbRRWFZ8_CZCtEnmaZoKTS7zEhDdW7RYRjvIfojV2CrViYtdbrDBXPxgXVLHskqoaFTXS16Mt-JwQ/pub" class="sidebar__item" rounded="lg" rel="noopener noreferrer">
             <template v-slot:prepend>
               <div class="sidebar__icon-wrap sidebar__icon-wrap--home">
                 <v-icon icon="mdi-book-open" size="18" aria-hidden="true"></v-icon>

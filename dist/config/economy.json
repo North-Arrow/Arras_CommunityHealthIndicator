@@ -6,7 +6,8 @@
       "short_title": "Bachelor's Degree",
       "geotype": "tract",
       "default": "left",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQLH2WHaIW_W1rCEHkcCALW2GFVgr20hRmIu2DOKyETmKi3-vMDv0dF5WFbLU47By9gDXSeTdA4oJH6/pub?gid=936536633&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1iSa8ahngEUAJspyJiIBEOTjPcgPsZj5ZyzRccIFviFI/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1iSa8ahngEUAJspyJiIBEOTjPcgPsZj5ZyzRccIFviFI/export?format=csv&sheet=staging",
       "short_name": "bachelor_degree",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -35,7 +36,8 @@
       "short_title": "Children in Concentrated Poverty",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5brqPPF4bUPlKzP2a6utP4cdJCaitWTx9D34NEiTFFuvXHvnGzIbBiCq7nLf8rI-L_qf8pWDh5_5z/pub?gid=622872564&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1sourXTieXo10vsNWjas0W1OKSA0ErVuF7YK9pJbd-Hs/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1sourXTieXo10vsNWjas0W1OKSA0ErVuF7YK9pJbd-Hs/export?format=csv&sheet=staging",
       "short_name": "concentrated_poverty",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -83,7 +85,8 @@
           },
           "data_merge": {
             "source": "tracts-harmonized-dup",
-            "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5brqPPF4bUPlKzP2a6utP4cdJCaitWTx9D34NEiTFFuvXHvnGzIbBiCq7nLf8rI-L_qf8pWDh5_5z/pub?gid=622872564&single=true&output=csv"
+            "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSBClnDkRDqdSfmA32qtB_sYtq4RwbHDbpeDTQuT7Icde9whZdKDrV2wMrfgihZfjQbF5ad_Yd817wL/pub?gid=1735437551&single=true&output=csv",
+            "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSBClnDkRDqdSfmA32qtB_sYtq4RwbHDbpeDTQuT7Icde9whZdKDrV2wMrfgihZfjQbF5ad_Yd817wL/pub?gid=724440388&single=true&output=csv"
           }
         }
       },
@@ -95,7 +98,8 @@
       "short_title": "Household Income",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxBdPEeiYzDaPP8ZRebLlTvX_OzEFwRL6c7zC45u0HES0ZlD5v2o8tUdL0xcBmYKTpCL_I4ALJoWNR/pub?gid=956489115&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/18Fk3FZOu54Uekh5gDYJPftnhfx3i0SXSqQz96Ip2At8/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/18Fk3FZOu54Uekh5gDYJPftnhfx3i0SXSqQz96Ip2At8/export?format=csv&sheet=staging",
       "short_name": "household-income",
       "timeline": {
         "yearValuePrefix": "count_",
@@ -123,7 +127,8 @@
       "short_title": "Cost-Burdened Households",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS0QQ808Zlb6SD7sdjmijEDSlqLhHs2qElErij9mqKt8AQEKH_dAZxfxlyIeqogfI6EN8rMy1qPyb22/pub?gid=1195534552&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/157k9XPCEbbJap336MR8po-Ex-dmLpkYGqr8qsyY-cZE/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/157k9XPCEbbJap336MR8po-Ex-dmLpkYGqr8qsyY-cZE/export?format=csv&sheet=staging",
       "short_name": "housing-burden",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -152,7 +157,8 @@
       "short_title": "HS Diploma",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfEBRwU2Zwqtbt3hzpobMszogf7jUrvcxHIXbAmzaNlTGafpTgroY3P0wJyXr9FRy8QJbJJyBLoBeR/pub?gid=1453198124&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1kICAPbMOfEcTDoMBUYQvx0p5qzT97EOhyWfWnkt6u4I/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1kICAPbMOfEcTDoMBUYQvx0p5qzT97EOhyWfWnkt6u4I/export?format=csv&sheet=staging",
       "short_name": "hs_grads",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -184,7 +190,8 @@
       "short_title": "Long Commutes",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vT67ITh6KidlwFKzHeQNGkKULuRnRhp2T6KzAUnVUgfo9m0VD26KcpOVJL1pmqk7TDetCNUXNChn_hl/pub?gid=175542881&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1ELVdK56kXnFd1twa0TiLfQW4dOF2OktCZ_ChEdATWDo/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1ELVdK56kXnFd1twa0TiLfQW4dOF2OktCZ_ChEdATWDo/export?format=csv&sheet=staging",
       "short_name": "long_commute",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -216,7 +223,8 @@
       "short_title": "Poverty Rate",
       "geotype": "tract",
       "default": "right",
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRnru_GVIY34kQpl2sYDTCXMFWT_GGtaq6qU9YGKbTIwXdiqI63GdfhVUmzSaDaHUz9pFreEcWXRHJ3/pub?gid=1994802547&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1G8Y9I9OWVZ4FBHbG4oImeYfa7wpYyo-Zlzlz_VBEU7c/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1G8Y9I9OWVZ4FBHbG4oImeYfa7wpYyo-Zlzlz_VBEU7c/export?format=csv&sheet=staging",
       "short_name": "people_in_pov",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -248,7 +256,8 @@
       "short_title": "Workforce in Poverty",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vS4ioVC9PmujjHYlkLhZUNYF22RmqsGOXEgPzKvOwVb5OWWr0Q6Tm6OpMhnyyxte9u0d38mp5fYxbDv/pub?gid=1087215282&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1GOTOF7MGSzsBW1bp2iB0U7sgUSSE_mkZ8LgNnYxXeRY/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1GOTOF7MGSzsBW1bp2iB0U7sgUSSE_mkZ8LgNnYxXeRY/export?format=csv&sheet=staging",
       "short_name": "workforce_in_pov",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -280,7 +289,8 @@
       "short_title": "Unemployment Rate",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQerb-iOq-zzpATcIUQ43K34qWDe1bE4gHBRQJYhSjLxeMOm83ALT3FVcGqihxt_1k4qBRhQ0WocHRB/pub?gid=1933545590&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1FpYtEHHEta1kkeQqfs0Tx1jLCvGCYQcNlsnmyM-k1qA/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1FpYtEHHEta1kkeQqfs0Tx1jLCvGCYQcNlsnmyM-k1qA/export?format=csv&sheet=staging",
       "short_name": "unemployment_rate",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -304,15 +314,16 @@
       "map": {
         "color": "pct"
       },
-      "tooltip-info": "The unemployment rate is the percentage of the labor force actively seeking employment but unable to find it, suggesting broader economimc trends and challenges."
+      "tooltip-info": "The unemployment rate is the percentage of the labor force actively seeking employment but unable to find it, suggesting broader economic trends and challenges."
     },
     {
       "title": "Percent of housing units that lack complete plumbing facilities for exclusive use",
       "data_source": "census",
       "short_title": "Substandard Housing",
-      "geotype": "tract",
+      "geotype": "county",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRnL5GlWMLotD1OY_nU_L712aq6VcN6r5I6S0g5D_CC5TceMqofVscOxlnioXwgjTvoDzUOoMtCJNAG/pub?gid=1379297340&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/11XpIztpdyiAcKSsOXOJXeGxL-nwTE9W5_o6WroBjb2A/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/11XpIztpdyiAcKSsOXOJXeGxL-nwTE9W5_o6WroBjb2A/export?format=csv&sheet=staging",
       "short_name": "substandard_housing",
       "timeline": {
         "yearValuePrefix": "pct_",
@@ -344,7 +355,8 @@
       "short_title": "No Vehicles Available",
       "geotype": "tract",
       "default": false,
-      "google_sheets_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGKDlQUqjd1dhm5DsfWiGlktvYsWXFQqFInKPnVssJGP_ohAE0aPKXLxleOUSfWqa-Jq9X5EGYWedB/pub?gid=66299098&single=true&output=csv",
+      "google_sheets_url": "https://docs.google.com/spreadsheets/d/1m2R-y2dwsQeAnkHHermD-CqhPWvSLtoQlMemOcXSkfE/export?format=csv&sheet=production",
+      "dev_google_sheets_url": "https://docs.google.com/spreadsheets/d/1m2R-y2dwsQeAnkHHermD-CqhPWvSLtoQlMemOcXSkfE/export?format=csv&sheet=staging",
       "short_name": "vehicles_available",
       "timeline": {
         "yearValuePrefix": "pct_",
