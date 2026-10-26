@@ -3,7 +3,7 @@
     <div class="timeline-header">
       <IndicatorSelector :side="side" @indicator-changed="handleIndicatorChange" />
     </div>
-    <v-select v-if="availableYears.length > 0" v-model="selectedYear" :items="availableYears" label="Year"
+    <v-select v-if="availableYears.length > 0" v-model="selectedYear" :items="yearItems" label="Year"
       density="compact" variant="solo" elevation="0" hide-details class="year-selector"
       @update:model-value="handleYearChange"></v-select>
     <div ref="container" class="timeline-visualization">
@@ -50,7 +50,7 @@
           </thead>
           <tbody>
             <tr v-for="row in chartTableRows" :key="row.year">
-              <td>{{ row.year }}</td>
+              <td>{{ row.yearLabel }}</td>
               <td>{{ row.valueLabel }}</td>
             </tr>
           </tbody>
@@ -68,6 +68,7 @@ import IndicatorSelector from './IndicatorSelector.vue';
 import { YEAR_PATTERN } from '../constants';
 import { downloadGoogleSheetCsv } from '../utils/csvDownload';
 import { resolveGoogleSheetsUrl } from '../utils/resolveGoogleSheetsUrl';
+import { formatYearLabel } from '../utils/yearLabels';
 import { useAccessibilityStore } from '../stores/accessibilityStore';
 
 const emitter = inject('mitt') as any
@@ -99,7 +100,7 @@ const selectedColorRef = ref(selectedColor);
 const hoveredColorRef = ref(hoveredColor);
 
 const showValuesOnTimeline = false;
-const chartTableRows = ref<Array<{ year: number; valueLabel: string }>>([])
+const chartTableRows = ref<Array<{ year: number; yearLabel: string; valueLabel: string }>>([])
 const chartAriaLabel = ref('Indicator timeline chart')
 
 function formatChartValue(value: number | null | undefined) {
@@ -114,7 +115,7 @@ function bindChartPointAccessibility(
   selection
     .attr('tabindex', 0)
     .attr('role', 'button')
-    .attr('aria-label', (d) => `Select year ${d.year}, value ${formatChartValue(d.value)}`)
+    .attr('aria-label', (d) => `Select year ${yearLabel(d.year)}, value ${formatChartValue(d.value)}`)
     .on('keydown', function (event: KeyboardEvent, d) {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault()
@@ -156,6 +157,26 @@ function plotWidth() {
   return Math.max(1, width - margin.left - margin.right)
 }
 
+function yearLabel(year: number) {
+  return formatYearLabel(indicatorStore.getCurrentIndicator(), year)
+}
+
+/** Nudge edge tick labels inward when a long label (e.g. "2010-2020") would be clipped. */
+function keepXTickLabelsInView(
+  axisGroup: d3.Selection<SVGGElement, unknown, null, undefined>,
+  xScale: d3.ScaleLinear<number, number>,
+) {
+  const inset = 2
+  axisGroup.selectAll<SVGTextElement, number>('.tick text').each(function (d) {
+    const half = this.getComputedTextLength() / 2
+    const x = xScale(d)
+    const overflowRight = x + half - (width - inset)
+    const overflowLeft = inset - (x - half)
+    if (overflowRight > 0) d3.select(this).attr('dx', -overflowRight)
+    else if (overflowLeft > 0) d3.select(this).attr('dx', overflowLeft)
+  })
+}
+
 // Year selector - get available years from the indicator data
 const availableYears = computed(() => {
   const indicator = indicatorStore.getCurrentIndicator()
@@ -177,6 +198,10 @@ const availableYears = computed(() => {
     )
   )
 })
+
+const yearItems = computed(() =>
+  (availableYears.value as number[]).map((year) => ({ title: yearLabel(year), value: year }))
+)
 
 const timelineValueFormat = computed(() => {
   const indicator = indicatorStore.getCurrentIndicator()
@@ -275,11 +300,12 @@ const createChart = () => {
 
   chartTableRows.value = validData.map((d) => ({
     year: d.year,
+    yearLabel: yearLabel(d.year),
     valueLabel: formatChartValue(d.value),
   }))
   const indicator = indicatorStore.getCurrentIndicator() as { short_title?: string; title?: string } | null
   const indicatorTitle = indicator?.short_title ?? indicator?.title ?? 'Indicator'
-  chartAriaLabel.value = `${indicatorTitle} timeline, years ${validData[0].year} to ${validData[validData.length - 1].year}`
+  chartAriaLabel.value = `${indicatorTitle} timeline, years ${yearLabel(validData[0].year)} to ${yearLabel(validData[validData.length - 1].year)}`
 
   // Calculate scales
   const xScale = createXScale(data)
@@ -289,7 +315,7 @@ const createChart = () => {
   const yearTicks = data.map((d) => d.year).filter((y) => !isNaN(y)).sort((a, b) => a - b)
   const xAxis = d3.axisBottom(xScale)
     .tickValues(yearTicks)
-    .tickFormat((d) => `${d}`)
+    .tickFormat((d) => yearLabel(d as number))
     .tickSize(4)
     .tickPadding(6)
 
@@ -304,13 +330,14 @@ const createChart = () => {
   const xAxisY = height - margin.bottom
 
   // Add axes
-  svgElement.append('g')
+  const xAxisGroup = svgElement.append('g')
     .attr('class', 'x-axis')
     .attr('transform', `translate(0, ${xAxisY})`)
     .call(xAxis)
-    .selectAll('text')
+  xAxisGroup.selectAll('text')
     .style('font-size', '10px')
     .style('fill', '#666')
+  keepXTickLabelsInView(xAxisGroup, xScale)
 
   svgElement.append('g')
     .attr('class', 'y-axis')
@@ -553,17 +580,18 @@ const createAxisOnly = (data: Array<{ year: number; value: number | null }>) => 
 
   const xAxis = d3.axisBottom(xScale)
     .tickValues(yearTicks)
-    .tickFormat((d) => `${d}`)
+    .tickFormat((d) => yearLabel(d as number))
     .tickSize(0)
     .tickPadding(6)
 
-  svgElement.append('g')
+  const xAxisGroup = svgElement.append('g')
     .attr('class', 'x-axis')
     .attr('transform', `translate(0, ${xAxisY})`)
     .call(xAxis)
-    .selectAll('text')
+  xAxisGroup.selectAll('text')
     .style('font-size', '10px')
     .style('fill', '#666')
+  keepXTickLabelsInView(xAxisGroup, xScale)
 
   // Add vertical line for current year
   const currentYear = indicatorStore.getCurrentYear()

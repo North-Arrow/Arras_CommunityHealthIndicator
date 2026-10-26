@@ -590,6 +590,45 @@ export function validateThemeConfig(
             )
           );
         }
+        if (t.yearLabels !== undefined) {
+          const labels = t.yearLabels;
+          if (!labels || typeof labels !== 'object' || Array.isArray(labels)) {
+            issues.push(
+              issue(
+                'fail',
+                'timeline.yearLabels must be an object mapping years to labels (e.g. {"2000": "1990-2000"})',
+                `${base}.timeline.yearLabels`,
+                raw,
+                anchor
+              )
+            );
+          } else {
+            for (const [year, label] of Object.entries(labels as Record<string, unknown>)) {
+              if (typeof label !== 'string' || !label.trim()) {
+                issues.push(
+                  issue(
+                    'fail',
+                    `timeline.yearLabels["${year}"] must be a non-empty string`,
+                    `${base}.timeline.yearLabels.${year}`,
+                    raw,
+                    anchor
+                  )
+                );
+              }
+              if (!/^\d{4}$/.test(year)) {
+                issues.push(
+                  issue(
+                    'warn',
+                    `timeline.yearLabels key "${year}" is not a 4-digit year, so it will never match a data column`,
+                    `${base}.timeline.yearLabels.${year}`,
+                    raw,
+                    anchor
+                  )
+                );
+              }
+            }
+          }
+        }
       }
     }
 

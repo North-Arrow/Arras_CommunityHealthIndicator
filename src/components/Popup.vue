@@ -20,7 +20,7 @@
             <div class="stats-grid">
                 <div :class="{ 'stat-item': true, 'stat-item-empty': stat.isEmpty }" v-for="stat in stats"
                     :key="stat.year">
-                    <div class="stat-label">{{ stat.year }}</div>
+                    <div class="stat-label">{{ stat.yearLabel }}</div>
                     <div class="stat-value percentage">{{ stat.title }}</div>
                     <div class="stat-value count" v-if="!stat.pctOnly && stat.subtitle">{{ stat.subtitle }}</div>
                 </div>
@@ -32,6 +32,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useIndicatorLevelStore } from '../stores/indicatorLevelStore'
+import { formatYearLabel } from '../utils/yearLabels'
 
 const props = defineProps<{
     id?: string
@@ -73,6 +74,7 @@ const stats = computed(() => {
             isEmpty: isEmpty,
             pctOnly: pctOnly,
             year: year,
+            yearLabel: formatYearLabel(currentIndicator.value, year),
             title: replacePlaceholders(popup?.format?.title),
             subtitle: replacePlaceholders(popup?.format?.subtitle)
         })
