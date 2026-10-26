@@ -102,7 +102,12 @@
       "timeline": {
         "yearValuePrefix": "pct_",
         "yearValueShortFormat": "{{value}}%",
-        "filterOut": []
+        "filterOut": [],
+        "yearLabels": {
+          "2000": "1990-2000",
+          "2010": "2000-2010",
+          "2020": "2010-2020"
+        }
       },
       "popup": {
         "popup_legend": {

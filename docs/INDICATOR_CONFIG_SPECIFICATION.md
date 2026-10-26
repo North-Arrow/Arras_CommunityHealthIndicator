@@ -124,6 +124,8 @@ The following properties MUST be present in every indicator object:
   - `yearValuePrefix` (string) - REQUIRED. Prefix for year-based data columns (e.g., `"pct_"`, `"count_"`, `"pop_"`, `"rate_"`)
   - `yearValueShortFormat` (string) - REQUIRED. Format string for displaying values in timeline, using `{{value}}` placeholder
   - `filterOut` (array) - REQUIRED. Array of strings representing geoid patterns to exclude from visualization. MUST be an array (empty array `[]` if no filters)
+- **Optional Properties**:
+  - `yearLabels` (object) - OPTIONAL. Maps a data year (the 4-digit suffix of the sheet's column names) to the label users see in the Year dropdown, timeline axis, screen-reader data table and popup stat cards. Use it when a column measures a period, e.g. `{"2000": "1990-2000", "2010": "2000-2010"}`. Years without an entry show as the plain year. It does not change the downloaded CSV, whose headings come from row 1 of the sheet. Use plain hyphens, not en dashes.
 - **Example**:
   ```json
   {
