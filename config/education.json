@@ -46,7 +46,7 @@
       },
       "popup": {
         "popup_legend": {
-          "title": "% of families",
+          "title": "% of families with children",
           "subtitle": "Amount out of total families with children"
         },
         "format": {
@@ -56,7 +56,7 @@
       },
       "legend": {
         "title-column": "pct",
-        "title": "{{pct}}% of families"
+        "title": "{{pct}}% of families with children"
       },
       "tooltip-info": "Children who live below 100% of the federal poverty threshold are at risk of impaired physical and cognitive development, poor academic achievement, and long-term negative health outcomes."
     },
